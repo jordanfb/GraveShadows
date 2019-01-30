@@ -11,7 +11,7 @@
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="Transparent" }
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
