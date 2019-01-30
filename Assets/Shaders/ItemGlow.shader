@@ -41,7 +41,7 @@
         void surf (Input IN, inout SurfaceOutput o)
         {
 			IN.color = _ColorTint;
-			o.Albedo = tex2D(_MainTex, IN.uv_MainTex).rgb * IN.color;
+			o.Albedo = tex2D(_MainTex, IN.uv_MainTex).rgb \;
 			o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
 
 			half rim = 1.0 - saturate(dot(normalize(IN.viewDir), o.Normal));
