@@ -8,14 +8,6 @@ using TMPro;
 [CustomEditor(typeof(ConversationMember))]
 public class ConversationMemberEditor : Editor
 {
-    private void DeleteSlave(object slaveIndex)
-    {
-        ConversationMember m = (ConversationMember)target;
-        m.slaves.RemoveAt((int)slaveIndex);
-    }
-
-    private bool displaySlaves = false;
-
     public override void OnInspectorGUI()
     {
         //base.OnInspectorGUI();
@@ -33,58 +25,19 @@ public class ConversationMemberEditor : Editor
             ConversationMember.ValidateAllNames();
         }
 
-        m.isConversationLeader = GUILayout.Toggle(m.isConversationLeader, "Is Conversation Leader");
-
-        if (m.isConversationLeader)
+        // you're just a slave only show slave things
+        if (m.master != null)
         {
-            // first select the script
-            m.script = (TextAsset)EditorGUILayout.ObjectField("Script:", m.script, typeof(TextAsset), true);
-            // then have a button to find all the named slaves (and error if it can't find the slaves)
-            if (m.script != null && GUILayout.Button("Validate Script and Find Slaves"))
+            if (GUILayout.Button("Go to master"))
             {
-                // then validate the script and make it all work!
-                m.ValidateScript();
+                // then it focuses on the master object
+                EditorGUIUtility.PingObject(m.master);
             }
-            // then add a list of all of the members of the conversation
-            displaySlaves = EditorGUILayout.Foldout(displaySlaves, "Slaves");
-            if (displaySlaves)
-            {
-                EditorGUILayout.LabelField("Itself");
-                for (int i = 0; i < m.slaves.Count; i++)
-                {
-                    m.slaves[i] = (ConversationMember)EditorGUILayout.ObjectField("Slave " + i, m.slaves[i], typeof(ConversationMember), true);
-                }
-                if (GUILayout.Button("Add Slave"))
-                {
-                    m.slaves.Add(null);
-                }
-                if (GUILayout.Button("Remove Slave"))
-                {
-                    // create a menu that lets them remove the correct slave
-                    GenericMenu menu = new GenericMenu();
-                    for (int i = 0; i < m.slaves.Count; i++)
-                    {
-                        // add item i
-                        menu.AddItem(new GUIContent("Slave " + i), false, DeleteSlave, i);
-                    }
-                    menu.ShowAsContext();
-                }
-            }
-        } else
+        }
+        else
         {
-            // you're just a slave only show slave things
-            if (m.master != null)
-            {
-                if (GUILayout.Button("Go to master"))
-                {
-                    // then it focuses on the master object
-                    EditorGUIUtility.PingObject(m.master);
-                }
-            } else
-            {
-                // tell the user that there's no master
-                EditorGUILayout.LabelField("This slave has no master");
-            }
+            // tell the user that there's no master
+            EditorGUILayout.LabelField("This slave has no master");
         }
 
         // here have things that should appear for slaves and masters like should face camera and whatever.

@@ -34,7 +34,6 @@ public class ConversationManagerEditor : Editor
         displaySlaves = EditorGUILayout.Foldout(displaySlaves, "Slaves");
         if (displaySlaves)
         {
-            EditorGUILayout.LabelField("Itself");
             for (int i = 0; i < m.slaves.Count; i++)
             {
                 m.slaves[i] = (ConversationMember)EditorGUILayout.ObjectField("Slave " + i, m.slaves[i], typeof(ConversationMember), true);

@@ -570,6 +570,8 @@ GameObject:
   - component: {fileID: 767652205}
   - component: {fileID: 767652204}
   - component: {fileID: 767652207}
+  - component: {fileID: 767652208}
+  - component: {fileID: 767652209}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -669,12 +671,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0ab66d16ad96f4fa076536dcb51120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Unnamed
-  script: {fileID: 4900000, guid: edd8f8d349b66564a8c961f6e38a0645, type: 3}
-  isConversationLeader: 1
+  characterName: Jordan
   master: {fileID: 0}
-  slaves: []
   text: {fileID: 375996121}
+  alwaysFaceCamera: 1
+--- !u!114 &767652208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767652202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eabefa2f0f04ee4f8cf80e7f8ecca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 4900000, guid: edd8f8d349b66564a8c961f6e38a0645, type: 3}
+  slaves: []
+--- !u!114 &767652209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767652202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0ab66d16ad96f4fa076536dcb51120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Jordan
+  master: {fileID: 0}
+  text: {fileID: 0}
   alwaysFaceCamera: 1
 --- !u!1 &863632255
 GameObject:
