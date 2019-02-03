@@ -52,6 +52,7 @@ public class LineDraw : MonoBehaviour
                 {
                     //Set the endpoint position of the line to the end pin
                     _line.SetPosition(1, endColl.gameObject.transform.position);
+                    AddCollider();
                     _currentLines++;
                 }
                 else
@@ -81,27 +82,54 @@ public class LineDraw : MonoBehaviour
 
             if(Physics.Raycast(ray, out delHit))
             {
-
+                Collider delColl = delHit.collider;
+                if(delColl.gameObject.tag == "Line")
+                {
+                    Destroy(delColl.transform.parent.gameObject);
+                }
             }
         }
     }
 
-    private void CreateLine(Vector3 position)
+    /**
+     * Creates a line with vertices at the transform of the starting pin.
+     * Requires line to be null, otherwise you could take control of multiple lines at once.
+     */
+    private void CreateLine(Vector3 position) // Can probably remove the vector3 arg now that I track the starting pin
     {
         if (_line != null) return;
         _line = new GameObject("Line" + _currentLines).AddComponent<LineRenderer>();
+        //Eventually this material will be an actual yarn texture
         _line.material = material;
         _line.positionCount = 2;
         _line.startWidth = _lineWidth;
         _line.useWorldSpace = true;
+        //Set both vertices to the start pin
         _line.SetPosition(0, position);
         _line.SetPosition(1, position);
     }
 
-    //Need to create a box collider around each line, otherwise they cannot
-    //be removed using right click.
-    private void AddCollider(LineRenderer line)
+    /**
+     * Creates a GameObject with a box collider that wraps around a
+     * newly connected line.
+     * Because I don't track the end pin, we need to pass it in.
+     * */
+    private void AddCollider()
     {
+        BoxCollider lineColl = new GameObject("LineCollider" + _currentLines).AddComponent<BoxCollider>();
+        lineColl.transform.parent = _line.transform;
+        lineColl.gameObject.tag = "Line";
 
+        float lineWidth = _line.startWidth;
+        float lineLength = Vector3.Distance(_line.GetPosition(0), _line.GetPosition(1));
+
+        lineColl.size = new Vector3(lineLength, lineWidth, 1f);
+
+        Vector3 midPoint = (_line.GetPosition(0) + _line.GetPosition(1)) / 2;
+        lineColl.transform.position = midPoint;
+
+        float angle = Mathf.Atan2((_line.GetPosition(1).z - _line.GetPosition(0).z), (_line.GetPosition(1).x - _line.GetPosition(0).x));
+        angle *= -Mathf.Rad2Deg;
+        lineColl.transform.Rotate(0f, angle, 0f);
     }
 }
