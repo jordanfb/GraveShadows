@@ -116,7 +116,6 @@ public class LineDraw : MonoBehaviour
     /**
      * Creates a GameObject with a box collider that wraps around a
      * newly connected line.
-     * Because I don't track the end pin, we need to pass it in.
      * */
     private void AddCollider()
     {
