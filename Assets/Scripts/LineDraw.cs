@@ -82,6 +82,8 @@ public class LineDraw : MonoBehaviour
 
             if(Physics.Raycast(ray, out delHit))
             {
+                //If we hit a line collider, destroy the parent
+                //(which in turn destroys all children and thus the collider is deleted too).
                 Collider delColl = delHit.collider;
                 if(delColl.gameObject.tag == "Line")
                 {
@@ -99,11 +101,13 @@ public class LineDraw : MonoBehaviour
     {
         if (_line != null) return;
         _line = new GameObject("Line" + _currentLines).AddComponent<LineRenderer>();
+
         //Eventually this material will be an actual yarn texture
         _line.material = material;
         _line.positionCount = 2;
         _line.startWidth = _lineWidth;
         _line.useWorldSpace = true;
+
         //Set both vertices to the start pin
         _line.SetPosition(0, position);
         _line.SetPosition(1, position);
@@ -116,18 +120,25 @@ public class LineDraw : MonoBehaviour
      * */
     private void AddCollider()
     {
+        //Create a new gameobject with a box collider
         BoxCollider lineColl = new GameObject("LineCollider" + _currentLines).AddComponent<BoxCollider>();
         lineColl.transform.parent = _line.transform;
+        //Tag required for the raycast check (right clicking to delete)
         lineColl.gameObject.tag = "Line";
 
+        //Calculate the length and width of the line to determine size of box
         float lineWidth = _line.startWidth;
         float lineLength = Vector3.Distance(_line.GetPosition(0), _line.GetPosition(1));
 
+        //Z-size is arbitrary, and we might need to change these around
+        //depending on what axis the yarn board faces
         lineColl.size = new Vector3(lineLength, lineWidth, 1f);
 
+        //Tne line collider GO will lie at the midpoint of the line to cover  the whole thing.
         Vector3 midPoint = (_line.GetPosition(0) + _line.GetPosition(1)) / 2;
         lineColl.transform.position = midPoint;
 
+        //Rotate the line collider by a certain angle so that it's oriented correctly.
         float angle = Mathf.Atan2((_line.GetPosition(1).z - _line.GetPosition(0).z), (_line.GetPosition(1).x - _line.GetPosition(0).x));
         angle *= -Mathf.Rad2Deg;
         lineColl.transform.Rotate(0f, angle, 0f);
