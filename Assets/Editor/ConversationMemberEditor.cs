@@ -8,6 +8,9 @@ using TMPro;
 [CustomEditor(typeof(ConversationMember))]
 public class ConversationMemberEditor : Editor
 {
+
+    private bool displayMasters = false;
+
     public override void OnInspectorGUI()
     {
         //base.OnInspectorGUI();
@@ -26,18 +29,25 @@ public class ConversationMemberEditor : Editor
         }
 
         // you're just a slave only show slave things
-        if (m.master != null)
+        if (m.masters.Count > 0)
         {
-            if (GUILayout.Button("Go to master"))
-            {
-                // then it focuses on the master object
-                EditorGUIUtility.PingObject(m.master);
+            displayMasters = EditorGUILayout.Foldout(displayMasters, "Masters");
+            if (displayMasters) {
+                for (int i = 0; i < m.masters.Count; i++)
+                {
+                    m.masters[i] = (ConversationManager)EditorGUILayout.ObjectField("Master " + i, m.masters[i], typeof(ConversationManager), true);
+                    //if (GUILayout.Button("Ping Master"))
+                    //{
+                    //    // then it focuses on the master object
+                    //    EditorGUIUtility.PingObject(m.masters[i]);
+                    //}
+                }
             }
         }
         else
         {
             // tell the user that there's no master
-            EditorGUILayout.LabelField("This slave has no master");
+            EditorGUILayout.LabelField("This slave has no masters");
         }
 
         // here have things that should appear for slaves and masters like should face camera and whatever.

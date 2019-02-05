@@ -23,6 +23,22 @@ public class ConversationManagerEditor : Editor
 
         // first select the script
         m.script = (TextAsset)EditorGUILayout.ObjectField("Script:", m.script, typeof(TextAsset), true);
+        if (m.conversationDescription.Length > 0)
+        {
+            // show the script description:
+            EditorGUILayout.LabelField("Description: " + m.conversationDescription);
+        }
+
+        // then add a list of all of the members of the conversation
+        displaySlaves = EditorGUILayout.Foldout(displaySlaves, "Characters");
+        if (displaySlaves)
+        {
+            for (int i = 0; i < m.slaves.Count; i++)
+            {
+                m.slaves[i] = (ConversationMember)EditorGUILayout.ObjectField(m.slaves[i].characterName + ":", m.slaves[i], typeof(ConversationMember), true);
+            }
+        }
+
         // then have a button to find all the named slaves (and error if it can't find the slaves)
         if (m.script != null && GUILayout.Button("Validate Script and Find Slaves"))
         {
@@ -30,14 +46,7 @@ public class ConversationManagerEditor : Editor
             m.ValidateScript();
         }
 
-        // then add a list of all of the members of the conversation
-        displaySlaves = EditorGUILayout.Foldout(displaySlaves, "Slaves");
-        if (displaySlaves)
-        {
-            for (int i = 0; i < m.slaves.Count; i++)
-            {
-                m.slaves[i] = (ConversationMember)EditorGUILayout.ObjectField("Slave " + i, m.slaves[i], typeof(ConversationMember), true);
-            }
-        }
+        //EditorGUILayout.TextArea(m.scriptHeader);
+        //EditorGUILayout.TextArea(m.scriptContent);
     }
 }
