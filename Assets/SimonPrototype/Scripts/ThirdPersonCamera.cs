@@ -17,12 +17,17 @@ public class ThirdPersonCamera : MonoBehaviour
     [SerializeField]
     const float MIN_X = 0;
     [SerializeField]
-    const float MAX_X = 20f;
+    const float MAX_X = 80f;
 
     [SerializeField]
     const float MIN_Y = 0;
     [SerializeField]
-    const float MAX_Y = 20f;
+    const float MAX_Y = 80f;
+
+    private float distance = 5f;
+
+    private float scrollSpeedX = 2f;
+    private float scrollSpeedY = 2f;
 
 
 
@@ -37,20 +42,18 @@ public class ThirdPersonCamera : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        currentRotationX += Input.GetAxis("Mouse X");
-        currentRotationY += Input.GetAxis("Mouse Y");
+        currentRotationX += Input.GetAxis("Mouse X")*scrollSpeedX;
+        currentRotationY += Input.GetAxis("Mouse Y")*scrollSpeedY;
+        distance += Input.GetAxis("Mouse ScrollWheel");
 
-        print("currentRotationX: " + currentRotationX);
-        print("currentRotationX: " + currentRotationY);
-        //currentRotationX = Mathf.Clamp(currentRotationX, MIN_X, MAX_X);
-        //currentRotationY = Mathf.Clamp(currentRotationY, MIN_Y, MAX_Y);
+        currentRotationY = Mathf.Clamp(currentRotationY, MIN_Y, MAX_Y);
 
 
     }
     void LateUpdate()
     {
         Quaternion rot = Quaternion.Euler(currentRotationY, currentRotationX, 0.0f);
-        mainCam.transform.position = lookAt.position + rot * new Vector3(0f, 0f, -5f);
+        mainCam.transform.position = lookAt.position + rot * new Vector3(0f, 0f, -distance);
         mainCam.transform.LookAt(lookAt);
     }
 }
