@@ -6,6 +6,8 @@ public class YarnBoard : MonoBehaviour
 {
     [SerializeField]
     private GameObject _pinPrefab;
+    [SerializeField]
+    private float _pinnedObjectOffset;
     private List<GameObject> _pins;
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,7 @@ public class YarnBoard : MonoBehaviour
                     //Display photo associated with evidence SO & parent it to pin
                     GameObject photo = new GameObject(evidence.Name);
                     photo.transform.parent = pin.transform;
+                    photo.transform.position = new Vector3(photo.transform.position.x, _pinnedObjectOffset, photo.transform.position.z);
                     SpriteRenderer pSprite = photo.AddComponent<SpriteRenderer>();
                     pSprite.sprite = evidence.Photo;
                     break;
