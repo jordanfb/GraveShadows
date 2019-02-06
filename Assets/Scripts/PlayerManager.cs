@@ -8,6 +8,10 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> _collectedEvidence;
+    /* for use later probably
+    [SerializeField]
+    private Player _player;
+    */
 
     void Awake()
     {

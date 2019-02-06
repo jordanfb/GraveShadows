@@ -7,11 +7,16 @@ public class Evidence : ScriptableObject
 {
     [SerializeField]
     private string _name;
+    //For use with Objects mostly
+    //If used with Conversations, drag in the default notebook paper sprite
+    //(or whatever it's called
     [SerializeField]
     private Sprite _photo;
+    //WRITERS: fill this in with whatever information is important
     [SerializeField]
     [TextArea]
     private string _flavorText;
+    //All evidence MUST have a type
     [SerializeField]
     private EvidenceType _evidenceType;
 
