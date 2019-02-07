@@ -52,8 +52,27 @@ public class ThirdPersonCamera : MonoBehaviour
     }
     void LateUpdate()
     {
+        RaycastHit wallHit = new RaycastHit();
+        LayerMask mask = LayerMask.GetMask("WallLayer");
+
+
+
+
         Quaternion rot = Quaternion.Euler(currentRotationY, currentRotationX, 0.0f);
-        mainCam.transform.position = lookAt.position + rot * new Vector3(0f, 0f, -distance);
+        Vector3 camPos = lookAt.position + rot * new Vector3(0f, 0f, -distance);
+       
+
+        if (Physics.Linecast(lookAt.position, mainCam.transform.position-2*transform.forward, out wallHit, mask)) {
+            Vector3 hitPoint = wallHit.point;
+            camPos = lookAt.position + rot * new Vector3(0f, 0f, -(lookAt.position - wallHit.point).magnitude);
+           
+        }
+
+        mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, camPos, 10f);
         mainCam.transform.LookAt(lookAt);
+
     }
+
+
+   
 }

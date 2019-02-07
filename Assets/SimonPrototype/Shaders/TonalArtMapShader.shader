@@ -2,7 +2,7 @@
 	Properties {
 		_MainTex ("Main texture", 2D) = "white" {}
 		_TonalArtMap ("Tonal Art Map", 2DArray) = "" {}
-		_ColorTint ("Tint", Color) = (1.0, 0.6, 0.6, 1.0)
+		_ColorTint ("Tint", Color) = (1.0, 0.0, 0.0, 1.0)
 		_Test ("Test", Range(0, 10)) = 0
         _Mod("modifier", Range(1, 10)) = 1
         _Levels("number of gradient levels", Range(0, 10))= 0
@@ -10,11 +10,11 @@
 	}
 
 	SubShader {
-		Tags { "RenderType" = "Opaque" }
+		Tags { "Queue" = "Geometry" "RenderType" = "Opaque" }
 
 		CGPROGRAM
 
-		#pragma surface surf Lambert finalcolor:apply_tam
+		#pragma surface surf Lambert finalcolor:apply_tam fullforwardshadows
         
 		struct Input {
             float3 worldPos;
@@ -71,30 +71,34 @@
 			fixed l = luma(color);
 			fixed texI = (1 - l) * _Levels;
             float2 worldUV = IN.uv_TonalArtMap;
+            
+            fixed4 col1;
+            fixed4 col2;
             if(abs(IN.worldNormal.y) > 0.5)
             {
                 float2 worldUV = TRANSFORM_TEX(IN.worldPos.xz, _TonalArtMap);
-                fixed4 col1 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, floor(texI)));
-                fixed4 col2 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, ceil(texI)));
+                col1 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, floor(texI)))*_ColorTint;
+                col2 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, ceil(texI)))*_ColorTint;
 
-                color = pow(lerp(col1, col2, texI - floor(texI)),_Mod);
             }
             else if(abs(IN.worldNormal.x) > 0.5)
             {
                 float2 worldUV = TRANSFORM_TEX(IN.worldPos.yz, _TonalArtMap);
-                fixed4 col1 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, floor(texI)));
-                fixed4 col2 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, ceil(texI)));
+                col1 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, floor(texI)))*_ColorTint;
+                col2 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, ceil(texI)))*_ColorTint;
 
-                color = pow(lerp(col1, col2, texI - floor(texI)),_Mod);
             }
             else
             {
                 float2 worldUV = TRANSFORM_TEX(IN.worldPos.xy, _TonalArtMap);
-                fixed4 col1 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, floor(texI)));
-                fixed4 col2 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, ceil(texI)));
+                col1 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, floor(texI)))*_ColorTint;
+                col2 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, ceil(texI)))*_ColorTint;
 
-                color = pow(lerp(col1, col2, texI - floor(texI)),_Mod);
             }
+            
+            
+            color = lerp(col1, col2, texI - floor(texI));
+           
             //fixed4 col1 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(IN.uv_TonalArtMap, floor(texI)));
             //fixed4 col2 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(IN.uv_TonalArtMap, ceil(texI)));
 
