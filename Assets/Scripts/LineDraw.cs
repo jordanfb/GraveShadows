@@ -7,12 +7,15 @@ public class LineDraw : MonoBehaviour
     private LineRenderer _line;
     private Vector3 _mousePos;
     private GameObject _startPin;
-    private int _currentLines = 0;
-    private List<GameObject> _lines = new List<GameObject>();
+    private List<LineRenderer> _lines;
 
     public Material material;
     public float _lineWidth = 0.15f;
 
+    private void Start()
+    {
+        _lines = new List<LineRenderer>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -57,21 +60,14 @@ public class LineDraw : MonoBehaviour
                     //Set the endpoint position of the line to the end pin
                     _line.SetPosition(1, endColl.gameObject.transform.position);
                     AddCollider();
-                    _currentLines++;
-                    _lines.Add(_line.gameObject);
+                    _lines.Add(_line);
                 }
                 else
                 {
                     //Line is invalid, destroy
-                    _lines.Remove(_line.gameObject);
+                    _lines.Remove(_line);
                     Destroy(_line.gameObject);
                 }
-            }
-            else
-            {
-                Debug.Log(_line.gameObject.name);
-                _lines.Remove(_line.gameObject);
-                Destroy(_line.gameObject);
             }
             _line = null;
             _startPin = null;
@@ -99,17 +95,13 @@ public class LineDraw : MonoBehaviour
                 Collider delColl = delHit.collider;
                 if(delColl.gameObject.tag == "Line")
                 {
-                    Debug.Log(_line.gameObject.name);
-                    _lines.Remove(_line.gameObject);
+                    LineRenderer delLine = delColl.transform.parent.gameObject.GetComponent<LineRenderer>();
+                    _lines.Remove(delLine);
                     Destroy(delColl.transform.parent.gameObject);
                 }
             }
         }
-        Debug.Log(_lines.Count);
-        foreach(GameObject go in _lines)
-        {
-            if (go == null) Debug.Log("null");
-        }
+
     }
 
     /**
@@ -119,7 +111,7 @@ public class LineDraw : MonoBehaviour
     private void CreateLine(Vector3 position) // Can probably remove the vector3 arg now that I track the starting pin
     {
         if (_line != null) return;
-        _line = new GameObject("Line" + _currentLines).AddComponent<LineRenderer>();
+        _line = new GameObject("Line" + _lines.Count).AddComponent<LineRenderer>();
         //Eventually this material will be an actual yarn texture
         _line.material = material;
         _line.positionCount = 2;
@@ -138,7 +130,7 @@ public class LineDraw : MonoBehaviour
     private void AddCollider()
     {
         //Create a new gameobject with a box collider
-        BoxCollider lineColl = new GameObject("LineCollider" + _currentLines).AddComponent<BoxCollider>();
+        BoxCollider lineColl = new GameObject("LineCollider" + _lines.Count).AddComponent<BoxCollider>();
         lineColl.transform.parent = _line.transform;
         //Tag required for the raycast check (right clicking to delete)
         lineColl.gameObject.tag = "Line";
@@ -167,10 +159,8 @@ public class LineDraw : MonoBehaviour
      * */
     public bool ConnectionExists(Vector3 endPos)
     {
-        foreach(GameObject go in _lines)
+        foreach(LineRenderer li in _lines)
         {
-            LineRenderer li = go.GetComponent<LineRenderer>();
-            if (li == null) continue;
             if (li.GetPosition(0) == _startPin.transform.position &&
                 li.GetPosition(1) == endPos)
                 return true;
