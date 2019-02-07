@@ -43,6 +43,12 @@ public class YarnBoard : MonoBehaviour
                 case EvidenceType.Conversation:
                     break;
                 case EvidenceType.Document:
+                    //Display the gameObject as it exists in the world
+                    //Later on we might have to rotate it to face the camera
+                    GameObject document = Instantiate(go) as GameObject;
+                    document.name = evidence.Name;
+                    document.transform.parent = pin.transform;
+                    document.transform.position = new Vector3(document.transform.position.x, _pinnedObjectOffset, document.transform.position.z);
                     break;
             }
         }
