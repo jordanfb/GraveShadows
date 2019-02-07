@@ -9,8 +9,31 @@ public class GuardEditor : Editor
 {
     private void OnSceneGUI()
     {
-        // draw lines between each of the points so we know the order
         GuardScript guard = (GuardScript)target;
+
+        // draw the AI viewcone
+        if (guard.guardHead != null)
+        {
+            // draw a cone
+            Vector3 endPos = guard.guardHead.position + guard.guardHead.forward * guard.viewConeDistance;
+            Debug.DrawLine(guard.guardHead.position, endPos, Color.blue, 0, true);
+            float RadiusOfCircle = Mathf.Tan(guard.viewConeAngle * Mathf.Deg2Rad) * guard.viewConeDistance;
+            int resolution = 16;
+            for (int i = 0; i < resolution; i++)
+            {
+                // draw the circle ending
+                float a1 = Mathf.PI * 2 * i / resolution;
+                Vector3 a1Pos = guard.guardHead.right * RadiusOfCircle * Mathf.Cos(a1) + guard.guardHead.up * RadiusOfCircle * Mathf.Sin(a1);
+                float a2 = Mathf.PI * 2 * (i + 1) / resolution;
+                Vector3 a2Pos = guard.guardHead.right * RadiusOfCircle * Mathf.Cos(a2) + guard.guardHead.up * RadiusOfCircle * Mathf.Sin(a2);
+                Debug.DrawLine(endPos + a1Pos, endPos + a2Pos, Color.blue, 0, true);
+                Debug.DrawLine(endPos, endPos + a1Pos, Color.blue, 0, true);
+                Debug.DrawLine(guard.guardHead.position, endPos + a2Pos, Color.blue, 0, true);
+            }
+
+        }
+
+        // draw lines between each of the points so we know the order
         for (int i = 0; i < guard.positions.Count; i++)
         {
             Handles.DrawLine(guard.positions[i], guard.positions[(i + 1) % guard.positions.Count]);
