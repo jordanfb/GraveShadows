@@ -48,7 +48,7 @@ public class YarnBoard : MonoBehaviour
                     GameObject document = Instantiate(go) as GameObject;
                     document.name = evidence.Name;
                     document.transform.parent = pin.transform;
-                    document.transform.position = new Vector3(document.transform.position.x, _pinnedObjectOffset, document.transform.position.z);
+                    document.transform.position = new Vector3(document.transform.position.x, _pinnedObjectOffset, document.transform.position.z + 1f);
                     break;
             }
         }

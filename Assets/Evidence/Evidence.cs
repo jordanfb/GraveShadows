@@ -19,6 +19,11 @@ public class Evidence : ScriptableObject
     //All evidence MUST have a type
     [SerializeField]
     private EvidenceType _evidenceType;
+    //For use with conversations only
+    //Does nothing now, but eventually it will need to be populated with text according to
+    //what characters are speaking in the conversation.
+    [SerializeField]
+    private List<string> _characters;
 
     public string Name
     {
@@ -42,7 +47,10 @@ public class Evidence : ScriptableObject
         get { return _evidenceType; }
     }
 
-    
+    public List<string> Characters
+    {
+        get { return _characters; }
+    }
 }
 
 public enum EvidenceType
