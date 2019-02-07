@@ -8,6 +8,9 @@ using UnityEngine.AI;
 public class GuardScript : MonoBehaviour
 {
     public float speed = .5f; // meters per second
+    public float suspicionMultiplier = 2;
+    public float suspicionFallMultiplier = 1; // how quickly suspicion falls
+    public float suspicionTime = 5; // number of seconds before suspicion gets reduced
     [Space]
     public bool editPositions = true; // if false it edits rotations
     public List<Vector3> positions = new List<Vector3>();
@@ -98,6 +101,7 @@ public class GuardScript : MonoBehaviour
 
         // spot the character
         SpotTheCharacter();
+        // then handle suspicion in the state machine I guess?
     }
 
     void SpotTheCharacter()
@@ -131,6 +135,7 @@ public class GuardScript : MonoBehaviour
                             {
                                 // this may be incorrect if we have multiple visible objects of the same type... FIX
                                 visibility += visibleObjects[i].parts[j].visibilityPercent;
+                                suspicionTimer = suspicionTime;
                             }
                         }
                     }
@@ -141,7 +146,16 @@ public class GuardScript : MonoBehaviour
                     break;
                 }
             }
-            suspicion += Time.deltaTime * Mathf.Max(1, visibility);
+            suspicion += Time.deltaTime * Mathf.Min(1, visibility) * suspicionMultiplier;
+            if (suspicion > 0)
+            {
+                // then reduce the suspiciontimer
+                suspicionTimer -= Time.deltaTime;
+                if (suspicionTimer <= 0)
+                {
+                    suspicion = Mathf.Max(0, suspicion - Time.deltaTime * suspicionFallMultiplier);
+                }
+            }
         }
         Debug.Log("Suspicion: " + suspicion);
     }
