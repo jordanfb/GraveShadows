@@ -25,5 +25,6 @@ public class EvidenceMono : MonoBehaviour
     public Evidence EvidenceInfo
     {
         get { return _evidenceInfo; }
+        set { _evidenceInfo = value; }
     }
 }
