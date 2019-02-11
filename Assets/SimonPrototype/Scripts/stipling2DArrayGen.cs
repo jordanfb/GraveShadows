@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class stipling2DArrayGen : MonoBehaviour
 {
     // Start is called before the first frame update
 
     public Texture inputTexture;
     public int numTones;
-    public RenderTexture target;
     Texture2DArray return2DArray;
     public string fileName;
 
