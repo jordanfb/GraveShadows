@@ -102,6 +102,7 @@ public class GuardScript : MonoBehaviour
         // spot the character
         SpotTheCharacter();
         // then handle suspicion in the state machine I guess?
+
     }
 
     void SpotTheCharacter()
