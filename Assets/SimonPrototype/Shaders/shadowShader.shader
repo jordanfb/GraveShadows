@@ -8,10 +8,11 @@
     SubShader
     {
         Pass{
-        Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" }
-        LOD 200
+        Tags {"Queue"="Transparent" "RenderType"="Transparent" }
+        LOD 100
+
+        ZWrite Off
         Blend SrcAlpha OneMinusSrcAlpha
-        ZWrite On
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
@@ -57,23 +58,21 @@
             
             float4 c = tex2D(_CameraTex, o.texcoord);
             
-            if(c.r>0.0){
-                
-                return float4(1.0,0.0,0.0, 1.0);
-            }else{
+            if(c.r<0.1){
+            
                 c.a = 0.0;
-                return c;
+                
             }
-              
+            
+            return c;
+
                
         }
-        
-        
         
 
         
         ENDCG
-    }
+        }
     }
     FallBack "Diffuse"
 }
