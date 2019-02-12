@@ -688,7 +688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -778,6 +778,7 @@ MonoBehaviour:
   _pinnedObjectOffset: -2
   _textPositionXOffset: -1
   _charTextFontSize: 8
+  _yarnBoardCamera: {fileID: 1367367182}
 --- !u!1 &1367367178
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,6 +790,7 @@ GameObject:
   - component: {fileID: 1367367181}
   - component: {fileID: 1367367180}
   - component: {fileID: 1367367179}
+  - component: {fileID: 1367367182}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -860,6 +862,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1367367182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367367178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c32d07de0637834f93b802038cb4a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothTime: 5
 --- !u!1 &1386444201
 GameObject:
   m_ObjectHideFlags: 0

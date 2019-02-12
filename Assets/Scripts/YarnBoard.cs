@@ -20,6 +20,8 @@ public class YarnBoard : MonoBehaviour
     private float _textPositionXOffset;
     [SerializeField]
     private int _charTextFontSize;
+    [SerializeField]
+    private YarnBoardCamera _yarnBoardCamera;
 
     private List<GameObject> _pins;
     private bool displaying = false;
@@ -92,6 +94,7 @@ public class YarnBoard : MonoBehaviour
                 GameObject evidence = hit.collider.gameObject;
                 if(evidence.tag == "Evidence")
                 {
+                    _yarnBoardCamera.LookAtEvidence(evidence.transform);
                     _flavorTextPanel.SetActive(true);
                     _flavorTextAsset.text = evidence.GetComponent<EvidenceMono>().EvidenceInfo.FlavorText;
                     displaying = true;
