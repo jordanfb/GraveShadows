@@ -7,10 +7,15 @@ public class LineDraw : MonoBehaviour
     private LineRenderer _line;
     private Vector3 _mousePos;
     private GameObject _startPin;
-    private int _currentLines = 0;
+    private List<LineRenderer> _lines;
 
     public Material material;
     public float _lineWidth = 0.15f;
+
+    private void Start()
+    {
+        _lines = new List<LineRenderer>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -48,16 +53,19 @@ public class LineDraw : MonoBehaviour
             if(Physics.Raycast(ray, out endHit))
             {
                 Collider endColl = endHit.collider;
-                if(endColl.gameObject.tag == "Pin" && endColl.gameObject != _startPin)
+                if(endColl.gameObject.tag == "Pin" && 
+                    endColl.gameObject != _startPin &&
+                    !ConnectionExists(endColl.gameObject.transform.position))
                 {
                     //Set the endpoint position of the line to the end pin
                     _line.SetPosition(1, endColl.gameObject.transform.position);
                     AddCollider();
-                    _currentLines++;
+                    _lines.Add(_line);
                 }
                 else
                 {
                     //Line is invalid, destroy
+                    _lines.Remove(_line);
                     Destroy(_line.gameObject);
                 }
             }
@@ -87,10 +95,13 @@ public class LineDraw : MonoBehaviour
                 Collider delColl = delHit.collider;
                 if(delColl.gameObject.tag == "Line")
                 {
+                    LineRenderer delLine = delColl.transform.parent.gameObject.GetComponent<LineRenderer>();
+                    _lines.Remove(delLine);
                     Destroy(delColl.transform.parent.gameObject);
                 }
             }
         }
+
     }
 
     /**
@@ -100,8 +111,7 @@ public class LineDraw : MonoBehaviour
     private void CreateLine(Vector3 position) // Can probably remove the vector3 arg now that I track the starting pin
     {
         if (_line != null) return;
-        _line = new GameObject("Line" + _currentLines).AddComponent<LineRenderer>();
-
+        _line = new GameObject("Line" + _lines.Count).AddComponent<LineRenderer>();
         //Eventually this material will be an actual yarn texture
         _line.material = material;
         _line.positionCount = 2;
@@ -119,8 +129,10 @@ public class LineDraw : MonoBehaviour
      * */
     private void AddCollider()
     {
+        Debug.Log(_line.GetPosition(0));
+        Debug.Log(_line.GetPosition(1));
         //Create a new gameobject with a box collider
-        BoxCollider lineColl = new GameObject("LineCollider" + _currentLines).AddComponent<BoxCollider>();
+        BoxCollider lineColl = new GameObject("LineCollider" + _lines.Count).AddComponent<BoxCollider>();
         lineColl.transform.parent = _line.transform;
         //Tag required for the raycast check (right clicking to delete)
         lineColl.gameObject.tag = "Line";
@@ -138,8 +150,26 @@ public class LineDraw : MonoBehaviour
         lineColl.transform.position = midPoint;
 
         //Rotate the line collider by a certain angle so that it's oriented correctly.
-        float angle = Mathf.Atan2((_line.GetPosition(1).z - _line.GetPosition(0).z), (_line.GetPosition(1).x - _line.GetPosition(0).x));
-        angle *= -Mathf.Rad2Deg;
-        lineColl.transform.Rotate(0f, angle, 0f);
+        float angle = Mathf.Atan2((_line.GetPosition(1).y - _line.GetPosition(0).y), (_line.GetPosition(1).x - _line.GetPosition(0).x));
+        angle *= Mathf.Rad2Deg;
+        lineColl.transform.Rotate(0f, 0f, angle);
+    }
+
+    /**
+     * Returns true if and only if a line exists with the exact
+     * endpoint positions. Returns false otherwise.
+     * */
+    public bool ConnectionExists(Vector3 endPos)
+    {
+        foreach(LineRenderer li in _lines)
+        {
+            if (li.GetPosition(0) == _startPin.transform.position &&
+                li.GetPosition(1) == endPos)
+                return true;
+            if (li.GetPosition(1) == _startPin.transform.position &&
+                li.GetPosition(0) == endPos)
+                return true;
+        }
+        return false;
     }
 }
