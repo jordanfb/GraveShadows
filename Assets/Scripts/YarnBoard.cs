@@ -94,6 +94,7 @@ public class YarnBoard : MonoBehaviour
                 {
                     _flavorTextPanel.SetActive(true);
                     _flavorTextAsset.text = evidence.GetComponent<EvidenceMono>().EvidenceInfo.FlavorText;
+                    displaying = true;
                 }
             }
         }
@@ -120,5 +121,6 @@ public class YarnBoard : MonoBehaviour
     {
         _flavorTextPanel.SetActive(false);
         _flavorTextAsset.text = "";
+        displaying = false;
     }
 }
