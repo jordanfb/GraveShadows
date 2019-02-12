@@ -25,15 +25,24 @@ public class YarnBoard : MonoBehaviour
 
     private List<GameObject> _pins;
     private bool displaying = false;
+    private Renderer _renderer;
+    private Vector2 _minPinPos;
+    private Vector2 _maxPinPos;
 
     // Start is called before the first frame update
     void Start()
     {
+        //For use with randomly placing pins
+        _renderer = GetComponent<Renderer>();
+        _minPinPos = new Vector2(_renderer.bounds.min.x, _renderer.bounds.min.y);
+        _maxPinPos = new Vector2(_renderer.bounds.max.x, _renderer.bounds.max.y);
+
+        //Initialize Pins
         _pins = new List<GameObject>();
         foreach (GameObject go in PlayerManager.instance.CollectedEvidence)
         {
             GameObject pin = Instantiate(_pinPrefab) as GameObject;
-            //TODO: Change transform position (need to decide best way of doing so)
+            RandomizePositionOnBoard(ref pin);
             _pins.Add(pin);
 
             Evidence evidence = go.GetComponent<EvidenceMono>().EvidenceInfo;
@@ -44,7 +53,7 @@ public class YarnBoard : MonoBehaviour
                     GameObject photo = new GameObject(evidence.Name);
                     photo.tag = "Evidence";
                     photo.transform.parent = pin.transform;
-                    photo.transform.position = new Vector3(photo.transform.position.x, _pinnedObjectOffset, photo.transform.position.z);
+                    photo.transform.localPosition = Vector3.zero;
                     photo.AddComponent<SpriteRenderer>().sprite = evidence.Photo;
                     photo.AddComponent<BoxCollider>();
                     photo.AddComponent<EvidenceMono>().EvidenceInfo = evidence;
@@ -54,15 +63,14 @@ public class YarnBoard : MonoBehaviour
                     GameObject paper = new GameObject(evidence.Name);
                     paper.tag = "Evidence";
                     paper.transform.parent = pin.transform;
-                    paper.transform.position = new Vector3(paper.transform.position.x, _pinnedObjectOffset, paper.transform.position.z);
+                    paper.transform.localPosition = Vector3.zero;
                     paper.AddComponent<SpriteRenderer>().sprite = evidence.Photo;
                     paper.AddComponent<BoxCollider>();
                     paper.AddComponent<EvidenceMono>().EvidenceInfo = evidence;
                     //Create text object to display over paper
                     GameObject text = new GameObject(evidence.Name + "Characters");
                     text.transform.parent = paper.transform;
-                    text.transform.position = new Vector3(text.transform.position.x + _textPositionXOffset,
-                        text.transform.position.y, text.transform.position.z - 1f);
+                    text.transform.localPosition = new Vector3(0f, 0f, -1f);
                     DisplayCharacters(ref text, evidence);
                     break;
                 case EvidenceType.Document:
@@ -74,7 +82,8 @@ public class YarnBoard : MonoBehaviour
                     document.tag = "Evidence";
                     document.name = evidence.Name;
                     document.transform.parent = pin.transform;
-                    document.transform.position = new Vector3(document.transform.position.x, _pinnedObjectOffset, document.transform.position.z + 1f);
+                    // CHANGE WHEN ACTUAL DOCUMENT MODELS ARE AVAILABLE
+                    document.transform.localPosition = new Vector3(0f, 6f, 0f);
                     break;
             }
         }
@@ -101,6 +110,13 @@ public class YarnBoard : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void RandomizePositionOnBoard(ref GameObject pin)
+    {
+        float randX = Random.Range(_minPinPos.x * .75f, _maxPinPos.y * .75f);
+        float randY = Random.Range(_minPinPos.y * .75f, _maxPinPos.y * .75f);
+        pin.transform.position = new Vector3(randX, randY, 0f);
     }
 
     //Isolated for readability sake
