@@ -129,8 +129,6 @@ public class LineDraw : MonoBehaviour
      * */
     private void AddCollider()
     {
-        Debug.Log(_line.GetPosition(0));
-        Debug.Log(_line.GetPosition(1));
         //Create a new gameobject with a box collider
         BoxCollider lineColl = new GameObject("LineCollider" + _lines.Count).AddComponent<BoxCollider>();
         lineColl.transform.parent = _line.transform;
