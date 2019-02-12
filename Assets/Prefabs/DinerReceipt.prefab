@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4117591951637224460}
   - component: {fileID: 8858577484230890684}
   - component: {fileID: 1008049737}
+  - component: {fileID: 174030334837306938}
   m_Layer: 0
   m_Name: DinerReceipt
   m_TagString: Evidence
@@ -90,4 +91,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce24771a62989f4e9b29b7ef82b929d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _evidenceInfo: {fileID: 0}
+  _evidenceInfo: {fileID: 11400000, guid: 9db0c0a49182a474cbf698d6a8820016, type: 2}
+--- !u!65 &174030334837306938
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008049736}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3273328, y: 0.050920006, z: 0.055449568}
+  m_Center: {x: -0.16057605, y: -0.020773606, z: 0.0007572407}

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 815551722652236688}
   - component: {fileID: 26056242924266149}
   - component: {fileID: 194427298}
+  - component: {fileID: 7468630829815184878}
   m_Layer: 0
   m_Name: WarehouseKey
   m_TagString: Evidence
@@ -91,3 +92,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _evidenceInfo: {fileID: 11400000, guid: 5122288511a212649aed932c7e7adea3, type: 2}
+--- !u!65 &7468630829815184878
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194427297}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4012754, y: 0.11031784, z: 0.94338804}
+  m_Center: {x: 0, y: 0, z: 0}

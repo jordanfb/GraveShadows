@@ -79,12 +79,14 @@ public class YarnBoard : MonoBehaviour
                     //Later on we might have to rotate it to face the camera
                     //Because we are instantiating a stored go and not making a new one, 
                     //adding a collider and EvidenceMono is unnecessary.
-                    GameObject document = Instantiate(go) as GameObject;
+                    GameObject document = new GameObject(evidence.Name);
                     document.tag = "Evidence";
                     document.name = evidence.Name;
                     document.transform.parent = pin.transform;
+                    document.AddComponent<SpriteRenderer>().sprite = evidence.Photo;
                     // CHANGE WHEN ACTUAL DOCUMENT MODELS ARE AVAILABLE
-                    document.transform.localPosition = new Vector3(0f, 6f, PinOffset(document.GetComponent<SphereCollider>()));
+                    BoxCollider dColl = document.AddComponent<BoxCollider>();
+                    document.transform.localPosition = new Vector3(0f, 6f, PinOffset(dColl));
                     break;
             }
         }
