@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class YarnBoardCamera : MonoBehaviour
 {
-    Vector3 velocity = Vector3.zero;
+    Vector3 startPos;
     public float duration = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        startPos = transform.position;
     }
 
     // Update is called once per frame
@@ -23,6 +23,11 @@ public class YarnBoardCamera : MonoBehaviour
         Vector3 endPos = new Vector3(target.position.x, target.position.y, transform.position.z);
         StartCoroutine(CameraLerp(transform.position, endPos));
         
+    }
+
+    public void ReturnToStart()
+    {
+        StartCoroutine(CameraLerp(transform.position, startPos));
     }
 
     IEnumerator CameraLerp(Vector3 start, Vector3 end)
