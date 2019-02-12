@@ -27,7 +27,7 @@ public class playerShadowMovementScript : MonoBehaviour
     {
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        int layerMask = 1 << 10;
+        int layerMask = 1 << 8;
         if (Physics.Raycast(mainCamera.transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
         {
             print(hit.collider.gameObject.name);
