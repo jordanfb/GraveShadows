@@ -42,7 +42,7 @@ public class YarnBoard : MonoBehaviour
         foreach (GameObject go in PlayerManager.instance.CollectedEvidence)
         {
             GameObject pin = Instantiate(_pinPrefab) as GameObject;
-            RandomizePositionOnBoard(ref pin);
+            RandomizePositionOnBoard(ref pin, _pins.IndexOf(pin));
             _pins.Add(pin);
 
             Evidence evidence = go.GetComponent<EvidenceMono>().EvidenceInfo;
@@ -120,11 +120,11 @@ public class YarnBoard : MonoBehaviour
         }
     }
 
-    private void RandomizePositionOnBoard(ref GameObject pin)
+    private void RandomizePositionOnBoard(ref GameObject pin, int index)
     {
-        float randX = Random.Range(_minPinPos.x * .75f, _maxPinPos.y * .75f);
+        float randX = Random.Range(_minPinPos.x * .75f, _maxPinPos.x * .75f);
         float randY = Random.Range(_minPinPos.y * .75f, _maxPinPos.y * .75f);
-        pin.transform.position = new Vector3(randX, randY, 0f);
+        pin.transform.position = new Vector3(randX + index, randY, 0f);
     }
 
     //Isolated for readability sake
