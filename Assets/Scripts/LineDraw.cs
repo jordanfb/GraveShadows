@@ -129,6 +129,8 @@ public class LineDraw : MonoBehaviour
      * */
     private void AddCollider()
     {
+        Debug.Log(_line.GetPosition(0));
+        Debug.Log(_line.GetPosition(1));
         //Create a new gameobject with a box collider
         BoxCollider lineColl = new GameObject("LineCollider" + _lines.Count).AddComponent<BoxCollider>();
         lineColl.transform.parent = _line.transform;
@@ -148,9 +150,9 @@ public class LineDraw : MonoBehaviour
         lineColl.transform.position = midPoint;
 
         //Rotate the line collider by a certain angle so that it's oriented correctly.
-        float angle = Mathf.Atan2((_line.GetPosition(1).z - _line.GetPosition(0).z), (_line.GetPosition(1).x - _line.GetPosition(0).x));
-        angle *= -Mathf.Rad2Deg;
-        lineColl.transform.Rotate(0f, angle, 0f);
+        float angle = Mathf.Atan2((_line.GetPosition(1).y - _line.GetPosition(0).y), (_line.GetPosition(1).x - _line.GetPosition(0).x));
+        angle *= Mathf.Rad2Deg;
+        lineColl.transform.Rotate(0f, 0f, angle);
     }
 
     /**

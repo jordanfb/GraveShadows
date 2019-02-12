@@ -14,7 +14,7 @@ public class YarnBoard : MonoBehaviour
     [SerializeField]
     private Text _flavorTextAsset;
     [SerializeField]
-    private float _pinnedObjectOffset;
+    private float _offsetRatio;
     [Tooltip("Determines the x offset of character text meshes on the notebook paper.")]
     [SerializeField]
     private float _textPositionXOffset;
@@ -53,9 +53,9 @@ public class YarnBoard : MonoBehaviour
                     GameObject photo = new GameObject(evidence.Name);
                     photo.tag = "Evidence";
                     photo.transform.parent = pin.transform;
-                    photo.transform.localPosition = Vector3.zero;
                     photo.AddComponent<SpriteRenderer>().sprite = evidence.Photo;
-                    photo.AddComponent<BoxCollider>();
+                    BoxCollider pColl = photo.AddComponent<BoxCollider>();
+                    photo.transform.localPosition = new Vector3(0f, 1f, PinOffset(pColl));
                     photo.AddComponent<EvidenceMono>().EvidenceInfo = evidence;
                     break;
                 case EvidenceType.Conversation:
@@ -63,9 +63,10 @@ public class YarnBoard : MonoBehaviour
                     GameObject paper = new GameObject(evidence.Name);
                     paper.tag = "Evidence";
                     paper.transform.parent = pin.transform;
-                    paper.transform.localPosition = Vector3.zero;
                     paper.AddComponent<SpriteRenderer>().sprite = evidence.Photo;
-                    paper.AddComponent<BoxCollider>();
+                    BoxCollider paColl = paper.AddComponent<BoxCollider>();
+                    //PINOFFSET SET TO Z BC PINS ARE ROTATED
+                    paper.transform.localPosition = new Vector3(0f, 1f, PinOffset(paColl)); 
                     paper.AddComponent<EvidenceMono>().EvidenceInfo = evidence;
                     //Create text object to display over paper
                     GameObject text = new GameObject(evidence.Name + "Characters");
@@ -83,10 +84,15 @@ public class YarnBoard : MonoBehaviour
                     document.name = evidence.Name;
                     document.transform.parent = pin.transform;
                     // CHANGE WHEN ACTUAL DOCUMENT MODELS ARE AVAILABLE
-                    document.transform.localPosition = new Vector3(0f, 6f, 0f);
+                    document.transform.localPosition = new Vector3(0f, 6f, PinOffset(document.GetComponent<SphereCollider>()));
                     break;
             }
         }
+    }
+
+    private float PinOffset(Collider c)
+    {
+        return (1f / _offsetRatio) * (c.bounds.max.y - c.bounds.center.y);
     }
 
     private void Update()
