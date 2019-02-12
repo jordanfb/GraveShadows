@@ -82,6 +82,7 @@ public class YarnBoard : MonoBehaviour
                     GameObject document = new GameObject(evidence.Name);
                     document.tag = "Evidence";
                     document.name = evidence.Name;
+                    document.AddComponent<EvidenceMono>().EvidenceInfo = evidence;
                     document.transform.parent = pin.transform;
                     document.AddComponent<SpriteRenderer>().sprite = evidence.Photo;
                     // CHANGE WHEN ACTUAL DOCUMENT MODELS ARE AVAILABLE
