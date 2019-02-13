@@ -20,14 +20,17 @@ public class ConversationMemberEditor : Editor
         EditorGUILayout.BeginHorizontal();
         //GUILayout.Label("Character Name:", GUILayout.ExpandWidth(false));
         EditorGUILayout.PrefixLabel("Character Name:");
-        m.characterName = EditorGUILayout.DelayedTextField(m.characterName);
+        string newName = EditorGUILayout.DelayedTextField(m.characterName);
         EditorGUILayout.EndHorizontal();
         if (EditorGUI.EndChangeCheck())
         {
             // then validate the character names after you finish editing the name
+            Undo.RecordObject(m, "Set name of ConversationMember");
+            Debug.Log("Set character name");
+            m.characterName = newName;
             ConversationMember.ValidateAllNames();
         }
-
+        Undo.RecordObject(m, "Modified ConversationMember");
         // you're just a slave only show slave things
         if (m.masters.Count > 0)
         {

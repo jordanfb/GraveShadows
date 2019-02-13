@@ -177,13 +177,13 @@ public class ConversationManager : MonoBehaviour
 {
 
     public TextAsset script;
-    public List<ConversationMember> slaves;
-    public List<ScriptLine> scriptLines;
+    public List<ConversationMember> slaves = new List<ConversationMember>();
+    public List<ScriptLine> scriptLines = new List<ScriptLine>();
 
-    public string conversationDescription;
-    public string scriptHeader;
-    public string scriptContent;
-    public List<string> characterNames;
+    public string conversationDescription = "";
+    public string scriptHeader = "";
+    public string scriptContent = "";
+    public List<string> characterNames = new List<string>();
     public float defaultSpeed = 1; // this is way too slow but for now it works
     public bool defaultUsePostDelay = true;
     public float defaultDelay = 0;
@@ -472,6 +472,8 @@ public class ConversationManager : MonoBehaviour
         // clear your current slaves
         foreach (ConversationMember m in slaves)
         {
+            if (m == null)
+                continue;
             m.RemoveMaster(this);
         }
         slaves.Clear();

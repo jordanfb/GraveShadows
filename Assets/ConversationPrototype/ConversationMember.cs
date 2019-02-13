@@ -19,16 +19,52 @@ public class ConversationMember : MonoBehaviour
     private int characterNumber = 0;
     private int unformattedCharacterNumber = 0;
     private ScriptLine line;
+    private bool playing = true;
 
-    // Start is called before the first frame update
-    void Start()
+    private ScriptLine interuptedLine;
+
+    public void InterruptConversation(string newLine, float speed = .05f)
+    {
+        interuptedLine = line;
+        foreach(ConversationManager m in masters)
+        {
+            if (m != null)
+            {
+                m.StopRunningScript(); // FIX so it pauses the script instead
+            }
+        }
+        SayLine(new ScriptLine(characterName, newLine, speed));
+    }
+
+    public void StopConversation()
     {
 
+    }
+
+    public void PlayConversation()
+    {
+
+    }
+
+    public void PauseConversation()
+    {
+
+    }
+
+    private void FaceCamera()
+    {
+        transform.LookAt(Camera.main.transform);
+        // for some reason they need to be flipped after they look at the camera?
+        transform.Rotate(0, 180, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (alwaysFaceCamera)
+        {
+            FaceCamera();
+        }
         if (!IsFinished())
         {
             // then say stuff!
