@@ -63,7 +63,7 @@ public class LightingManager : MonoBehaviour
                 if (Physics.Raycast(playerHitPoints[j].position, direction, out hitWall, Vector3.Distance(playerHitPoints[j].position, lightsInScene[i].transform.position), mask))
                 {
 
-                    Debug.DrawRay(playerHitPoints[j].position, direction, Color.red);
+                    //Debug.DrawRay(playerHitPoints[j].position, direction, Color.red);
                     continue;
                 }
                 if (Physics.Raycast(playerHitPoints[j].position, -direction, out hitWall, Mathf.Infinity, mask))
