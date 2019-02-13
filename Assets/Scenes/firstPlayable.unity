@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &27887647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2547,16 +2547,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2701277236420419686, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701277236420419609, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: shadowPlane
@@ -2597,6 +2587,16 @@ PrefabInstance:
       propertyPath: lightsInScene.Array.data[1]
       value: 
       objectReference: {fileID: 1314316398}
+    - target: {fileID: 2701277236420419686, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419609, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: distance
@@ -2612,7 +2612,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 2701277237824572701, guid: c16a4fdeecf104c7898d04976f09544e,
+    - target: {fileID: 2701277237202402289, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701277237278251770, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_Layer
       value: 9
@@ -2622,12 +2627,7 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 2701277237202402289, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701277237278251770, guid: c16a4fdeecf104c7898d04976f09544e,
+    - target: {fileID: 2701277237824572701, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_Layer
       value: 9
@@ -2920,6 +2920,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: shadowPlane
       objectReference: {fileID: 0}
+    - target: {fileID: 9102548792243493570, guid: d996cb25236f44f5ab46845dc2c8a569,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 9102548792243493574, guid: d996cb25236f44f5ab46845dc2c8a569,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2999,6 +3004,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 9102548792912262249, guid: d996cb25236f44f5ab46845dc2c8a569,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d996cb25236f44f5ab46845dc2c8a569, type: 3}
@@ -3759,8 +3769,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1707480051}
   m_LocalRotation: {x: -0, y: -0.51490915, z: -0, w: 0.85724473}
-  m_LocalPosition: {x: 5.03, y: 2.037757, z: -0.32}
-  m_LocalScale: {x: 3.6509, y: 3.7298, z: 1}
+  m_LocalPosition: {x: 3.44, y: 2.037757, z: 0.39}
+  m_LocalScale: {x: 3.6509, y: 3.7298, z: 5.3101}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 21
@@ -4147,6 +4157,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     onlyRunOnce: 0
+--- !u!114 &1858840571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858840568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd5b6a30a0bfaf34283795549d1ece01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: 114
+  scene: YarnBoardTest
 --- !u!4 &1913292241 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4579863663632027586, guid: 3405c0a0f2cb64743a5ee64c805b403d,

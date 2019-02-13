@@ -737,6 +737,7 @@ GameObject:
   - component: {fileID: 826193255}
   - component: {fileID: 826193254}
   - component: {fileID: 826193259}
+  - component: {fileID: 826193260}
   m_Layer: 0
   m_Name: YarnBoard
   m_TagString: Untagged
@@ -852,6 +853,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 3ab232e47c4f8654eb94ea90fe074173, type: 2}
   _lineWidth: 0.15
+--- !u!114 &826193260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826193253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd5b6a30a0bfaf34283795549d1ece01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: 114
+  scene: firstPlayable
 --- !u!1 &916344329
 GameObject:
   m_ObjectHideFlags: 0
