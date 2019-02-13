@@ -27,4 +27,13 @@ public class EvidenceMono : MonoBehaviour
         get { return _evidenceInfo; }
         set { _evidenceInfo = value; }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (Input.GetKeyDown(KeyCode.E) && other.gameObject.tag == "Player")
+        {
+            PlayerManager.instance.CollectEvidence(this.gameObject);
+            Destroy(this.gameObject);
+        }
+    }
 }

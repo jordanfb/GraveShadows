@@ -15,16 +15,16 @@ public class ThirdPersonCamera : MonoBehaviour
     private float currentRotationY;
 
     [SerializeField]
-    const float MIN_X = 0;
+    private float min_x = 0;
     [SerializeField]
-    const float MAX_X = 80f;
+    private float max_x = 80f;
 
     [SerializeField]
-    const float MIN_Y = 0;
+    private float min_y = 0;
     [SerializeField]
-    const float MAX_Y = 80f;
+    private float max_y = 80f;
 
-    private float distance = 5f;
+    private float distance = 2f;
 
     private float scrollSpeedX = 2f;
     private float scrollSpeedY = 2f;
@@ -46,7 +46,7 @@ public class ThirdPersonCamera : MonoBehaviour
         currentRotationY += Input.GetAxis("Mouse Y")*scrollSpeedY;
         distance += Input.GetAxis("Mouse ScrollWheel");
 
-        currentRotationY = Mathf.Clamp(currentRotationY, MIN_Y, MAX_Y);
+        currentRotationY = Mathf.Clamp(currentRotationY, min_y, max_y);
 
 
     }
@@ -62,17 +62,42 @@ public class ThirdPersonCamera : MonoBehaviour
         Vector3 camPos = lookAt.position + rot * new Vector3(0f, 0f, -distance);
        
 
-        if (Physics.Linecast(lookAt.position, mainCam.transform.position-2*transform.forward, out wallHit, mask)) {
+        if (Physics.Linecast(lookAt.position, mainCam.transform.position, out wallHit, mask)) {
             Vector3 hitPoint = wallHit.point;
             camPos = lookAt.position + rot * new Vector3(0f, 0f, -(lookAt.position - wallHit.point).magnitude);
+
            
         }
 
+        camPos -= mainCam.transform.forward*0.3f;
         mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, camPos, 10f);
         mainCam.transform.LookAt(lookAt);
 
     }
 
+    public GameObject setLookAt(GameObject newLookAt) {
+        lookAt = newLookAt.transform;
+        return lookAt.gameObject;
+    }
 
-   
+    public void setCameraClamps(float newMin_x, float newMax_x, float newMin_y, float newMax_y) {
+        min_x = newMin_x;
+        max_x = newMax_x;
+        min_y = newMin_y;
+        max_y = newMax_y;
+
+    }
+    public Vector4 getCameraClamps() {
+        return new Vector4(min_x, max_x, min_y, max_y);
+    }
+    public void printCurrentRotationY() {
+        print(currentRotationY);
+    }
+    public void printCurrentRotationX()
+    {
+        print(currentRotationX);
+    }
+
+
+
 }

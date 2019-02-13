@@ -71,7 +71,6 @@
             fixed4 col2;
             
             
-            
             if(abs(IN.worldNormal.y) > 0.5)
             {
                 float2 worldUV = TRANSFORM_TEX(IN.worldPos.xz, _TonalArtMap);
@@ -82,7 +81,6 @@
             else if(abs(IN.worldNormal.x) > 0.5)
             {
                 float2 worldUV = TRANSFORM_TEX(IN.worldPos.yz, _TonalArtMap);
-               
                 col1 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, floor(texI)));
                 col2 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(worldUV, ceil(texI)));
 
