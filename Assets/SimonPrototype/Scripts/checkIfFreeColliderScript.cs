@@ -9,6 +9,9 @@ public class checkIfFreeColliderScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Evidence")) {
+            return;
+        }
         isColliding = true;
     }
 

@@ -93,8 +93,8 @@
 
             }
             
-            col1 = AdjustContrast(col1, _Contrast);
-            col2 = AdjustContrast(col2, _Contrast);
+            col1 = AdjustContrast(col1, _Contrast) * _ColorTint;
+            col2 = AdjustContrast(col2, _Contrast) * _ColorTint;
             
            
             

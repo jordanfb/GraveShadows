@@ -24,7 +24,7 @@ public class ThirdPersonCamera : MonoBehaviour
     [SerializeField]
     private float max_y = 80f;
 
-    private float distance = 2f;
+    public float distance = 2f;
 
     private float scrollSpeedX = 2f;
     private float scrollSpeedY = 2f;
