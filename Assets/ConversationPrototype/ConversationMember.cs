@@ -20,8 +20,22 @@ public class ConversationMember : MonoBehaviour
     private int unformattedCharacterNumber = 0;
     private ScriptLine line;
 
-    // Start is called before the first frame update
-    void Start()
+    public void InterruptConversation(string newLine)
+    {
+
+    }
+
+    public void StopConversation()
+    {
+
+    }
+
+    public void PlayConversation()
+    {
+
+    }
+
+    public void PauseConversation()
     {
 
     }
