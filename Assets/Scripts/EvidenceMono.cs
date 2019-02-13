@@ -28,7 +28,7 @@ public class EvidenceMono : MonoBehaviour
         set { _evidenceInfo = value; }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (Input.GetKeyDown(KeyCode.E) && other.gameObject.tag == "Player")
         {
