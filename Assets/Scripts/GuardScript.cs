@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 /*
  * faster spot if you are moving? (find the rigidbody on the visiblityObject and make it magic)
@@ -41,6 +42,7 @@ public class GuardScript : MonoBehaviour
     [Header("What happens when the guard has fully sighted the player?")]
     public float fullySuspiciousLevel = 1;
     public bool forceStopConverstion = true;
+    public bool stopWalking = true;
     private bool hasFiredStartSuspicionEvent = false; // a latch for only fully sighting something once
     public string[] sightedPlayerQuips;
     [Tooltip("This event is fired as soon as the guard's suspicion reaches critical levels")]
@@ -106,26 +108,6 @@ public class GuardScript : MonoBehaviour
     {
         if (positions.Count > 0)
         {
-            /*percentProgress += Time.deltaTime / percentSpeedThing;
-            // move towards each of the positions in turn
-            transform.position = Vector3.MoveTowards(transform.position, positions[target], speed * Time.deltaTime);
-            //transform.rotation = Quaternion.Lerp(previousRotation, rotation, percentProgress);
-            if (Vector3.Distance(transform.position, positions[target]) != 0)
-            {
-                transform.LookAt(positions[target]);
-            }
-
-            if (transform.position == positions[target])
-            {
-                // then find the next target
-                target++;
-                target %= positions.Count;
-                rotation = rotations[target];
-                previousRotation = transform.rotation;
-                // now calculate the time to turn over
-                float distance = Vector3.Distance(transform.position, positions[target]);
-                percentSpeedThing = distance / speed;
-            }*/
             if (!agent.hasPath)
             {
                 agent.SetDestination(positions[target]);
@@ -144,7 +126,7 @@ public class GuardScript : MonoBehaviour
         // spot the character
         SpotTheCharacter();
         // then handle suspicion in the state machine I guess?
-
+        HandleSuspicion();
     }
 
     [ContextMenu("Find ConversationMember")]
@@ -156,6 +138,36 @@ public class GuardScript : MonoBehaviour
         {
             conversationMember = GetComponentInChildren<ConversationMember>();
         }
+    }
+
+    public void DebugLogString(string s)
+    {
+        // this is used as a simple testing function for the guard suspicion levels
+        Debug.Log(s);
+    }
+
+    public void SpeakThenRestartLevel()
+    {
+        // this function is called to wait until the guard is finished talking and then reset the level
+        // it starts an async call to do so
+        StartCoroutine(WaitUntilFinishedSpeaking(ResetLevel));
+    }
+
+    public void ResetLevel()
+    {
+        Debug.Log("Reset the level");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private IEnumerator WaitUntilFinishedSpeaking(System.Action functionToCall)
+    {
+        Debug.Log("Started coroutine");
+        if (conversationMember != null)
+        {
+            yield return new WaitUntil(() => conversationMember.IsFinished());
+        }
+        // then call whatever
+        functionToCall.Invoke();
     }
 
     void SpotTheCharacter()
@@ -203,61 +215,80 @@ public class GuardScript : MonoBehaviour
             suspicion += Time.deltaTime * Mathf.Min(1, visibility) * suspicionMultiplier;
             if (suspicion > 0)
             {
-                if (suspicion > startSuspicionLevel && !hasFiredStartSuspicionEvent)
-                {
-                    // then we are suspicious! fire off the suspicion function call
-                    hasFiredStartSuspicionEvent = true;
-                    onStartSuspicionEvent.Invoke();
-                    if (conversationMember != null && spottedSomethingQuips.Length > 0)
-                    {
-                        // say a random quip
-                        string line = spottedSomethingQuips[Random.Range(0, spottedSomethingQuips.Length)];
-                        conversationMember.InterruptConversation(line);
-                    }
-                }
-
-                if (suspicion > investigateSuspicionLevel)
-                {
-                    // record where we should investigate whenever we see things
-                    onStartSuspicionEvent.Invoke();
-                    if (conversationMember != null && spottedSomethingQuips.Length > 0)
-                    {
-                        // say a random quip
-                        string line = spottedSomethingQuips[Random.Range(0, spottedSomethingQuips.Length)];
-                        conversationMember.InterruptConversation(line);
-                    }
-                }
-
                 // then reduce the suspiciontimer
                 suspicionTimer -= Time.deltaTime;
-                if (suspicionTimer <= 0)
+                if (suspicionTimer <= 0 && hasFiredStartSuspicionEvent)
                 {
+                    // they ran out of suspicion. FIX this to work with investigation.
                     suspicion = Mathf.Max(0, suspicion - Time.deltaTime * suspicionFallMultiplier);
-                    hasFiredSightingEvent = false;
-                    // we also fire the event which happens when they stop seeing them
-                    onLoseSuspicionEvent.Invoke();
-                    if (conversationMember != null && sightedPlayerQuips.Length > 0)
-                    {
-                        // say a random quip
-                        string line = sightedPlayerQuips[Random.Range(0, sightedPlayerQuips.Length)];
-                        conversationMember.InterruptConversation(line);
-                    }
-                }
-            }
-            if (suspicion >= fullySuspiciousLevel && !hasFiredSightingEvent)
-            {
-                // then we are suspicious! fire off the suspicion function call
-                hasFiredSightingEvent = true;
-                onSightingEvent.Invoke();
-                if (conversationMember != null && lostSightQuips.Length > 0)
-                {
-                    // say a random quip
-                    string line = lostSightQuips[Random.Range(0, lostSightQuips.Length)];
-                    conversationMember.InterruptConversation(line);
                 }
             }
         }
         //Debug.Log("Suspicion: " + suspicion);
+    }
+
+    void HandleSuspicion()
+    {
+        // FIX INVESTIGATION
+        //if (suspicion > investigateSuspicionLevel)
+        //{
+        //    // record where we should investigate whenever we see things FIX
+        //    if (conversationMember != null && spottedSomethingQuips.Length > 0)
+        //    {
+        //        // say a random quip
+        //        string line = spottedSomethingQuips[Random.Range(0, spottedSomethingQuips.Length)];
+        //        conversationMember.InterruptConversation(line);
+        //    }
+        //    //onStartSuspicionEvent.Invoke();
+        //}
+
+        if (suspicion > startSuspicionLevel && !hasFiredStartSuspicionEvent)
+        {
+            // then we are suspicious! fire off the suspicion function call
+            hasFiredStartSuspicionEvent = true;
+            onStartSuspicionEvent.Invoke();
+            if (conversationMember != null && spottedSomethingQuips.Length > 0)
+            {
+                // say a random quip
+                string line = spottedSomethingQuips[Random.Range(0, spottedSomethingQuips.Length)];
+                conversationMember.InterruptConversation(line);
+            }
+        }
+
+        if (suspicion >= fullySuspiciousLevel && !hasFiredSightingEvent)
+        {
+            // then we are suspicious! fire off the suspicion function call
+            hasFiredSightingEvent = true;
+            if (conversationMember != null && sightedPlayerQuips.Length > 0)
+            {
+                // say a random quip
+                string line = sightedPlayerQuips[Random.Range(0, sightedPlayerQuips.Length)];
+                conversationMember.InterruptConversation(line);
+            }
+            onSightingEvent.Invoke();
+            if (stopWalking)
+            {
+                positions.Clear();
+                rotations.Clear();
+                // FIX this this should be a bool rather than just clearing it
+                agent.SetDestination(transform.position);
+            }
+        }
+
+        if (suspicion <= 0 && hasFiredStartSuspicionEvent)
+        {
+            hasFiredStartSuspicionEvent = false;
+            if (conversationMember != null && lostSightQuips.Length > 0)
+            {
+                // say a random quip
+                string line = lostSightQuips[Random.Range(0, lostSightQuips.Length)];
+                conversationMember.InterruptConversation(line);
+            }
+            // we also fire the event which happens when they stop seeing them
+            onLoseSuspicionEvent.Invoke();
+
+            // here we should go back to our conversation after a segue. FIX
+        }
     }
 
     public List<Vector3> BackupPositions

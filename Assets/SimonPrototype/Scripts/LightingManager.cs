@@ -51,7 +51,7 @@ public class LightingManager : MonoBehaviour
             for(int j = 0; j<playerHitPoints.Count; j++) {
                 Vector3 direction = lightsInScene[i].gameObject.transform.position - playerHitPoints[j].position;
                 if (lightsInScene[i].GetComponent<Light>().type == LightType.Spot) {
-                    print(Vector3.Angle(lightsInScene[i].transform.forward, -direction));
+                    //print(Vector3.Angle(lightsInScene[i].transform.forward, -direction));
                     if(Vector3.Angle(lightsInScene[i].transform.forward, -direction)>= lightsInScene[i].GetComponent<Light>().spotAngle/2f)
                     {
                         continue;
