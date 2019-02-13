@@ -126,4 +126,14 @@ public class simplePlayerMovement : MonoBehaviour
         return currentWallCollider;
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.name);
+        if(Input.GetKeyDown(KeyCode.E) && other.gameObject.layer == 12 && !isInShadowRealm)
+        {
+            PlayerManager.instance.CollectEvidence(other.gameObject);
+            Destroy(other.gameObject);
+        }
+    }
 }
