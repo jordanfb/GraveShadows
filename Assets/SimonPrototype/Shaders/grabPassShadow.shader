@@ -22,8 +22,7 @@
         Pass
         {
             CGPROGRAM
-// Upgrade NOTE: excluded shader from DX11; has structs without semantics (struct v2f members uv)
-#pragma exclude_renderers d3d11
+
             #pragma vertex vert
             #pragma fragment frag
             #include "UnityCG.cginc"
@@ -64,17 +63,21 @@
             {
                 half4 bgcolor = tex2Dproj(_BackgroundTexture, i.grabPos);
                 
-                if(tex2D(_ShadowTex, i.uv).r<0.1){
-                    return bgcolor;
-                }else{
+				if (tex2D(_ShadowTex, i.uv).r < 0.1) {
+					return bgcolor;
+				}
+                else{
                     return bgcolor * UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(i.uv, 5.0));
                 }
-                
+				
                 //return tex2D(_ShadowTex, i.uv);
                 
             }
-            ENDCG
+		ENDCG
         }
-
+		
     }
+	//FallBack "Diffuse"
+	//FallBack Off
+
 }
