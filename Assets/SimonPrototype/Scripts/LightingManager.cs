@@ -38,10 +38,37 @@ public class LightingManager : MonoBehaviour
 
     private void Update()
     {
-        checkForShadows();
+        //if (!GetComponent<simplePlayerMovement>().getIsInShadowRealm()) {
+        //    checkForShadows();
+        //}
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (GetComponent<simplePlayerMovement>().getIsInShadowRealm())
+            {
+                print("get me out!");
+                teleportFromShadowRealm();
+            }
+            else
+            {
+                print("get me in!");
+                if (checkForShadows().Keys.Count == 1)
+                {
+
+                    teleportToWall(checkForShadows().First().Key, checkForShadows().First().Value.Distinct().ToList());
+
+                }
+                else
+                {
+                    print("NEED TO PROGRAM FOR MULTIPLE WALLS AT ONCE");
+                }
+
+            }
+
+        }
     }
 
-    void checkForShadows() {
+    Dictionary<Collider, List<Vector3>> checkForShadows() {
         //List<WallData> wallsTouching = new List<WallData>();
         Dictionary<Collider, List<Vector3>> wallDic = new Dictionary<Collider, List<Vector3>>();
         LayerMask mask = LayerMask.GetMask("WallLayer");
@@ -89,27 +116,8 @@ public class LightingManager : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (GetComponent<simplePlayerMovement>().getIsInShadowRealm())
-            {
-                teleportFromShadowRealm();
-            }
-            else {
-                if (wallDic.Keys.Count == 1)
-                {
+        return wallDic;
 
-                    teleportToWall(wallDic.First().Key, wallDic.First().Value.Distinct().ToList());
-
-                }
-                else
-                {
-                    print("NEED TO PROGRAM FOR MULTIPLE WALLS AT ONCE");
-                }
-
-            }
-
-        }
     }
 
 
@@ -119,7 +127,6 @@ public class LightingManager : MonoBehaviour
             Debug.Log("ERROR, player trying to enter real world but would be colliding with something");
         }
         else {
-            GetComponent<ThirdPersonCamera>().setLookAt(player);
             GetComponent<ThirdPersonCamera>().printCurrentRotationX();
 
             player.transform.position = checkIfFreeCollider.transform.position;
@@ -141,8 +148,8 @@ public class LightingManager : MonoBehaviour
         //moves it a bit away
         shadowPlane.transform.position += shadowPlane.transform.up * 0.01f;
         //sets the camera to focus on the player
-        GetComponent<ThirdPersonCamera>().setLookAt(shadowPlane);
-        GetComponent<ThirdPersonCamera>().printCurrentRotationX();
+        //GetComponent<ThirdPersonCamera>().setLookAt(shadowPlane);
+        //GetComponent<ThirdPersonCamera>().printCurrentRotationX();
 
         player.transform.position = shadowRealmTransform.position;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
