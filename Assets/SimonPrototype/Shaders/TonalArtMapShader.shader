@@ -3,10 +3,11 @@
 		_MainTex ("Main texture", 2D) = "white" {}
 		_TonalArtMap ("Tonal Art Map", 2DArray) = "" {}
 		_ColorTint ("Tint", Color) = (1.0, 0.0, 0.0, 1.0)
-		_Test ("Test", Range(0, 10)) = 0
         _Contrast("contrast", Range(1, 10)) = 1
         _Levels("number of gradient levels", Range(0, 10))= 0
         _RampTex("Ramp", 2D) = ""{}
+        _BumpMap ("Bumpmap", 2D) = "bump" {}
+        
 	}
 
 	SubShader {
@@ -14,19 +15,22 @@
 
 		CGPROGRAM
 
-		#pragma surface surf Lambert finalcolor:apply_tam fullforwardshadows
+		#pragma surface surf CelShadingForward finalcolor:apply_tam fullforwardshadows
        
 		struct Input {
             float3 worldPos;
 			float2 uv_MainTex;
 			float2 uv_TonalArtMap;
             float3 worldNormal;
+            float2 uv_BumpMap;
+            //INTERNAL_DATA
             
 		};
 
 		float _Test;
 		fixed4 _ColorTint;
 		sampler2D _MainTex;
+        sampler2D _BumpMap;
         UNITY_DECLARE_TEX2DARRAY(_TonalArtMap);
         float4 _TonalArtMap_ST;
         float _Contrast;
@@ -45,8 +49,27 @@
             color.rgb = s.Albedo * _LightColor0.rgb * (NdotL * atten);
             color.a = s.Alpha;
             
+            
             return color;
+            
+            
         
+        }
+        half4 LightingCelShadingForward(SurfaceOutput s, half3 lightDir, half atten) {
+            half NdotL = dot(s.Normal, lightDir);
+            if (NdotL <= 0.0){
+                NdotL = 0;
+            }
+            else if(NdotL<=0.5){
+                NdotL = 0.5;
+            }
+            else{
+                NdotL = 1;
+            }
+            half4 c;
+            c.rgb = s.Albedo * _LightColor0.rgb * (NdotL * atten * 2);
+            c.a = s.Alpha;
+            return c;
         }
       
 
@@ -120,7 +143,8 @@
            
            
             o.Albedo =  tex2D(_MainTex, IN.uv_MainTex);
-            
+            //o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
+            float3 worldNormal = WorldNormalVector (IN, o.Normal);
 		    
 		}
         
