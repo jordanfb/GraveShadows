@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1220,6 +1220,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579863664781502995, guid: 3405c0a0f2cb64743a5ee64c805b403d,
+        type: 3}
+      propertyPath: m_RenderingPath
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3405c0a0f2cb64743a5ee64c805b403d, type: 3}
@@ -3745,7 +3750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1707480053}
   - component: {fileID: 1707480052}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: StartGuardConversationCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
