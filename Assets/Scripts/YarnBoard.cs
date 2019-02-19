@@ -39,13 +39,12 @@ public class YarnBoard : MonoBehaviour
 
         //Initialize Pins
         _pins = new List<GameObject>();
-        foreach (GameObject go in PlayerManager.instance.CollectedEvidence)
+        foreach (Evidence evidence in PlayerManager.instance.CollectedEvidence)
         {
             GameObject pin = Instantiate(_pinPrefab) as GameObject;
             RandomizePositionOnBoard(ref pin, _pins.IndexOf(pin));
             _pins.Add(pin);
 
-            Evidence evidence = go.GetComponent<EvidenceMono>().EvidenceInfo;
             switch (evidence.GetEvidenceType)
             {
                 case EvidenceType.Object:
