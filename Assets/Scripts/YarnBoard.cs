@@ -41,7 +41,9 @@ public class YarnBoard : MonoBehaviour
         _pins = new List<GameObject>();
         foreach (Evidence evidence in PlayerManager.instance.CollectedEvidence)
         {
-            GameObject pin = Instantiate(_pinPrefab) as GameObject;
+            GameObject pin = Instantiate(_pinPrefab, transform.parent) as GameObject;
+            // set the parent as the parent
+            // of the yarn board so we can move the whole thing around
             RandomizePositionOnBoard(ref pin, _pins.IndexOf(pin));
             _pins.Add(pin);
 
@@ -124,7 +126,7 @@ public class YarnBoard : MonoBehaviour
     {
         float randX = Random.Range(_minPinPos.x * .75f, _maxPinPos.x * .75f);
         float randY = Random.Range(_minPinPos.y * .75f, _maxPinPos.y * .75f);
-        pin.transform.position = new Vector3(randX + index, randY, 0f);
+        pin.transform.localPosition = new Vector3(randX + index, randY, 0f);
     }
 
     //Isolated for readability sake

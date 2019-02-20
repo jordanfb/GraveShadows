@@ -44,7 +44,6 @@ public class LineDraw : MonoBehaviour
 
         }
         //Once the held mouse button is released
-        //BUG: Need to store start pin so yarn doesn't connect with itself
         else if(Input.GetMouseButtonUp(0) && _line)
         {
             //Cast a ray again from mouse to screen
@@ -73,14 +72,24 @@ public class LineDraw : MonoBehaviour
             _startPin = null;
         }
         //An attempt at dragging the line, but without a raycast it doesn't really work
-        /*
+        
         else if(Input.GetMouseButton(0) && _line != null) 
         {
-            _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            _mousePos.z = _line.GetPosition(0).z;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit endHit;
+            if (Physics.Raycast(ray, out endHit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
+            {
+                Vector3 pos = endHit.point;
+                // pos.z = _line.GetPosition(0).z;
+                // this is a bit of an issue since it means it doesn't perfectly align with
+                // the mouse but it does mean it stays above the evidence. It doesn't work for rotated yarn boards though
 
-            _line.SetPosition(1, _mousePos);
-        }*/
+                // this method is slightly better maybe but still not great
+                pos += endHit.normal; // move it up by 1 so it's above the evidence while still allowing a tilted yarn board
+
+                _line.SetPosition(1, pos);
+            }
+        }
 
         //Delete a line on right click
         if(Input.GetMouseButtonDown(1))
