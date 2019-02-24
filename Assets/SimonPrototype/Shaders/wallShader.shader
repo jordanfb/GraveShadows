@@ -17,7 +17,7 @@
 
         CGPROGRAM
 
-        #pragma surface surf CelShadingForward finalcolor:apply_tam fullforwardshadows
+        #pragma surface surf Lambert finalcolor:apply_tam fullforwardshadows
        
         struct Input {
             float3 worldPos;
@@ -32,7 +32,7 @@
 
         float _Test;
         fixed4 _ColorTint;
-        sampler2D _MainTex;
+        //sampler2D _MainTex;
         sampler2D _MainTex2;
         float4 _MainTex2_ST;
         sampler2D _BumpMap;
@@ -41,41 +41,40 @@
         float _Contrast;
         float _Levels;
         float2 worldUV;
-        
-        sampler2D _RampTex;
+
       
-        fixed4 LightingToon(SurfaceOutput s, fixed3 lightDir, fixed atten){
-            half NdotL = dot(s.Normal, lightDir);
+        //fixed4 LightingToon(SurfaceOutput s, fixed3 lightDir, fixed atten){
+        //    half NdotL = dot(s.Normal, lightDir);
             
-            NdotL = tex2D(_RampTex, fixed2(NdotL, 0.5));
+        //    NdotL = tex2D(_RampTex, fixed2(NdotL, 0.5));
             
-            half4 color;
+        //    half4 color;
             
-            color.rgb = s.Albedo * _LightColor0.rgb * (NdotL * atten);
-            color.a = s.Alpha;
+        //    color.rgb = s.Albedo * _LightColor0.rgb * (NdotL * atten);
+        //    color.a = s.Alpha;
             
             
-            return color;
+        //    return color;
             
             
         
-        }
-        half4 LightingCelShadingForward(SurfaceOutput s, half3 lightDir, half atten) {
-            half NdotL = dot(s.Normal, lightDir);
-            if (NdotL <= 0.0){
-                NdotL = 0;
-            }
-            else if(NdotL<=0.5){
-                NdotL = 0.5;
-            }
-            else{
-                NdotL = 1;
-            }
-            half4 c;
-            c.rgb = s.Albedo * _LightColor0.rgb * (NdotL * atten);
-            c.a = s.Alpha;
-            return c;
-        }
+        //}
+        //half4 LightingCelShadingForward(SurfaceOutput s, half3 lightDir, half atten) {
+        //    half NdotL = dot(s.Normal, lightDir);
+        //    if (NdotL <= 0.0){
+        //        NdotL = 0;
+        //    }
+        //    else if(NdotL<=0.5){
+        //        NdotL = 0.5;
+        //    }
+        //    else{
+        //        NdotL = 1;
+        //    }
+        //    half4 c;
+        //    c.rgb = s.Albedo * _LightColor0.rgb * (NdotL * atten);
+        //    c.a = s.Alpha;
+        //    return c;
+        //}
       
 
     
@@ -169,6 +168,10 @@
             //o.Albedo =  tex2D(_MainTex, IN.uv_MainTex);
             o.Albedo =  float4(1.0,1.0,1.0,1.0);;
             //o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
+            //float3 dpdx = ddx(o.worldPos.x);
+            //float3 dpdy = ddy(o.worldPos.y);
+            
+            //o.Normal = normalize(cross(dpdy, dpdx));
             float3 worldNormal = WorldNormalVector (IN, o.Normal);
             
         }

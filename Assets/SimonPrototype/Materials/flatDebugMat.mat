@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TonalArtMapShaderMat
-  m_Shader: {fileID: 4800000, guid: cb000f99595554dfd9deecea8d4ba0b8, type: 3}
+  m_Name: flatDebugMat
+  m_Shader: {fileID: 4800000, guid: 1326b87364dff4e8697faf2c3e01963a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -21,32 +21,25 @@ Material:
     m_TexEnvs:
     - _BumpMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 0.5, y: 0.5}
-        m_Offset: {x: 0, y: 0}
-    - _CelTex:
-        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d9ac8752219764c47a8fd5bc34f5c1e1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex2:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _RampTex:
-        m_Texture: {fileID: 2800000, guid: ec11903c260f94f6bb5358385118b822, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _TonalArtMap:
         m_Texture: {fileID: 18700000, guid: d95559a82c237443b8394acc7eedbd4b, type: 2}
-        m_Scale: {x: 2, y: 2}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Contrast: 1
+    - _Contrast: 7.95
+    - _Glossiness: 0.5
     - _Levels: 8
-    - _Mod: 1.6
-    - _Test: 0
+    - _Metallic: 0
     m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorTint: {r: 1, g: 1, b: 1, a: 1}
