@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
 
     [SerializeField]
-    private List<GameObject> _collectedEvidence;
+    private List<Evidence> _collectedEvidence;
     /* for use later probably
     [SerializeField]
     private Player _player;
@@ -27,13 +27,15 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public List<GameObject> CollectedEvidence
+    public List<Evidence> CollectedEvidence
     {
         get { return _collectedEvidence; }
     }
 
-    public void CollectEvidence(GameObject go)
+    public void CollectEvidence(Evidence ev)
     {
-        _collectedEvidence.Add(go);
+        if (_collectedEvidence.Contains(ev))
+            return;
+        _collectedEvidence.Add(ev);
     }
 }

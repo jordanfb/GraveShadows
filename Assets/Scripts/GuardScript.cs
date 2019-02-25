@@ -194,7 +194,7 @@ public class GuardScript : MonoBehaviour
                         // check a raycast
                         // for now we're just going to say that it sees it
                         RaycastHit hit;
-                        LayerMask mask = ~LayerMask.GetMask("Enemy");
+                        LayerMask mask = ~LayerMask.GetMask("Enemy") & ~LayerMask.GetMask("Ignore Raycast");
                         if (Physics.Raycast(guardHead.position, localDifference, out hit, viewConeDistance, mask))
                         {
                             if (hit.collider.gameObject.layer.Equals(visibleObjects[i].gameObject.layer))

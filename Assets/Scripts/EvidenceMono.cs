@@ -32,7 +32,7 @@ public class EvidenceMono : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && other.gameObject.tag == "Player")
         {
-            PlayerManager.instance.CollectEvidence(this.gameObject);
+            PlayerManager.instance.CollectEvidence(this.EvidenceInfo);
             Destroy(this.gameObject);
         }
     }
