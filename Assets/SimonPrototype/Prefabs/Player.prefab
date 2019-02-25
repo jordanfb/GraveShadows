@@ -108,11 +108,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 319cff262630b4905966e06bba79b23c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2701277236785403194}
-  speed: 10
-  shadowPlane: {fileID: 0}
+  playerMesh: {fileID: 2701277236785403194}
+  playerHitPoints:
+  - {fileID: 2701277236380990124}
+  - {fileID: 2701277237824572700}
+  - {fileID: 2701277237291600560}
+  - {fileID: 2701277237202402288}
+  - {fileID: 2701277237278251773}
+  speed: 5
   currentWallCollider: {fileID: 0}
-  isInShadowRealm: 0
 --- !u!114 &2701277236420419608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,19 +129,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17313658a890743a79489462bea334fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shadowPlane: {fileID: 0}
   lightsInScene:
   - {fileID: 0}
   - {fileID: 0}
-  playerHitPoints:
-  - {fileID: 2701277236380990124}
-  - {fileID: 2701277237824572700}
-  - {fileID: 2701277237291600560}
-  - {fileID: 2701277237202402288}
-  - {fileID: 2701277237278251773}
-  shadowPlane: {fileID: 0}
-  player: {fileID: 2701277236420419685}
   shadowRealmTransform: {fileID: 0}
   checkIfFreeCollider: {fileID: 0}
+  wallSelectedMaterial: {fileID: 2100000, guid: 23e9e6f81aa8447f2aa4643dee37116f,
+    type: 2}
+  wallNotSelectedMaterial: {fileID: 2100000, guid: 9c2977298e0b44eeab78a9be7d187be6,
+    type: 2}
+  WallMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  isInShadowRealm: 0
 --- !u!114 &2701277236420419611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,12 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10b228ed5ec2c451d9a64aac788880b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookAt: {fileID: 2701277236420419687}
-  direction: {x: 0, y: 0, z: 0}
-  min_x: 0
-  max_x: 80
-  min_y: 0
-  max_y: 80
+  mainCam: {fileID: 0}
+  distance: 5
 --- !u!1 &2701277236785403194
 GameObject:
   m_ObjectHideFlags: 0

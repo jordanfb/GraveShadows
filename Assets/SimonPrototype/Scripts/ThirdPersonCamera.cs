@@ -5,43 +5,39 @@ using UnityEngine;
 public class ThirdPersonCamera : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Camera mainCam;
-    [SerializeField]
+    public Camera mainCam;
 
     private Vector3 lookAtVec;
 
-    [SerializeField]
     private Vector3 direction;
     private float currentRotationX;
     private float currentRotationY;
 
-    [SerializeField]
+
     private float min_x = 0;
-    [SerializeField]
     private float max_x = 80f;
 
-    [SerializeField]
     private float min_y = 0;
-    [SerializeField]
     private float max_y = 80f;
 
+    [SerializeField]
     public float distance;
     private float STARTING_DISTANCE;
 
     private float scrollSpeedX = 2f;
     private float scrollSpeedY = 2f;
-    public GameObject shadowPlane;
-    public GameObject shadowRealmLookAt;
-    public GameObject player;
 
+    ShadowRealmManager SRmanager;
 
+    private bool nextCamPosIsLegal = true;
 
 
 
     void Start()
     {
+        SRmanager = GetComponent<ShadowRealmManager>();
         mainCam = Camera.main;
-        lookAtVec = player.transform.position;
+        lookAtVec = gameObject.transform.position;
         STARTING_DISTANCE = distance;
 
     }
@@ -49,71 +45,86 @@ public class ThirdPersonCamera : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        currentRotationX += Input.GetAxis("Mouse X")*scrollSpeedX;
-        currentRotationY += Input.GetAxis("Mouse Y")*scrollSpeedY;
-        distance += Input.GetAxis("Mouse ScrollWheel");
 
+        currentRotationX += Input.GetAxis("Mouse X") * scrollSpeedX;
+        currentRotationY += Input.GetAxis("Mouse Y") * scrollSpeedY;
+        distance += Input.GetAxis("Mouse ScrollWheel");
         currentRotationY = Mathf.Clamp(currentRotationY, min_y, max_y);
+
+
+
+
 
 
     }
 
     Vector3 debugPoint = Vector3.zero;
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(debugPoint, 1f);
-    }
+    //void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawSphere(debugPoint, 1f);
+    //    //Gizmos.DrawSphere(camPos - 3 * mainCam.transform.forward, 0.5f);
+    //}
 
-    Vector3 camPos;
+    Vector3 newCamPos;
+    Vector3 lastLegalCamPos;
     Vector3 shadowModVec = Vector3.zero;
+    
     void LateUpdate()
     {
 
 
         RaycastHit wallHit = new RaycastHit();
         LayerMask mask = LayerMask.GetMask("WallLayer");
-
-        if (GetComponent<simplePlayerMovement>().getIsInShadowRealm())
+        if (SRmanager.isInShadowRealm)
         {
-            Vector3 camPlaneDis = (mainCam.transform.position - shadowPlane.transform.position);
-            Vector3 newPos = Vector3.Scale(shadowPlane.transform.up, camPlaneDis);
-            newPos = Vector3.Scale(shadowPlane.transform.up, newPos);
-            newPos = (distance * shadowPlane.transform.up) - newPos;
-            newPos = shadowPlane.transform.position + newPos;
+            GameObject shadowPlaneChild = SRmanager.shadowPlane.transform.GetChild(0).gameObject;
+            //Vector3 camPlaneDis = (mainCam.transform.position - shadowPlaneChild.transform.position);
+            //Vector3 newPos = Vector3.Scale(shadowPlaneChild.transform.up, camPlaneDis);
+
+            //newPos = Vector3.Scale(shadowPlaneChild.transform.up, newPos);
+            //newPos = (distance * shadowPlaneChild.transform.up) - newPos;
+            //print(shadowPlaneChild.name);
+            ////newPos = new Vector3(newPos.y, 0f, 0f);
+            //newPos = shadowPlaneChild.transform.position + newPos;
 
 
 
+            //debugPoint = newPos;
 
-            debugPoint = newPos;
-            lookAtVec = shadowPlane.transform.position+ shadowPlane.transform.up*2f;
-            shadowModVec = newPos;
+            //lookAtVec = shadowPlaneChild.transform.position+ shadowPlaneChild.transform.up * 2f;
+            //shadowModVec = newPos;
 
+            lookAtVec = shadowPlaneChild.transform.position + shadowPlaneChild.transform.forward;
+            debugPoint = lookAtVec;
 
         }
         else
         {
-            lookAtVec = player.transform.position;
+           
+            lookAtVec = gameObject.transform.position + gameObject.transform.up;
             shadowModVec = lookAtVec;
+            debugPoint = lookAtVec;
         }
 
 
         Quaternion rot = Quaternion.Euler(currentRotationY, currentRotationX, 0.0f);
 
-        camPos = lookAtVec + (rot * new Vector3(0f, 0f, -distance));
+        newCamPos = lookAtVec + (rot * new Vector3(0f, 0f, -distance));
 
 
 
-        if (Physics.Linecast(lookAtVec, camPos, out wallHit, mask)) {
+        if (Physics.Linecast(lookAtVec, newCamPos - mainCam.transform.forward*0.5f, out wallHit, mask)) {
             Vector3 hitPoint = wallHit.point;
-            if (-(lookAtVec - wallHit.point).magnitude - 0.3f < -STARTING_DISTANCE)
+            float wallHitDistance = -(lookAtVec - wallHit.point).magnitude + 1f;
+            if (-wallHitDistance < -STARTING_DISTANCE)
             {
-                distance = STARTING_DISTANCE;
-                camPos = lookAtVec + rot * new Vector3(0f, 0f, -distance);
-            }
-            else {
-                camPos = lookAtVec + rot * new Vector3(0f, 0f, -(lookAtVec - wallHit.point).magnitude - 0.3f);
+                wallHitDistance = -STARTING_DISTANCE;
 
             }
+           
+
+            newCamPos = lookAtVec + rot * new Vector3(0f, 0f, wallHitDistance);
+
 
 
 
@@ -121,10 +132,15 @@ public class ThirdPersonCamera : MonoBehaviour
 
         }
 
+
         //camPos -= mainCam.transform.forward*0.3f;
-        
-        mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, camPos, 10f);
-        mainCam.transform.LookAt(shadowModVec);
+        lastLegalCamPos = newCamPos;
+        mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, newCamPos, 0.5f);
+        //make this lerp
+        //Vector3 lookAtDir = player.transform.position - mainCam.transform.position;
+        //Quaternion toRotation = Quaternion.FromToRotation(mainCam.transform.forward, lookAtDir);
+        //mainCam.transform.rotation = mainCam.transform.position * Quaternion.Lerp(mainCam.transform.rotation, toRotation, 1.0f * Time.time);
+        mainCam.transform.LookAt(lookAtVec);
 
     }
 
