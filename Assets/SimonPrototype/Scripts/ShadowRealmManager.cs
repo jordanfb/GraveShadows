@@ -33,7 +33,7 @@ public class ShadowRealmManager : MonoBehaviour
 
     public bool isInShadowRealm;
     //this should use the shadow plane variabe :/
-    const float SHADOWPLANE_HEIGHT = 1.3f;
+    const float SHADOWPLANE_HEIGHT = 1.7f;
 
     private simplePlayerMovement spm;
     private ThirdPersonCamera tpc;

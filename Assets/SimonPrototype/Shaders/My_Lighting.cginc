@@ -6,6 +6,16 @@
 
 
 
+sampler2D _MainTex;
+UNITY_DECLARE_TEX2DARRAY(_TonalArtMap);
+float4 _TonalArtMap_ST;
+float4 _MainTex_ST;
+float _Levels;
+float _Contrast;
+float4 _ColorTint;
+float2 uv_TonalArtMap;
+int _isSelected = 0.0;
+
 
 struct v2f {
 
@@ -34,7 +44,7 @@ v2f vert (appdata_base v)
 {
     v2f o;
     o.pos = UnityObjectToClipPos(v.vertex);
-    o.uv = v.texcoord;
+    o.uv = TRANSFORM_TEX(v.texcoord, _TonalArtMap);
     o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
     half3 wNormal = UnityObjectToWorldNormal(v.normal);
     TRANSFER_SHADOW(o);
@@ -64,14 +74,7 @@ UnityLight CreateLight (v2f i) {
     return light;
 }
 
-sampler2D _MainTex;
-UNITY_DECLARE_TEX2DARRAY(_TonalArtMap);
-float4 _TonalArtMap_ST;
-float4 _MainTex_ST;
-float _Levels;
-float _Contrast;
-float4 _ColorTint;
-int _isSelected = 0.0;
+
 
 
 
@@ -95,22 +98,23 @@ fixed4 frag (v2f i) : SV_Target
     float3 flatNormal = -normalize(cross(dpdx, dpdy)).xyz;
     half nl = max(0, dot(flatNormal, light.dir));
     // factor in the light color
-    if(nl<0.2 || nl>1.0){
-        nl=0;
-    }
-    else if(nl<0.8){
-        nl=0.6;
-    }
-    else if(nl<0.95){
-        nl=0.8;
-    }
-    else{
-        nl=1.0;
-    }
+    //if(nl<0.2 || nl>1.0){
+    //    nl=0;
+    //}
+    //else if(nl<0.8){
+    //    nl=0.6;
+    //}
+    //else if(nl<0.95){
+    //    nl=0.8;
+    //}
+    //else{
+    //    nl=1.0;
+    //}
+    
     i.diff.rgb = nl * light.color;
     i.ambient = ShadeSH9(half4(flatNormal,1));
-    i.ambient = 0.0;
-    i.ambient = half4(1,1,1,1);
+    i.ambient = 1.0;
+    
     fixed shadow = SHADOW_ATTENUATION(i);
     fixed3 lighting = i.diff * shadow + i.ambient;
     
@@ -157,12 +161,16 @@ fixed4 frag (v2f i) : SV_Target
     col2 = AdjustContrast(col2, _Contrast) * _ColorTint;
     
     
-    //float4 TAMcolor = lerp(col1, col2, texI - floor(texI))*tex2D(_MainTex, worldUVMain);
-    float4 TAMcolor = col1*tex2D(_MainTex, worldUVMain);
+    float4 TAMcolor = lerp(col1, col2, texI - floor(texI))*tex2D(_MainTex, worldUVMain);
+    //float4 TAMcolor = col1*tex2D(_MainTex, worldUVMain);
     
     //c = TAMcolor;
     
-    return TAMcolor;
+    #if defined(PLAYER)
+        return c;
+    #else
+        return TAMcolor;
+    #endif
 }
 
 #endif

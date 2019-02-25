@@ -1,7 +1,7 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Custom/flatDebug"
+Shader "Custom/playerFlat"
 
 {
     Properties {
@@ -27,11 +27,13 @@ Shader "Custom/flatDebug"
             #include "Lighting.cginc"
             
             #pragma multi_compile_fwdbase
+            #pragma multi_compile PLAYER
             
             // shadow helper functions and macros
             
             
             //#pragma multi_compile DIRECTIONAL POINT
+            #define PLAYER
             #include "My_Lighting.cginc"
            
             ENDCG
@@ -57,7 +59,7 @@ Shader "Custom/flatDebug"
             #pragma multi_compile DIRECTIONAL POINT SPOT
             // shadow helper functions and macros
            
-            
+            #define PLAYER
             //#pragma multi_compile_fwdadd 
             #include "My_Lighting.cginc"
             
@@ -81,7 +83,7 @@ Shader "Custom/flatDebug"
             #include "AutoLight.cginc"
             #pragma multi_compile _ SHADOWS_SCREEN
             #pragma multi_compile _ VERTEXLIGHT_ON
-            
+            #define PLAYER
             #include "My_Shadows.cginc"
             
             
