@@ -95,9 +95,21 @@ fixed4 frag (v2f i) : SV_Target
     float3 flatNormal = -normalize(cross(dpdx, dpdy)).xyz;
     half nl = max(0, dot(flatNormal, light.dir));
     // factor in the light color
-    
+    if(nl<0.2 || nl>1.0){
+        nl=0;
+    }
+    else if(nl<0.8){
+        nl=0.6;
+    }
+    else if(nl<0.95){
+        nl=0.8;
+    }
+    else{
+        nl=1.0;
+    }
     i.diff.rgb = nl * light.color;
     i.ambient = ShadeSH9(half4(flatNormal,1));
+    i.ambient = 0.0;
     i.ambient = half4(1,1,1,1);
     fixed shadow = SHADOW_ATTENUATION(i);
     fixed3 lighting = i.diff * shadow + i.ambient;
@@ -145,11 +157,12 @@ fixed4 frag (v2f i) : SV_Target
     col2 = AdjustContrast(col2, _Contrast) * _ColorTint;
     
     
-    float4 TAMcolor = lerp(col1, col2, texI - floor(texI))*tex2D(_MainTex, worldUVMain);
+    //float4 TAMcolor = lerp(col1, col2, texI - floor(texI))*tex2D(_MainTex, worldUVMain);
+    float4 TAMcolor = col1*tex2D(_MainTex, worldUVMain);
     
     //c = TAMcolor;
     
-    return c*TAMcolor;
+    return TAMcolor;
 }
 
 #endif

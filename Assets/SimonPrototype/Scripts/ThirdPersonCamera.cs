@@ -54,11 +54,11 @@ public class ThirdPersonCamera : MonoBehaviour
     }
 
     Vector3 debugPoint = Vector3.zero;
-    //void OnDrawGizmos()
-    //{
-    //    Gizmos.DrawSphere(debugPoint, 1f);
-    //    //Gizmos.DrawSphere(camPos - 3 * mainCam.transform.forward, 0.5f);
-    //}
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(debugPoint, 1f);
+        //Gizmos.DrawSphere(camPos - 3 * mainCam.transform.forward, 0.5f);
+    }
 
     Vector3 camPos;
     Vector3 shadowModVec = Vector3.zero;
@@ -71,17 +71,21 @@ public class ThirdPersonCamera : MonoBehaviour
 
         if (SRmanager.isInShadowRealm)
         {
-            Vector3 camPlaneDis = (mainCam.transform.position - SRmanager.shadowPlane.transform.position);
-            Vector3 newPos = Vector3.Scale(SRmanager.shadowPlane.transform.up, camPlaneDis);
-            newPos = Vector3.Scale(SRmanager.shadowPlane.transform.up, newPos);
-            newPos = (distance * SRmanager.shadowPlane.transform.up) - newPos;
-            newPos = SRmanager.shadowPlane.transform.position + newPos;
+            GameObject shadowPlaneChild = SRmanager.shadowPlane.transform.GetChild(0).gameObject;
+            Vector3 camPlaneDis = (mainCam.transform.position - shadowPlaneChild.transform.position);
+            Vector3 newPos = Vector3.Scale(shadowPlaneChild.transform.up, camPlaneDis);
 
+            newPos = Vector3.Scale(shadowPlaneChild.transform.up, newPos);
+            newPos = (distance * shadowPlaneChild.transform.up) - newPos;
+            print(shadowPlaneChild.name);
+            //newPos = new Vector3(newPos.y, 0f, 0f);
+            newPos = shadowPlaneChild.transform.position + newPos;
 
 
 
             debugPoint = newPos;
-            lookAtVec = SRmanager.shadowPlane.transform.position+ SRmanager.shadowPlane.transform.up*2f;
+
+            lookAtVec = shadowPlaneChild.transform.position+ shadowPlaneChild.transform.up * 2f;
             shadowModVec = newPos;
 
 

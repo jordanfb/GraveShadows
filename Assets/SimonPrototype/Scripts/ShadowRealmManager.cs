@@ -79,7 +79,10 @@ public class ShadowRealmManager : MonoBehaviour
                     Debug.Log("ENTRY PARENT IS NULL");
                     continue;
                 }
-                entry.Key.gameObject.transform.parent.GetComponent<Renderer>().material = wallNotSelectedMaterial;
+                if(entry.Key.gameObject.transform.Find("selectionQuad") != null) {
+                    entry.Key.gameObject.transform.Find("selectionQuad").gameObject.SetActive(false);
+                }
+
             }
             
             RaycastHit hitWall;
@@ -92,8 +95,11 @@ public class ShadowRealmManager : MonoBehaviour
             if (wallToTeleportTo != null) {
                 if (checkForShadows().ContainsKey(wallToTeleportTo))
                 {
+                    if (wallToTeleportTo.gameObject.transform.Find("selectionQuad") != null) {
+                        wallToTeleportTo.gameObject.transform.Find("selectionQuad").gameObject.SetActive(true);
 
-                    wallToTeleportTo.gameObject.transform.parent.GetComponent<Renderer>().material = wallSelectedMaterial;
+                    }
+
 
                 }
 
@@ -123,7 +129,10 @@ public class ShadowRealmManager : MonoBehaviour
                         Debug.Log("ENTRY PARENT IS NULL");
                         continue;
                     }
-                    entry.Key.gameObject.transform.parent.GetComponent<Renderer>().material = wallNotSelectedMaterial;
+                    if (entry.Key.gameObject.transform.Find("selectionQuad") != null)
+                    {
+                        entry.Key.gameObject.transform.Find("selectionQuad").gameObject.SetActive(false);
+                    }
                 }
                 if (wallToTeleportTo == null)
                 {
@@ -225,7 +234,7 @@ public class ShadowRealmManager : MonoBehaviour
 
         print("after: " + shadowPlane.transform.position);
         shadowPlane.transform.rotation = targetWall.transform.rotation;
-        shadowPlane.transform.position -= targetWall.transform.right*0.001f;
+        shadowPlane.transform.position -= targetWall.transform.right*0.11f;
         //moves it a bit away); = new Vector3(
 
 
