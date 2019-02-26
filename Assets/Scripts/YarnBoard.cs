@@ -25,7 +25,7 @@ public class YarnBoard : MonoBehaviour
 
     private List<GameObject> _pins;
     private bool displaying = false;
-    private Renderer _renderer;
+    private BoxCollider _collider;
     private Vector2 _minPinPos;
     private Vector2 _maxPinPos;
 
@@ -33,9 +33,9 @@ public class YarnBoard : MonoBehaviour
     void Start()
     {
         //For use with randomly placing pins
-        _renderer = GetComponent<Renderer>();
-        _minPinPos = new Vector2(_renderer.bounds.min.x, _renderer.bounds.min.y);
-        _maxPinPos = new Vector2(_renderer.bounds.max.x, _renderer.bounds.max.y);
+        _collider = GetComponent<BoxCollider>();
+        _minPinPos = new Vector2(_collider.bounds.min.x, _collider.bounds.min.y);
+        _maxPinPos = new Vector2(_collider.bounds.max.x, _collider.bounds.max.y);
 
         //Initialize Pins
         _pins = new List<GameObject>();
@@ -57,7 +57,6 @@ public class YarnBoard : MonoBehaviour
                     photo.AddComponent<SpriteRenderer>().sprite = evidence.Photo;
                     BoxCollider pColl = photo.AddComponent<BoxCollider>();
                     photo.transform.localPosition = new Vector3(0f, 1f, PinOffset(pColl));
-                    photo.transform.localScale /= 1000f;
                     photo.AddComponent<EvidenceMono>().EvidenceInfo = evidence;
                     break;
                 case EvidenceType.Conversation:
@@ -127,7 +126,8 @@ public class YarnBoard : MonoBehaviour
     {
         float randX = Random.Range(_minPinPos.x * .75f, _maxPinPos.x * .75f);
         float randY = Random.Range(_minPinPos.y * .75f, _maxPinPos.y * .75f);
-        pin.transform.localPosition = new Vector3(randX + index, randY, 0f);
+        pin.transform.position = new Vector3(randX + index, randY, 0f);
+        pin.GetComponentInChildren<Transform>().position = Vector3.zero;
     }
 
     //Isolated for readability sake
