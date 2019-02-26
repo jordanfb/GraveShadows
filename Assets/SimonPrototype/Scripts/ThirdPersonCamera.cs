@@ -29,7 +29,6 @@ public class ThirdPersonCamera : MonoBehaviour
 
     ShadowRealmManager SRmanager;
 
-    private bool nextCamPosIsLegal = true;
     Material playerMat;
     public GameObject materialedObjectsParent;
 

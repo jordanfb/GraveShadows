@@ -18,11 +18,13 @@ public class simplePlayerMovement : MonoBehaviour
     [SerializeField]
     public float PLAYER_SPEED_FORWARD;
     public float PLAYER_SPEED_STRAFE;
+    public float SHADOW_SPEED;
+
     private Animator anim;
 
 
     const float PLAYER_WIDTH = 0.5f;
-    const float WALL_SPEED = 0.1f;
+
 
     public Collider currentWallCollider = null;
 
@@ -40,6 +42,9 @@ public class simplePlayerMovement : MonoBehaviour
     {
         anim.SetBool("isInShadowRealm", SRmanager.isInShadowRealm);
         if (SRmanager.isChoosingWall) {
+            anim.SetFloat("yVelocity", 0f);
+            anim.SetFloat("xVelocity", 0f);
+
             return;
         }
 
@@ -91,6 +96,7 @@ public class simplePlayerMovement : MonoBehaviour
 
 
     bool touchingWall = true;
+    Quaternion targetWallRot = Quaternion.AngleAxis(90f, Vector3.up);
     void wallMovement(float _moveDirX, float _moveDirY, Collider _currentWallCollider) {
 
         if (_currentWallCollider == null) {
@@ -101,7 +107,7 @@ public class simplePlayerMovement : MonoBehaviour
         LayerMask mask = LayerMask.GetMask("WallLayer");
         RaycastHit hitWall;
         touchingWall = false;
-        Vector3 nextPos = SRmanager.shadowPlane.transform.position + SRmanager.shadowPlane.transform.forward * -_moveDirX * WALL_SPEED 
+        Vector3 nextPos = SRmanager.shadowPlane.transform.position + SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime
                             - (Mathf.Sign(_moveDirX)* SRmanager.shadowPlane.transform.forward * PLAYER_WIDTH);
         Debug.DrawRay(nextPos, SRmanager.shadowPlane.transform.right);
         if (Physics.Raycast(nextPos, SRmanager.shadowPlane.transform.right, out hitWall, Mathf.Infinity, mask))
@@ -116,8 +122,22 @@ public class simplePlayerMovement : MonoBehaviour
         if (touchingWall)
         {
 
-            SRmanager.shadowPlane.transform.position += SRmanager.shadowPlane.transform.forward * -_moveDirX * 0.1f;
+            SRmanager.shadowPlane.transform.position += SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime;
+            anim.SetFloat("xVelocityShadow", Mathf.Abs(-_moveDirX * SHADOW_SPEED) * Time.deltaTime);
+            print(Mathf.Abs(-_moveDirX * SHADOW_SPEED) * Time.deltaTime);
 
+            if (_moveDirX>0) {
+                targetWallRot = Quaternion.AngleAxis(90f, Vector3.up);
+
+            }
+            else if (_moveDirX < 0)
+            {
+                targetWallRot = Quaternion.AngleAxis(-90f, Vector3.up);
+
+            }
+
+            float turnSpeed = 0.1f;
+            gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, targetWallRot, turnSpeed);
 
         }
         
