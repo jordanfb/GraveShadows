@@ -14,6 +14,8 @@ public class YarnBoard : MonoBehaviour
     [SerializeField]
     private Text _flavorTextAsset;
     [SerializeField]
+    private float _pinZOffset = 0.0f;
+    [SerializeField]
     private float _offsetRatio;
     [Tooltip("Determines the x offset of character text meshes on the notebook paper.")]
     [SerializeField]
@@ -25,7 +27,7 @@ public class YarnBoard : MonoBehaviour
 
     private List<GameObject> _pins;
     private bool displaying = false;
-    private BoxCollider _collider;
+    private Collider _collider;
     private Vector2 _minPinPos;
     private Vector2 _maxPinPos;
 
@@ -33,7 +35,7 @@ public class YarnBoard : MonoBehaviour
     void Start()
     {
         //For use with randomly placing pins
-        _collider = GetComponent<BoxCollider>();
+        _collider = GetComponent<Collider>();
         _minPinPos = new Vector2(_collider.bounds.min.x, _collider.bounds.min.y);
         _maxPinPos = new Vector2(_collider.bounds.max.x, _collider.bounds.max.y);
 
@@ -41,7 +43,7 @@ public class YarnBoard : MonoBehaviour
         _pins = new List<GameObject>();
         foreach (Evidence evidence in PlayerManager.instance.CollectedEvidence)
         {
-            GameObject pin = Instantiate(_pinPrefab, transform.parent) as GameObject;
+            GameObject pin = Instantiate(_pinPrefab) as GameObject;
             // set the parent as the parent
             // of the yarn board so we can move the whole thing around
             RandomizePositionOnBoard(ref pin, _pins.IndexOf(pin));
@@ -126,7 +128,7 @@ public class YarnBoard : MonoBehaviour
     {
         float randX = Random.Range(_minPinPos.x * .75f, _maxPinPos.x * .75f);
         float randY = Random.Range(_minPinPos.y * .75f, _maxPinPos.y * .75f);
-        pin.transform.position = new Vector3(randX + index, randY, 0f);
+        pin.transform.position = new Vector3(randX + index, randY, transform.position.z - _pinZOffset);
         pin.GetComponentInChildren<Transform>().position = Vector3.zero;
     }
 
