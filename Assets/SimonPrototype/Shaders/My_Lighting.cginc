@@ -167,7 +167,7 @@ fixed4 frag (v2f i) : SV_Target
     //c = TAMcolor;
     
     #if defined(PLAYER)
-        c.a = _Transparency;
+        TAMcolor.a = _Transparency;
         return TAMcolor;
     #else
         TAMcolor.a =1.0;

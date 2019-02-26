@@ -16,7 +16,8 @@ public class simplePlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     [SerializeField]
-    public float speed;
+    public float PLAYER_SPEED_FORWARD;
+    public float PLAYER_SPEED_STRAFE;
     private Animator anim;
 
 
@@ -37,10 +38,12 @@ public class simplePlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        anim.SetBool("isInShadowRealm", SRmanager.isInShadowRealm);
         if (SRmanager.isChoosingWall) {
             return;
         }
+
+
         float moveDirX = Input.GetAxis("Horizontal");
         float moveDirY = Input.GetAxis("Vertical");
         if (!SRmanager.isInShadowRealm) {
@@ -57,17 +60,36 @@ public class simplePlayerMovement : MonoBehaviour
     }
 
     void thirdPersonMovement(float _moveDirX, float _moveDirY) {
+        if (_moveDirY < 0) {
+            return;
+        }
+        if (_moveDirY > 0.1) {
+            Quaternion targetRot = Quaternion.LookRotation(Vector3.Scale(mainCam.transform.forward, new Vector3(1f, 0f, 1f)), Vector3.up);
 
-        rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0f, mainCam.transform.forward.z).normalized * _moveDirY) + (mainCam.transform.right.normalized * _moveDirX)) * speed;
-        if (rb.velocity.magnitude > 0.1f)
-        {
-            anim.SetBool("isWalking", true);
+            gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, targetRot, 0.1f);
+
+
         }
-        else
-        {
-            anim.SetBool("isWalking", false);
+        else if (Mathf.Abs(_moveDirX) > 0.1) {
+            Quaternion targetRot = Quaternion.LookRotation(Vector3.Scale(mainCam.transform.forward, new Vector3(1f, 0f, 1f)), Vector3.up);
+
+            gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, targetRot, 0.1f);
+
         }
+
+
+        anim.SetFloat("yVelocity", transform.InverseTransformDirection(rb.velocity).z);
+        anim.SetFloat("xVelocity", transform.InverseTransformDirection(rb.velocity).x);
+        rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0f, mainCam.transform.forward.z).normalized * _moveDirY * PLAYER_SPEED_FORWARD) 
+                                    + (mainCam.transform.right.normalized * _moveDirX)* PLAYER_SPEED_STRAFE);
+
+
+
+
+
     }
+
+
     bool touchingWall = true;
     void wallMovement(float _moveDirX, float _moveDirY, Collider _currentWallCollider) {
 
@@ -97,14 +119,6 @@ public class simplePlayerMovement : MonoBehaviour
             SRmanager.shadowPlane.transform.position += SRmanager.shadowPlane.transform.forward * -_moveDirX * 0.1f;
 
 
-                                                        
-
-            if (Mathf.Abs(_moveDirX) > 0.1){
-                anim.SetBool("isWalking", true);
-            }
-            else {
-                anim.SetBool("isWalking", false);
-            }
         }
         
 

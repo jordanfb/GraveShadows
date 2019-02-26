@@ -31,12 +31,23 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private bool nextCamPosIsLegal = true;
     Material playerMat;
+    public GameObject materialedObjectsParent;
 
+
+
+
+    void setAllMaterialTransparency(float newTransparency) { 
+        for(int i = 0; i< materialedObjectsParent.transform.childCount; i++) {
+            materialedObjectsParent.transform.GetChild(i).GetComponent<Renderer>().material.SetFloat("_Transparency", newTransparency);
+
+
+        }
+
+    }
 
     void Start()
     {
 
-        playerMat = transform.GetChild(0).GetComponent<Renderer>().material;
         SRmanager = GetComponent<ShadowRealmManager>();
         mainCam = Camera.main;
         lookAtVec = gameObject.transform.position;
@@ -53,7 +64,7 @@ public class ThirdPersonCamera : MonoBehaviour
         currentRotationY += Input.GetAxis("Mouse Y") * scrollSpeedY;
         distance += Input.GetAxis("Mouse ScrollWheel");
         currentRotationY = Mathf.Clamp(currentRotationY, min_y, max_y);
-
+        
 
 
 
@@ -71,7 +82,7 @@ public class ThirdPersonCamera : MonoBehaviour
     Vector3 newCamPos;
     Vector3 lastLegalCamPos;
     Vector3 shadowModVec = Vector3.zero;
-    
+    Vector3 wallRaycastVec;
     void LateUpdate()
     {
 
@@ -97,8 +108,10 @@ public class ThirdPersonCamera : MonoBehaviour
             //lookAtVec = shadowPlaneChild.transform.position+ shadowPlaneChild.transform.up * 2f;
             //shadowModVec = newPos;
 
-            lookAtVec = shadowPlaneChild.transform.position + shadowPlaneChild.transform.forward;
+            lookAtVec = shadowPlaneChild.transform.position + shadowPlaneChild.transform.up;
             debugPoint = lookAtVec;
+            wallRaycastVec = lookAtVec;
+
 
         }
         else
@@ -109,7 +122,7 @@ public class ThirdPersonCamera : MonoBehaviour
           
 
             lookAtVec = gameObject.transform.position + modVec*2f;
-
+            wallRaycastVec = gameObject.transform.position;
             debugPoint = lookAtVec;
         }
 
@@ -120,7 +133,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
 
 
-        if (Physics.Linecast(gameObject.transform.position, newCamPos - mainCam.transform.forward*0.0f, out wallHit, mask)) {
+        if (Physics.Linecast(wallRaycastVec, newCamPos - mainCam.transform.forward*0.0f, out wallHit, mask)) {
             Vector3 hitPoint = wallHit.point;
             float wallHitDistance = -(lookAtVec - wallHit.point).magnitude + 0.1f;
             if (-wallHitDistance < -STARTING_DISTANCE)
@@ -140,10 +153,11 @@ public class ThirdPersonCamera : MonoBehaviour
         }
         //print((newCamPos - gameObject.transform.position).magnitude);
         if((newCamPos - gameObject.transform.position).magnitude < 2f) {
-            playerMat.SetFloat("_Transparency", Mathf.Max((newCamPos - gameObject.transform.position).magnitude - 1.2f, 0f));
+
+            setAllMaterialTransparency(Mathf.Max((newCamPos - gameObject.transform.position).magnitude - 1.2f, 0f));
         }
         else {
-            playerMat.SetFloat("_Transparency", 1.0f);
+            setAllMaterialTransparency(1.0f);
         }
 
         //camPos -= mainCam.transform.forward*0.3f;

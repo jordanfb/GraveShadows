@@ -18,7 +18,7 @@ Shader "Custom/playerFlat"
     {
     
         Pass{
-            Tags {"Queue"="Transparent" "RenderType"="Transparent"}
+            Tags {"Queue"="Transparent"}
             ZWrite On
             ColorMask 0
         }
@@ -29,6 +29,7 @@ Shader "Custom/playerFlat"
             
             LOD 100
             Blend SrcAlpha OneMinusSrcAlpha
+
             
             ZWrite Off
             
@@ -55,12 +56,12 @@ Shader "Custom/playerFlat"
         
         Pass {
             Tags {
-                "LightMode" = "ForwardAdd" "Queue"="Transparent"
+                "LightMode" = "ForwardAdd" "Queue"="Transparent" "RenderType"="Transparent"
             }
             LOD 100
 
             ZWrite Off
-            Blend SrcAlpha OneMinusSrcAlpha
+            Blend SrcAlpha One
             
             
             CGPROGRAM
