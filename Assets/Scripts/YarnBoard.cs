@@ -57,6 +57,7 @@ public class YarnBoard : MonoBehaviour
                     photo.AddComponent<SpriteRenderer>().sprite = evidence.Photo;
                     BoxCollider pColl = photo.AddComponent<BoxCollider>();
                     photo.transform.localPosition = new Vector3(0f, 1f, PinOffset(pColl));
+                    photo.transform.localScale /= 1000f;
                     photo.AddComponent<EvidenceMono>().EvidenceInfo = evidence;
                     break;
                 case EvidenceType.Conversation:
