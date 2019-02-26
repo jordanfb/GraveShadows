@@ -123,12 +123,4 @@ public class simplePlayerMovement : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(Input.GetKeyDown(KeyCode.E) && other.gameObject.layer == 12 && !SRmanager.isInShadowRealm)
-        {
-            PlayerManager.instance.CollectEvidence(other.gameObject);
-            Destroy(other.gameObject);
-        }
-    }
 }
