@@ -10,14 +10,28 @@ Shader "Custom/playerFlat"
         _ColorTint ("Tint", Color) = (1.0, 0.0, 0.0, 1.0)
         _Contrast("contrast", Range(1, 10)) = 1
         _Levels("number of gradient levels", Range(0, 10))= 0
+        _Transparency("_Transparency", Range(0,1)) =1.0
          
     }
     
     SubShader
     {
+    
+        Pass{
+            Tags {"Queue"="Transparent" "RenderType"="Transparent"}
+            ZWrite On
+            ColorMask 0
+        }
+        
         Pass
         {
-            Tags {"LightMode"="ForwardBase"}
+            Tags {"LightMode"="ForwardBase" "Queue"="Transparent" "RenderType"="Transparent"}
+            
+            LOD 100
+            Blend SrcAlpha OneMinusSrcAlpha
+            
+            ZWrite Off
+            
             CGPROGRAM
 
          
@@ -26,8 +40,8 @@ Shader "Custom/playerFlat"
             #include "UnityCG.cginc"
             #include "Lighting.cginc"
             
-            #pragma multi_compile_fwdbase
-            #pragma multi_compile PLAYER
+            #pragma multi_compile_fwdbase PLAYER
+            
             
             // shadow helper functions and macros
             
@@ -41,10 +55,13 @@ Shader "Custom/playerFlat"
         
         Pass {
             Tags {
-                "LightMode" = "ForwardAdd"
+                "LightMode" = "ForwardAdd" "Queue"="Transparent"
             }
-            Blend One One
+            LOD 100
+
             ZWrite Off
+            Blend SrcAlpha OneMinusSrcAlpha
+            
             
             CGPROGRAM
 
@@ -56,11 +73,11 @@ Shader "Custom/playerFlat"
             #include "Lighting.cginc"
             #include "AutoLight.cginc"
             #pragma multi_compile_fwdadd_fullshadows
-            #pragma multi_compile DIRECTIONAL POINT SPOT
+            #pragma multi_compile DIRECTIONAL POINT SPOT PLAYER
             // shadow helper functions and macros
            
             #define PLAYER
-            //#pragma multi_compile_fwdadd 
+            
             #include "My_Lighting.cginc"
             
            

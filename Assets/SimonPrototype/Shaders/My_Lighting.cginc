@@ -15,7 +15,7 @@ float _Contrast;
 float4 _ColorTint;
 float2 uv_TonalArtMap;
 int _isSelected = 0.0;
-
+float _Transparency = 1.0;
 
 struct v2f {
 
@@ -167,8 +167,10 @@ fixed4 frag (v2f i) : SV_Target
     //c = TAMcolor;
     
     #if defined(PLAYER)
-        return c;
+        c.a = _Transparency;
+        return TAMcolor;
     #else
+        TAMcolor.a =1.0;
         return TAMcolor;
     #endif
 }

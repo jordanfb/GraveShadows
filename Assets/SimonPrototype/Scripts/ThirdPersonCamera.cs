@@ -30,11 +30,13 @@ public class ThirdPersonCamera : MonoBehaviour
     ShadowRealmManager SRmanager;
 
     private bool nextCamPosIsLegal = true;
-
+    Material playerMat;
 
 
     void Start()
     {
+
+        playerMat = transform.GetChild(0).GetComponent<Renderer>().material;
         SRmanager = GetComponent<ShadowRealmManager>();
         mainCam = Camera.main;
         lookAtVec = gameObject.transform.position;
@@ -45,6 +47,7 @@ public class ThirdPersonCamera : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
 
         currentRotationX += Input.GetAxis("Mouse X") * scrollSpeedX;
         currentRotationY += Input.GetAxis("Mouse Y") * scrollSpeedY;
@@ -59,11 +62,11 @@ public class ThirdPersonCamera : MonoBehaviour
     }
 
     Vector3 debugPoint = Vector3.zero;
-    //void OnDrawGizmos()
-    //{
-    //    Gizmos.DrawSphere(debugPoint, 1f);
-    //    //Gizmos.DrawSphere(camPos - 3 * mainCam.transform.forward, 0.5f);
-    //}
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(debugPoint, 0.1f);
+        //Gizmos.DrawSphere(camPos - 3 * mainCam.transform.forward, 0.5f);
+    }
 
     Vector3 newCamPos;
     Vector3 lastLegalCamPos;
@@ -100,9 +103,13 @@ public class ThirdPersonCamera : MonoBehaviour
         }
         else
         {
+
            
-            lookAtVec = gameObject.transform.position + gameObject.transform.up;
-            shadowModVec = lookAtVec;
+            Vector3 modVec = Vector3.Scale(mainCam.transform.forward, new Vector3(1f, 0f, 1f));
+          
+
+            lookAtVec = gameObject.transform.position + modVec*2f;
+
             debugPoint = lookAtVec;
         }
 
@@ -113,9 +120,9 @@ public class ThirdPersonCamera : MonoBehaviour
 
 
 
-        if (Physics.Linecast(lookAtVec, newCamPos - mainCam.transform.forward*0.5f, out wallHit, mask)) {
+        if (Physics.Linecast(gameObject.transform.position, newCamPos - mainCam.transform.forward*0.0f, out wallHit, mask)) {
             Vector3 hitPoint = wallHit.point;
-            float wallHitDistance = -(lookAtVec - wallHit.point).magnitude + 1f;
+            float wallHitDistance = -(lookAtVec - wallHit.point).magnitude + 0.1f;
             if (-wallHitDistance < -STARTING_DISTANCE)
             {
                 wallHitDistance = -STARTING_DISTANCE;
@@ -131,15 +138,18 @@ public class ThirdPersonCamera : MonoBehaviour
 
 
         }
-
+        //print((newCamPos - gameObject.transform.position).magnitude);
+        if((newCamPos - gameObject.transform.position).magnitude < 2f) {
+            playerMat.SetFloat("_Transparency", Mathf.Max((newCamPos - gameObject.transform.position).magnitude - 1.2f, 0f));
+        }
+        else {
+            playerMat.SetFloat("_Transparency", 1.0f);
+        }
 
         //camPos -= mainCam.transform.forward*0.3f;
         lastLegalCamPos = newCamPos;
         mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, newCamPos, 0.5f);
-        //make this lerp
-        //Vector3 lookAtDir = player.transform.position - mainCam.transform.position;
-        //Quaternion toRotation = Quaternion.FromToRotation(mainCam.transform.forward, lookAtDir);
-        //mainCam.transform.rotation = mainCam.transform.position * Quaternion.Lerp(mainCam.transform.rotation, toRotation, 1.0f * Time.time);
+
         mainCam.transform.LookAt(lookAtVec);
 
     }

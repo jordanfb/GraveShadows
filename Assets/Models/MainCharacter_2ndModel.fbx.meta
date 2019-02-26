@@ -66,6 +66,8 @@ ModelImporter:
     4300018: Belt_Geo
     4300020: L_Foot_Geo
     4300022: L_Foot_Geo1
+    9500000: //RootNode
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -78,7 +80,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'Hips' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -86,7 +89,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -118,8 +121,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -133,7 +136,72 @@ ModelImporter:
   humanDescription:
     serializedVersion: 2
     human: []
-    skeleton: []
+    skeleton:
+    - name: MainCharacter_2ndModel(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Legs_Geo
+      parentName: MainCharacter_2ndModel(Clone)
+      position: {x: 0.012493448, y: 1.1387467, z: -0.019222712}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head_Geo
+      parentName: MainCharacter_2ndModel(Clone)
+      position: {x: 0.000028029079, y: 1.7143366, z: -0.00965111}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hat_Geo
+      parentName: MainCharacter_2ndModel(Clone)
+      position: {x: -0.000094857794, y: 1.9106556, z: 0.01421966}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Collar_Geo
+      parentName: MainCharacter_2ndModel(Clone)
+      position: {x: -0, y: 1.5077931, z: -0.023469917}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Eye_Geo
+      parentName: MainCharacter_2ndModel(Clone)
+      position: {x: 0.039812036, y: 1.7765886, z: 0.057409715}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Eye_Geo
+      parentName: MainCharacter_2ndModel(Clone)
+      position: {x: -0.039292503, y: 1.7765886, z: 0.057409715}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Tie_Geo
+      parentName: MainCharacter_2ndModel(Clone)
+      position: {x: -0, y: 1.5332129, z: 0.03182805}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Shirt_Geo
+      parentName: MainCharacter_2ndModel(Clone)
+      position: {x: -0, y: 1.4941686, z: 0.050306596}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Coat_Geo
+      parentName: MainCharacter_2ndModel(Clone)
+      position: {x: 0.002346971, y: 1.4536341, z: -0.0046235183}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Belt_Geo
+      parentName: MainCharacter_2ndModel(Clone)
+      position: {x: -0, y: 1.0940945, z: -0.028005086}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Foot_Geo
+      parentName: MainCharacter_2ndModel(Clone)
+      position: {x: 0.11412236, y: 0.013762879, z: -0.04011289}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Foot_Geo1
+      parentName: MainCharacter_2ndModel(Clone)
+      position: {x: -0.090841584, y: 0.013762879, z: -0.04011289}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5

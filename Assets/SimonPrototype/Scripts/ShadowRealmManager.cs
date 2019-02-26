@@ -63,7 +63,6 @@ public class ShadowRealmManager : MonoBehaviour
         //if (!GetComponent<simplePlayerMovement>().getIsInShadowRealm()) {
         //    checkForShadows();
         //}
-
         if (Input.GetKey(KeyCode.Space))
         {
             isChoosingWall = true;
