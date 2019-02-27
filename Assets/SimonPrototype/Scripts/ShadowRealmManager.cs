@@ -79,7 +79,8 @@ public class ShadowRealmManager : MonoBehaviour
                     Debug.Log("ENTRY PARENT IS NULL");
                     continue;
                 }
-                if(entry.Key.gameObject.transform.Find("selectionQuad") != null) {
+
+                if (entry.Key.gameObject.transform.Find("selectionQuad") != null) {
                     entry.Key.gameObject.transform.Find("selectionQuad").gameObject.SetActive(false);
                 }
 
@@ -130,6 +131,7 @@ public class ShadowRealmManager : MonoBehaviour
                     //    Debug.Log("ENTRY PARENT IS NULL");
                     //    continue;
                     //}
+
                     if (entry.Key.gameObject.transform.Find("selectionQuad") != null)
                     {
                         entry.Key.gameObject.transform.Find("selectionQuad").gameObject.SetActive(false);
@@ -182,6 +184,11 @@ public class ShadowRealmManager : MonoBehaviour
                 }
                 if (Physics.Raycast(spm.playerHitPoints[j].position, -direction, out hitWall, Mathf.Infinity, WallMask))
                 {
+
+                    if (hitWall.collider.gameObject.CompareTag("Impossible"))
+                    {
+                        continue;
+                    }
                     counter += 1;
                     Debug.DrawRay(spm.playerHitPoints[j].position, -direction, Color.blue);
                     if (wallDic.ContainsKey(hitWall.collider))
