@@ -114,7 +114,6 @@ public class ShadowRealmManager : MonoBehaviour
             isChoosingWall = false;
             if (isInShadowRealm)
             {
-                print("get me out!");
                 teleportFromShadowRealm();
 
             }
@@ -241,7 +240,7 @@ public class ShadowRealmManager : MonoBehaviour
         //adjust rotation to be thjat of the parent of the collider. i.e. the gameobject wall
 
         shadowPlane.transform.rotation = targetWall.transform.rotation;
-        shadowPlane.transform.position -= targetWall.transform.right*0.11f;
+        shadowPlane.transform.position -= targetWall.transform.right*0.01f;
         //moves it a bit away); = new Vector3(
 
 

@@ -139,7 +139,11 @@ public class simplePlayerMovement : MonoBehaviour
             gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, targetWallRot, turnSpeed);
 
         }
-        
+        else {
+
+            anim.SetFloat("xVelocityShadow", 0f);
+        }
+
 
 
 
