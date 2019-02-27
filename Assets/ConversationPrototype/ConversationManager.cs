@@ -180,6 +180,7 @@ public class ConversationManager : MonoBehaviour
     public List<ConversationMember> slaves = new List<ConversationMember>();
     public List<ScriptLine> scriptLines = new List<ScriptLine>();
 
+    public string scriptName = "";
     public string conversationDescription = "";
     public string scriptHeader = "";
     public string scriptContent = "";
@@ -334,6 +335,10 @@ public class ConversationManager : MonoBehaviour
                 else if (line.ToLower().Contains("#description"))
                 {
                     conversationDescription = line.Substring("#description".Length + 1);
+                }
+                else if (line.ToLower().Contains("#scriptname"))
+                {
+                    scriptName = line.Substring("#scriptname".Length + 1);
                 }
             }
             // now validate the rest of the script, we want lines starting with #CharacterName, i.e. #Jordan

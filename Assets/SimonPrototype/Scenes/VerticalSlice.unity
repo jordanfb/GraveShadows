@@ -1291,7 +1291,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 837604436}
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1308,14 +1309,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   script: {fileID: 4900000, guid: 5ce3bda65413fae4aaf2f34e6dc3fb89, type: 3}
-  slaves: []
-  conversationDescription: 
-  scriptHeader: 
-  scriptContent: 
-  characterNames: []
-  defaultSpeed: 1
+  slaves:
+  - {fileID: 1143971392}
+  scriptName: "Monologue Level Load\r"
+  conversationDescription: "to tell the player to enter the shadow on the wall\r"
+  scriptHeader: "\r\n#scriptname Monologue Level Load\r\n#description to tell the
+    player to enter the shadow on the wall\r\n#character Graves\r\n#speed .05\r\n#delay
+    1\r\n"
+  scriptContent: "\r\n\r\n#Graves\r\nSince the accident, I've had a weird relationship
+    with shadows, like a dame you can't shake. I bet I can become one on the wall
+    to get past that guard.\r\n#"
+  characterNames:
+  - Graves
+  defaultSpeed: 0.05
   defaultUsePostDelay: 1
-  defaultDelay: 0
+  defaultDelay: 1
 --- !u!114 &702020992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1329,14 +1337,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   script: {fileID: 4900000, guid: 8d77dc5607365d344a7a0c786285317b, type: 3}
-  slaves: []
-  conversationDescription: 
-  scriptHeader: 
-  scriptContent: 
-  characterNames: []
-  defaultSpeed: 1
+  slaves:
+  - {fileID: 1143971392}
+  scriptName: "Monologue Found All Evidence\r"
+  conversationDescription: "let the player know it's okay to leave\r"
+  scriptHeader: "\r\n#scriptname Monologue Found All Evidence\r\n#description let
+    the player know it's okay to leave\r\n#character Graves\r\n#speed .05\r\n#delay
+    1\r\n"
+  scriptContent: "\r\n\r\n#Graves\r\nThat's everything I came here for. Time to get
+    out before the blues realize I've overstayed my welcome.\r\n#"
+  characterNames:
+  - Graves
+  defaultSpeed: 0.05
   defaultUsePostDelay: 1
-  defaultDelay: 0
+  defaultDelay: 1
 --- !u!114 &702020993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1350,14 +1364,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   script: {fileID: 4900000, guid: ec5bbe16888a7c04b90d43db8fdf255d, type: 3}
-  slaves: []
-  conversationDescription: 
-  scriptHeader: 
-  scriptContent: 
-  characterNames: []
-  defaultSpeed: 1
+  slaves:
+  - {fileID: 1143971392}
+  scriptName: "Monologue Exit Too Early\r"
+  conversationDescription: "explain to the player why they can't leave yet\r"
+  scriptHeader: "\r\n#scriptname Monologue Exit Too Early\r\n#description explain
+    to the player why they can't leave yet\r\n#character Graves\r\n#speed .05\r\n#delay
+    1\r\n"
+  scriptContent: "\r\n\r\n#Graves\r\nNo, this can't be all Marv had. There's gotta
+    be something else I'm missing.\r\n#"
+  characterNames:
+  - Graves
+  defaultSpeed: 0.05
   defaultUsePostDelay: 1
-  defaultDelay: 0
+  defaultDelay: 1
 --- !u!114 &702020994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1371,14 +1391,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   script: {fileID: 4900000, guid: 0263d39ff2fe10a4fa430470c05edbda, type: 3}
-  slaves: []
-  conversationDescription: 
-  scriptHeader: 
-  scriptContent: 
-  characterNames: []
-  defaultSpeed: 1
+  slaves:
+  - {fileID: 1143971392}
+  scriptName: "Monologue Exit Building\r"
+  conversationDescription: "teach the player they won't know if they've gathered all
+    the evidence at the other locations\r"
+  scriptHeader: "\r\n#scriptname Monologue Exit Building\r\n#description teach the
+    player they won't know if they've gathered all the evidence at the other locations\r\n#character
+    Graves\r\n#speed .05\r\n#delay 1\r\n"
+  scriptContent: "\r\n\r\n#Graves\r\nI knew what I was looking for today. The next
+    time won't be so easy.\r\n#"
+  characterNames:
+  - Graves
+  defaultSpeed: 0.05
   defaultUsePostDelay: 1
-  defaultDelay: 0
+  defaultDelay: 1
 --- !u!114 &702020995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1394,9 +1421,10 @@ MonoBehaviour:
   script: {fileID: 4900000, guid: 3297bb7eafd830648b7441c7835210bb, type: 3}
   slaves:
   - {fileID: 1143971392}
+  scriptName: "Monologue Exit First Wall\r"
   conversationDescription: "teach the player how to exit the shadow\r"
-  scriptHeader: "\r\n#description teach the player how to exit the shadow\r\n#character
-    Graves\r\n#speed .05\r\n#delay 1\r\n"
+  scriptHeader: "\r\n#scriptname Monologue Exit First Wall\r\n#description teach the
+    player how to exit the shadow\r\n#character Graves\r\n#speed .05\r\n#delay 1\r\n"
   scriptContent: "\r\n\r\n#Graves\r\nShould be safe to step out of the shadows now.
     Same way I got in.\r\n#"
   characterNames:
@@ -1575,6 +1603,108 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 991cf44a4aa784135bc05dbaa6d8b71b, type: 3}
+--- !u!1 &837604435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 837604436}
+  - component: {fileID: 837604438}
+  - component: {fileID: 837604437}
+  - component: {fileID: 837604439}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &837604436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837604435}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.96, y: 0.54, z: 2.72}
+  m_LocalScale: {x: 4.412, y: 4.412, z: 4.412}
+  m_Children: []
+  m_Father: {fileID: 702020990}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &837604437
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837604435}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &837604438
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837604435}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &837604439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837604435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a64da2d28b7724eb32803d9d002843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerEventPairs:
+  - collider: {fileID: 0}
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
+  - collider: {fileID: 0}
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
+  - collider: {fileID: 0}
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
+  - collider: {fileID: 0}
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
+  - collider: {fileID: 0}
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
 --- !u!1 &974955866
 GameObject:
   m_ObjectHideFlags: 0
@@ -2083,7 +2213,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Graves
   masters:
+  - {fileID: 702020991}
   - {fileID: 702020995}
+  - {fileID: 702020994}
+  - {fileID: 702020993}
+  - {fileID: 702020992}
   text: {fileID: 1933384314}
   alwaysFaceCamera: 0
 --- !u!1001 &1190385078

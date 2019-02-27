@@ -17,6 +17,12 @@ public class OnTriggerEnterHandler : MonoBehaviour
 
     public List<colliderActions> triggerEventPairs;
 
+    public void TriggerOnTrigger(Collider other)
+    {
+        // this is so the player can call this I guess? This isn't the cleanest but I don't want rigidbodies
+        // on all the colliders in the scene...
+        OnTriggerEnter(other);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
