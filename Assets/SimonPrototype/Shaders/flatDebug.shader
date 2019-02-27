@@ -17,7 +17,9 @@ Shader "Custom/flatDebug"
     {
         Pass
         {
-            Tags {"LightMode"="ForwardBase"}
+            Tags {"LightMode"="ForwardBase" }
+           
+            
             CGPROGRAM
 
          
@@ -39,8 +41,9 @@ Shader "Custom/flatDebug"
         
         Pass {
             Tags {
-                "LightMode" = "ForwardAdd"
+                "LightMode" = "ForwardAdd" 
             }
+            
             Blend One One
             ZWrite Off
             

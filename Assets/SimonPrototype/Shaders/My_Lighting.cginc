@@ -15,7 +15,7 @@ float _Contrast;
 float4 _ColorTint;
 float2 uv_TonalArtMap;
 int _isSelected = 0.0;
-
+float _Transparency = 1.0;
 
 struct v2f {
 
@@ -161,14 +161,16 @@ fixed4 frag (v2f i) : SV_Target
     col2 = AdjustContrast(col2, _Contrast) * _ColorTint;
     
     
-    float4 TAMcolor = lerp(col1, col2, texI - floor(texI))*tex2D(_MainTex, worldUVMain);
+    float4 TAMcolor = lerp(col1, col2, texI - floor(texI))*tex2D(_MainTex, i.uv);
     //float4 TAMcolor = col1*tex2D(_MainTex, worldUVMain);
     
     //c = TAMcolor;
     
     #if defined(PLAYER)
-        return c;
+        TAMcolor.a = _Transparency;
+        return TAMcolor;
     #else
+        TAMcolor.a =1.0;
         return TAMcolor;
     #endif
 }
