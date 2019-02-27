@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1074,7 +1074,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598141651}
   m_LocalRotation: {x: -0.48470762, y: 0.6135176, z: -0.55515, w: 0.28366062}
-  m_LocalPosition: {x: -1.099, y: 2.84, z: 11.2}
+  m_LocalPosition: {x: -1.037, y: 2.812, z: 11.184}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1783,10 +1783,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: VerticalSlice_DetailPass
       objectReference: {fileID: 0}
-    - target: {fileID: 100030, guid: 5c671f71eded24c13a11832a63749622, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 400042, guid: 5c671f71eded24c13a11832a63749622, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -1830,6 +1826,10 @@ PrefabInstance:
     - target: {fileID: 400042, guid: 5c671f71eded24c13a11832a63749622, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100030, guid: 5c671f71eded24c13a11832a63749622, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300002, guid: 5c671f71eded24c13a11832a63749622, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2882,7 +2882,7 @@ PrefabInstance:
     - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: lightsInScene.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
@@ -2909,6 +2909,11 @@ PrefabInstance:
       propertyPath: lightsInScene.Array.data[1]
       value: 
       objectReference: {fileID: 671253701}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: lightsInScene.Array.data[2]
+      value: 
+      objectReference: {fileID: 598141651}
     - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: playerHitPoints.Array.size
