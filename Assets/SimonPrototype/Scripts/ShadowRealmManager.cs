@@ -215,9 +215,11 @@ public class ShadowRealmManager : MonoBehaviour
         }
         else {
 
+
             gameObject.transform.position = checkIfFreeCollider.transform.position;
             gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             isInShadowRealm = !isInShadowRealm;
+            shadowPlane.transform.position = shadowRealmTransform.position;
         }
     }
 
