@@ -90,12 +90,13 @@ public class ShadowRealmManager : MonoBehaviour
             if(Physics.Raycast(tpc.mainCam.transform.position, tpc.mainCam.transform.forward, out hitWall, Mathf.Infinity, WallMask)) {
                 
                 wallToTeleportTo = hitWall.collider;
-            }
 
+            }
             if (wallToTeleportTo != null) {
                 if (checkForShadows().ContainsKey(wallToTeleportTo))
                 {
                     if (wallToTeleportTo.gameObject.transform.Find("selectionQuad") != null) {
+                        
                         wallToTeleportTo.gameObject.transform.Find("selectionQuad").gameObject.SetActive(true);
 
                     }
