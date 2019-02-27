@@ -162,7 +162,16 @@ public class simplePlayerMovement : MonoBehaviour
         {
             Evidence e = other.gameObject.GetComponent<EvidenceMono>().EvidenceInfo;
             PlayerManager.instance.CollectEvidence(e);
-            Destroy(other.gameObject);
+            StartCoroutine(DestroyAfterTime(1f, other.gameObject));
+            anim.SetTrigger("pickUp");
+
         }
+    }
+
+    IEnumerator DestroyAfterTime(float time, GameObject gameObjectToDestroy)
+    {
+        yield return new WaitForSeconds(time);
+
+        Destroy(gameObjectToDestroy);
     }
 }
