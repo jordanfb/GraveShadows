@@ -125,11 +125,11 @@ public class ShadowRealmManager : MonoBehaviour
                         Debug.Log("ENTRY IS NULL");
                         continue;
                     }
-                    if (entry.Key.gameObject.transform.parent == null)
-                    {
-                        Debug.Log("ENTRY PARENT IS NULL");
-                        continue;
-                    }
+                    //if (entry.Key.gameObject.transform.parent == null)
+                    //{
+                    //    Debug.Log("ENTRY PARENT IS NULL");
+                    //    continue;
+                    //}
                     if (entry.Key.gameObject.transform.Find("selectionQuad") != null)
                     {
                         entry.Key.gameObject.transform.Find("selectionQuad").gameObject.SetActive(false);

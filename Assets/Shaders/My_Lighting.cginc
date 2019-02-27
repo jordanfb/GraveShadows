@@ -113,7 +113,7 @@ fixed4 frag (v2f i) : SV_Target
     //}
     
     i.diff.rgb = nl * light.color;
-    i.ambient = ShadeSH9(half4(flatNormal,1));
+    //i.ambient = ShadeSH9(half4(flatNormal,1));
     i.ambient = 1.0;
     
     fixed shadow = SHADOW_ATTENUATION(i);
