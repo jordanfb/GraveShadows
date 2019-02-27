@@ -12,6 +12,8 @@ public class YarnBoard : MonoBehaviour
     [SerializeField]
     private GameObject _flavorTextPanel;
     [SerializeField]
+    private Text _evidenceTitle;
+    [SerializeField]
     private Text _flavorTextAsset;
     [SerializeField]
     private float _pinZOffset = 0.0f;
@@ -122,6 +124,7 @@ public class YarnBoard : MonoBehaviour
                     _yarnBoardCamera.LookAtEvidence(evidence.transform);
                     _flavorTextPanel.SetActive(true);
                     _flavorTextAsset.text = evidence.GetComponent<EvidenceMono>().EvidenceInfo.FlavorText;
+                    _evidenceTitle.text = evidence.GetComponent<EvidenceMono>().EvidenceInfo.Name;
                     displaying = true;
                 }
             }
