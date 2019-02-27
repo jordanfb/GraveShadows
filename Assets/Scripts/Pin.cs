@@ -6,10 +6,12 @@ public class Pin : MonoBehaviour
 {
     Shader _defaultShader;
     Shader _glowShader;
+    [SerializeField]
+    MeshRenderer _renderer;
     // Start is called before the first frame update
     void Start()
     {
-        _defaultShader = GetComponent<Renderer>().material.shader;
+        _defaultShader = _renderer.materials[0].shader;
         _glowShader = Shader.Find("Custom/ItemGlow");
     }
 
@@ -21,11 +23,11 @@ public class Pin : MonoBehaviour
 
     private void OnMouseOver()
     {
-        GetComponent<Renderer>().material.shader = _glowShader;
+        _renderer.materials[0].shader = _glowShader;
     }
 
     private void OnMouseExit()
     {
-        GetComponent<Renderer>().material.shader = _defaultShader;
+        _renderer.materials[0].shader = _defaultShader;
     }
 }
