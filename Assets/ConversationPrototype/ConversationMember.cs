@@ -102,6 +102,10 @@ public class ConversationMember : MonoBehaviour
                     break;
                 }
             }
+            if (enableDisableUponSpeaking != null)
+            {
+                enableDisableUponSpeaking.SetActive(true);
+            }
         }
     }
 
@@ -131,10 +135,6 @@ public class ConversationMember : MonoBehaviour
         characterNumber = 0;
         unformattedCharacterNumber = 0;
         this.line = line;
-        if (enableDisableUponSpeaking != null)
-        {
-            enableDisableUponSpeaking.SetActive(true);
-        }
     }
 
     public bool IsFinished()
