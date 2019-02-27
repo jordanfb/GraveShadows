@@ -33,7 +33,9 @@ public class AudioManager : MonoBehaviour
 
         if(currentlyInShadowRealm != previouslyInShadowRealm)
         {
+
             _audioSource.clip = _clips[1];
+            _audioSource.volume = 0.1f;
             _audioSource.Play();
         }
 
