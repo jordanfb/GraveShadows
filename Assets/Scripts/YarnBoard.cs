@@ -28,10 +28,18 @@ public class YarnBoard : MonoBehaviour
     private YarnBoardCamera _yarnBoardCamera;
 
     private List<GameObject> _pins;
-    private bool displaying = false;
+    private YarnBoardMode mode = YarnBoardMode.None;
     private Collider _collider;
     private Vector2 _minPinPos;
     private Vector2 _maxPinPos;
+
+    // evidene moving info:
+    private GameObject movingYarnboardItem;
+
+    public enum YarnBoardMode
+    {
+        None, Displaying, Moving
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -109,25 +117,79 @@ public class YarnBoard : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0) && !displaying)
+        if (Input.GetMouseButtonDown(0) && mode == YarnBoardMode.None)
         {
             //Raycast to screen
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            
+
             // On hit, check if it's a piece of evidence
-            if(Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit))
             {
                 GameObject evidence = hit.collider.gameObject;
-                if(evidence.tag == "Evidence")
+                if (evidence.tag == "Evidence")
                 {
                     _yarnBoardCamera.LookAtEvidence(evidence.transform);
                     _flavorTextPanel.SetActive(true);
                     _flavorTextAsset.text = evidence.GetComponent<EvidenceMono>().EvidenceInfo.FlavorText;
                     _evidenceTitle.text = evidence.GetComponent<EvidenceMono>().EvidenceInfo.Name;
-                    displaying = true;
+                    //displaying = true;
+                    mode = YarnBoardMode.Displaying;
                 }
             }
+        }
+        else if (Input.GetMouseButtonDown(1) && mode == YarnBoardMode.None)
+        {
+            // move the item you clicked on
+            Debug.Log("Mtrying to oving now");
+            //Raycast to screen
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // On hit, check if it's a piece of evidence
+            if (Physics.Raycast(ray, out hit))
+            {
+                GameObject evidence = hit.collider.gameObject;
+                if (evidence.tag == "Evidence")
+                {
+                    Debug.Log("Moving now");
+                    // get the correct object to move
+                    movingYarnboardItem = hit.collider.transform.parent.gameObject;
+                    mode = YarnBoardMode.Moving;
+                }
+            }
+        }
+        else if (Input.GetMouseButton(1) && mode == YarnBoardMode.Moving)
+        {
+            Debug.Log("clicking annd holding");
+
+            // move the item you clicked on
+
+            //Raycast to screen
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // On hit, check if it's a piece of evidence
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
+            {
+                movingYarnboardItem.transform.position = hit.point;
+            }
+        }
+        else if (Input.GetMouseButtonUp(1) && mode == YarnBoardMode.Moving)
+        {
+            // move the item you clicked on
+            Debug.Log("nolonger clicking");
+
+            //Raycast to screen
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // On hit, check if it's a piece of evidence
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
+            {
+                movingYarnboardItem.transform.position = hit.point;
+            }
+            mode = YarnBoardMode.None;
         }
     }
 
@@ -160,6 +222,7 @@ public class YarnBoard : MonoBehaviour
     {
         _flavorTextPanel.SetActive(false);
         _flavorTextAsset.text = "";
-        displaying = false;
+        //displaying = false;
+        mode = YarnBoardMode.None;
     }
 }
