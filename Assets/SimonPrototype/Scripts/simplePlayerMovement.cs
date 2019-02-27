@@ -160,8 +160,10 @@ public class simplePlayerMovement : MonoBehaviour
     {
         if(other.gameObject.tag == "Evidence" && Input.GetKeyDown(KeyCode.E))
         {
-            Evidence e = other.gameObject.GetComponent<EvidenceMono>().EvidenceInfo;
-            PlayerManager.instance.CollectEvidence(e);
+            EvidenceMono emono = other.gameObject.GetComponent<EvidenceMono>();
+            emono.CollectThisEvidence();
+            //Evidence e = emono.EvidenceInfo;
+            //PlayerManager.instance.CollectEvidence(e);
             StartCoroutine(DestroyAfterTime(1f, other.gameObject));
             anim.SetTrigger("pickUp");
 
