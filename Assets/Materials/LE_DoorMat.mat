@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: jacketMat
-  m_Shader: {fileID: 4800000, guid: 7aec077f52fae4597a7b3714224bb3e2, type: 3}
+  m_Name: LE_DoorMat
+  m_Shader: {fileID: 4800000, guid: 1326b87364dff4e8697faf2c3e01963a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 25a1f8a017b173446a88a629ea1b1c32, type: 3}
+        m_Texture: {fileID: 2800000, guid: bc31229e2baa1c04fa69d01132d188b5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -57,7 +57,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _TonalArtMap:
         m_Texture: {fileID: 18700000, guid: d95559a82c237443b8394acc7eedbd4b, type: 2}
-        m_Scale: {x: 4, y: 4}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
@@ -76,7 +76,6 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Transparency: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:

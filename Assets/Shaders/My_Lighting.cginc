@@ -125,7 +125,7 @@ fixed4 frag (v2f i) : SV_Target
     c.rgb = i.diff * lighting*tex2D(_MainTex, i.uv);
     c.a = 1.0;
     
-    fixed l = Luminance(c);
+    fixed l = Luminance(c)+0.1;
     fixed texI = (1 - l) * _Levels;
     float2 worldUV;
     float2 worldUVMain;
