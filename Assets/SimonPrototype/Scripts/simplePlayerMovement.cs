@@ -16,12 +16,15 @@ public class simplePlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     [SerializeField]
-    public float speed;
+    public float PLAYER_SPEED_FORWARD;
+    public float PLAYER_SPEED_STRAFE;
+    public float SHADOW_SPEED;
+
     private Animator anim;
 
 
     const float PLAYER_WIDTH = 0.5f;
-    const float WALL_SPEED = 0.1f;
+
 
     public Collider currentWallCollider = null;
 
@@ -37,10 +40,15 @@ public class simplePlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        anim.SetBool("isInShadowRealm", SRmanager.isInShadowRealm);
         if (SRmanager.isChoosingWall) {
+            anim.SetFloat("yVelocity", 0f);
+            anim.SetFloat("xVelocity", 0f);
+
             return;
         }
+
+
         float moveDirX = Input.GetAxis("Horizontal");
         float moveDirY = Input.GetAxis("Vertical");
         if (!SRmanager.isInShadowRealm) {
@@ -57,18 +65,38 @@ public class simplePlayerMovement : MonoBehaviour
     }
 
     void thirdPersonMovement(float _moveDirX, float _moveDirY) {
+        if (_moveDirY < 0) {
+            return;
+        }
+        if (_moveDirY > 0.1) {
+            Quaternion targetRot = Quaternion.LookRotation(Vector3.Scale(mainCam.transform.forward, new Vector3(1f, 0f, 1f)), Vector3.up);
 
-        rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0f, mainCam.transform.forward.z).normalized * _moveDirY) + (mainCam.transform.right.normalized * _moveDirX)) * speed;
-        if (rb.velocity.magnitude > 0.1f)
-        {
-            anim.SetBool("isWalking", true);
+            gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, targetRot, 0.1f);
+
+
         }
-        else
-        {
-            anim.SetBool("isWalking", false);
+        else if (Mathf.Abs(_moveDirX) > 0.1) {
+            Quaternion targetRot = Quaternion.LookRotation(Vector3.Scale(mainCam.transform.forward, new Vector3(1f, 0f, 1f)), Vector3.up);
+
+            gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, targetRot, 0.1f);
+
         }
+
+
+        anim.SetFloat("yVelocity", transform.InverseTransformDirection(rb.velocity).z);
+        anim.SetFloat("xVelocity", transform.InverseTransformDirection(rb.velocity).x);
+        rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0f, mainCam.transform.forward.z).normalized * _moveDirY * PLAYER_SPEED_FORWARD) 
+                                    + (mainCam.transform.right.normalized * _moveDirX)* PLAYER_SPEED_STRAFE);
+
+
+
+
+
     }
+
+
     bool touchingWall = true;
+    Quaternion targetWallRot = Quaternion.AngleAxis(90f, Vector3.up);
     void wallMovement(float _moveDirX, float _moveDirY, Collider _currentWallCollider) {
 
         if (_currentWallCollider == null) {
@@ -79,7 +107,7 @@ public class simplePlayerMovement : MonoBehaviour
         LayerMask mask = LayerMask.GetMask("WallLayer");
         RaycastHit hitWall;
         touchingWall = false;
-        Vector3 nextPos = SRmanager.shadowPlane.transform.position + SRmanager.shadowPlane.transform.forward * -_moveDirX * WALL_SPEED 
+        Vector3 nextPos = SRmanager.shadowPlane.transform.position + SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime
                             - (Mathf.Sign(_moveDirX)* SRmanager.shadowPlane.transform.forward * PLAYER_WIDTH);
         Debug.DrawRay(nextPos, SRmanager.shadowPlane.transform.right);
         if (Physics.Raycast(nextPos, SRmanager.shadowPlane.transform.right, out hitWall, Mathf.Infinity, mask))
@@ -94,17 +122,22 @@ public class simplePlayerMovement : MonoBehaviour
         if (touchingWall)
         {
 
-            SRmanager.shadowPlane.transform.position += SRmanager.shadowPlane.transform.forward * -_moveDirX * 0.1f;
+            SRmanager.shadowPlane.transform.position += SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime;
+            anim.SetFloat("xVelocityShadow", Mathf.Abs(-_moveDirX * SHADOW_SPEED) * Time.deltaTime);
 
+            if (_moveDirX>0) {
+                targetWallRot = Quaternion.AngleAxis(90f, Vector3.up);
 
-                                                        
-
-            if (Mathf.Abs(_moveDirX) > 0.1){
-                anim.SetBool("isWalking", true);
             }
-            else {
-                anim.SetBool("isWalking", false);
+            else if (_moveDirX < 0)
+            {
+                targetWallRot = Quaternion.AngleAxis(-90f, Vector3.up);
+
             }
+
+            float turnSpeed = 0.1f;
+            gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, targetWallRot, turnSpeed);
+
         }
         
 
@@ -123,4 +156,13 @@ public class simplePlayerMovement : MonoBehaviour
 
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.tag == "Evidence" && Input.GetKeyDown(KeyCode.E))
+        {
+            Evidence e = other.gameObject.GetComponent<EvidenceMono>().EvidenceInfo;
+            PlayerManager.instance.CollectEvidence(e);
+            Destroy(other.gameObject);
+        }
+    }
 }

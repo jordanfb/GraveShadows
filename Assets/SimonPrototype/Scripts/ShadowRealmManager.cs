@@ -33,7 +33,7 @@ public class ShadowRealmManager : MonoBehaviour
 
     public bool isInShadowRealm;
     //this should use the shadow plane variabe :/
-    const float SHADOWPLANE_HEIGHT = 1.7f;
+    private float SHADOWPLANE_HEIGHT;
 
     private simplePlayerMovement spm;
     private ThirdPersonCamera tpc;
@@ -56,6 +56,7 @@ public class ShadowRealmManager : MonoBehaviour
         WallMask = LayerMask.GetMask("WallLayer");
         spm = GetComponent<simplePlayerMovement>();
         tpc = GetComponent<ThirdPersonCamera>();
+        SHADOWPLANE_HEIGHT = shadowPlane.transform.GetChild(0).GetComponent<Renderer>().bounds.size.y/2f;
 
     }
     private void Update()
@@ -63,7 +64,6 @@ public class ShadowRealmManager : MonoBehaviour
         //if (!GetComponent<simplePlayerMovement>().getIsInShadowRealm()) {
         //    checkForShadows();
         //}
-
         if (Input.GetKey(KeyCode.Space))
         {
             isChoosingWall = true;
@@ -140,8 +140,7 @@ public class ShadowRealmManager : MonoBehaviour
                     return;
                 }
 
-                print("get me in!");
-                print(wallToTeleportTo.gameObject.name);
+
                 if (checkForShadows().ContainsKey(wallToTeleportTo))
                 {
                     teleportToWall(wallToTeleportTo, checkForShadows()[wallToTeleportTo].Distinct().ToList());
@@ -230,9 +229,7 @@ public class ShadowRealmManager : MonoBehaviour
         //teleport to average of all points
         shadowPlane.transform.position = new Vector3(midPoint.x, SHADOWPLANE_HEIGHT, midPoint.z);
         //adjust rotation to be thjat of the parent of the collider. i.e. the gameobject wall
-        print("before: " + shadowPlane.transform.position);
 
-        print("after: " + shadowPlane.transform.position);
         shadowPlane.transform.rotation = targetWall.transform.rotation;
         shadowPlane.transform.position -= targetWall.transform.right*0.11f;
         //moves it a bit away); = new Vector3(
@@ -241,7 +238,7 @@ public class ShadowRealmManager : MonoBehaviour
 
         gameObject.transform.position = shadowRealmTransform.position;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-
+        gameObject.transform.rotation = Quaternion.AngleAxis(90f, Vector3.up);
         isInShadowRealm = !isInShadowRealm;
         GetComponent<simplePlayerMovement>().setCurrentWallCollider(targetWall);
 
