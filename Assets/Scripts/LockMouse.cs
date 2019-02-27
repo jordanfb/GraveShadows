@@ -13,6 +13,7 @@ public class LockMouse : MonoBehaviour
         if (lockMouse)
         {
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 
@@ -22,10 +23,12 @@ public class LockMouse : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && lockMouse)
         {
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         if (Input.GetKeyDown(KeyCode.Escape) && unlockOnEscape)
         {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }
