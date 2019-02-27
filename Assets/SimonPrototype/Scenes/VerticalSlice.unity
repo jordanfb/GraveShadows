@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4012,6 +4012,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400040, guid: 5c671f71eded24c13a11832a63749622, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.00029087067
+      objectReference: {fileID: 0}
+    - target: {fileID: 400040, guid: 5c671f71eded24c13a11832a63749622, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.06569648
+      objectReference: {fileID: 0}
+    - target: {fileID: 100040, guid: 5c671f71eded24c13a11832a63749622, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100026, guid: 5c671f71eded24c13a11832a63749622, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 100030, guid: 5c671f71eded24c13a11832a63749622, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4081,14 +4097,6 @@ PrefabInstance:
       value: -0.00029087067
       objectReference: {fileID: 0}
     - target: {fileID: 400026, guid: 5c671f71eded24c13a11832a63749622, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.06569648
-      objectReference: {fileID: 0}
-    - target: {fileID: 400040, guid: 5c671f71eded24c13a11832a63749622, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.00029087067
-      objectReference: {fileID: 0}
-    - target: {fileID: 400040, guid: 5c671f71eded24c13a11832a63749622, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.06569648
       objectReference: {fileID: 0}
@@ -5519,6 +5527,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioSourceObject
       objectReference: {fileID: 0}
+    - target: {fileID: 34284726133045714, guid: 1330689e3fff0f248891866c90bdbc21,
+        type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1693832151}
+    - target: {fileID: 34284726133045714, guid: 1330689e3fff0f248891866c90bdbc21,
+        type: 3}
+      propertyPath: _srManager
+      value: 
+      objectReference: {fileID: 1693832149}
     - target: {fileID: 34284726133045715, guid: 1330689e3fff0f248891866c90bdbc21,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5574,16 +5592,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 34284726133045714, guid: 1330689e3fff0f248891866c90bdbc21,
+    - target: {fileID: 34284726133045725, guid: 1330689e3fff0f248891866c90bdbc21,
         type: 3}
-      propertyPath: _player
-      value: 
-      objectReference: {fileID: 1693832151}
-    - target: {fileID: 34284726133045714, guid: 1330689e3fff0f248891866c90bdbc21,
-        type: 3}
-      propertyPath: _srManager
-      value: 
-      objectReference: {fileID: 1693832149}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1330689e3fff0f248891866c90bdbc21, type: 3}
 --- !u!1001 &1796358075
@@ -5958,6 +5971,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: shadowPlane
+      value: 
+      objectReference: {fileID: 1308648997}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: lightsInScene.Array.data[0]
+      value: 
+      objectReference: {fileID: 1111851361}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: lightsInScene.Array.data[1]
+      value: 
+      objectReference: {fileID: 671253701}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: lightsInScene.Array.data[2]
+      value: 
+      objectReference: {fileID: 598141651}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: shadowRealmTransform
+      value: 
+      objectReference: {fileID: 170942744}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: checkIfFreeCollider
+      value: 
+      objectReference: {fileID: 1217798723}
     - target: {fileID: 2701277236420419687, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6013,36 +6056,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: shadowPlane
-      value: 
-      objectReference: {fileID: 1308648997}
-    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: lightsInScene.Array.data[0]
-      value: 
-      objectReference: {fileID: 1111851361}
-    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: lightsInScene.Array.data[1]
-      value: 
-      objectReference: {fileID: 671253701}
-    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: lightsInScene.Array.data[2]
-      value: 
-      objectReference: {fileID: 598141651}
-    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: shadowRealmTransform
-      value: 
-      objectReference: {fileID: 170942744}
-    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: checkIfFreeCollider
-      value: 
-      objectReference: {fileID: 1217798723}
     - target: {fileID: 1693832146, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: handler
       value: 
