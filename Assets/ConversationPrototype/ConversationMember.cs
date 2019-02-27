@@ -12,6 +12,9 @@ public class ConversationMember : MonoBehaviour
     public string characterName = "Unnamed";
     public List<ConversationManager> masters = new List<ConversationManager>(); // only for slaves
 
+    public GameObject enableDisableUponSpeaking;
+
+
     public TextMeshProUGUI text; // we may want to make this the non-UGUI version but for now it works
     public bool alwaysFaceCamera = true;
 
@@ -92,6 +95,10 @@ public class ConversationMember : MonoBehaviour
                 if (IsFinished())
                 {
                     // this handles the fact that it's now a while loop to display speed = 0 things immediately not just every frame.
+                    if (enableDisableUponSpeaking != null)
+                    {
+                        enableDisableUponSpeaking.SetActive(false); // disable it
+                    }
                     break;
                 }
             }
@@ -124,6 +131,10 @@ public class ConversationMember : MonoBehaviour
         characterNumber = 0;
         unformattedCharacterNumber = 0;
         this.line = line;
+        if (enableDisableUponSpeaking != null)
+        {
+            enableDisableUponSpeaking.SetActive(true);
+        }
     }
 
     public bool IsFinished()

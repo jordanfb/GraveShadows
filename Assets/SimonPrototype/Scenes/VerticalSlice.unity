@@ -967,6 +967,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 152.019, y: 94.144, z: 89.131996}
+--- !u!1 &682617231 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3011720941516419545, guid: f35ed56bdd5a94a53964c3ad3e10822d,
+    type: 3}
+  m_PrefabInstance: {fileID: 347460759}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &682617235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682617231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91436111e855f58439b9ce1d92326b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handler: {fileID: 702020996}
 --- !u!1001 &685762167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1251,7 +1270,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1143971389}
+  - {fileID: 1777984490}
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1274,6 +1293,7 @@ GameObject:
   - component: {fileID: 702020994}
   - component: {fileID: 702020993}
   - component: {fileID: 702020992}
+  - component: {fileID: 702020996}
   m_Layer: 0
   m_Name: MonologueConversations
   m_TagString: Untagged
@@ -1310,7 +1330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script: {fileID: 4900000, guid: 5ce3bda65413fae4aaf2f34e6dc3fb89, type: 3}
   slaves:
-  - {fileID: 1143971392}
+  - {fileID: 0}
   scriptName: "Monologue Level Load\r"
   conversationDescription: "to tell the player to enter the shadow on the wall\r"
   scriptHeader: "\r\n#scriptname Monologue Level Load\r\n#description to tell the
@@ -1338,7 +1358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script: {fileID: 4900000, guid: 8d77dc5607365d344a7a0c786285317b, type: 3}
   slaves:
-  - {fileID: 1143971392}
+  - {fileID: 0}
   scriptName: "Monologue Found All Evidence\r"
   conversationDescription: "let the player know it's okay to leave\r"
   scriptHeader: "\r\n#scriptname Monologue Found All Evidence\r\n#description let
@@ -1365,7 +1385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script: {fileID: 4900000, guid: ec5bbe16888a7c04b90d43db8fdf255d, type: 3}
   slaves:
-  - {fileID: 1143971392}
+  - {fileID: 0}
   scriptName: "Monologue Exit Too Early\r"
   conversationDescription: "explain to the player why they can't leave yet\r"
   scriptHeader: "\r\n#scriptname Monologue Exit Too Early\r\n#description explain
@@ -1392,7 +1412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script: {fileID: 4900000, guid: 0263d39ff2fe10a4fa430470c05edbda, type: 3}
   slaves:
-  - {fileID: 1143971392}
+  - {fileID: 0}
   scriptName: "Monologue Exit Building\r"
   conversationDescription: "teach the player they won't know if they've gathered all
     the evidence at the other locations\r"
@@ -1420,7 +1440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script: {fileID: 4900000, guid: 3297bb7eafd830648b7441c7835210bb, type: 3}
   slaves:
-  - {fileID: 1143971392}
+  - {fileID: 0}
   scriptName: "Monologue Exit First Wall\r"
   conversationDescription: "teach the player how to exit the shadow\r"
   scriptHeader: "\r\n#scriptname Monologue Exit First Wall\r\n#description teach the
@@ -1432,6 +1452,65 @@ MonoBehaviour:
   defaultSpeed: 0.05
   defaultUsePostDelay: 1
   defaultDelay: 1
+--- !u!114 &702020996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702020989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a64da2d28b7724eb32803d9d002843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerEventPairs:
+  - collider: {fileID: 837604437}
+    events:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 702020991}
+          m_MethodName: StartRunningScript
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 1
+  - collider: {fileID: 0}
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
+  - collider: {fileID: 0}
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
+  - collider: {fileID: 0}
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
+  - collider: {fileID: 0}
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
 --- !u!1 &720010649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1476,7 +1555,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720010649}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
@@ -1614,9 +1693,8 @@ GameObject:
   - component: {fileID: 837604436}
   - component: {fileID: 837604438}
   - component: {fileID: 837604437}
-  - component: {fileID: 837604439}
-  m_Layer: 0
-  m_Name: Cube
+  m_Layer: 2
+  m_Name: EntrancewayCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1657,54 +1735,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837604435}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &837604439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 837604435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81a64da2d28b7724eb32803d9d002843, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerEventPairs:
-  - collider: {fileID: 0}
-    events:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    onlyRunOnce: 0
-  - collider: {fileID: 0}
-    events:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    onlyRunOnce: 0
-  - collider: {fileID: 0}
-    events:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    onlyRunOnce: 0
-  - collider: {fileID: 0}
-    events:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    onlyRunOnce: 0
-  - collider: {fileID: 0}
-    events:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    onlyRunOnce: 0
 --- !u!1 &974955866
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,14 +2163,13 @@ GameObject:
   - component: {fileID: 1143971389}
   - component: {fileID: 1143971391}
   - component: {fileID: 1143971390}
-  - component: {fileID: 1143971392}
   m_Layer: 5
   m_Name: Monologue Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1143971389
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2148,13 +2177,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143971388}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1320680404}
   - {fileID: 2031521331}
-  m_Father: {fileID: 698417805}
+  m_Father: {fileID: 1777984490}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2199,27 +2228,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143971388}
   m_CullTransparentMesh: 0
---- !u!114 &1143971392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1143971388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd0ab66d16ad96f4fa076536dcb51120, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterName: Graves
-  masters:
-  - {fileID: 702020991}
-  - {fileID: 702020995}
-  - {fileID: 702020994}
-  - {fileID: 702020993}
-  - {fileID: 702020992}
-  text: {fileID: 1933384314}
-  alwaysFaceCamera: 0
 --- !u!1001 &1190385078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3017,12 +3025,84 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockMouse: 1
   unlockOnEscape: 1
+--- !u!114 &1693832146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693832144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91436111e855f58439b9ce1d92326b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handler: {fileID: 702020996}
 --- !u!4 &1776538486 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 974761546466385224, guid: c16a4fdeecf104c7898d04976f09544e,
     type: 3}
   m_PrefabInstance: {fileID: 1846627862}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1777984489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1777984490}
+  - component: {fileID: 1777984491}
+  m_Layer: 5
+  m_Name: Monologue Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1777984490
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777984489}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1143971389}
+  m_Father: {fileID: 698417805}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1777984491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777984489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0ab66d16ad96f4fa076536dcb51120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Graves
+  masters:
+  - {fileID: 702020992}
+  - {fileID: 702020993}
+  - {fileID: 702020994}
+  - {fileID: 702020995}
+  - {fileID: 702020991}
+  enableDisableUponSpeaking: {fileID: 1143971388}
+  text: {fileID: 1933384314}
+  alwaysFaceCamera: 0
 --- !u!1 &1826565422
 GameObject:
   m_ObjectHideFlags: 0
@@ -3640,10 +3720,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: In central London, trains cannot drive faster than 30-40mph because of the
-    short distances between stations. The Victoria line can reach speeds of up to
-    50mph because the stations are further apart. The Metropolitan line has the fastest
-    train speeds, sometimes reaching over 60mph.
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 13c0f2367e153ad4fa2f3d3204827c63, type: 2}
   m_sharedMaterial: {fileID: 21524619498381458, guid: 13c0f2367e153ad4fa2f3d3204827c63,
@@ -3713,13 +3790,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1933384314}
-    characterCount: 281
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 43
-    wordCount: 44
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 4
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
