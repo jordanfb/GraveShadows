@@ -124,7 +124,6 @@ public class simplePlayerMovement : MonoBehaviour
 
             SRmanager.shadowPlane.transform.position += SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime;
             anim.SetFloat("xVelocityShadow", Mathf.Abs(-_moveDirX * SHADOW_SPEED) * Time.deltaTime);
-            print(Mathf.Abs(-_moveDirX * SHADOW_SPEED) * Time.deltaTime);
 
             if (_moveDirX>0) {
                 targetWallRot = Quaternion.AngleAxis(90f, Vector3.up);
@@ -157,4 +156,13 @@ public class simplePlayerMovement : MonoBehaviour
 
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.tag == "Evidence" && Input.GetKeyDown(KeyCode.E))
+        {
+            Evidence e = other.gameObject.GetComponent<EvidenceMono>().EvidenceInfo;
+            PlayerManager.instance.CollectEvidence(e);
+            Destroy(other.gameObject);
+        }
+    }
 }
