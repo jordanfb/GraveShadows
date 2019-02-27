@@ -34,6 +34,8 @@ public class YarnBoard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        /*
         //For use with randomly placing pins
         _collider = GetComponent<Collider>();
         _minPinPos = new Vector2(_collider.bounds.min.x, _collider.bounds.min.y);
@@ -93,7 +95,9 @@ public class YarnBoard : MonoBehaviour
                     document.transform.localPosition = new Vector3(0f, 6f, PinOffset(dColl));
                     break;
             }
+
         }
+        */
     }
 
     private float PinOffset(Collider c)
