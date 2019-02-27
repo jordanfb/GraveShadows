@@ -52,10 +52,13 @@
                 float width = 0.1;
                 half4 color;
                 if(i.uv.y > fmod(_Time.y, 1.0)- width && i.uv.y < fmod(_Time.y, 1.0) + width){
-                    half colorValue = abs(fmod(_Time.y, 1.0)-i.uv.y)- width;
+                    float colorValue = abs(fmod(_Time.y, 1.0)-i.uv.y)- width;
                     half4 colorMultiplier = half4(colorValue,colorValue,colorValue,1.0);
                     
-                    color = bgcolor + colorMultiplier;
+                    color = bgcolor + colorMultiplier*2.0;
+                    //color = 1-bgcolor;
+                    
+                  
 
                 }else{
                     

@@ -119,10 +119,20 @@ public class simplePlayerMovement : MonoBehaviour
            
         }
 
+        print(Vector3.Dot(SRmanager.shadowPlane.transform.right, mainCam.transform.forward));
+
+
         if (touchingWall)
         {
 
-            SRmanager.shadowPlane.transform.position += SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime;
+            if(Vector3.Dot(SRmanager.shadowPlane.transform.right, mainCam.transform.forward) < -0.2f)
+            {
+                SRmanager.shadowPlane.transform.position -= SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime;
+            }
+            else {
+                SRmanager.shadowPlane.transform.position += SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime;
+            }
+
             anim.SetFloat("xVelocityShadow", Mathf.Abs(-_moveDirX * SHADOW_SPEED) * Time.deltaTime);
 
             if (_moveDirX>0) {

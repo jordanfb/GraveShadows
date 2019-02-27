@@ -22,7 +22,9 @@ public class ThirdPersonCamera : MonoBehaviour
 
     [SerializeField]
     public float distance;
-    private float STARTING_DISTANCE;
+    public float SHADOW_CAMERA_DISTANCE;
+    public float REGULAR_CAMERA_DISTANCE;
+    private float currentDistance;
 
     private float scrollSpeedX = 2f;
     private float scrollSpeedY = 2f;
@@ -50,7 +52,7 @@ public class ThirdPersonCamera : MonoBehaviour
         SRmanager = GetComponent<ShadowRealmManager>();
         mainCam = Camera.main;
         lookAtVec = gameObject.transform.position;
-        STARTING_DISTANCE = distance;
+        currentDistance = distance;
 
     }
 
@@ -61,7 +63,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         currentRotationX += Input.GetAxis("Mouse X") * scrollSpeedX;
         currentRotationY += Input.GetAxis("Mouse Y") * scrollSpeedY;
-        distance += Input.GetAxis("Mouse ScrollWheel");
+        //distance += Input.GetAxis("Mouse ScrollWheel");
         currentRotationY = Mathf.Clamp(currentRotationY, min_y, max_y);
         
 
@@ -110,7 +112,7 @@ public class ThirdPersonCamera : MonoBehaviour
             lookAtVec = shadowPlaneChild.transform.position + shadowPlaneChild.transform.up;
             debugPoint = lookAtVec;
             wallRaycastVec = lookAtVec;
-
+            currentDistance = SHADOW_CAMERA_DISTANCE;
 
         }
         else
@@ -123,21 +125,22 @@ public class ThirdPersonCamera : MonoBehaviour
             lookAtVec = gameObject.transform.position + modVec*2f;
             wallRaycastVec = gameObject.transform.position;
             debugPoint = lookAtVec;
+            currentDistance = REGULAR_CAMERA_DISTANCE;
         }
 
 
         Quaternion rot = Quaternion.Euler(currentRotationY, currentRotationX, 0.0f);
 
-        newCamPos = lookAtVec + (rot * new Vector3(0f, 0f, -distance));
+        newCamPos = lookAtVec + (rot * new Vector3(0f, 0f, -currentDistance));
 
 
 
         if (Physics.Linecast(wallRaycastVec, newCamPos - mainCam.transform.forward*0.0f, out wallHit, mask)) {
             Vector3 hitPoint = wallHit.point;
             float wallHitDistance = -(lookAtVec - wallHit.point).magnitude + 0.1f;
-            if (-wallHitDistance < -STARTING_DISTANCE)
+            if (-wallHitDistance < -currentDistance)
             {
-                wallHitDistance = -STARTING_DISTANCE;
+                wallHitDistance = -currentDistance;
 
             }
            
