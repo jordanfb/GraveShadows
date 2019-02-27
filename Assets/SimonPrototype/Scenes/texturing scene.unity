@@ -1356,6 +1356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1244236561}
   - component: {fileID: 1244236560}
+  - component: {fileID: 1244236562}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1390,6 +1391,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1244236562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244236559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd5b6a30a0bfaf34283795549d1ece01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: 97
+  scene: texturing scene
 --- !u!1001 &1249409261
 PrefabInstance:
   m_ObjectHideFlags: 0
