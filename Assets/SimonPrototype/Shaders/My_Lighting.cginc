@@ -161,7 +161,7 @@ fixed4 frag (v2f i) : SV_Target
     col2 = AdjustContrast(col2, _Contrast) * _ColorTint;
     
     
-    float4 TAMcolor = lerp(col1, col2, texI - floor(texI))*tex2D(_MainTex, worldUVMain);
+    float4 TAMcolor = lerp(col1, col2, texI - floor(texI))*tex2D(_MainTex, i.uv);
     //float4 TAMcolor = col1*tex2D(_MainTex, worldUVMain);
     
     //c = TAMcolor;
