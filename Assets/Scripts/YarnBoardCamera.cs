@@ -34,10 +34,16 @@ public class YarnBoardCamera : MonoBehaviour
     {
         for(float t = 0f; t < duration; t += Time.deltaTime)
         {
-            transform.position = Vector3.Lerp(start, end, t / duration);
+            transform.position = Vector3.Lerp(start, end, Smootherstep(t / duration));
             yield return 0;
         }
 
         transform.position = end;
+    }
+
+    float Smootherstep(float x)
+    {
+        // adapted from wikipedia
+        return x * x * x * (x * (x * 6 - 15) + 10);
     }
 }
