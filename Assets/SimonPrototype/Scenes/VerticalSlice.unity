@@ -1270,6 +1270,10 @@ GameObject:
   m_Component:
   - component: {fileID: 702020990}
   - component: {fileID: 702020991}
+  - component: {fileID: 702020995}
+  - component: {fileID: 702020994}
+  - component: {fileID: 702020993}
+  - component: {fileID: 702020992}
   m_Layer: 0
   m_Name: MonologueConversations
   m_TagString: Untagged
@@ -1303,7 +1307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eabefa2f0f04ee4f8cf80e7f8ecca6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  script: {fileID: 0}
+  script: {fileID: 4900000, guid: 5ce3bda65413fae4aaf2f34e6dc3fb89, type: 3}
   slaves: []
   conversationDescription: 
   scriptHeader: 
@@ -1312,6 +1316,94 @@ MonoBehaviour:
   defaultSpeed: 1
   defaultUsePostDelay: 1
   defaultDelay: 0
+--- !u!114 &702020992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702020989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eabefa2f0f04ee4f8cf80e7f8ecca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 4900000, guid: 8d77dc5607365d344a7a0c786285317b, type: 3}
+  slaves: []
+  conversationDescription: 
+  scriptHeader: 
+  scriptContent: 
+  characterNames: []
+  defaultSpeed: 1
+  defaultUsePostDelay: 1
+  defaultDelay: 0
+--- !u!114 &702020993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702020989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eabefa2f0f04ee4f8cf80e7f8ecca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 4900000, guid: ec5bbe16888a7c04b90d43db8fdf255d, type: 3}
+  slaves: []
+  conversationDescription: 
+  scriptHeader: 
+  scriptContent: 
+  characterNames: []
+  defaultSpeed: 1
+  defaultUsePostDelay: 1
+  defaultDelay: 0
+--- !u!114 &702020994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702020989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eabefa2f0f04ee4f8cf80e7f8ecca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 4900000, guid: 0263d39ff2fe10a4fa430470c05edbda, type: 3}
+  slaves: []
+  conversationDescription: 
+  scriptHeader: 
+  scriptContent: 
+  characterNames: []
+  defaultSpeed: 1
+  defaultUsePostDelay: 1
+  defaultDelay: 0
+--- !u!114 &702020995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702020989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eabefa2f0f04ee4f8cf80e7f8ecca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 4900000, guid: 3297bb7eafd830648b7441c7835210bb, type: 3}
+  slaves:
+  - {fileID: 1143971392}
+  conversationDescription: "teach the player how to exit the shadow\r"
+  scriptHeader: "\r\n#description teach the player how to exit the shadow\r\n#character
+    Graves\r\n#speed .05\r\n#delay 1\r\n"
+  scriptContent: "\r\n\r\n#Graves\r\nShould be safe to step out of the shadows now.
+    Same way I got in.\r\n#"
+  characterNames:
+  - Graves
+  defaultSpeed: 0.05
+  defaultUsePostDelay: 1
+  defaultDelay: 1
 --- !u!1 &720010649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1990,8 +2082,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Graves
-  masters: []
-  text: {fileID: 1826565424}
+  masters:
+  - {fileID: 702020995}
+  text: {fileID: 1933384314}
   alwaysFaceCamera: 0
 --- !u!1001 &1190385078
 PrefabInstance:
