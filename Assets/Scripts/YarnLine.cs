@@ -7,8 +7,8 @@ public class YarnLine : MonoBehaviour
 
     public Transform point1;
     public Transform point2;
-    public Vector3 tempPoint;
-    public bool useTempPoint;
+    //public Vector3 tempPoint;
+    public bool lockToPoints = false;
 
     public LineRenderer _line;
 
@@ -21,6 +21,10 @@ public class YarnLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (lockToPoints)
+        {
+            _line.SetPosition(0, point1.position);
+            _line.SetPosition(1, point2.position);
+        }
     }
 }

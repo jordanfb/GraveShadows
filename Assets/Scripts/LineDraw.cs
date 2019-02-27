@@ -60,6 +60,10 @@ public class LineDraw : MonoBehaviour
                     _line.SetPosition(1, endColl.gameObject.transform.position);
                     AddCollider();
                     _lines.Add(_line);
+                    YarnLine yarnLine = _line.gameObject.AddComponent<YarnLine>();
+                    yarnLine.point1 = _startPin.transform;
+                    yarnLine.point2 = endColl.gameObject.transform;
+                    yarnLine.lockToPoints = true;
                 }
                 else
                 {
