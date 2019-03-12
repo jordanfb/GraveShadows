@@ -26,8 +26,8 @@ public class ThirdPersonCamera : MonoBehaviour
     public float REGULAR_CAMERA_DISTANCE;
     private float currentDistance;
 
-    private float scrollSpeedX = 2f;
-    private float scrollSpeedY = 2f;
+    public float scrollSpeedX;
+    public float scrollSpeedY;
 
     ShadowRealmManager SRmanager;
 
@@ -62,7 +62,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
 
         currentRotationX += Input.GetAxis("Mouse X") * scrollSpeedX;
-        currentRotationY += Input.GetAxis("Mouse Y") * scrollSpeedY;
+        currentRotationY -= Input.GetAxis("Mouse Y") * scrollSpeedY;
         //distance += Input.GetAxis("Mouse ScrollWheel");
         currentRotationY = Mathf.Clamp(currentRotationY, min_y, max_y);
         
@@ -93,21 +93,7 @@ public class ThirdPersonCamera : MonoBehaviour
         if (SRmanager.isInShadowRealm)
         {
             GameObject shadowPlaneChild = SRmanager.shadowPlane.transform.GetChild(0).gameObject;
-            //Vector3 camPlaneDis = (mainCam.transform.position - shadowPlaneChild.transform.position);
-            //Vector3 newPos = Vector3.Scale(shadowPlaneChild.transform.up, camPlaneDis);
 
-            //newPos = Vector3.Scale(shadowPlaneChild.transform.up, newPos);
-            //newPos = (distance * shadowPlaneChild.transform.up) - newPos;
-            //print(shadowPlaneChild.name);
-            ////newPos = new Vector3(newPos.y, 0f, 0f);
-            //newPos = shadowPlaneChild.transform.position + newPos;
-
-
-
-            //debugPoint = newPos;
-
-            //lookAtVec = shadowPlaneChild.transform.position+ shadowPlaneChild.transform.up * 2f;
-            //shadowModVec = newPos;
 
             lookAtVec = shadowPlaneChild.transform.position + shadowPlaneChild.transform.up;
             debugPoint = lookAtVec;
@@ -164,7 +150,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         //camPos -= mainCam.transform.forward*0.3f;
         lastLegalCamPos = newCamPos;
-        mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, newCamPos, 0.5f);
+        mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, newCamPos, 0.3f);
 
         mainCam.transform.LookAt(lookAtVec);
 
