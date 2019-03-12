@@ -12,7 +12,11 @@ public class YarnBoard : MonoBehaviour
     [SerializeField]
     private GameObject _flavorTextPanel;
     [SerializeField]
+    private Text _evidenceTitle;
+    [SerializeField]
     private Text _flavorTextAsset;
+    [SerializeField]
+    private float _pinZOffset = 0.0f;
     [SerializeField]
     private float _offsetRatio;
     [Tooltip("Determines the x offset of character text meshes on the notebook paper.")]
@@ -24,24 +28,34 @@ public class YarnBoard : MonoBehaviour
     private YarnBoardCamera _yarnBoardCamera;
 
     private List<GameObject> _pins;
-    private bool displaying = false;
-    private Renderer _renderer;
+    private YarnBoardMode mode = YarnBoardMode.None;
+    private Collider _collider;
     private Vector2 _minPinPos;
     private Vector2 _maxPinPos;
+
+    // evidene moving info:
+    private GameObject movingYarnboardItem;
+
+    public enum YarnBoardMode
+    {
+        None, Displaying, Moving
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+
+        /*
         //For use with randomly placing pins
-        _renderer = GetComponent<Renderer>();
-        _minPinPos = new Vector2(_renderer.bounds.min.x, _renderer.bounds.min.y);
-        _maxPinPos = new Vector2(_renderer.bounds.max.x, _renderer.bounds.max.y);
+        _collider = GetComponent<Collider>();
+        _minPinPos = new Vector2(_collider.bounds.min.x, _collider.bounds.min.y);
+        _maxPinPos = new Vector2(_collider.bounds.max.x, _collider.bounds.max.y);
 
         //Initialize Pins
         _pins = new List<GameObject>();
         foreach (Evidence evidence in PlayerManager.instance.CollectedEvidence)
         {
-            GameObject pin = Instantiate(_pinPrefab, transform.parent) as GameObject;
+            GameObject pin = Instantiate(_pinPrefab) as GameObject;
             // set the parent as the parent
             // of the yarn board so we can move the whole thing around
             RandomizePositionOnBoard(ref pin, _pins.IndexOf(pin));
@@ -91,7 +105,9 @@ public class YarnBoard : MonoBehaviour
                     document.transform.localPosition = new Vector3(0f, 6f, PinOffset(dColl));
                     break;
             }
+
         }
+        */
     }
 
     private float PinOffset(Collider c)
@@ -101,24 +117,79 @@ public class YarnBoard : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0) && !displaying)
+        if (Input.GetMouseButtonDown(0) && mode == YarnBoardMode.None)
         {
             //Raycast to screen
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            
+
             // On hit, check if it's a piece of evidence
-            if(Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit))
             {
                 GameObject evidence = hit.collider.gameObject;
-                if(evidence.tag == "Evidence")
+                if (evidence.tag == "Evidence")
                 {
                     _yarnBoardCamera.LookAtEvidence(evidence.transform);
                     _flavorTextPanel.SetActive(true);
                     _flavorTextAsset.text = evidence.GetComponent<EvidenceMono>().EvidenceInfo.FlavorText;
-                    displaying = true;
+                    _evidenceTitle.text = evidence.GetComponent<EvidenceMono>().EvidenceInfo.Name;
+                    //displaying = true;
+                    mode = YarnBoardMode.Displaying;
                 }
             }
+        }
+        else if (Input.GetMouseButtonDown(1) && mode == YarnBoardMode.None)
+        {
+            // move the item you clicked on
+            Debug.Log("Mtrying to oving now");
+            //Raycast to screen
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // On hit, check if it's a piece of evidence
+            if (Physics.Raycast(ray, out hit))
+            {
+                GameObject evidence = hit.collider.gameObject;
+                if (evidence.tag == "Evidence")
+                {
+                    Debug.Log("Moving now");
+                    // get the correct object to move
+                    movingYarnboardItem = hit.collider.transform.parent.gameObject;
+                    mode = YarnBoardMode.Moving;
+                }
+            }
+        }
+        else if (Input.GetMouseButton(1) && mode == YarnBoardMode.Moving)
+        {
+            Debug.Log("clicking annd holding");
+
+            // move the item you clicked on
+
+            //Raycast to screen
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // On hit, check if it's a piece of evidence
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
+            {
+                movingYarnboardItem.transform.position = hit.point;
+            }
+        }
+        else if (Input.GetMouseButtonUp(1) && mode == YarnBoardMode.Moving)
+        {
+            // move the item you clicked on
+            Debug.Log("nolonger clicking");
+
+            //Raycast to screen
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // On hit, check if it's a piece of evidence
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
+            {
+                movingYarnboardItem.transform.position = hit.point;
+            }
+            mode = YarnBoardMode.None;
         }
     }
 
@@ -126,7 +197,8 @@ public class YarnBoard : MonoBehaviour
     {
         float randX = Random.Range(_minPinPos.x * .75f, _maxPinPos.x * .75f);
         float randY = Random.Range(_minPinPos.y * .75f, _maxPinPos.y * .75f);
-        pin.transform.localPosition = new Vector3(randX + index, randY, 0f);
+        pin.transform.position = new Vector3(randX + index, randY, transform.position.z - _pinZOffset);
+        pin.GetComponentInChildren<Transform>().position = Vector3.zero;
     }
 
     //Isolated for readability sake
@@ -150,6 +222,7 @@ public class YarnBoard : MonoBehaviour
     {
         _flavorTextPanel.SetActive(false);
         _flavorTextAsset.text = "";
-        displaying = false;
+        //displaying = false;
+        mode = YarnBoardMode.None;
     }
 }

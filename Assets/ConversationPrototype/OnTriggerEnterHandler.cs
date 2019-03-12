@@ -17,10 +17,17 @@ public class OnTriggerEnterHandler : MonoBehaviour
 
     public List<colliderActions> triggerEventPairs;
 
+    public void TriggerOnTrigger(Collider other)
+    {
+        // this is so the player can call this I guess? This isn't the cleanest but I don't want rigidbodies
+        // on all the colliders in the scene...
+        OnTriggerEnter(other);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        for(int i = 0; i < triggerEventPairs.Count; i++)
+        int i = 0;
+        while (i < triggerEventPairs.Count)
         {
             if (triggerEventPairs[i].collider == other)
             {
@@ -28,9 +35,10 @@ public class OnTriggerEnterHandler : MonoBehaviour
                 if (triggerEventPairs[i].onlyRunOnce)
                 {
                     triggerEventPairs.RemoveAt(i);
+                    i--; // so that we account for the fact that we shrunk the list
                 }
-                break;
             }
+            i++;
         }
     }
 }

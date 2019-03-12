@@ -60,6 +60,10 @@ public class LineDraw : MonoBehaviour
                     _line.SetPosition(1, endColl.gameObject.transform.position);
                     AddCollider();
                     _lines.Add(_line);
+                    YarnLine yarnLine = _line.gameObject.AddComponent<YarnLine>();
+                    yarnLine.point1 = _startPin.transform;
+                    yarnLine.point2 = endColl.gameObject.transform;
+                    yarnLine.lockToPoints = true;
                 }
                 else
                 {
@@ -75,17 +79,19 @@ public class LineDraw : MonoBehaviour
         
         else if(Input.GetMouseButton(0) && _line != null) 
         {
+            Debug.Log("HERE");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit endHit;
             if (Physics.Raycast(ray, out endHit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
             {
+                Debug.Log("HITHITHIT");
                 Vector3 pos = endHit.point;
-                // pos.z = _line.GetPosition(0).z;
+                pos.z = _line.GetPosition(0).z;
                 // this is a bit of an issue since it means it doesn't perfectly align with
                 // the mouse but it does mean it stays above the evidence. It doesn't work for rotated yarn boards though
 
                 // this method is slightly better maybe but still not great
-                pos += endHit.normal; // move it up by 1 so it's above the evidence while still allowing a tilted yarn board
+                // pos += endHit.normal; // move it up by 1 so it's above the evidence while still allowing a tilted yarn board
 
                 _line.SetPosition(1, pos);
             }
@@ -110,7 +116,6 @@ public class LineDraw : MonoBehaviour
                 }
             }
         }
-
     }
 
     /**

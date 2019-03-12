@@ -16,4 +16,15 @@ public class LoadSceneOnButonPress : MonoBehaviour
             SceneManager.LoadScene(scene);
         }
     }
+
+    public void LoadSceneAfterTime(float t)
+    {
+        StartCoroutine(LoadSceneCoroutine(t));
+    }
+
+    private IEnumerator LoadSceneCoroutine(float t)
+    {
+        yield return new WaitForSeconds(t);
+        SceneManager.LoadScene(scene);
+    }
 }
