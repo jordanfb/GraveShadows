@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Suspect", menuName = "Suspect", order = 1)]
-public class Suspect : ScriptableObject
+public class Suspect : YarnBoardEntity
 {
     [SerializeField]
-    private string _name;
+    private string _codeName;
     [SerializeField]
     [TextArea]
     private string _bio;
 
-    public string Name
+    public string CodeName
     {
-        get { return name; }
+        get { return _codeName; }
     }
 }
