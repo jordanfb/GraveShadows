@@ -41,7 +41,6 @@ public class playerShadowMovementScript : MonoBehaviour
                     gameObject.transform.position = shadowTeleportPoint.position;
                     //rb.useGravity = false;
                     //rb.isKinematic = true;
-                    gameObject.GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().m_MoveSpeedMultiplier = 0.0f;
 
 
 
