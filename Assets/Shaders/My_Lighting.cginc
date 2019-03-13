@@ -15,8 +15,8 @@ float _Contrast;
 float4 _ColorTint;
 float2 uv_TonalArtMap;
 int _isSelected = 0.0;
-float _Transparency = 1.0;
-
+float _Transparency;
+float _AttenMod;
 struct v2f {
 
     float2 uv: TEXCOORD0;
@@ -59,6 +59,7 @@ v2f vert (appdata_base v)
 UnityLight CreateLight (v2f i) {
     UnityLight light;
     #if defined(POINT) || defined(SPOT)
+        //light.dir = normalize(_WorldSpaceLightPos0.xyz - i.worldPos);
         light.dir = normalize(_WorldSpaceLightPos0.xyz - i.worldPos);
         
         
@@ -68,10 +69,14 @@ UnityLight CreateLight (v2f i) {
     #endif
     
     
+    
+
+      // use z coordinate in light space as signed distance
+    
     UNITY_LIGHT_ATTENUATION(attenuation, i, i.worldPos);
     
-    
     light.color = _LightColor0.rgb * attenuation;
+    //light.ndotl = DotClamped(i.normal, light.dir);
     return light;
 }
 
@@ -98,34 +103,23 @@ fixed4 frag (v2f i) : SV_Target
     
     float3 flatNormal = -normalize(cross(dpdx, dpdy)).xyz;
     half nl = max(0, dot(flatNormal, light.dir));
-    // factor in the light color
-    //if(nl<0.2 || nl>1.0){
-    //    nl=0;
-    //}
-    //else if(nl<0.8){
-    //    nl=0.6;
-    //}
-    //else if(nl<0.95){
-    //    nl=0.8;
-    //}
-    //else{
-    //    nl=1.0;
-    //}
+
     
     i.diff.rgb = nl * light.color;
     //i.ambient = ShadeSH9(half4(flatNormal,1));
-    i.ambient = 1.0;
+    i.ambient = 0.2;
     
     fixed shadow = SHADOW_ATTENUATION(i);
-    fixed3 lighting = i.diff * shadow + i.ambient;
+    fixed3 lighting = i.diff * shadow;
     
     //i.diff.a =1.0;
     fixed4 c;
     
-    c.rgb = i.diff * lighting*tex2D(_MainTex, i.uv);
-    c.a = 1.0;
+    c.rgb = i.diff * lighting * tex2D(_MainTex, i.uv);
     
-    fixed l = Luminance(c)+0.1;
+    //c.a = 1.0;
+    
+    fixed l = Luminance(c);
     fixed texI = (1 - l) * _Levels;
     float2 worldUV;
     float2 worldUVMain;
@@ -168,7 +162,8 @@ fixed4 frag (v2f i) : SV_Target
         TAMcolor.a = _Transparency;
         return TAMcolor;
     #else
-        TAMcolor.a =1.0;
+        TAMcolor.a = 1.0;
+        
         return TAMcolor;
     #endif
 }

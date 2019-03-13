@@ -10,6 +10,7 @@ Shader "Custom/flatDebug"
         _ColorTint ("Tint", Color) = (1.0, 0.0, 0.0, 1.0)
         _Contrast("contrast", Range(1, 10)) = 1
         _Levels("number of gradient levels", Range(0, 10))= 0
+        _AttenMod("Attenuation Modifier", Range(0,4)) = 1.0
          
     }
     

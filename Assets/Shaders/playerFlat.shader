@@ -10,7 +10,8 @@ Shader "Custom/playerFlat"
         _ColorTint ("Tint", Color) = (1.0, 0.0, 0.0, 1.0)
         _Contrast("contrast", Range(1, 10)) = 1
         _Levels("number of gradient levels", Range(0, 10))= 0
-        _Transparency("_Transparency", Range(0,1)) =1.0
+        _Transparency("_Transparency", Range(0,1)) = 1.0
+        
          
     }
     
