@@ -24,6 +24,8 @@ public class Evidence : ScriptableObject
     //what characters are speaking in the conversation.
     [SerializeField]
     private List<string> _characters;
+    [SerializeField]
+    private Suspect[] _associatedSuspects;
 
     public string Name
     {
@@ -50,6 +52,11 @@ public class Evidence : ScriptableObject
     public List<string> Characters
     {
         get { return _characters; }
+    }
+
+    public Suspect[] AssociatedSuspects
+    {
+        get { return _associatedSuspects; }
     }
 }
 
