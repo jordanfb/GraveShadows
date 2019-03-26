@@ -14,8 +14,9 @@ float _Levels;
 float _Contrast;
 float4 _ColorTint;
 float2 uv_TonalArtMap;
-int _isSelected = 0.0;
-float _Transparency = 1.0;
+float _Transparency;
+float _AttenMod;
+float _Ambient;
 
 struct v2f {
 
@@ -44,34 +45,43 @@ v2f vert (appdata_base v)
 {
     v2f o;
     o.pos = UnityObjectToClipPos(v.vertex);
+    o.worldPos = mul(unity_ObjectToWorld, v.vertex);
     o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
     o.uv2 = TRANSFORM_TEX(v.texcoord, _TonalArtMap);
-    o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
-    half3 wNormal = UnityObjectToWorldNormal(v.normal);
     TRANSFER_SHADOW(o);
- 
     
+    half3 wNormal = UnityObjectToWorldNormal(v.normal);
+    
+ 
+    o.normal = v.normal;
     return o;
 }
 
 // normal map texture from shader properties
 
 UnityLight CreateLight (v2f i) {
+
     UnityLight light;
-    #if defined(POINT) || defined(SPOT)
-        light.dir = normalize(_WorldSpaceLightPos0.xyz - i.worldPos);
         
-        
+    #if defined(SPOT) || defined(POINT)
+    light.dir = normalize(_WorldSpaceLightPos0.xyz - i.worldPos);
+    float3 lightVec = _WorldSpaceLightPos0.xyz - i.worldPos;
+    
     #else
-        light.dir = _WorldSpaceLightPos0.xyz;
-        
+    float3 lightVec = _WorldSpaceLightPos0.xyz;
+    light.dir = _WorldSpaceLightPos0.xyz;
     #endif
     
-    
+      
     UNITY_LIGHT_ATTENUATION(attenuation, i, i.worldPos);
-    
-    
+    attenuation = pow(attenuation, 1);
+   
     light.color = _LightColor0.rgb * attenuation;
+   
+    
+   
+    light.ndotl = DotClamped(i.normal, light.dir);
+    
     return light;
 }
 
@@ -93,39 +103,25 @@ fixed4 frag (v2f i) : SV_Target
     
     
     UnityLight light = CreateLight(i);
+    //flatten vertex
     float3 dpdx = ddx(i.worldPos);
     float3 dpdy = ddy(i.worldPos);
     
     float3 flatNormal = -normalize(cross(dpdx, dpdy)).xyz;
     half nl = max(0, dot(flatNormal, light.dir));
-    // factor in the light color
-    //if(nl<0.2 || nl>1.0){
-    //    nl=0;
-    //}
-    //else if(nl<0.8){
-    //    nl=0.6;
-    //}
-    //else if(nl<0.95){
-    //    nl=0.8;
-    //}
-    //else{
-    //    nl=1.0;
-    //}
     
-    i.diff.rgb = nl * light.color;
-    //i.ambient = ShadeSH9(half4(flatNormal,1));
-    i.ambient = 1.0;
+    
+    i.diff.rgb = light.color * nl;    
     
     fixed shadow = SHADOW_ATTENUATION(i);
-    fixed3 lighting = i.diff * shadow + i.ambient;
+    fixed3 lighting = i.diff * shadow;
     
-    //i.diff.a =1.0;
+    
     fixed4 c;
     
-    c.rgb = i.diff * lighting*tex2D(_MainTex, i.uv);
-    c.a = 1.0;
-    
-    fixed l = Luminance(c)+0.1;
+    c.rgb = i.diff * lighting * tex2D(_MainTex, i.uv);
+        
+    fixed l = Luminance(c);
     fixed texI = (1 - l) * _Levels;
     float2 worldUV;
     float2 worldUVMain;
@@ -160,15 +156,16 @@ fixed4 frag (v2f i) : SV_Target
     
     
     float4 TAMcolor = lerp(col1, col2, texI - floor(texI));
-    //float4 TAMcolor = col1*tex2D(_MainTex, worldUVMain);
-    
-    //c = TAMcolor;
-    
+        
+    #ifdef BASEPASS
+        TAMcolor.rgb += _Ambient;
+    #endif
     #if defined(PLAYER)
         TAMcolor.a = _Transparency;
         return TAMcolor;
     #else
-        TAMcolor.a =1.0;
+        TAMcolor.a = 1.0;
+        
         return TAMcolor;
     #endif
 }

@@ -1,7 +1,7 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Custom/flatDebug"
+Shader "Custom/flatLightingBase"
 
 {
     Properties {
@@ -10,7 +10,8 @@ Shader "Custom/flatDebug"
         _ColorTint ("Tint", Color) = (1.0, 0.0, 0.0, 1.0)
         _Contrast("contrast", Range(1, 10)) = 1
         _Levels("number of gradient levels", Range(0, 10))= 0
-         
+        _AttenMod("Attenuation Modifier", Range(0,4)) = 1.0
+        _Ambient("Ambient light amount", Range(0,1)) = 0.0
     }
     
     SubShader
@@ -29,14 +30,12 @@ Shader "Custom/flatDebug"
             #include "Lighting.cginc"
             
             #pragma multi_compile_fwdbase
+
+            #define BASEPASS
             
-            // shadow helper functions and macros
-            
-            
-            //#pragma multi_compile DIRECTIONAL POINT
             #include "My_Lighting.cginc"
-           
             ENDCG
+        
         }
         
         Pass {
@@ -57,21 +56,14 @@ Shader "Custom/flatDebug"
             #include "Lighting.cginc"
             #include "AutoLight.cginc"
             #pragma multi_compile_fwdadd_fullshadows
-            #pragma multi_compile DIRECTIONAL POINT SPOT
-            // shadow helper functions and macros
-           
-            
-            //#pragma multi_compile_fwdadd 
+            #pragma multi_compile POINT SPOT
+
             #include "My_Lighting.cginc"
-            
-           
+
 
             ENDCG
         }
         
-        
-        UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
-            
         Pass{
         
             Tags{"LightMode" = "ShadowCaster"}

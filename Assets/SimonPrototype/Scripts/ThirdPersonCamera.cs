@@ -21,7 +21,6 @@ public class ThirdPersonCamera : MonoBehaviour
     private float max_y = 80f;
 
     [SerializeField]
-    public float distance;
     public float SHADOW_CAMERA_DISTANCE;
     public float REGULAR_CAMERA_DISTANCE;
     private float currentDistance;
@@ -52,7 +51,7 @@ public class ThirdPersonCamera : MonoBehaviour
         SRmanager = GetComponent<ShadowRealmManager>();
         mainCam = Camera.main;
         lookAtVec = gameObject.transform.position;
-        currentDistance = distance;
+        currentDistance = REGULAR_CAMERA_DISTANCE;
 
     }
 
@@ -108,7 +107,7 @@ public class ThirdPersonCamera : MonoBehaviour
             Vector3 modVec = Vector3.Scale(mainCam.transform.forward, new Vector3(1f, 0f, 1f));
           
 
-            lookAtVec = gameObject.transform.position + modVec*2f;
+            lookAtVec = gameObject.transform.position + modVec * 2f + mainCam.transform.right*0.2f;
             wallRaycastVec = gameObject.transform.position;
             debugPoint = lookAtVec;
             currentDistance = REGULAR_CAMERA_DISTANCE;
@@ -117,7 +116,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         Quaternion rot = Quaternion.Euler(currentRotationY, currentRotationX, 0.0f);
 
-        newCamPos = lookAtVec + (rot * new Vector3(0f, 0f, -currentDistance));
+        newCamPos = lookAtVec + (rot * (new Vector3(0f, 0f, -currentDistance)));
 
 
 
@@ -149,7 +148,6 @@ public class ThirdPersonCamera : MonoBehaviour
         }
 
         //camPos -= mainCam.transform.forward*0.3f;
-        lastLegalCamPos = newCamPos;
         mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, newCamPos, 0.3f);
 
         mainCam.transform.LookAt(lookAtVec);

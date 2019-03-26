@@ -119,7 +119,6 @@ public class simplePlayerMovement : MonoBehaviour
            
         }
 
-        print(Vector3.Dot(SRmanager.shadowPlane.transform.right, mainCam.transform.forward));
 
 
         if (touchingWall)
