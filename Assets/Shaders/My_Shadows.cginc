@@ -12,10 +12,7 @@
 struct VertexData{
     float4 position: POSITION;
     float3 normal: NORMAL;
-   
-    
-    
-    
+
     
 };
 
@@ -26,6 +23,8 @@ struct VertexData{
 float4 vert (VertexData v) : SV_POSITION
 {
     float4 position = UnityClipSpaceShadowCasterPos(v.position.xyz, v.normal);
+    //float4 position = 0;
+    //return float4(1.0,0.0,0.0);
     return UnityApplyLinearShadowBias(position);
 
     
