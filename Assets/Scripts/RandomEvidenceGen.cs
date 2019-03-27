@@ -18,12 +18,16 @@ public class RandomEvidenceGen : MonoBehaviour
     private float _spawnPercentage;
 
     private int[] _suspectTotals; //Index corresponds to index of suspect in _allSuspects
-    private List<Evidence> _evidenceToGen;
+
+    //Because we don't care about indexing and the random generation ignores duplicates,
+    //I figured a set is the most efficient structure to use here.
+    private HashSet<Evidence> _evidenceToGen;
+    
     // Start is called before the first frame update
     void Start()
     {
         //Initialize some necessary fields
-        _evidenceToGen = new List<Evidence>();
+        _evidenceToGen = new HashSet<Evidence>();
         _suspectTotals = new int[5];
 
         //Gather culprit data to add to evidence to generate list
@@ -44,11 +48,13 @@ public class RandomEvidenceGen : MonoBehaviour
             //If evidence is assoc. with no one, ignore it
             if (ev.AssociatedSuspects.Count == 0)
                 continue;
+
             if(ev.AssociatedSuspects.Contains(_culprit))
             {
                 //Add evidence to generation queue if it belongs to culprit
                 _evidenceToGen.Add(ev);
                 _suspectTotals[index]++;
+
                 //If it points to any other evidence too, add it to the totals
                 if(ev.AssociatedSuspects.Count > 1)
                 {
@@ -59,6 +65,29 @@ public class RandomEvidenceGen : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private void GatherRandomEvidence()
+    {
+        if(_evidenceToGen.Count >= _evidenceTotal)
+        {
+            Debug.LogError("There's already more evidence than can be generated!");
+            return;
+        }
+
+        //Apparently not using the System namespace calls a vestigial UnityEngine Random class instead.
+        //Also didn't want to use all of System AND either way I still needed to specify bc C# got angry.
+        System.Random rng = new System.Random();
+
+        //Is this efficient??? God I hope so.
+        //Need to refactor
+        while ( _evidenceToGen.Count < _evidenceTotal)
+        {
+            int next = rng.Next(0, _allEvidence.Count - 1);
+            Evidence e = _allEvidence[next];
+            _allEvidence.Add(e);
+            
         }
     }
 }
