@@ -9,6 +9,6 @@ public class PlayerStartOnTriggerEnter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        handler.TriggerOnTrigger(other); // forward it to that game object this is kinda terrible but it works
+        //handler.TriggerOnTrigger(other); // forward it to that game object this is kinda terrible but it works
     }
 }

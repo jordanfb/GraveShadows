@@ -136,7 +136,7 @@ float4 MyFragmentProgram (Interpolators i) : SV_TARGET {
     
     
     float3 albedo = tex2D(_MainTex, i.uv.xy).rgb * _Tint.rgb ;
-    float3 specularTint = 0.0;
+    float3 specularTint = float3(0.0, 1.0,0.0);
     float oneMinusReflectivity = 0.0;
     //albedo = DiffuseAndSpecularFromMetallic(
     //    albedo, _Metallic, specularTint, oneMinusReflectivity

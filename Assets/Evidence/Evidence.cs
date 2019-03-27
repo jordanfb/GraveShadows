@@ -13,7 +13,7 @@ public class Evidence : YarnBoardEntity
     [SerializeField]
     private EvidenceType _evidenceType;
     [SerializeField]
-    private Suspect[] _associatedSuspects;
+    private List<Suspect> _associatedSuspects;
     [SerializeField]
     private List<string> _characters;
 
@@ -27,7 +27,7 @@ public class Evidence : YarnBoardEntity
         get { return _evidenceType; }
     }
 
-    public Suspect[] AssociatedSuspects
+    public List<Suspect> AssociatedSuspects
     {
         get { return _associatedSuspects; }
     }
