@@ -13,6 +13,8 @@ public class Evidence : YarnBoardEntity
     [SerializeField]
     private EvidenceType _evidenceType;
     [SerializeField]
+    private Level _level;
+    [SerializeField]
     private List<Suspect> _associatedSuspects;
     [SerializeField]
     private List<string> _characters;
@@ -25,6 +27,11 @@ public class Evidence : YarnBoardEntity
     public EvidenceType GetEvidenceType
     {
         get { return _evidenceType; }
+    }
+
+    public Level GetLevel
+    {
+        get { return _level; }
     }
 
     public List<Suspect> AssociatedSuspects
@@ -41,4 +48,9 @@ public class Evidence : YarnBoardEntity
 public enum EvidenceType
 {
     Object, Conversation, Document
+}
+
+public enum Level
+{
+    Office, Factory
 }
