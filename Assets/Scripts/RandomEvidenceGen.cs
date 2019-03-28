@@ -19,34 +19,24 @@ public class RandomEvidenceGen : MonoBehaviour
 
     private int[] _suspectTotals; //Index corresponds to index of suspect in _allSuspects
 
-    //Because we don't care about indexing and the random generation ignores duplicates,
-    //I figured a set is the most efficient structure to use here.
-    private List<Evidence> _evidenceToGen;
+    private List<Evidence> _officeGenQueue;
+    private List<Evidence> _factoryGenQueue;
     
     // Start is called before the first frame update
     void Start()
     {
         //Initialize some necessary fields
-        _evidenceToGen = new List<Evidence>();
+        _officeGenQueue = new List<Evidence>();
+        _factoryGenQueue = new List<Evidence>();
         _suspectTotals = new int[5];
 
         //Gather culprit data to add to evidence to generate list
         int culpritIndex = _allSuspects.IndexOf(_culprit);
         GatherCulpritAndConversationEvidence(culpritIndex);
         GatherRandomEvidence();
-        foreach(Evidence e in _evidenceToGen)
-        {
-            Debug.Log("Evidence: " + e.Name);
-            /*
-            foreach(Suspect s in e.AssociatedSuspects)
-            {
-                Debug.Log("\tAssociated with: " + s.CodeName);
-            }
-            */
-        }
-        foreach (int i in _suspectTotals)
-            Debug.Log(i);
-        Debug.Log("Evidence Count: " + _evidenceToGen.Count);
+
+        Debug.Log("Office: " + _officeGenQueue.Count);
+        Debug.Log("Factory: " + _factoryGenQueue.Count);
     }
 
     // Update is called once per frame
@@ -66,7 +56,15 @@ public class RandomEvidenceGen : MonoBehaviour
             if(ev.AssociatedSuspects.Contains(_culprit))
             {
                 //Add evidence to generation queue if it belongs to culprit
-                _evidenceToGen.Add(ev);
+                switch(ev.GetLevel)
+                {
+                    case Level.Factory:
+                        _factoryGenQueue.Add(ev);
+                        break;
+                    case Level.Office:
+                        _officeGenQueue.Add(ev);
+                        break;
+                }
                 _suspectTotals[index]++;
 
                 //If it points to any other evidence too, add it to the totals
@@ -74,14 +72,24 @@ public class RandomEvidenceGen : MonoBehaviour
                 {
                     foreach(Suspect s in ev.AssociatedSuspects)
                     {
-                        _suspectTotals[_allSuspects.IndexOf(s)]++;
+                        if(s != _culprit)
+                            _suspectTotals[_allSuspects.IndexOf(s)]++;
                     }
                 }
             }
             //All conversations need to exist in any playthrough as well
             else if(ev.GetEvidenceType == EvidenceType.Conversation)
             {
-                _evidenceToGen.Add(ev);
+                switch(ev.GetLevel)
+                {
+                    case Level.Factory:
+                        _factoryGenQueue.Add(ev);
+                        break;
+                    case Level.Office:
+                        _officeGenQueue.Add(ev);
+                        break;
+                }
+                
                 foreach(Suspect s in ev.AssociatedSuspects)
                 {
                     _suspectTotals[_allSuspects.IndexOf(s)]++;
@@ -92,21 +100,23 @@ public class RandomEvidenceGen : MonoBehaviour
 
     private void GatherRandomEvidence()
     {
-        if(_evidenceToGen.Count >= _evidenceTotal)
+        if(_officeGenQueue.Count + _factoryGenQueue.Count >= _evidenceTotal)
         {
             Debug.LogError("There's already more evidence than can be generated!");
             return;
         }
 
         List<Evidence> remainingEv = new List<Evidence>(_allEvidence);
-        foreach (Evidence e in _evidenceToGen)
+        foreach (Evidence e in _factoryGenQueue)
+            remainingEv.Remove(e);
+        foreach (Evidence e in _officeGenQueue)
             remainingEv.Remove(e);
 
         //Apparently not using the System namespace calls a vestigial UnityEngine Random class instead.
         //Also didn't want to use all of System AND either way I still needed to specify bc C# got angry.
         System.Random rng = new System.Random();
 
-        while(_evidenceToGen.Count < _evidenceTotal)
+        while(_officeGenQueue.Count + _factoryGenQueue.Count < _evidenceTotal)
         {
             if (remainingEv.Count < 1)
                 break;
@@ -117,7 +127,15 @@ public class RandomEvidenceGen : MonoBehaviour
             {
                 foreach (Suspect s in randEv.AssociatedSuspects)
                     _suspectTotals[_allSuspects.IndexOf(s)]++;
-                _evidenceToGen.Add(randEv);
+                switch(randEv.GetLevel)
+                {
+                    case Level.Factory:
+                        _factoryGenQueue.Add(randEv);
+                        break;
+                    case Level.Office:
+                        _officeGenQueue.Add(randEv);
+                        break;
+                }
             }
             remainingEv.Remove(randEv);
         }
