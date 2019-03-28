@@ -108,6 +108,9 @@ public class RandomEvidenceGen : MonoBehaviour
 
         while(_evidenceToGen.Count < _evidenceTotal)
         {
+            if (remainingEv.Count < 1)
+                break;
+
             int next = rng.Next(0, remainingEv.Count - 1);
             Evidence randEv = remainingEv[next];
             if(CheckIfPlaceable(randEv))
@@ -116,6 +119,7 @@ public class RandomEvidenceGen : MonoBehaviour
                     _suspectTotals[_allSuspects.IndexOf(s)]++;
                 _evidenceToGen.Add(randEv);
             }
+            remainingEv.Remove(randEv);
         }
     }
 
