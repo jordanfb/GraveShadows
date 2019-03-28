@@ -125,6 +125,8 @@ public class RandomEvidenceGen : MonoBehaviour
 
     private bool CheckIfPlaceable(Evidence ev)
     {
+        if (ev.AssociatedSuspects.Count == 0)
+            return true;
         foreach(Suspect s in ev.AssociatedSuspects)
         {
             if (_suspectTotals[_allSuspects.IndexOf(s)] >= _otherSuspectMax)
