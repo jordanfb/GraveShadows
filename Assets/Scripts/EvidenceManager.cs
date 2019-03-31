@@ -55,6 +55,11 @@ public class EvidenceManager : MonoBehaviour
         // we can also just load a new game with pressing a button and calling NewSaveData()
     }
 
+    public bool IsEvidenceInWarehouse(int i)
+    {
+        return false;
+    }
+
     public void InitializeSerializedEvidence()
     {
         // then initialize all the evidence with the correct indices:
