@@ -69,6 +69,7 @@ public class ShadowRealmManager : MonoBehaviour
                 return;
             }
             if (Input.GetKeyDown(KeyCode.S)){
+                tpc.resetCurrentWallToChooseFrom();
                 foreach (KeyValuePair<Collider, List<Vector3>> entry in checkForShadows())
                 {
                     if (entry.Key == null)
@@ -137,6 +138,7 @@ public class ShadowRealmManager : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            tpc.resetCurrentWallToChooseFrom();
             if (abortIsChoosingWall) {
                 abortIsChoosingWall = false;
                 return;

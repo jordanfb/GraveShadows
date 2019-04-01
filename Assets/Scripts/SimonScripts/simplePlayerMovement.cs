@@ -65,9 +65,9 @@ public class simplePlayerMovement : MonoBehaviour
     }
 
     void thirdPersonMovement(float _moveDirX, float _moveDirY) {
-        if (_moveDirY < 0) {
-            return;
-        }
+        //if (_moveDirY < 0) {
+        //    return;
+        //}
         if (_moveDirY > 0.1) {
             Quaternion targetRot = Quaternion.LookRotation(Vector3.Scale(mainCam.transform.forward, new Vector3(1f, 0f, 1f)), Vector3.up);
 
