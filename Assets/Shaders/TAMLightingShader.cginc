@@ -94,6 +94,7 @@ UnityLight CreateLight (Interpolators i) {
     float3 lightVec = _WorldSpaceLightPos0.xyz - i.worldPos;
 	UNITY_LIGHT_ATTENUATION(attenuation, i, i.worldPos);
     //fixed attenuation = 1/dot(lightVec, lightVec);
+    
 	light.color = _LightColor0.rgb * attenuation;
 	light.ndotl = DotClamped(i.normal, light.dir);
 	return light;
