@@ -28,11 +28,18 @@ public class ThirdPersonCamera : MonoBehaviour
     public float scrollSpeedX;
     public float scrollSpeedY;
 
+
+
+    //choosing a wall variables
+    int currentWallToChooseFrom = 0;
+    public float cameraWhileChoosingLerpMoveSpeed;
+    public float cameraWhileChoosingLerpRotateSpeed;
+
     ShadowRealmManager SRmanager;
 
     Material playerMat;
     public GameObject materialedObjectsParent;
-
+    public Transform headTransform;
 
 
 
@@ -60,6 +67,7 @@ public class ThirdPersonCamera : MonoBehaviour
     {
 
 
+
         currentRotationX += Input.GetAxis("Mouse X") * scrollSpeedX;
         currentRotationY -= Input.GetAxis("Mouse Y") * scrollSpeedY;
         //distance += Input.GetAxis("Mouse ScrollWheel");
@@ -75,7 +83,6 @@ public class ThirdPersonCamera : MonoBehaviour
     Vector3 debugPoint = Vector3.zero;
     void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(debugPoint, 0.1f);
         //Gizmos.DrawSphere(camPos - 3 * mainCam.transform.forward, 0.5f);
     }
 
@@ -85,7 +92,11 @@ public class ThirdPersonCamera : MonoBehaviour
     Vector3 wallRaycastVec;
     void LateUpdate()
     {
-
+        if (SRmanager.isChoosingWall)
+        {
+            handleIsChoosingWall(SRmanager.checkForShadows());
+            return;
+        }
 
         RaycastHit wallHit = new RaycastHit();
         LayerMask mask = LayerMask.GetMask("WallLayer");
@@ -175,5 +186,70 @@ public class ThirdPersonCamera : MonoBehaviour
     }
 
 
+    
+    void handleIsChoosingWall(Dictionary<Collider, List<Vector3>> wallDict)
+    {
+
+        
+        List<Collider> keyList = new List<Collider>(wallDict.Keys);
+        if(keyList.Count == 0) {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.A)) {
+            currentWallToChooseFrom -= 1;
+            currentWallToChooseFrom = currentWallToChooseFrom % keyList.Count;
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            currentWallToChooseFrom += 1;
+            currentWallToChooseFrom = currentWallToChooseFrom % keyList.Count;
+        }
+
+        Vector3 targetPos = findMiddlePos(wallDict[keyList[currentWallToChooseFrom]]);
+        Vector3 dir = targetPos - mainCam.transform.position;
+
+        //camera rotation
+        Quaternion lookAngle = Quaternion.LookRotation(dir, Vector3.up);
+        Debug.DrawRay(mainCam.transform.position, dir, Color.red);
+        Quaternion newCamLook = Quaternion.RotateTowards(mainCam.transform.rotation, lookAngle, cameraWhileChoosingLerpRotateSpeed * Time.deltaTime);
+        mainCam.transform.rotation = newCamLook;
+
+        //camera position
+
+        Vector3 headToWallDir = targetPos - headTransform.position;
+
+        Vector3 startPos = Quaternion.LookRotation(headToWallDir, Vector3.up) * (headTransform.transform.position + headTransform.transform.forward);
+
+
+        Debug.DrawLine(headTransform.position, headTransform.position + startPos*0.1f, Color.yellow);
+        
+
+        mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, headTransform.position + startPos*0.01f, cameraWhileChoosingLerpMoveSpeed * Time.deltaTime);
+
+
+    }
+
+    Vector3 findMiddlePos(List<Vector3> pointList)
+    {
+        if (pointList.Count == 0)
+        {
+            Debug.Log("ERROR: Length of list is 0");
+            return Vector3.negativeInfinity;
+        }
+        Vector3 average = Vector3.zero;
+
+        for (int i = 0; i < pointList.Count; i++)
+        {
+            average += pointList[i];
+        }
+
+
+
+        return average / (pointList.Count);
+    }
+
 
 }
+
+

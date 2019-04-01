@@ -75,6 +75,7 @@ UnityLight CreateLight (v2f i) {
       
     UNITY_LIGHT_ATTENUATION(attenuation, i, i.worldPos);
     attenuation = pow(attenuation, 1);
+    attenuation*=5.0;
    
     light.color = _LightColor0.rgb * attenuation;
    

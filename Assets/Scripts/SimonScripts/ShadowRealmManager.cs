@@ -25,9 +25,6 @@ public class ShadowRealmManager : MonoBehaviour
 
     public Collider checkIfFreeCollider;
 
-    public Material wallSelectedMaterial;
-
-    public Material wallNotSelectedMaterial;
     public LayerMask WallMask;
     private Collider wallToTeleportTo;
 
@@ -37,6 +34,8 @@ public class ShadowRealmManager : MonoBehaviour
 
     private simplePlayerMovement spm;
     private ThirdPersonCamera tpc;
+
+    private bool abortIsChoosingWall = false;
 
     private void Awake()
     {
@@ -66,8 +65,35 @@ public class ShadowRealmManager : MonoBehaviour
         //}
         if (Input.GetKey(KeyCode.Space))
         {
+            if (abortIsChoosingWall) {
+                return;
+            }
+            if (Input.GetKeyDown(KeyCode.S)){
+                foreach (KeyValuePair<Collider, List<Vector3>> entry in checkForShadows())
+                {
+                    if (entry.Key == null)
+                    {
+                        Debug.Log("ENTRY IS NULL");
+                        continue;
+                    }
+                    if (entry.Key.gameObject.transform.parent == null)
+                    {
+                        Debug.Log("ENTRY PARENT IS NULL");
+                        continue;
+                    }
+
+                    if (entry.Key.gameObject.transform.Find("selectionQuad") != null)
+                    {
+                        entry.Key.gameObject.transform.Find("selectionQuad").gameObject.SetActive(false);
+                    }
+
+                }
+                abortIsChoosingWall = true;
+                isChoosingWall = false;
+
+                return;
+            }
             isChoosingWall = true;
-            wallToTeleportTo = null;
             foreach (KeyValuePair<Collider, List<Vector3>> entry in checkForShadows())
             {
                 if(entry.Key == null) {
@@ -111,12 +137,19 @@ public class ShadowRealmManager : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            if (abortIsChoosingWall) {
+                abortIsChoosingWall = false;
+                return;
+            }
+
+
             isChoosingWall = false;
             if (isInShadowRealm)
             {
                 teleportFromShadowRealm();
 
             }
+
             else {
                 foreach (KeyValuePair<Collider, List<Vector3>> entry in checkForShadows())
                 {
@@ -125,11 +158,6 @@ public class ShadowRealmManager : MonoBehaviour
                         Debug.Log("ENTRY IS NULL");
                         continue;
                     }
-                    //if (entry.Key.gameObject.transform.parent == null)
-                    //{
-                    //    Debug.Log("ENTRY PARENT IS NULL");
-                    //    continue;
-                    //}
 
                     if (entry.Key.gameObject.transform.Find("selectionQuad") != null)
                     {
@@ -156,8 +184,10 @@ public class ShadowRealmManager : MonoBehaviour
         }
     }
 
-    Dictionary<Collider, List<Vector3>> checkForShadows() {
+    public Dictionary<Collider, List<Vector3>> checkForShadows() {
         //List<WallData> wallsTouching = new List<WallData>();
+
+
         Dictionary<Collider, List<Vector3>> wallDic = new Dictionary<Collider, List<Vector3>>();
 
         int counter = 0;
@@ -166,7 +196,9 @@ public class ShadowRealmManager : MonoBehaviour
             for(int j = 0; j<spm.playerHitPoints.Count; j++) {
                 Vector3 direction = lightsInScene[i].gameObject.transform.position - spm.playerHitPoints[j].position;
                 if (lightsInScene[i].GetComponent<Light>().type == LightType.Spot) {
-                    //print(Vector3.Angle(lightsInScene[i].transform.forward, -direction));
+
+
+                    //continue to the next player hit point if the current hit point falls out of the spt angle.
                     if(Vector3.Angle(lightsInScene[i].transform.forward, -direction)>= lightsInScene[i].GetComponent<Light>().spotAngle/2f)
                     {
                         continue;
@@ -175,21 +207,25 @@ public class ShadowRealmManager : MonoBehaviour
 
                 RaycastHit hitWall;
 
+
+                //if the raycast distance
                 if (Physics.Raycast(spm.playerHitPoints[j].position, direction, out hitWall, Vector3.Distance(spm.playerHitPoints[j].position, lightsInScene[i].transform.position), WallMask))
                 {
 
-                    //Debug.DrawRay(playerHitPoints[j].position, direction, Color.red);
                     continue;
                 }
-                if (Physics.Raycast(spm.playerHitPoints[j].position, -direction, out hitWall, Mathf.Infinity, WallMask))
+                if (Physics.Raycast(spm.playerHitPoints[j].position, -direction, out hitWall, lightsInScene[i].GetComponent<Light>().range, WallMask))
                 {
 
                     if (hitWall.collider.gameObject.CompareTag("Impossible"))
                     {
+                        //if we deemed this light as impossible, continue
                         continue;
                     }
                     counter += 1;
-                    Debug.DrawRay(spm.playerHitPoints[j].position, -direction, Color.blue);
+                    //draw the ray to the player and the ray from the player to the wall
+                    Debug.DrawRay(spm.playerHitPoints[j].position, spm.playerHitPoints[j].position - lightsInScene[i].transform.position, Color.blue);
+                    Debug.DrawRay(spm.playerHitPoints[j].position, spm.playerHitPoints[j].position - hitWall.point, Color.red);
                     if (wallDic.ContainsKey(hitWall.collider))
                     {
                         wallDic[hitWall.collider].Add(hitWall.point);
