@@ -12,6 +12,7 @@
 		[NoScaleOffset] _DetailNormalMap ("Detail Normals", 2D) = "bump" {}
 		_DetailBumpScale ("Detail Bump Scale", Float) = 1
         _ContrastAdjustment("Contrast", Range(0,1)) = 1
+        _Transparency("_Transparency", Range(0,1)) = 1.0
 	}
 
 	CGINCLUDE

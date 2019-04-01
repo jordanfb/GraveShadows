@@ -15,7 +15,6 @@ public class shadowCamScript : MonoBehaviour
         shadowCam = GetComponent<Camera>();
         shadowCam.depthTextureMode = DepthTextureMode.Depth;
 
-        //shadowCam.SetTargetBuffers(shadowCam.targetTexture.colorBuffer, shadowCam.targetTexture.depthBuffer);
 
         Shader.SetGlobalTexture("_shadowDepthTexture", shadowCam.targetTexture);
 

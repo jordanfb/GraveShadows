@@ -17,6 +17,7 @@ float _BumpScale, _DetailBumpScale;
 
 float _Metallic;
 float _Smoothness;
+float _Transparency =  1.0;
 
 struct VertexData {
 	float4 vertex : POSITION;
@@ -180,8 +181,14 @@ float4 MyFragmentProgram (Interpolators i) : SV_TARGET {
     }
     
 	float4 TAMcolor = lerp(col1, col2, texI - floor(texI));
+    #if defined(PLAYER)
+        TAMcolor.a = _Transparency;
+        return TAMcolor;
+    #else
+        TAMcolor.a = 1.0;
+        return TAMcolor;
+    #endif
     
-    return TAMcolor;
     
     
 	
