@@ -182,22 +182,32 @@ public class ThirdPersonCamera : MonoBehaviour
     void handleIsChoosingWall(Dictionary<Collider, List<Vector3>> wallDict)
     {
 
-        
+
         List<Collider> keyList = new List<Collider>(wallDict.Keys);
-        if(keyList.Count == 0) {
+        print(keyList.Count);
+
+        if (keyList.Count == 0) {
             return;
         }
 
         if (Input.GetKeyDown(KeyCode.A)) {
             currentWallToChooseFrom -= 1;
-            currentWallToChooseFrom = currentWallToChooseFrom % keyList.Count;
+
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             currentWallToChooseFrom += 1;
-            currentWallToChooseFrom = currentWallToChooseFrom % keyList.Count;
+
+        }
+        if (currentWallToChooseFrom < 0) {
+            currentWallToChooseFrom = keyList.Count - 1;
+        }
+        if (currentWallToChooseFrom >= keyList.Count)
+        {
+            currentWallToChooseFrom = 0;
         }
 
+        print(currentWallToChooseFrom);
         Vector3 targetPos = findMiddlePos(wallDict[keyList[currentWallToChooseFrom]]);
         Vector3 dir = targetPos - mainCam.transform.position;
 

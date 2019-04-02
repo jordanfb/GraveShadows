@@ -65,6 +65,9 @@ float3 CreateBinormal (float3 normal, float3 tangent, float binormalSign) {
 
 Interpolators MyVertexProgram (VertexData v) {
 	Interpolators i;
+    
+    
+    
 	i.pos = UnityObjectToClipPos(v.vertex);
 	i.worldPos = mul(unity_ObjectToWorld, v.vertex);
 	i.normal = UnityObjectToWorldNormal(v.normal);
@@ -81,6 +84,11 @@ Interpolators MyVertexProgram (VertexData v) {
 	TRANSFER_SHADOW(i);
     i.worldNormal = UnityObjectToWorldNormal(v.normal);
 	ComputeVertexLightColor(i);
+    
+    float shadow = SHADOW_ATTENUATION(i);
+    
+    //maybe for beta
+    
 	return i;
 }
 
@@ -137,7 +145,7 @@ float4 MyFragmentProgram (Interpolators i) : SV_TARGET {
     
     
     float3 albedo = tex2D(_MainTex, i.uv.xy).rgb * _Tint.rgb ;
-    float3 specularTint = float3(0.0, 1.0,0.0);
+    float3 specularTint = float3(0.0, 0.0,0.0);
     float oneMinusReflectivity = 0.0;
     //albedo = DiffuseAndSpecularFromMetallic(
     //    albedo, _Metallic, specularTint, oneMinusReflectivity
@@ -150,18 +158,12 @@ float4 MyFragmentProgram (Interpolators i) : SV_TARGET {
         CreateLight(i), CreateIndirectLight(i)
     );
     
-    float shadow = SHADOW_ATTENUATION(i);
     
-    //maybe for beta
-    //float lightIntensity = light.ndotl * shadow;
-    //if(lightIntensity !=0){
-    //    return float4(1.0,0,0,1) * c ;
-    //}
     
     
     
     fixed l = Luminance(c);
-    l = pow(l, _ContrastAdjustment);
+    
     fixed texI = (1 - l) * 8.0;
     float2 worldUV;
     float levels = 8.0;

@@ -35,6 +35,9 @@ public class ShadowRealmManager : MonoBehaviour
     private simplePlayerMovement spm;
     private ThirdPersonCamera tpc;
 
+
+    public GameObject choosingRedicle;
+    GameObject lightContainer;
     private bool abortIsChoosingWall = false;
 
     private void Awake()
@@ -56,13 +59,26 @@ public class ShadowRealmManager : MonoBehaviour
         spm = GetComponent<simplePlayerMovement>();
         tpc = GetComponent<ThirdPersonCamera>();
         SHADOWPLANE_HEIGHT = shadowPlane.transform.GetChild(0).GetComponent<Renderer>().bounds.size.y/2f;
-
+        lightContainer = GameObject.Find("lightContainer");
+        if(lightContainer == null) {
+            print("ERROR: light container not found");
+        }
+        for(int i = 0; i< lightContainer.transform.childCount; i++) {
+            lightsInScene.Add(lightContainer.transform.GetChild(i).gameObject);
+        }
     }
     private void Update()
     {
         //if (!GetComponent<simplePlayerMovement>().getIsInShadowRealm()) {
         //    checkForShadows();
         //}
+
+        if (isChoosingWall) {
+            choosingRedicle.SetActive(true);
+        }
+        else {
+            choosingRedicle.SetActive(false);
+        }
         if (Input.GetKey(KeyCode.Space))
         {
             if (abortIsChoosingWall) {
