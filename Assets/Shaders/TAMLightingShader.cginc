@@ -132,7 +132,6 @@ float4 MyFragmentProgram (Interpolators i) : SV_TARGET {
 	float3 viewDir = normalize(_WorldSpaceCameraPos - i.worldPos);
     fixed4 col1;
     fixed4 col2;
-   //float3 worldUV;
     
     
     
@@ -150,6 +149,15 @@ float4 MyFragmentProgram (Interpolators i) : SV_TARGET {
         i.normal, viewDir,
         CreateLight(i), CreateIndirectLight(i)
     );
+    
+    float shadow = SHADOW_ATTENUATION(i);
+    
+    //maybe for beta
+    //float lightIntensity = light.ndotl * shadow;
+    //if(lightIntensity !=0){
+    //    return float4(1.0,0,0,1) * c ;
+    //}
+    
     
     
     fixed l = Luminance(c);
@@ -181,13 +189,8 @@ float4 MyFragmentProgram (Interpolators i) : SV_TARGET {
     }
     
 	float4 TAMcolor = lerp(col1, col2, texI - floor(texI));
-    #if defined(PLAYER)
-        TAMcolor.a = _Transparency;
-        return TAMcolor;
-    #else
-        TAMcolor.a = 1.0;
-        return TAMcolor;
-    #endif
+
+    return TAMcolor;
     
     
     
