@@ -151,7 +151,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         }
 
-        mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, newCamPos, 0.3f);
+        mainCam.transform.position = newCamPos; // Vector3.Lerp(mainCam.transform.position, newCamPos, 0.3f);
 
         mainCam.transform.LookAt(lookAtVec);
 
