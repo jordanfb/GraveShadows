@@ -43,14 +43,14 @@ public class ThirdPersonCamera : MonoBehaviour
 
 
 
-    void setAllMaterialTransparency(float newTransparency) { 
-        for(int i = 0; i< materialedObjectsParent.transform.childCount; i++) {
-            materialedObjectsParent.transform.GetChild(i).GetComponent<Renderer>().material.SetFloat("_Transparency", newTransparency);
+    //void setAllMaterialTransparency(float newTransparency) { 
+    //    for(int i = 0; i< materialedObjectsParent.transform.childCount; i++) {
+    //        materialedObjectsParent.transform.GetChild(i).GetComponent<Renderer>().material.SetFloat("_Transparency", newTransparency);
 
 
-        }
+    //    }
 
-    }
+    //}
 
     void Start()
     {
@@ -102,6 +102,7 @@ public class ThirdPersonCamera : MonoBehaviour
         LayerMask mask = LayerMask.GetMask("WallLayer");
         if (SRmanager.isInShadowRealm)
         {
+
             GameObject shadowPlaneChild = SRmanager.shadowPlane.transform.GetChild(0).gameObject;
 
 
@@ -149,16 +150,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
 
         }
-        //print((newCamPos - gameObject.transform.position).magnitude);
-        if((newCamPos - gameObject.transform.position).magnitude < 2f) {
 
-            setAllMaterialTransparency(Mathf.Max((newCamPos - gameObject.transform.position).magnitude - 1.2f, 0f));
-        }
-        else {
-            setAllMaterialTransparency(1.0f);
-        }
-
-        //camPos -= mainCam.transform.forward*0.3f;
         mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, newCamPos, 0.3f);
 
         mainCam.transform.LookAt(lookAtVec);
@@ -190,22 +182,32 @@ public class ThirdPersonCamera : MonoBehaviour
     void handleIsChoosingWall(Dictionary<Collider, List<Vector3>> wallDict)
     {
 
-        
+
         List<Collider> keyList = new List<Collider>(wallDict.Keys);
-        if(keyList.Count == 0) {
+        print(keyList.Count);
+
+        if (keyList.Count == 0) {
             return;
         }
 
         if (Input.GetKeyDown(KeyCode.A)) {
             currentWallToChooseFrom -= 1;
-            currentWallToChooseFrom = currentWallToChooseFrom % keyList.Count;
+
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             currentWallToChooseFrom += 1;
-            currentWallToChooseFrom = currentWallToChooseFrom % keyList.Count;
+
+        }
+        if (currentWallToChooseFrom < 0) {
+            currentWallToChooseFrom = keyList.Count - 1;
+        }
+        if (currentWallToChooseFrom >= keyList.Count)
+        {
+            currentWallToChooseFrom = 0;
         }
 
+        print(currentWallToChooseFrom);
         Vector3 targetPos = findMiddlePos(wallDict[keyList[currentWallToChooseFrom]]);
         Vector3 dir = targetPos - mainCam.transform.position;
 
@@ -247,6 +249,11 @@ public class ThirdPersonCamera : MonoBehaviour
 
 
         return average / (pointList.Count);
+    }
+
+    public void resetCurrentWallToChooseFrom() {
+        print("reseting to 0");
+        currentWallToChooseFrom = 0;
     }
 
 

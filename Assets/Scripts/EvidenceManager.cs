@@ -8,7 +8,7 @@ public class EvidenceManager : MonoBehaviour
 
     public List<YarnBoardEntity> allEvidenceEntities;
 
-    private List<SerializedEvidence> allSerializedEvidence; // this is private so that it doesn't get saved. It's initialized either from save data or by code
+    private List<SerializedEvidence> allSerializedEvidence = new List<SerializedEvidence>(); // this is private so that it doesn't get saved. It's initialized either from save data or by code
     public static List<SerializedEvidence> AllEvidence
     {
         get
@@ -53,6 +53,11 @@ public class EvidenceManager : MonoBehaviour
             InitializeSerializedEvidence();
         }
         // we can also just load a new game with pressing a button and calling NewSaveData()
+    }
+
+    public bool IsEvidenceInWarehouse(int i)
+    {
+        return false;
     }
 
     public void InitializeSerializedEvidence()

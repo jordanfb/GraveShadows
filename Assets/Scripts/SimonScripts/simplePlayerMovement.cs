@@ -65,9 +65,9 @@ public class simplePlayerMovement : MonoBehaviour
     }
 
     void thirdPersonMovement(float _moveDirX, float _moveDirY) {
-        if (_moveDirY < 0) {
-            return;
-        }
+        //if (_moveDirY < 0) {
+        //    return;
+        //}
         if (_moveDirY > 0.1) {
             Quaternion targetRot = Quaternion.LookRotation(Vector3.Scale(mainCam.transform.forward, new Vector3(1f, 0f, 1f)), Vector3.up);
 
@@ -107,8 +107,15 @@ public class simplePlayerMovement : MonoBehaviour
         LayerMask mask = LayerMask.GetMask("WallLayer");
         RaycastHit hitWall;
         touchingWall = false;
-        Vector3 nextPos = SRmanager.shadowPlane.transform.position + SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime
-                            - (Mathf.Sign(_moveDirX)* SRmanager.shadowPlane.transform.forward * PLAYER_WIDTH);
+        Vector3 nextPos;
+        if (Vector3.Dot(SRmanager.shadowPlane.transform.right, mainCam.transform.forward) < -0.2f) {
+            nextPos = SRmanager.shadowPlane.transform.position + SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime
+                            + (Mathf.Sign(_moveDirX) * SRmanager.shadowPlane.transform.forward * PLAYER_WIDTH);
+        }
+        else {
+            nextPos = SRmanager.shadowPlane.transform.position + SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime
+                            - (Mathf.Sign(_moveDirX) * SRmanager.shadowPlane.transform.forward * PLAYER_WIDTH);
+        }
         Debug.DrawRay(nextPos, SRmanager.shadowPlane.transform.right);
         if (Physics.Raycast(nextPos, SRmanager.shadowPlane.transform.right, out hitWall, Mathf.Infinity, mask))
         {
