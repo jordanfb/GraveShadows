@@ -3,7 +3,8 @@
     Properties
     {
         
-        
+        _PerlinTex("Perlin Noise Texture", 2D) = "white" {}
+        _FlowMap("Flow Map", 2D) = "white" {}
     }
     SubShader
     {
@@ -19,24 +20,32 @@
         
         Pass
         {
+            
+            //Blend DstColor Zero
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #include "UnityCG.cginc"
-
+            
+            
+            
             struct v2f
             {
                 float4 grabPos : TEXCOORD0;
                 float4 pos : SV_POSITION;
                 float2 uv : TEXCOORD1;
+                
             };
-
+            
+            sampler2D _PerlinTex, _FlowMap;
+            float4 _PerlinTex_ST, _FlowMap_ST;
+            
             v2f vert(appdata_base v) {
                 v2f o;
                 // use UnityObjectToClipPos from UnityCG.cginc to calculate 
                 // the clip-space of the vertex
                 o.pos = UnityObjectToClipPos(v.vertex);
-                o.uv = v.texcoord;
+                o.uv = TRANSFORM_TEX(v.texcoord,_PerlinTex);
                 // use ComputeGrabScreenPos function from UnityCG.cginc
                 // to get the correct texture coordinate
                 o.grabPos = ComputeGrabScreenPos(o.pos);
@@ -47,24 +56,22 @@
 
             half4 frag(v2f i) : SV_Target
             {
+                float threshold = 0.4*sin(_Time.w)+0.5;
+                float4 flowSample = tex2D(_FlowMap, i.uv);
+                float4 perlinSample = tex2D(_PerlinTex, i.uv);
                 
-                half4 bgcolor = tex2Dproj(_BackgroundTexture, i.grabPos);
-                float width = 0.1;
-                half4 color;
-                if(i.uv.y > fmod(_Time.y, 1.0)- width && i.uv.y < fmod(_Time.y, 1.0) + width){
-                    float colorValue = abs(fmod(_Time.y, 1.0)-i.uv.y)- width;
-                    half4 colorMultiplier = half4(colorValue,colorValue,colorValue,1.0);
-                    
-                    color = bgcolor + colorMultiplier*2.0;
-                    //color = 1-bgcolor;
-                    
-                  
-
-                }else{
-                    
-                    color = bgcolor;
+                
+                fixed4 c = tex2Dproj(_BackgroundTexture, UNITY_PROJ_COORD(i.grabPos));
+                c-=0.4;
+                fixed val = 1 - tex2D(_PerlinTex, i.uv).r;
+                if(val < threshold - 0.04)
+                {
+                    discard;
                 }
-                return color;
+ 
+                bool b = val < threshold;
+                return lerp(c, c * fixed4(lerp(1, 0, 1 - saturate(abs(threshold - val) / 0.04)), 0, 0, 1), b);
+                return c;
             }
             ENDCG
         }
