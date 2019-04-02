@@ -8,7 +8,7 @@ public class EvidenceManager : MonoBehaviour
 
     public List<YarnBoardEntity> allEvidenceEntities;
 
-    private List<SerializedEvidence> allSerializedEvidence; // this is private so that it doesn't get saved. It's initialized either from save data or by code
+    private List<SerializedEvidence> allSerializedEvidence = new List<SerializedEvidence>(); // this is private so that it doesn't get saved. It's initialized either from save data or by code
     public static List<SerializedEvidence> AllEvidence
     {
         get
