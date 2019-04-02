@@ -4,7 +4,24 @@ using UnityEngine;
 
 public class HubManager : MonoBehaviour
 {
-
+    /*
+     * Things to do:
+     * lerp camera to and from desk
+     * enable and disable the exit from desk collider
+     * eventually remove the donotexitfromdesk collider once the desk has an actual collider
+     * click the gun makes UI show up for picking a target
+     * 
+     * replace the gotoscenes in the gameplaymanager with the real scene names
+     * add the yarnboard to this
+     *  - make the yarnboard work
+     * add the player to this scene
+     * make walls on the walls for the player
+     * deal with the player camera wanting to follow the player but being required to lerp to the yarnboard or the desk
+     * generate real text for what happened each day and save it
+     * save and load the text for what happened each day in playerprefs (steal code from my yarnboard stuff)
+     * add the fade to black script and canvas to each scene
+     */
+    
     public Transform DeskCameraLocation;
     public Transform YarnBoardCameraLocation;
     public CameraMode cameraMode = CameraMode.LookAtDesk; // looking at desk, player, or yarnboard
@@ -34,6 +51,10 @@ public class HubManager : MonoBehaviour
         // this is called when the collider is clicked probably
         cameraMode = CameraMode.FollowPlayer; // go back to following the player
         Debug.Log("Exitintg desk");
+        for (int i = 0; i < deskItems.Count; i++)
+        {
+            deskItems[i].ResetPosition();
+        }
     }
 
 #if UNITY_EDITOR
@@ -74,7 +95,10 @@ public class HubManager : MonoBehaviour
         for (int i = 0; i < deskItems.Count; i++)
         {
             string content = "<size=.05><u>" + dayNames[i] + "</u></size>\n";
-            content += GameplayManager.instance.dayData[i].dayContent;
+            if (GameplayManager.instance.dayData.Count > i)
+            {
+                content += GameplayManager.instance.dayData[i].dayContent;
+            }
             if (i == GameplayManager.instance.dayNum)
             {
                 // activate that day's buttons
