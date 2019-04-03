@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4784,6 +4784,7 @@ GameObject:
   - component: {fileID: 1394663720}
   - component: {fileID: 1394663719}
   - component: {fileID: 1394663718}
+  - component: {fileID: 1394663721}
   m_Layer: 11
   m_Name: Cop1
   m_TagString: Untagged
@@ -4888,6 +4889,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1394663721
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394663717}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1447546212 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100190, guid: 0b24b572527404ddb8168e5575a8326e,
@@ -5945,6 +5960,7 @@ GameObject:
   - component: {fileID: 2063677342}
   - component: {fileID: 2063677341}
   - component: {fileID: 2063677340}
+  - component: {fileID: 2063677343}
   m_Layer: 11
   m_Name: Cop2
   m_TagString: Untagged
@@ -6043,6 +6059,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 103.66801, z: 0}
+--- !u!136 &2063677343
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063677339}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &1965054617875954299
 PrefabInstance:
   m_ObjectHideFlags: 0
