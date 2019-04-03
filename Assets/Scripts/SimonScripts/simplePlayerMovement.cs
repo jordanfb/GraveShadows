@@ -169,9 +169,9 @@ public class simplePlayerMovement : MonoBehaviour
 
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Exit" && Input.GetKeyDown(KeyCode.E))
+        if (collision.gameObject.tag == "Exit")
         {
             GameplayManager.instance.ExitBackToHubNextDay();
         }
