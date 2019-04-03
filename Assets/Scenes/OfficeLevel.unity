@@ -6038,54 +6038,38 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 666243975}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &676086041 stripped
+--- !u!1 &676405058
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 101000, guid: 4b0b5b5f1068b764689ba794035c5eba,
-    type: 3}
-  m_PrefabInstance: {fileID: 1195079403}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &676086045
-MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 676086041}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4301104, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
---- !u!1 &678376354 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100170, guid: 4b0b5b5f1068b764689ba794035c5eba,
-    type: 3}
-  m_PrefabInstance: {fileID: 1195079403}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &678376358
-MeshCollider:
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 676405060}
+  - component: {fileID: 676405059}
+  m_Layer: 0
+  m_Name: OfficeLevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &676405059
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678376354}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_GameObject: {fileID: 676405058}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4301082, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
---- !u!1 &683611142 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 102428, guid: 4b0b5b5f1068b764689ba794035c5eba,
-    type: 3}
-  m_PrefabInstance: {fileID: 1195079403}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &683611146
-MeshCollider:
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d36cc169eed105649b56510facb4b020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
+--- !u!4 &676405060
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -10457,14 +10441,8 @@ CapsuleCollider:
     type: 3}
   m_PrefabInstance: {fileID: 224702891}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1102569092 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100970, guid: 4b0b5b5f1068b764689ba794035c5eba,
-    type: 3}
-  m_PrefabInstance: {fileID: 1195079403}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1102569093
-MeshCollider:
+--- !u!1001 &1136917657
+PrefabInstance:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
