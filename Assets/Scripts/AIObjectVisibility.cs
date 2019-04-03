@@ -16,4 +16,20 @@ public class AIObjectVisibility : MonoBehaviour
     // basically just a list of places where the ai should be able to see and a percent of visiblity 
     // seeing that implies
     public PartVisibility[] parts;
+
+    [ContextMenu("Steal parts from SimplePlayerMovement")]
+    private void LoadPartsFromPlayer()
+    {
+        simplePlayerMovement m = GetComponent<simplePlayerMovement>();
+        if (m == null)
+        {
+            return;
+        }
+        parts = new PartVisibility[m.playerHitPoints.Count];
+        for (int i = 0; i < m.playerHitPoints.Count; i++)
+        {
+            parts[i].part = m.playerHitPoints[i];
+            parts[i].visibilityPercent = 1; // the player will adjust this
+        }
+    }
 }
