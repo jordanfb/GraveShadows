@@ -169,6 +169,14 @@ public class simplePlayerMovement : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "Exit")
+        {
+            GameplayManager.instance.ExitBackToHubNextDay();
+        }
+    }
+
 
     public Collider setCurrentWallCollider(Collider newCurrentWallCollider) {
         currentWallCollider = newCurrentWallCollider;

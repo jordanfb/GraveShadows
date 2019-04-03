@@ -244,7 +244,14 @@ public class ConversationManager : MonoBehaviour
         if (associatedEvidence)
         {
             // then collect it!
-            PlayerManager.instance.CollectEvidence(associatedEvidence);
+            if (PlayerManager.instance == null)
+            {
+                Debug.LogError("NO PLAYER MANAGER WHY");
+            }
+            else
+            {
+                PlayerManager.instance.CollectEvidence(associatedEvidence);
+            }
         }
         ResetScript();
         if (scriptLines.Count == 0)
