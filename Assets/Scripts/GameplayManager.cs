@@ -17,7 +17,6 @@ public class GameplayManager : MonoBehaviour
     public static GameplayManager instance;
 
     [Space]
-    public Texture2D fadeToBlackTexture;
 
     [Tooltip("Can you miss the last day if you get caught on the second to last?")]
     public bool allowSkippingLastDay = true;
@@ -65,17 +64,59 @@ public class GameplayManager : MonoBehaviour
 
     private void StartOfficeScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("OfficeLevel"); // TODO
     }
 
     private void StartMainMenuScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("MainMenu"); // TODO
     }
 
     private void StartCrimeScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("Level1"); // TODO
+    }
+
+    public string GenerateTodaysRecipt(Level visitedLocation, List<Evidence> evidenceFound, bool wasSpotted, bool foundAll)
+    {
+        string visitedLocationString = "";
+        switch (visitedLocation)
+        {
+            case Level.Apartment:
+                visitedLocationString = "The Apartment";
+                break;
+            case Level.Factory:
+                visitedLocationString = "The Factory";
+                break;
+            case Level.Hub:
+                visitedLocationString = "My Office";
+                break;
+            case Level.Office:
+                visitedLocationString = "The Office";
+                break;
+        }
+        string s = "<u>Visited:</u>\n" + visitedLocationString + "\n<u>Found:</u>\n";
+        if (evidenceFound.Count == 0)
+        {
+            s += "Nothing\n";
+        } else
+        {
+            // loop through the evidence found and print their names
+            for (int i = 0; i < evidenceFound.Count; i++)
+            {
+                s += evidenceFound[i].Name + "\n";
+            }
+        }
+
+        if (wasSpotted)
+        {
+            s += "\nThey caught me. Damn.";
+        }
+        if (foundAll)
+        {
+            s += "\nI think I found everything.";
+        }
+        return s;
     }
 
     public void VisitFactory()

@@ -252,7 +252,6 @@ public class ThirdPersonCamera : MonoBehaviour
     }
 
     public void resetCurrentWallToChooseFrom() {
-        print("reseting to 0");
         currentWallToChooseFrom = 0;
     }
 
