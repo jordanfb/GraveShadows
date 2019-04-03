@@ -210,8 +210,10 @@ public class ShadowRealmManager : MonoBehaviour
 
         int counter = 0;
         for (int i=0; i<lightsInScene.Count; i++) {
-
-            for(int j = 0; j<spm.playerHitPoints.Count; j++) {
+            if(lightsInScene[i].activeInHierarchy == false) {
+                continue;
+            }
+            for (int j = 0; j<spm.playerHitPoints.Count; j++) {
                 Vector3 direction = lightsInScene[i].gameObject.transform.position - spm.playerHitPoints[j].position;
                 if (lightsInScene[i].GetComponent<Light>().type == LightType.Spot) {
 
