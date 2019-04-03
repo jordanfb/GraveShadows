@@ -92,6 +92,7 @@ public class GuardScript : MonoBehaviour
     private Vector3 investigatePosition;
     public bool isInvestigating = false;
     private bool isWalkingOverToInvestigate = false;
+    private int dayNum; // the current daynum
 
 
     private int pathingTargetNumber;
@@ -103,6 +104,7 @@ public class GuardScript : MonoBehaviour
         LoadQuips(); // load the quips!
         animatorWalkingId = Animator.StringToHash("Walking");
         animatorSuspicousId = Animator.StringToHash("IsSuspicious");
+        dayNum = GameplayManager.instance.dayNum; // so that multiple guards don't spot the player at once
 
         agent = GetComponent<NavMeshAgent>();
         if (positions.Count > 0)
@@ -144,8 +146,11 @@ public class GuardScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetBool(animatorWalkingId, agent.velocity.sqrMagnitude > 0.1f); // if it's moving then animate!
-        animator.SetBool(animatorSuspicousId, suspicion > investigateSuspicionLevel);
+        if (animator)
+        {
+            animator.SetBool(animatorWalkingId, agent.velocity.sqrMagnitude > 0.1f); // if it's moving then animate!
+            animator.SetBool(animatorSuspicousId, suspicion > investigateSuspicionLevel);
+        }
         if (isInvestigating)
         {
             // then walk over and investigate!
@@ -153,6 +158,7 @@ public class GuardScript : MonoBehaviour
             {
                 // look around you!
                 isWalkingOverToInvestigate = false; // once they've arrived they look around and are no longer walking over
+                Debug.LogWarning("STOPPED INVESTIGATING");
             } else
             {
                 // try to walk over towards the position!
@@ -275,13 +281,33 @@ public class GuardScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private IEnumerator WaitUntilFinishedSpeaking(System.Action functionToCall)
+    public void RunFunctionAfterFinishedSpeaking(System.Action action, float timeAfter)
     {
-        Debug.Log("Started coroutine");
+        StartCoroutine(WaitUntilFinishedSpeaking(action, timeAfter));
+    }
+
+    public void RunFunctionAfterTime(System.Action action, float timeAfter)
+    {
+        StartCoroutine(WaitUntilFinishedSeconds(action, timeAfter));
+    }
+
+    private IEnumerator WaitUntilFinishedSeconds(System.Action functionToCall, float timeAfter)
+    {
+        // then wait however many additional seconds
+        yield return new WaitForSeconds(timeAfter);
+        // then call whatever
+        functionToCall.Invoke();
+    }
+
+
+    private IEnumerator WaitUntilFinishedSpeaking(System.Action functionToCall, float timeAfter = 0)
+    {
         if (conversationMember != null)
         {
             yield return new WaitUntil(() => conversationMember.IsFinished());
         }
+        // then wait however many additional seconds
+        yield return new WaitForSeconds(timeAfter);
         // then call whatever
         functionToCall.Invoke();
     }
@@ -354,7 +380,7 @@ public class GuardScript : MonoBehaviour
     private void OnDrawGizmos()
     {
         // draw text above your head please
-        UnityEditor.Handles.Label(guardHead.position + guardHead.up, "Suspicion level: " + suspicion);
+        UnityEditor.Handles.Label(guardHead.position + guardHead.up, "Suspicion level: " + suspicion + "\nIs investigating: " + isInvestigating + "\nIswalking over: " + isWalkingOverToInvestigate + "\ndisance: " + Vector3.Distance(investigatePosition, transform.position));
     }
 #endif
 
@@ -399,14 +425,28 @@ public class GuardScript : MonoBehaviour
             animator.SetTrigger("AimAtPlayer");
             // also call the code to trigger the start of the scene change!
             // also point the camera at this guard! FIX
-            GameLevelManager gameLevel = FindObjectOfType<GameLevelManager>();
-            Debug.Assert(gameLevel != null); // duh it can't be null we need it in all our levels
-            GameplayManager.instance.SkipDay(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, true, gameLevel.HasFoundEverything()));
+            if (GameplayManager.instance.dayNum == dayNum)
+            {
+                GameLevelManager gameLevel = FindObjectOfType<GameLevelManager>();
+                Debug.Assert(gameLevel != null); // duh it can't be null we need it in all our levels
+                GameplayManager.instance.SkipDay(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, true, gameLevel.HasFoundEverything()));
+                if (conversationMember != null && sightedPlayerQuips.Length > 0)
+                {
+                    RunFunctionAfterFinishedSpeaking(GameplayManager.instance.VisitHubScene, 1);
+                } else
+                {
+                    RunFunctionAfterTime(GameplayManager.instance.VisitHubScene, 1);
+                }
+            }
             if (stopWalking)
             {
+                // just stop moving at all
                 positions.Clear();
+                isInvestigating = false;
+                isWalkingOverToInvestigate = false;
                 // FIX this this should be a bool rather than just clearing it
                 agent.ResetPath();
+                agent.speed = 0; // force the agent to stop lol this is bad practice FIX
             }
         }
 

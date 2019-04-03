@@ -179,6 +179,7 @@ public class ConversationManager : MonoBehaviour
     public TextAsset script;
     public List<ConversationMember> slaves = new List<ConversationMember>();
     public List<ScriptLine> scriptLines = new List<ScriptLine>();
+    public Evidence associatedEvidence;
 
     public string scriptName = "";
     public string conversationDescription = "";
@@ -239,6 +240,20 @@ public class ConversationManager : MonoBehaviour
     [ContextMenu("Run Script")]
     public void StartRunningScript()
     {
+        // we give the evidence to the player since it started playing the conversation:
+        if (associatedEvidence)
+        {
+            // then collect it!
+            EvidenceManager.instance.FindEvidence(associatedEvidence);
+            GameLevelManager lm = FindObjectOfType<GameLevelManager>();
+            if (lm)
+            {
+                lm.evidenceFoundThisDay.Add(associatedEvidence);
+            } else
+            {
+                Debug.LogError("Unable to log evidence unable to find gamelevelmanager");
+            }
+        }
         ResetScript();
         if (scriptLines.Count == 0)
         {

@@ -11,11 +11,15 @@ public class EvidenceManager : MonoBehaviour
     public Suspect culprit;
     private List<SerializedEvidence> allSerializedEvidence = new List<SerializedEvidence>(); // this is private so that it doesn't get saved. It's initialized either from save data or by code
     private List<Suspect> suspects = new List<Suspect>();
-    [HideInInspector]
+    [System.NonSerialized]
     public List<SerializedEvidence> officeEv = new List<SerializedEvidence>();
-    [HideInInspector]
+    [System.NonSerialized]
     public List<SerializedEvidence> factoryEv = new List<SerializedEvidence>();
+    [System.NonSerialized]
+    public List<SerializedEvidence> apartmentEV = new List<SerializedEvidence>();
     private int[] suspectTotals = new int[5];
+
+
     public static List<SerializedEvidence> AllEvidence
     {
         get
@@ -61,6 +65,20 @@ public class EvidenceManager : MonoBehaviour
             
         }
         // we can also just load a new game with pressing a button and calling NewSaveData()
+    }
+
+    public void FindEvidence(Evidence e)
+    {
+        // find the evidence!
+        SerializedEvidence se = FindSerializedEvidence(e);
+        if (se != null)
+        {
+            // then we're set!
+            Debug.Assert(se.evidenceState == SerializedEvidence.EvidenceState.NotFound); // shouldn't have found something not in the game
+            se.evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
+        }
+
+        SaveEvideneToPlayerPrefs();
     }
 
     public bool IsEvidenceInWarehouse(int i)
@@ -178,10 +196,16 @@ public class EvidenceManager : MonoBehaviour
                         office++;
                         officeEv.Add(se);
                     }
-                    else
+                    else if (ev.GetLevel == Level.Factory)
                     {
                         factory++;
                         factoryEv.Add(se);
+                    } else if (ev.GetLevel == Level.Apartment)
+                    {
+                        apartmentEV.Add(se);
+                    } else
+                    {
+                        Debug.LogWarning("FOund evidencec with unknown level: " + ev.GetLevel);
                     }
                     suspectTotals[suspects.IndexOf(culprit)]++;
                 }                       
@@ -288,5 +312,19 @@ public class EvidenceManager : MonoBehaviour
     public YarnBoardEntity ReferencedEntity(SerializedEvidence se)
     {
         return allEvidenceEntities[se.evidenceindex];
+    }
+
+    public SerializedEvidence FindSerializedEvidence(YarnBoardEntity e)
+    {
+        for (int i = 0; i < allSerializedEvidence.Count; i++)
+        {
+            if (allEvidenceEntities[allSerializedEvidence[i].evidenceindex] == e)
+            {
+                return allSerializedEvidence[i];
+            }
+        }
+
+        Debug.LogError("UNABLE TO FIND EVIDENCE OH DEAR");
+        return null;
     }
 }

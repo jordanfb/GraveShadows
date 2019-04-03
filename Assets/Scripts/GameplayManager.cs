@@ -17,7 +17,6 @@ public class GameplayManager : MonoBehaviour
     public static GameplayManager instance;
 
     [Space]
-    public Texture2D fadeToBlackTexture;
 
     [Tooltip("Can you miss the last day if you get caught on the second to last?")]
     public bool allowSkippingLastDay = true;
@@ -65,20 +64,20 @@ public class GameplayManager : MonoBehaviour
 
     private void StartOfficeScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("OfficeLevel"); // TODO
     }
 
     private void StartMainMenuScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("MainMenu"); // TODO
     }
 
     private void StartCrimeScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("Level1"); // TODO
     }
 
-    public string GenerateTodaysRecipt(Level visitedLocation, List<EvidenceMono> evidenceFound, bool wasSpotted, bool foundAll)
+    public string GenerateTodaysRecipt(Level visitedLocation, List<Evidence> evidenceFound, bool wasSpotted, bool foundAll)
     {
         string visitedLocationString = "";
         switch (visitedLocation)
@@ -105,7 +104,7 @@ public class GameplayManager : MonoBehaviour
             // loop through the evidence found and print their names
             for (int i = 0; i < evidenceFound.Count; i++)
             {
-                s += evidenceFound[i].EvidenceInfo.Name + "\n";
+                s += evidenceFound[i].Name + "\n";
             }
         }
 
