@@ -244,15 +244,7 @@ public class ConversationManager : MonoBehaviour
         if (associatedEvidence)
         {
             // then collect it!
-            EvidenceManager.instance.FindEvidence(associatedEvidence);
-            GameLevelManager lm = FindObjectOfType<GameLevelManager>();
-            if (lm)
-            {
-                lm.evidenceFoundThisDay.Add(associatedEvidence);
-            } else
-            {
-                Debug.LogError("Unable to log evidence unable to find gamelevelmanager");
-            }
+            PlayerManager.instance.CollectEvidence(associatedEvidence);
         }
         ResetScript();
         if (scriptLines.Count == 0)
