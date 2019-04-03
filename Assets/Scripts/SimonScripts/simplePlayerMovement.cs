@@ -19,6 +19,7 @@ public class simplePlayerMovement : MonoBehaviour
     public float PLAYER_SPEED_FORWARD;
     public float PLAYER_SPEED_STRAFE;
     public float SHADOW_SPEED;
+    bool canExit = true; // to stop it from leaving twice
 
     private Animator anim;
 
@@ -171,8 +172,9 @@ public class simplePlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Exit")
+        if (collision.gameObject.tag == "Exit" && canExit)
         {
+            canExit = false;
             GameplayManager.instance.ExitBackToHubNextDay();
         }
     }
