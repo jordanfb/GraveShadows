@@ -56,7 +56,7 @@ public class GameplayManager : MonoBehaviour
     {
         GameLevelManager gameLevel = FindObjectOfType<GameLevelManager>();
         Debug.Assert(gameLevel != null); // duh it can't be null we need it in all our levels
-        GameplayManager.instance.SkipDay(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, false, gameLevel.HasFoundEverything()));
+        GameplayManager.instance.NextDay(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, false, gameLevel.HasFoundEverything()));
     }
 
     private void StartFactoryScene()
