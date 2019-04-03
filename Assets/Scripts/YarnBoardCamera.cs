@@ -22,14 +22,14 @@ public class YarnBoardCamera : MonoBehaviour
     void Update()
     {
         float dzoom = Input.mouseScrollDelta.y * scrollSpeed;
-        transform.position += Vector3.forward * dzoom;
+        transform.position += transform.forward * dzoom;
         if (!lookingAtEvidence)
         {
             // move around the world with middle mouse down
             if (Input.GetMouseButton(2))
             {
                 // middle mouse down
-                transform.position += new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0) * moveSpeed;
+                transform.position += (transform.right * Input.GetAxis("Mouse X") + transform.up * Input.GetAxis("Mouse Y")) * moveSpeed;
             }
             startPos = transform.position; // set the zoom of the start pos probably?
         }
