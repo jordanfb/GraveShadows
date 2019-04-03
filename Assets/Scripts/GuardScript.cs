@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Animations;
 
 /*
  * faster spot if you are moving? (find the rigidbody on the visiblityObject and make it magic)
@@ -62,6 +63,9 @@ public class GuardScript : MonoBehaviour
     private string[] returnToConversationQuips;
 
     [Space]
+    public Animator animator;
+    private int animatorWalkingId;
+    private int animatorSuspicousId;
     [Tooltip("Right click on the component and choose \"Find ConversationMember\" to auto find it")]
     public ConversationMember conversationMember; // for integration with the conversation system for interuptions
     [Space]
@@ -93,6 +97,8 @@ public class GuardScript : MonoBehaviour
     void Start()
     {
         LoadQuips(); // load the quips!
+        animatorWalkingId = Animator.StringToHash("Walking");
+        animatorSuspicousId = Animator.StringToHash("IsSuspicious");
 
         agent = GetComponent<NavMeshAgent>();
         if (positions.Count > 0)
@@ -113,16 +119,31 @@ public class GuardScript : MonoBehaviour
 
     private void LoadQuips()
     {
-        spottedSomethingQuips = spottedSomethingQuipsTextAsset.text.Split('\n');
-        investigationQuips = investigationQuipsTextAsset.text.Split('\n');
-        sightedPlayerQuips = sightedPlayerQuipsTextAsset.text.Split('\n');
-        lostSightQuips = lostSightQuipsTextAsset.text.Split('\n');
-        returnToConversationQuips = returnToConversationQuipsTextAsset.text.Split('\n');
+        spottedSomethingQuips = new string[0];
+        investigationQuips = new string[0];
+        sightedPlayerQuips = new string[0];
+        lostSightQuips = new string[0];
+        returnToConversationQuips = new string[0];
+
+
+        if (spottedSomethingQuipsTextAsset)
+            spottedSomethingQuips = spottedSomethingQuipsTextAsset.text.Split('\n');
+        if (investigationQuipsTextAsset)
+            investigationQuips = investigationQuipsTextAsset.text.Split('\n');
+        if (sightedPlayerQuipsTextAsset)
+            sightedPlayerQuips = sightedPlayerQuipsTextAsset.text.Split('\n');
+        if (lostSightQuipsTextAsset)
+            lostSightQuips = lostSightQuipsTextAsset.text.Split('\n');
+        if (returnToConversationQuipsTextAsset)
+            returnToConversationQuips = returnToConversationQuipsTextAsset.text.Split('\n');
     }
 
     // Update is called once per frame
     void Update()
     {
+        animator.SetBool(animatorWalkingId, agent.velocity.sqrMagnitude > 0);
+        animator.SetBool(animatorSuspicousId, suspicion > investigateSuspicionLevel);
+
         if (positions.Count > 0)
         {
             if (!agent.hasPath)
@@ -155,6 +176,17 @@ public class GuardScript : MonoBehaviour
         if (conversationMember == null)
         {
             conversationMember = GetComponentInChildren<ConversationMember>();
+        }
+    }
+
+    [ContextMenu("Find Animator")]
+    public void FindAnimatorInChildren()
+    {
+        // this finds the conversation member if one exists in this/the children of the game object
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
         }
     }
 
@@ -201,6 +233,10 @@ public class GuardScript : MonoBehaviour
             {
                 // check if they're within the view angle and view distance
                 Transform part = visibleObjects[i].parts[j].part;
+                if (part == null)
+                {
+                    continue;
+                }
                 if (Vector3.Distance(part.position, guardHead.position) < viewConeDistance)
                 {
                     // then it's within the distance, check within angle
@@ -269,6 +305,7 @@ public class GuardScript : MonoBehaviour
             {
                 // say a random quip
                 string line = spottedSomethingQuips[Random.Range(0, spottedSomethingQuips.Length)];
+                Debug.Log("Delivered line when start suspicious: " + line);
                 conversationMember.InterruptConversation(line);
             }
         }
@@ -281,6 +318,7 @@ public class GuardScript : MonoBehaviour
             {
                 // say a random quip
                 string line = sightedPlayerQuips[Random.Range(0, sightedPlayerQuips.Length)];
+                Debug.Log("Delivered line when fully suspicious: " + line);
                 conversationMember.InterruptConversation(line);
             }
             onSightingEvent.Invoke();
@@ -299,6 +337,7 @@ public class GuardScript : MonoBehaviour
             {
                 // say a random quip
                 string line = lostSightQuips[Random.Range(0, lostSightQuips.Length)];
+                Debug.Log("Delivered line when lost sight: " + line);
                 conversationMember.InterruptConversation(line);
             }
             // we also fire the event which happens when they stop seeing them

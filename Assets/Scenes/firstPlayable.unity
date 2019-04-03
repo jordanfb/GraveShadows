@@ -293,6 +293,7 @@ MonoBehaviour:
   slaves:
   - {fileID: 1167879389}
   - {fileID: 1822023845}
+  scriptName: 
   conversationDescription: "Two crooked cops discussing the Family at the crime scene\r"
   scriptHeader: "\r\n#description Two crooked cops discussing the Family at the crime
     scene\r\n#character Cop1\r\n#character Cop2\r\n#speed .05\r\n#delay 1\r\n"
@@ -359,12 +360,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &233447580 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2701277237824572700, guid: c16a4fdeecf104c7898d04976f09544e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1224678349}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &250856644
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,12 +423,6 @@ Transform:
   m_Father: {fileID: 1458416257}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &298131763 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2701277237291600560, guid: c16a4fdeecf104c7898d04976f09544e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1224678349}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &354012957
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,77 +461,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!1001 &406536177
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1434405869}
-    m_Modifications:
-    - target: {fileID: 100000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_Name
-      value: MainCharacter_BasicDemo_UV (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0cefe9d40ac8f41368fdb04bce591ec7, type: 2}
-    - target: {fileID: 2300000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 846a48653b00cd14096e05eea2869d3f, type: 3}
---- !u!4 &429397779 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2701277236380990124, guid: c16a4fdeecf104c7898d04976f09544e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1224678349}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &453488405
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,12 +761,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497783042}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &510150660 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2701277237202402288, guid: c16a4fdeecf104c7898d04976f09544e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1224678349}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &514874115
 Transform:
   m_ObjectHideFlags: 0
@@ -1892,12 +1804,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aaa5383d517dda40833cf503db93553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
   suspicionMultiplier: 2
   suspicionFallMultiplier: 1
   suspicionTime: 5
   startSuspicionLevel: 0.05
-  spottedSomethingQuips: []
+  spottedSomethingQuipsTextAsset: {fileID: 0}
   onStartSuspicionEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1905,15 +1816,11 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   investigateSuspicionLevel: 0.25
   shouldInvestigate: 1
-  investigationQuips: []
+  investigationQuipsTextAsset: {fileID: 0}
   fullySuspiciousLevel: 1
   forceStopConverstion: 1
   stopWalking: 1
-  sightedPlayerQuips:
-  - Turn back now!<speed=2> </speed>
-  - You can't be here!<speed=2> </speed>
-  - Leave immediately!<speed=2> </speed>
-  - Get lost!<speed=2> </speed>
+  sightedPlayerQuipsTextAsset: {fileID: 0}
   onSightingEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1930,16 +1837,16 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  lostSightQuips: []
+  lostSightQuipsTextAsset: {fileID: 0}
   onLoseSuspicionEvent:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  returnToConversationQuipsTextAsset: {fileID: 0}
   conversationMember: {fileID: 1167879389}
   editPositions: 1
   positions: []
-  rotations: []
   guardHead: {fileID: 958891696}
   viewConeDistance: 10
   viewConeAngle: 30
@@ -2499,7 +2406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1117547176
 Transform:
   m_ObjectHideFlags: 0
@@ -2710,7 +2617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1163410663
 Transform:
   m_ObjectHideFlags: 0
@@ -3199,16 +3106,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: shadowPlane
-      value: 
-      objectReference: {fileID: 655649717}
-    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: speed
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: lightsInScene.Array.size
@@ -3239,16 +3136,6 @@ PrefabInstance:
       propertyPath: lightsInScene.Array.data[1]
       value: 
       objectReference: {fileID: 1314316398}
-    - target: {fileID: 2701277236420419686, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701277236420419609, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: distance
@@ -3264,6 +3151,26 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1858840568}
+    - target: {fileID: 2701277236420419686, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419609, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: shadowPlane
+      value: 
+      objectReference: {fileID: 655649717}
+    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: speed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2701277236785403194, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_Layer
@@ -3317,12 +3224,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1249896925 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2701277237278251773, guid: c16a4fdeecf104c7898d04976f09544e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1224678349}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1250573792
 Transform:
   m_ObjectHideFlags: 0
@@ -3730,12 +3631,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1434405869 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2701277236785403185, guid: c16a4fdeecf104c7898d04976f09544e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1224678349}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1448704390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4045,12 +3940,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aaa5383d517dda40833cf503db93553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.2
   suspicionMultiplier: 2
   suspicionFallMultiplier: 1
   suspicionTime: 5
   startSuspicionLevel: 0.05
-  spottedSomethingQuips: []
+  spottedSomethingQuipsTextAsset: {fileID: 0}
   onStartSuspicionEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -4058,15 +3952,11 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   investigateSuspicionLevel: 0.25
   shouldInvestigate: 1
-  investigationQuips: []
+  investigationQuipsTextAsset: {fileID: 0}
   fullySuspiciousLevel: 1
   forceStopConverstion: 1
   stopWalking: 1
-  sightedPlayerQuips:
-  - Turn back now!<speed=2> </speed>
-  - You can't be here!<speed=2> </speed>
-  - Leave immediately!<speed=2> </speed>
-  - Get lost!<speed=2> </speed>
+  sightedPlayerQuipsTextAsset: {fileID: 0}
   onSightingEvent:
     m_PersistentCalls:
       m_Calls:
@@ -4083,20 +3973,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  lostSightQuips: []
+  lostSightQuipsTextAsset: {fileID: 0}
   onLoseSuspicionEvent:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  returnToConversationQuipsTextAsset: {fileID: 0}
   conversationMember: {fileID: 1822023845}
   editPositions: 1
   positions:
   - {x: 2.357418, y: 0, z: -1.7052549}
   - {x: -1.4531174, y: 0, z: -1.674591}
-  rotations:
-  - {x: 0, y: 0, z: 0, w: 1}
-  - {x: 0, y: 0, z: 0, w: 1}
   guardHead: {fileID: 453488406}
   viewConeDistance: 10
   viewConeAngle: 30
@@ -5250,15 +5138,15 @@ MonoBehaviour:
   parts:
   - part: {fileID: 1461723045}
     visibilityPercent: 1
-  - part: {fileID: 429397779}
+  - part: {fileID: 0}
     visibilityPercent: 0.5
-  - part: {fileID: 233447580}
+  - part: {fileID: 0}
     visibilityPercent: 0.2
-  - part: {fileID: 298131763}
+  - part: {fileID: 0}
     visibilityPercent: 0.2
-  - part: {fileID: 510150660}
+  - part: {fileID: 0}
     visibilityPercent: 0.2
-  - part: {fileID: 1249896925}
+  - part: {fileID: 0}
     visibilityPercent: 0.2
 --- !u!114 &1858840570
 MonoBehaviour:
@@ -5518,6 +5406,7 @@ MonoBehaviour:
   characterName: Player
   masters:
   - {fileID: 0}
+  enableDisableUponSpeaking: {fileID: 0}
   text: {fileID: 1821339417}
   alwaysFaceCamera: 0
 --- !u!1 &2056704174
