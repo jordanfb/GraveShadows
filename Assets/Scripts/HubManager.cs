@@ -7,21 +7,16 @@ public class HubManager : MonoBehaviour
     /*
      * Things to do:
      * lerp camera to and from desk
-     * enable and disable the exit from desk collider
      * eventually remove the donotexitfromdesk collider once the desk has an actual collider
      * click the gun makes UI show up for picking a target
      * 
      * replace the gotoscenes in the gameplaymanager with the real scene names
      * add the yarnboard to this
      *  - make the yarnboard work
-     * add the player to this scene
-     * make walls on the walls for the player
      * deal with the player camera wanting to follow the player but being required to lerp to the yarnboard or the desk
-     * generate real text for what happened each day and save it
      * save and load the text for what happened each day in playerprefs (steal code from my yarnboard stuff)
-     * add the fade to black script and canvas to each scene
      */
-    
+
     public Transform DeskCameraLocation;
     public Transform YarnBoardCameraLocation;
     public CameraMode cameraMode = CameraMode.LookAtDesk; // looking at desk, player, or yarnboard
@@ -32,11 +27,15 @@ public class HubManager : MonoBehaviour
     public List<DeskDayDescriptionItem> deskItems; // in order by days!
     public float deskItemsLerpSpeed = 1;
     public Vector3 deskItemCameraOffset = Vector3.down * .5f;
+    public GameObject deskCollider;
 
     [Header("Gun variables")]
     public Transform gunTransform;
     public Transform finalGunPosition;
     public Material GlowingGunMaterial; // for the final day it's highlighted
+
+    [Header("Yarn Board")]
+    public GameObject yarnBoardExitCollider; // for exiting the yarnboard via click
 
     // Start is called before the first frame update
     void Start()
@@ -53,16 +52,36 @@ public class HubManager : MonoBehaviour
         Debug.Log("Exitintg desk");
         for (int i = 0; i < deskItems.Count; i++)
         {
-            deskItems[i].ResetPosition();
+            deskItems[i].ResetPosition(); // they should go back to the table not nearby the camera duh
         }
+
+
+        deskCollider.SetActive(false);
     }
 
-#if UNITY_EDITOR
-    // only have these cheat keys if we're in the editor, not a build
-    // this is just because I don't trust myself not to forget them
+    public void EnterDesk()
+    {
+        cameraMode = CameraMode.LookAtDesk;
+        deskCollider.SetActive(true);
+    }
+
+    public void EnterYarnBoard()
+    {
+        cameraMode = CameraMode.LookAtYarnBoard;
+        yarnBoardExitCollider.SetActive(false);
+    }
+    
+    public void ExitYarnBoard()
+    {
+        // this is called when the collider is clicked probably
+        cameraMode = CameraMode.FollowPlayer; // go back to following the player
+        yarnBoardExitCollider.SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
+        // only have these cheat keys if we're in the editor, not a build FIX
         if (Input.GetKeyDown(KeyCode.M))
         {
             // skip a day
@@ -75,8 +94,17 @@ public class HubManager : MonoBehaviour
             GameplayManager.instance.NextDay("Visited stuff found stuff whoop-di-do");
             LoadDesk();
         }
+
+        if (cameraMode == CameraMode.LookAtDesk && Input.GetKeyDown(KeyCode.E))
+        {
+            // then if they press E exit the desk or exit the yarnboard
+            ExitDesk();
+        }
+        else if (cameraMode == CameraMode.LookAtYarnBoard && Input.GetKeyDown(KeyCode.E))
+        {
+            ExitYarnBoard();
+        }
     }
-#endif
 
     public void ClickOnGun()
     {
