@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FadeToBlack : MonoBehaviour
 {
@@ -32,6 +33,11 @@ public class FadeToBlack : MonoBehaviour
         Color c = image.color;
         c.a = Smootherstep(alpha);
         image.color = c;
+    }
+
+    public void FadeToScene(string sceneName)
+    {
+        FadeOut(() => { SceneManager.LoadScene(sceneName); });
     }
 
     [ContextMenu("Fade Out")]

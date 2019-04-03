@@ -39,6 +39,7 @@ public class HubManager : MonoBehaviour
     public Transform gunTransform;
     public Transform finalGunPosition;
     public Material GlowingGunMaterial; // for the final day it's highlighted
+    public EndgameManager endgameManager;
 
     [Header("Yarn Board")]
     public GameObject yarnBoardExitCollider; // for exiting the yarnboard via click
@@ -67,6 +68,7 @@ public class HubManager : MonoBehaviour
         }
 
         LockMouse.LockTheMouse();
+        endgameManager.gameObject.SetActive(false);
         deskCollider.SetActive(false);
     }
 
@@ -176,6 +178,7 @@ public class HubManager : MonoBehaviour
             // only do anything if you click on it at the right time
             Debug.Log("Clicked on the gun");
             // FIX
+            endgameManager.gameObject.SetActive(true);
         }
     }
 
