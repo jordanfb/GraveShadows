@@ -61,7 +61,7 @@ public class GameplayManager : MonoBehaviour
 
     private void StartFactoryScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("Level1"); // TODO
     }
 
     private void StartHubScene()
