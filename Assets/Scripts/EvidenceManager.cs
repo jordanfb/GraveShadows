@@ -165,31 +165,19 @@ public class EvidenceManager : MonoBehaviour
             //If we can cast the YBE to Evidence, then it's a piece of Evidence!
             if(ev != null)
             {
-                bool removed = false;
-                foreach(Suspect s in ev.AssociatedSuspects)
-                {
-                    //Find the culprit
-                    if(s == culprit)
-                    {
-                        se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
-                        remainingEvidence.Remove(se);
-                        if (ev.GetLevel == Level.Office)
-                            office++;
-                        else
-                            factory++;
-                        removed = true;
-                        suspectTotals[suspects.IndexOf(s)]++;
-                    }                       
-                }
-
-                // If it was removed don't check for convo stuff
-                if (removed) continue;
-
-                // Otherwise we still need it in-game if it's a conversation
-                if(ev.GetEvidenceType == EvidenceType.Conversation)
+                //Find the culprit
+                if(ev.AssociatedSuspects.Contains(culprit))
                 {
                     se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
-                    remainingEvidence.Remove(se);
+                    if (ev.GetLevel == Level.Office)
+                        office++;
+                    else
+                        factory++;
+                    suspectTotals[suspects.IndexOf(culprit)]++;
+                }                       
+                else if(ev.GetEvidenceType == EvidenceType.Conversation)
+                {
+                    se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
                     if (ev.GetLevel == Level.Office)
                         office++;
                     else
@@ -207,13 +195,12 @@ public class EvidenceManager : MonoBehaviour
                 // Make sure evidence state is set to OffYarnBoard, since we always have the suspect profiles.
                 // Remove suspects from the list. We don't want them fucking with the algorithm.
                 se.evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
-                remainingEvidence.Remove(se);
             }
             
         }
                 
         System.Random rng = new System.Random();
-        while(office < maxEvidence / 2 && factory < maxEvidence / 2)
+        while(office < 15 || factory < 15)
         {
             if (remainingEvidence.Count == 0)
                 break;
@@ -222,6 +209,12 @@ public class EvidenceManager : MonoBehaviour
             int next = rng.Next(0, remainingEvidence.Count - 1);
             SerializedEvidence se = remainingEvidence[next];
             Evidence ev = ReferencedEntity(se) as Evidence;
+            if(ev == null)
+            {
+                remainingEvidence.Remove(se);
+                continue;
+            }
+
             if (!CheckIfPlaceable(ev))
                 continue;
 
@@ -251,6 +244,15 @@ public class EvidenceManager : MonoBehaviour
                 suspectTotals[suspects.IndexOf(s)]++;
             remainingEvidence.Remove(se);
         }
+
+        int count = 0;
+        foreach(SerializedEvidence se in allSerializedEvidence)
+        {
+            if (se.evidenceState == SerializedEvidence.EvidenceState.NotFound)
+                count++;
+        }
+        Debug.Log(culprit.CodeName);
+        Debug.Log(count);
     }
 
     private bool CheckIfPlaceable(Evidence ev)
