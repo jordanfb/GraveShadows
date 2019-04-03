@@ -11,6 +11,10 @@ public class EvidenceManager : MonoBehaviour
     public Suspect culprit;
     private List<SerializedEvidence> allSerializedEvidence = new List<SerializedEvidence>(); // this is private so that it doesn't get saved. It's initialized either from save data or by code
     private List<Suspect> suspects = new List<Suspect>();
+    [HideInInspector]
+    public List<SerializedEvidence> officeEv = new List<SerializedEvidence>();
+    [HideInInspector]
+    public List<SerializedEvidence> factoryEv = new List<SerializedEvidence>();
     private int[] suspectTotals = new int[5];
     public static List<SerializedEvidence> AllEvidence
     {
@@ -170,18 +174,30 @@ public class EvidenceManager : MonoBehaviour
                 {
                     se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
                     if (ev.GetLevel == Level.Office)
+                    {
                         office++;
+                        officeEv.Add(se);
+                    }
                     else
+                    {
                         factory++;
+                        factoryEv.Add(se);
+                    }
                     suspectTotals[suspects.IndexOf(culprit)]++;
                 }                       
                 else if(ev.GetEvidenceType == EvidenceType.Conversation)
                 {
                     se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
                     if (ev.GetLevel == Level.Office)
+                    {
                         office++;
+                        officeEv.Add(se);
+                    }
                     else
+                    {
                         factory++;
+                        factoryEv.Add(se);
+                    }
 
                     foreach (Suspect s in ev.AssociatedSuspects)
                         suspectTotals[suspects.IndexOf(s)]++;
@@ -227,6 +243,7 @@ public class EvidenceManager : MonoBehaviour
                         // Add it to the game!
                         se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
                         office++;
+                        officeEv.Add(se);
                     }
                     break;
                 case Level.Factory:
@@ -235,6 +252,7 @@ public class EvidenceManager : MonoBehaviour
                         // Add it to the game!
                         se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
                         factory++;
+                        factoryEv.Add(se);
                     }
                     break;
             }
