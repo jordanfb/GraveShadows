@@ -56,7 +56,6 @@ public class elevatorOpener : MonoBehaviour
         float movedSoFar = 0;
         while (movedSoFar < ammoutToOpen)
         {
-            print(movedSoFar);
             isMoving = true;
             yield return new WaitForSeconds(timeStep);
             elapsedTime += timeStep;
