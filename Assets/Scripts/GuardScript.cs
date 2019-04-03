@@ -19,8 +19,8 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(NavMeshAgent))]
 public class GuardScript : MonoBehaviour
 {
-    [Tooltip("Speed of the guard it seems? I'm not sure if this works")]
-    public float speed = .5f; // meters per second
+    //[Tooltip("Speed of the guard it seems? I'm not sure if this works")]
+    //public float speed = .5f; // meters per second
     public float suspicionMultiplier = 2;
     public float suspicionFallMultiplier = 1; // how quickly suspicion falls
     [Tooltip("Time without seeing something before suspicion starts falling")]
@@ -30,28 +30,36 @@ public class GuardScript : MonoBehaviour
     [Header("What happens when the guard starts to see something?")]
     public float startSuspicionLevel = .05f;
     private bool hasFiredSightingEvent = false; // a latch for only spotting something once
-    public string[] spottedSomethingQuips;
+    public TextAsset spottedSomethingQuipsTextAsset;
+    private string[] spottedSomethingQuips;
     [Tooltip("This event is fired as soon as the guard sees something")]
     public UnityEvent onStartSuspicionEvent;
 
     [Header("When to investigate?")]
     public float investigateSuspicionLevel = .25f;
     public bool shouldInvestigate = true;
-    public string[] investigationQuips;
+    public TextAsset investigationQuipsTextAsset;
+    private string[] investigationQuips;
 
     [Header("What happens when the guard has fully sighted the player?")]
     public float fullySuspiciousLevel = 1;
     public bool forceStopConverstion = true;
     public bool stopWalking = true;
     private bool hasFiredStartSuspicionEvent = false; // a latch for only fully sighting something once
-    public string[] sightedPlayerQuips;
+    public TextAsset sightedPlayerQuipsTextAsset;
+    private string[] sightedPlayerQuips;
     [Tooltip("This event is fired as soon as the guard's suspicion reaches critical levels")]
     public UnityEvent onSightingEvent;
 
     [Header("What should happen if the guard looses sight of something?")]
-    public string[] lostSightQuips;
+    public TextAsset lostSightQuipsTextAsset;
+    private string[] lostSightQuips;
     [Tooltip("This event is fired when the guard no longer cares")]
     public UnityEvent onLoseSuspicionEvent;
+
+    [Header("Guard returning to conversation quips")]
+    public TextAsset returnToConversationQuipsTextAsset;
+    private string[] returnToConversationQuips;
 
     [Space]
     [Tooltip("Right click on the component and choose \"Find ConversationMember\" to auto find it")]
@@ -59,7 +67,7 @@ public class GuardScript : MonoBehaviour
     [Space]
     public bool editPositions = true; // if false it edits rotations
     public List<Vector3> positions = new List<Vector3>();
-    public List<Quaternion> rotations = new List<Quaternion>();
+    private Quaternion startingDirection;
 
     AIObjectVisibility[] visibleObjects; // this gets found upon start to avoid calculating this every frame
 
@@ -77,30 +85,39 @@ public class GuardScript : MonoBehaviour
     [HideInInspector]
     public int editIndex = 0;
 
-    //[HideInInspector]
-    //public List<Vector3> backupPositions = new List<Vector3>(); // these are for the editor
-    //[HideInInspector]
-    //public List<Quaternion> backupRotations = new List<Quaternion>(); // these are for the editor
 
-    private int target;
-    private Quaternion rotation = Quaternion.identity;
-    private Quaternion previousRotation = Quaternion.identity;
-    float percentProgress = 0; // this is for lerping the quaternions
-    float percentSpeedThing = 1; // this is also for quaternions
-
+    private int pathingTargetNumber;
     private NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
     {
+        LoadQuips(); // load the quips!
+
         agent = GetComponent<NavMeshAgent>();
         if (positions.Count > 0)
         {
-            target = 0;
-            transform.position = positions[target];
-            transform.rotation = rotations[target];
+            pathingTargetNumber = 0;
+            transform.position = positions[pathingTargetNumber];
+            // keep track of your starting angle though
+            startingDirection = transform.rotation;
+        } else
+        {
+            // it's a stationary agent so keep track of the starting position and starting angle
+            startingDirection = transform.rotation;
+            pathingTargetNumber = 0;
+            positions.Add(transform.position);
         }
         visibleObjects = FindObjectsOfType<AIObjectVisibility>();
+    }
+
+    private void LoadQuips()
+    {
+        spottedSomethingQuips = spottedSomethingQuipsTextAsset.text.Split('\n');
+        investigationQuips = investigationQuipsTextAsset.text.Split('\n');
+        sightedPlayerQuips = sightedPlayerQuipsTextAsset.text.Split('\n');
+        lostSightQuips = lostSightQuipsTextAsset.text.Split('\n');
+        returnToConversationQuips = returnToConversationQuipsTextAsset.text.Split('\n');
     }
 
     // Update is called once per frame
@@ -110,16 +127,17 @@ public class GuardScript : MonoBehaviour
         {
             if (!agent.hasPath)
             {
-                agent.SetDestination(positions[target]);
-                target++;
-                target %= positions.Count;
+                // follow the path!
+                agent.SetDestination(positions[pathingTargetNumber]);
+                pathingTargetNumber++;
+                pathingTargetNumber %= positions.Count;
             }
             if (agent.remainingDistance < .5f)
             {
                 // then it's there, so move to the next point
-                agent.SetDestination(positions[target]);
-                target++;
-                target %= positions.Count;
+                agent.SetDestination(positions[pathingTargetNumber]);
+                pathingTargetNumber++;
+                pathingTargetNumber %= positions.Count;
             }
         }
 
@@ -269,7 +287,6 @@ public class GuardScript : MonoBehaviour
             if (stopWalking)
             {
                 positions.Clear();
-                rotations.Clear();
                 // FIX this this should be a bool rather than just clearing it
                 agent.SetDestination(transform.position);
             }
@@ -289,15 +306,5 @@ public class GuardScript : MonoBehaviour
 
             // here we should go back to our conversation after a segue. FIX
         }
-    }
-
-    public List<Vector3> BackupPositions
-    {
-        get;set;
-    }
-
-    public List<Quaternion> BackupRotations
-    {
-        get;set;
     }
 }
