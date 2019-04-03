@@ -17,7 +17,6 @@ public class GameplayManager : MonoBehaviour
     public static GameplayManager instance;
 
     [Space]
-    public Texture2D fadeToBlackTexture;
 
     [Tooltip("Can you miss the last day if you get caught on the second to last?")]
     public bool allowSkippingLastDay = true;
