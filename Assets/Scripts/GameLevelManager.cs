@@ -11,6 +11,10 @@ public class GameLevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(EvidenceManager.instance == null) {
+            Debug.Log("EvidenceManager not found");
+            return;
+        }
         evidenceMonos = FindObjectsOfType<EvidenceMono>();
         List<SerializedEvidence> allEvidence = (level == Level.Office) ? EvidenceManager.instance.officeEv : EvidenceManager.instance.factoryEv;
         for (int i = 0; i < allEvidence.Count; i++)
