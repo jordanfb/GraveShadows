@@ -64,17 +64,17 @@ public class GameplayManager : MonoBehaviour
 
     private void StartOfficeScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("OfficeLevel"); // TODO
     }
 
     private void StartMainMenuScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("MainMenu"); // TODO
     }
 
     private void StartCrimeScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("Level1"); // TODO
     }
 
     public string GenerateTodaysRecipt(Level visitedLocation, List<EvidenceMono> evidenceFound, bool wasSpotted, bool foundAll)

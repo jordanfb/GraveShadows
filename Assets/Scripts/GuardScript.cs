@@ -146,8 +146,11 @@ public class GuardScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetBool(animatorWalkingId, agent.velocity.sqrMagnitude > 0.1f); // if it's moving then animate!
-        animator.SetBool(animatorSuspicousId, suspicion > investigateSuspicionLevel);
+        if (animator)
+        {
+            animator.SetBool(animatorWalkingId, agent.velocity.sqrMagnitude > 0.1f); // if it's moving then animate!
+            animator.SetBool(animatorSuspicousId, suspicion > investigateSuspicionLevel);
+        }
         if (isInvestigating)
         {
             // then walk over and investigate!

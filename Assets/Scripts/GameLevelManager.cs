@@ -12,9 +12,24 @@ public class GameLevelManager : MonoBehaviour
     void Start()
     {
         evidenceMonos = FindObjectsOfType<EvidenceMono>();
-        List<SerializedEvidence> allEvidence = (level == Level.Office) ? EvidenceManager.instance.officeEv : EvidenceManager.instance.factoryEv;
+        List<SerializedEvidence> allEvidence = new List<SerializedEvidence>();
+        if (level == Level.Office)
+        {
+            allEvidence = EvidenceManager.instance.officeEv;
+        } else if (level == Level.Factory)
+        {
+            allEvidence = EvidenceManager.instance.factoryEv;
+        } else if (level == Level.Apartment)
+        {
+            Debug.LogWarning("Need to be able to spawn in the evidence!!!!");
+        }
         for (int i = 0; i < allEvidence.Count; i++)
         {
+            if (i >= evidenceMonos.Length)
+            {
+                Debug.LogWarning("Not enough evidence monos in this scene for the evidence");
+                break; // we can't do anything we don't have enough evidence monos so I guess we just die
+            }
             evidenceMonos[i].EvidenceInfo = EvidenceManager.instance.ReferencedEntity(allEvidence[i]) as Evidence;
             if (allEvidence[i].evidenceState == SerializedEvidence.EvidenceState.NotFound)
             {

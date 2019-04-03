@@ -11,10 +11,12 @@ public class EvidenceManager : MonoBehaviour
     public Suspect culprit;
     private List<SerializedEvidence> allSerializedEvidence = new List<SerializedEvidence>(); // this is private so that it doesn't get saved. It's initialized either from save data or by code
     private List<Suspect> suspects = new List<Suspect>();
-    [HideInInspector]
+    [System.NonSerialized]
     public List<SerializedEvidence> officeEv = new List<SerializedEvidence>();
-    [HideInInspector]
+    [System.NonSerialized]
     public List<SerializedEvidence> factoryEv = new List<SerializedEvidence>();
+    [System.NonSerialized]
+    public List<SerializedEvidence> apartmentEV = new List<SerializedEvidence>();
     private int[] suspectTotals = new int[5];
     public static List<SerializedEvidence> AllEvidence
     {
@@ -178,10 +180,16 @@ public class EvidenceManager : MonoBehaviour
                         office++;
                         officeEv.Add(se);
                     }
-                    else
+                    else if (ev.GetLevel == Level.Factory)
                     {
                         factory++;
                         factoryEv.Add(se);
+                    } else if (ev.GetLevel == Level.Apartment)
+                    {
+                        apartmentEV.Add(se);
+                    } else
+                    {
+                        Debug.LogWarning("FOund evidencec with unknown level: " + ev.GetLevel);
                     }
                     suspectTotals[suspects.IndexOf(culprit)]++;
                 }                       
