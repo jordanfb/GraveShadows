@@ -3267,6 +3267,7 @@ MonoBehaviour:
   - {fileID: 1082199882}
   deskItemsLerpSpeed: 1
   deskItemCameraOffset: {x: 0, y: 0, z: 0.7}
+  deskCollider: {fileID: 1161317102}
   gunTransform: {fileID: 1409489799}
   finalGunPosition: {fileID: 981365714}
   GlowingGunMaterial: {fileID: 2100000, guid: 4dd91cd692d024bb6894b9f83791fc07, type: 2}
@@ -6501,8 +6502,6 @@ MonoBehaviour:
   otherSuspectMax: 3
   allEvidenceEntities: []
   culprit: {fileID: 0}
-  officeEv: []
-  factoryEv: []
 --- !u!1 &1552116405
 GameObject:
   m_ObjectHideFlags: 0
