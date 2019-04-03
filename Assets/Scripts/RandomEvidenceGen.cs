@@ -116,7 +116,7 @@ public class RandomEvidenceGen : MonoBehaviour
         //Also didn't want to use all of System AND either way I still needed to specify bc C# got angry.
         System.Random rng = new System.Random();
 
-        while(_officeGenQueue.Count + _factoryGenQueue.Count < _evidenceTotal)
+        while(_officeGenQueue.Count < _evidenceTotal / 2 || _factoryGenQueue.Count < _evidenceTotal / 2)
         {
             if (remainingEv.Count < 1)
                 break;
@@ -130,10 +130,12 @@ public class RandomEvidenceGen : MonoBehaviour
                 switch(randEv.GetLevel)
                 {
                     case Level.Factory:
-                        _factoryGenQueue.Add(randEv);
+                        if(_factoryGenQueue.Count < _evidenceTotal / 2)
+                            _factoryGenQueue.Add(randEv);
                         break;
                     case Level.Office:
-                        _officeGenQueue.Add(randEv);
+                        if(_officeGenQueue.Count < _evidenceTotal / 2)
+                            _officeGenQueue.Add(randEv);
                         break;
                 }
             }
