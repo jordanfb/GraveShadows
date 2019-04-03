@@ -365,6 +365,50 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300066, guid: 8e72e28978e475c43908054cba43f005, type: 3}
+--- !u!1 &127533482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 127533485}
+  - component: {fileID: 127533484}
+  m_Layer: 0
+  m_Name: EnterDeskCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &127533484
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127533482}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.649619, y: 1, z: 4.0333705}
+  m_Center: {x: -0.5417156, y: 0, z: -1.8019135}
+--- !u!4 &127533485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127533482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &141424011 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100134, guid: 8e72e28978e475c43908054cba43f005,
@@ -1439,6 +1483,92 @@ RectTransform:
   m_AnchoredPosition: {x: -0.342, y: 1.09}
   m_SizeDelta: {x: 0.4, y: 0.6}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &374009853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 374009856}
+  - component: {fileID: 374009855}
+  - component: {fileID: 374009854}
+  m_Layer: 0
+  m_Name: ExitYarnBoard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &374009854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374009853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8070154a4c06d7468079e0a47ed4943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 824428057}
+        m_MethodName: ExitYarnBoard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 374009853}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!65 &374009855
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374009853}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.745238, y: 1, z: 7.802494}
+  m_Center: {x: 0.0060937405, y: 0, z: -1.3931881}
+--- !u!4 &374009856
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374009853}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.09, y: 0, z: 2.43}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1533686446}
+  - {fileID: 1857229792}
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &379481695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2003,7 +2133,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: The Factory
+  m_text: Crime Scene
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 13c0f2367e153ad4fa2f3d3204827c63, type: 2}
   m_sharedMaterial: {fileID: 21524619498381458, guid: 13c0f2367e153ad4fa2f3d3204827c63,
@@ -2081,11 +2211,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2127,6 +2257,50 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300090, guid: 8e72e28978e475c43908054cba43f005, type: 3}
+--- !u!1 &585074451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 585074453}
+  - component: {fileID: 585074452}
+  m_Layer: 0
+  m_Name: EnterYarnBoardCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &585074452
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585074451}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.745238, y: 1, z: 7.802494}
+  m_Center: {x: 0.0060937405, y: 0, z: -1.3931881}
+--- !u!4 &585074453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585074451}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.71, y: 0, z: 2.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &585285797 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100088, guid: 8e72e28978e475c43908054cba43f005,
@@ -2383,7 +2557,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: The Factory
+  m_text: Crime Scene
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 13c0f2367e153ad4fa2f3d3204827c63, type: 2}
   m_sharedMaterial: {fileID: 21524619498381458, guid: 13c0f2367e153ad4fa2f3d3204827c63,
@@ -2465,7 +2639,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2986,7 +3160,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: The Factory
+  m_text: Crime Scene
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 13c0f2367e153ad4fa2f3d3204827c63, type: 2}
   m_sharedMaterial: {fileID: 21524619498381458, guid: 13c0f2367e153ad4fa2f3d3204827c63,
@@ -3068,7 +3242,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -3254,9 +3428,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcc0982f242181468703bef94e5d300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraGameObject: {fileID: 43419565}
+  characterCamera: {fileID: 975380190}
   DeskCameraLocation: {fileID: 2037993669}
   YarnBoardCameraLocation: {fileID: 1745525207}
-  cameraMode: 1
+  cameraMode: 0
+  player: {fileID: 975380192}
   deskItemParent: {fileID: 768535763}
   deskItemFinalOffset: {x: 0, y: 0, z: 0.25}
   deskItems:
@@ -3268,9 +3445,12 @@ MonoBehaviour:
   deskItemsLerpSpeed: 1
   deskItemCameraOffset: {x: 0, y: 0, z: 0.7}
   deskCollider: {fileID: 1161317102}
+  enterDeskCollider: {fileID: 127533484}
   gunTransform: {fileID: 1409489799}
   finalGunPosition: {fileID: 981365714}
   GlowingGunMaterial: {fileID: 2100000, guid: 4dd91cd692d024bb6894b9f83791fc07, type: 2}
+  yarnBoardExitCollider: {fileID: 374009853}
+  enterYarnCollider: {fileID: 585074452}
 --- !u!4 &824428058
 Transform:
   m_ObjectHideFlags: 0
@@ -4133,6 +4313,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 947969181}
   m_CullTransparentMesh: 0
+--- !u!114 &975380190 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1617351490}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b228ed5ec2c451d9a64aac788880b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &975380192 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1617351490}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 319cff262630b4905966e06bba79b23c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &977469980 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100050, guid: 8e72e28978e475c43908054cba43f005,
@@ -5078,7 +5282,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161317102}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.745238, y: 1, z: 7.802494}
@@ -6272,6 +6476,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416089480}
   m_CullTransparentMesh: 0
+--- !u!1 &1418463136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1418463137}
+  m_Layer: 0
+  m_Name: PlayerCameraPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1418463137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418463136}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.3851514, y: 4.0888186, z: 21.72933}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1435386263
 GameObject:
   m_ObjectHideFlags: 0
@@ -6502,6 +6736,50 @@ MonoBehaviour:
   otherSuspectMax: 3
   allEvidenceEntities: []
   culprit: {fileID: 0}
+--- !u!1 &1533686445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1533686446}
+  - component: {fileID: 1533686447}
+  m_Layer: 0
+  m_Name: ExitDeskCollider (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1533686446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533686445}
+  m_LocalRotation: {x: -0, y: -0, z: 0.77224636, w: 0.6353232}
+  m_LocalPosition: {x: 0.06926775, y: -0.0059791715, z: -4.411}
+  m_LocalScale: {x: 1, y: 1, z: 0.27347}
+  m_Children: []
+  m_Father: {fileID: 374009856}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 101.11201}
+--- !u!65 &1533686447
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533686445}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.745238, y: 1, z: 7.802494}
+  m_Center: {x: 0.0060937405, y: 0, z: -1.3931881}
 --- !u!1 &1552116405
 GameObject:
   m_ObjectHideFlags: 0
@@ -6666,7 +6944,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: The Factory
+  m_text: Crime Scene
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 13c0f2367e153ad4fa2f3d3204827c63, type: 2}
   m_sharedMaterial: {fileID: 21524619498381458, guid: 13c0f2367e153ad4fa2f3d3204827c63,
@@ -6744,11 +7022,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -6978,11 +7256,17 @@ PrefabInstance:
       propertyPath: shadowPlane
       value: 
       objectReference: {fileID: 1472679718}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1418463136}
     - target: {fileID: 1125838775, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1693832145, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
 --- !u!1 &1654133026 stripped
 GameObject:
@@ -7176,7 +7460,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: The Factory
+  m_text: Crime Scene
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 13c0f2367e153ad4fa2f3d3204827c63, type: 2}
   m_sharedMaterial: {fileID: 21524619498381458, guid: 13c0f2367e153ad4fa2f3d3204827c63,
@@ -7258,7 +7542,7 @@ MonoBehaviour:
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -7310,6 +7594,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1857229791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1857229792}
+  - component: {fileID: 1857229793}
+  m_Layer: 0
+  m_Name: ExitDeskCollider (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1857229792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857229791}
+  m_LocalRotation: {x: -0, y: -0, z: 0.77224636, w: 0.6353232}
+  m_LocalPosition: {x: 0.06926775, y: -0.0059791715, z: 0.01}
+  m_LocalScale: {x: 1, y: 1, z: 0.27346998}
+  m_Children: []
+  m_Father: {fileID: 374009856}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 101.11201}
+--- !u!65 &1857229793
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857229791}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.745238, y: 1, z: 7.802494}
+  m_Center: {x: 0.0060937405, y: 0, z: -1.3931881}
 --- !u!1 &1895214326 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100148, guid: 8e72e28978e475c43908054cba43f005,

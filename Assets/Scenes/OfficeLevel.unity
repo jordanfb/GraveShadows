@@ -2481,8 +2481,8 @@ Camera:
   m_GameObject: {fileID: 319980969}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -3762,7 +3762,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 418451427}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.4603701, y: 1.1558361, z: 1.1679008}
@@ -10393,7 +10393,7 @@ PrefabInstance:
     - target: {fileID: 2701277236420419687, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 47.41
+      value: 3.48
       objectReference: {fileID: 0}
     - target: {fileID: 2701277236420419687, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
@@ -10460,6 +10460,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 319980969}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
 --- !u!1 &1080945273 stripped
@@ -11322,7 +11327,51 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f3d2689b25ec444b3b22fe6786c9e06d, type: 2}
+    - target: {fileID: 100932, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
+      propertyPath: m_TagString
+      value: Evidence
+      objectReference: {fileID: 0}
+    - target: {fileID: 100934, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
+      propertyPath: m_TagString
+      value: Evidence
+      objectReference: {fileID: 0}
     - target: {fileID: 100936, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
+      propertyPath: m_TagString
+      value: Evidence
+      objectReference: {fileID: 0}
+    - target: {fileID: 100938, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
+      propertyPath: m_TagString
+      value: Evidence
+      objectReference: {fileID: 0}
+    - target: {fileID: 100940, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
+      propertyPath: m_TagString
+      value: Evidence
+      objectReference: {fileID: 0}
+    - target: {fileID: 100942, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
+      propertyPath: m_TagString
+      value: Evidence
+      objectReference: {fileID: 0}
+    - target: {fileID: 100944, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
+      propertyPath: m_TagString
+      value: Evidence
+      objectReference: {fileID: 0}
+    - target: {fileID: 100946, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
+      propertyPath: m_TagString
+      value: Evidence
+      objectReference: {fileID: 0}
+    - target: {fileID: 100948, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
+      propertyPath: m_TagString
+      value: Evidence
+      objectReference: {fileID: 0}
+    - target: {fileID: 100950, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
+      propertyPath: m_TagString
+      value: Evidence
+      objectReference: {fileID: 0}
+    - target: {fileID: 100952, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
+      propertyPath: m_TagString
+      value: Evidence
+      objectReference: {fileID: 0}
+    - target: {fileID: 100954, guid: 4b0b5b5f1068b764689ba794035c5eba, type: 3}
       propertyPath: m_TagString
       value: Evidence
       objectReference: {fileID: 0}
@@ -11990,6 +12039,80 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8622064, y: 1.9614708, z: 4.5537457}
   m_Center: {x: -0.0000005364418, y: 0.00000008940697, z: 0}
+--- !u!1 &1195079454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100934, guid: 4b0b5b5f1068b764689ba794035c5eba,
+    type: 3}
+  m_PrefabInstance: {fileID: 1195079403}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1195079455
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195079454}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4823147, y: 1.4823174, z: 1.4823266}
+  m_Center: {x: 0.00000011920929, y: 0.7411587, z: -0.00000017881393}
+--- !u!114 &1195079456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195079454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ce24771a62989f4e9b29b7ef82b929d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _evidenceInfo: {fileID: 0}
+  onEvidenceCollected:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: EvidenceMono+EvidenceEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!1 &1195079457 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100938, guid: 4b0b5b5f1068b764689ba794035c5eba,
+    type: 3}
+  m_PrefabInstance: {fileID: 1195079403}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1195079458
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195079457}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5487615, y: 1.5487686, z: 1.5487615}
+  m_Center: {x: -0.00000059604645, y: 0.7743843, z: 0.00000035762787}
+--- !u!114 &1195079459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195079457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ce24771a62989f4e9b29b7ef82b929d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _evidenceInfo: {fileID: 0}
+  onEvidenceCollected:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: EvidenceMono+EvidenceEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &1198270017 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100094, guid: 4b0b5b5f1068b764689ba794035c5eba,
