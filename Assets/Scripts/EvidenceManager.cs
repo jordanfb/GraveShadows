@@ -18,6 +18,8 @@ public class EvidenceManager : MonoBehaviour
     [System.NonSerialized]
     public List<SerializedEvidence> apartmentEV = new List<SerializedEvidence>();
     private int[] suspectTotals = new int[5];
+
+
     public static List<SerializedEvidence> AllEvidence
     {
         get
@@ -63,6 +65,20 @@ public class EvidenceManager : MonoBehaviour
             
         }
         // we can also just load a new game with pressing a button and calling NewSaveData()
+    }
+
+    public void FindEvidence(Evidence e)
+    {
+        // find the evidence!
+        SerializedEvidence se = FindSerializedEvidence(e);
+        if (se != null)
+        {
+            // then we're set!
+            Debug.Assert(se.evidenceState == SerializedEvidence.EvidenceState.NotFound); // shouldn't have found something not in the game
+            se.evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
+        }
+
+        SaveEvideneToPlayerPrefs();
     }
 
     public bool IsEvidenceInWarehouse(int i)
@@ -296,5 +312,19 @@ public class EvidenceManager : MonoBehaviour
     public YarnBoardEntity ReferencedEntity(SerializedEvidence se)
     {
         return allEvidenceEntities[se.evidenceindex];
+    }
+
+    public SerializedEvidence FindSerializedEvidence(YarnBoardEntity e)
+    {
+        for (int i = 0; i < allSerializedEvidence.Count; i++)
+        {
+            if (allEvidenceEntities[allSerializedEvidence[i].evidenceindex] == e)
+            {
+                return allSerializedEvidence[i];
+            }
+        }
+
+        Debug.LogError("UNABLE TO FIND EVIDENCE OH DEAR");
+        return null;
     }
 }

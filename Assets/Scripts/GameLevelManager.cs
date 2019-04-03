@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameLevelManager : MonoBehaviour
 {
     public Level level;
-    public List<EvidenceMono> evidenceFoundThisDay = new List<EvidenceMono>(); // this is used to keep track of the recipts of what's found this day
+    public List<Evidence> evidenceFoundThisDay = new List<Evidence>(); // this is used to keep track of the recipts of what's found this day
     private EvidenceMono[] evidenceMonos; // these are all the evidence in this level
 
     // Start is called before the first frame update

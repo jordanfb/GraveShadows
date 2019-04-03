@@ -77,7 +77,7 @@ public class GameplayManager : MonoBehaviour
         SceneManager.LoadScene("Level1"); // TODO
     }
 
-    public string GenerateTodaysRecipt(Level visitedLocation, List<EvidenceMono> evidenceFound, bool wasSpotted, bool foundAll)
+    public string GenerateTodaysRecipt(Level visitedLocation, List<Evidence> evidenceFound, bool wasSpotted, bool foundAll)
     {
         string visitedLocationString = "";
         switch (visitedLocation)
@@ -104,7 +104,7 @@ public class GameplayManager : MonoBehaviour
             // loop through the evidence found and print their names
             for (int i = 0; i < evidenceFound.Count; i++)
             {
-                s += evidenceFound[i].EvidenceInfo.Name + "\n";
+                s += evidenceFound[i].Name + "\n";
             }
         }
 
