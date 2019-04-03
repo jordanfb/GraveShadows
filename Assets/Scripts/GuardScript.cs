@@ -399,6 +399,9 @@ public class GuardScript : MonoBehaviour
             animator.SetTrigger("AimAtPlayer");
             // also call the code to trigger the start of the scene change!
             // also point the camera at this guard! FIX
+            GameLevelManager gameLevel = FindObjectOfType<GameLevelManager>();
+            Debug.Assert(gameLevel != null); // duh it can't be null we need it in all our levels
+            GameplayManager.instance.SkipDay(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, true, gameLevel.HasFoundEverything()));
             if (stopWalking)
             {
                 positions.Clear();
