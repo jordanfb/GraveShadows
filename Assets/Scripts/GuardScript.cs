@@ -67,6 +67,7 @@ public class GuardScript : MonoBehaviour
     [Space]
     public bool editPositions = true; // if false it edits rotations
     public List<Vector3> positions = new List<Vector3>();
+    private Quaternion startingDirection;
 
     AIObjectVisibility[] visibleObjects; // this gets found upon start to avoid calculating this every frame
 
@@ -98,6 +99,14 @@ public class GuardScript : MonoBehaviour
         {
             pathingTargetNumber = 0;
             transform.position = positions[pathingTargetNumber];
+            // keep track of your starting angle though
+            startingDirection = transform.rotation;
+        } else
+        {
+            // it's a stationary agent so keep track of the starting position and starting angle
+            startingDirection = transform.rotation;
+            pathingTargetNumber = 0;
+            positions.Add(transform.position);
         }
         visibleObjects = FindObjectsOfType<AIObjectVisibility>();
     }
@@ -118,6 +127,7 @@ public class GuardScript : MonoBehaviour
         {
             if (!agent.hasPath)
             {
+                // follow the path!
                 agent.SetDestination(positions[pathingTargetNumber]);
                 pathingTargetNumber++;
                 pathingTargetNumber %= positions.Count;
