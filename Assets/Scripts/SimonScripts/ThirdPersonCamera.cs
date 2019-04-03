@@ -184,7 +184,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
 
         List<Collider> keyList = new List<Collider>(wallDict.Keys);
-        print(keyList.Count);
+
 
         if (keyList.Count == 0) {
             return;
@@ -207,7 +207,7 @@ public class ThirdPersonCamera : MonoBehaviour
             currentWallToChooseFrom = 0;
         }
 
-        print(currentWallToChooseFrom);
+
         Vector3 targetPos = findMiddlePos(wallDict[keyList[currentWallToChooseFrom]]);
         Vector3 dir = targetPos - mainCam.transform.position;
 
