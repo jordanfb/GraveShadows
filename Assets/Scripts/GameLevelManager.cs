@@ -42,7 +42,7 @@ public class GameLevelManager : MonoBehaviour
 
     public EvidenceMono[] GetEvidence()
     {
-        return evidenceMonos
+        return evidenceMonos;
     }
 
     // Update is called once per frame
