@@ -169,6 +169,14 @@ public class simplePlayerMovement : MonoBehaviour
 
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Exit" && Input.GetKeyDown(KeyCode.E))
+        {
+            GameplayManager.instance.ExitBackToHubNextDay();
+        }
+    }
+
 
     public Collider setCurrentWallCollider(Collider newCurrentWallCollider) {
         currentWallCollider = newCurrentWallCollider;
