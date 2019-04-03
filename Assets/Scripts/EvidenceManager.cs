@@ -324,7 +324,7 @@ public class EvidenceManager : MonoBehaviour
             }
         }
 
-        Debug.LogError("UNABLE TO FIND EVIDENCE OH DEAR");
+        //Debug.LogError("UNABLE TO FIND EVIDENCE OH DEAR");
         return null;
     }
 }

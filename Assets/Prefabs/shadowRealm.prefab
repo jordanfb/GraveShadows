@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6877464289873445466}
   - component: {fileID: 805827115445530723}
-  - component: {fileID: 6279228481640449565}
   - component: {fileID: 672862974029529878}
   m_Layer: 0
   m_Name: Shadow Camera
@@ -75,14 +74,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &6279228481640449565
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1951819173782370602}
-  m_Enabled: 1
 --- !u!114 &672862974029529878
 MonoBehaviour:
   m_ObjectHideFlags: 0
