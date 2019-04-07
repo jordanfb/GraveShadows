@@ -179,6 +179,7 @@ public class ConversationManager : MonoBehaviour
     public TextAsset script;
     public List<ConversationMember> slaves = new List<ConversationMember>();
     public List<ScriptLine> scriptLines = new List<ScriptLine>();
+    public Evidence associatedEvidence;
 
     public string scriptName = "";
     public string conversationDescription = "";
@@ -239,6 +240,19 @@ public class ConversationManager : MonoBehaviour
     [ContextMenu("Run Script")]
     public void StartRunningScript()
     {
+        // we give the evidence to the player since it started playing the conversation:
+        if (associatedEvidence)
+        {
+            // then collect it!
+            if (PlayerManager.instance == null)
+            {
+                Debug.LogError("NO PLAYER MANAGER WHY");
+            }
+            else
+            {
+                PlayerManager.instance.CollectEvidence(associatedEvidence);
+            }
+        }
         ResetScript();
         if (scriptLines.Count == 0)
         {

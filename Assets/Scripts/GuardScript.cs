@@ -38,9 +38,7 @@ public class GuardScript : MonoBehaviour
 
     [Header("When to investigate?")]
     public float investigateSuspicionLevel = .25f;
-    public bool shouldInvestigate = true;
-    public TextAsset investigationQuipsTextAsset;
-    private string[] investigationQuips;
+    public float investigateGoalDistance = 2; // meters
 
     [Header("What happens when the guard has fully sighted the player?")]
     public float fullySuspiciousLevel = 1;
@@ -76,6 +74,7 @@ public class GuardScript : MonoBehaviour
     AIObjectVisibility[] visibleObjects; // this gets found upon start to avoid calculating this every frame
 
 
+
     [Space]
     [Header("AI spotting properties")]
     [Tooltip("The origin of the view cone")]
@@ -90,6 +89,12 @@ public class GuardScript : MonoBehaviour
     public int editIndex = 0;
 
 
+    private Vector3 investigatePosition;
+    public bool isInvestigating = false;
+    private bool isWalkingOverToInvestigate = false;
+    private int dayNum; // the current daynum
+
+
     private int pathingTargetNumber;
     private NavMeshAgent agent;
 
@@ -99,6 +104,7 @@ public class GuardScript : MonoBehaviour
         LoadQuips(); // load the quips!
         animatorWalkingId = Animator.StringToHash("Walking");
         animatorSuspicousId = Animator.StringToHash("IsSuspicious");
+        dayNum = GameplayManager.instance.dayNum; // so that multiple guards don't spot the player at once
 
         agent = GetComponent<NavMeshAgent>();
         if (positions.Count > 0)
@@ -107,7 +113,8 @@ public class GuardScript : MonoBehaviour
             transform.position = positions[pathingTargetNumber];
             // keep track of your starting angle though
             startingDirection = transform.rotation;
-        } else
+        }
+        else
         {
             // it's a stationary agent so keep track of the starting position and starting angle
             startingDirection = transform.rotation;
@@ -115,12 +122,12 @@ public class GuardScript : MonoBehaviour
             positions.Add(transform.position);
         }
         visibleObjects = FindObjectsOfType<AIObjectVisibility>();
+        Debug.Assert(visibleObjects.Length == 1); // if it's not 1 then we're in trouble for the investigate code
     }
 
     private void LoadQuips()
     {
         spottedSomethingQuips = new string[0];
-        investigationQuips = new string[0];
         sightedPlayerQuips = new string[0];
         lostSightQuips = new string[0];
         returnToConversationQuips = new string[0];
@@ -128,8 +135,6 @@ public class GuardScript : MonoBehaviour
 
         if (spottedSomethingQuipsTextAsset)
             spottedSomethingQuips = spottedSomethingQuipsTextAsset.text.Split('\n');
-        if (investigationQuipsTextAsset)
-            investigationQuips = investigationQuipsTextAsset.text.Split('\n');
         if (sightedPlayerQuipsTextAsset)
             sightedPlayerQuips = sightedPlayerQuipsTextAsset.text.Split('\n');
         if (lostSightQuipsTextAsset)
@@ -141,10 +146,73 @@ public class GuardScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetBool(animatorWalkingId, agent.velocity.sqrMagnitude > 0);
-        animator.SetBool(animatorSuspicousId, suspicion > investigateSuspicionLevel);
+        if (animator)
+        {
+            animator.SetBool(animatorWalkingId, agent.velocity.sqrMagnitude > 0.1f); // if it's moving then animate!
+            animator.SetBool(animatorSuspicousId, suspicion > investigateSuspicionLevel);
+        }
+        if (isInvestigating)
+        {
+            // then walk over and investigate!
+            if (Vector3.Distance(investigatePosition, transform.position) < investigateGoalDistance)
+            {
+                // look around you!
+                isWalkingOverToInvestigate = false; // once they've arrived they look around and are no longer walking over
+                Debug.LogWarning("STOPPED INVESTIGATING");
+            } else
+            {
+                // try to walk over towards the position!
+                isWalkingOverToInvestigate = true; // if they're walking over they're walking over!
+                agent.SetDestination(investigatePosition);
+                //bool generateNewPath = true;
+                //if (agent.hasPath) {
+                //    // check if the path ends close to the destination
+                //    // if it's not close then we should generate a new path
+                //    if (Vector3.Distance(agent.destination, investigatePosition) > investigateGoalDistance)
+                //    {
+                //        // then delete it and make a new path that takes us closer
+                //        generateNewPath = true;
+                //    }
+                //    else
+                //    {
+                //        generateNewPath = false;
+                //    }
+                //}
 
-        if (positions.Count > 0)
+                //if (generateNewPath)
+                //{
+                //    NavMeshPath possiblePath = new NavMeshPath();
+                //    bool pathValid = agent.CalculatePath(investigatePosition, possiblePath);
+                //    if (pathValid && possiblePath.status == NavMeshPathStatus.PathComplete)
+                //    {
+                //        // then we follow the path!
+                //        agent.SetPath(possiblePath);
+                //    } else if (pathValid && possiblePath.status == NavMeshPathStatus.PathPartial)
+                //    {
+                //        // for now we probably just follow the partial path
+                //    }
+                //    else
+                //    {
+                //        // then choose a random location nearby to try to investigate
+                //    }
+                //}
+            }
+        }
+        else if (positions.Count == 1)
+        {
+            // then return to the original position and look whatever way you're looking
+            if (Vector3.Distance(positions[0], transform.position) > .2f)
+            {
+                agent.SetDestination(positions[0]);
+            } else if (Quaternion.Angle(transform.rotation, startingDirection) > 5)
+            {
+                // rotate towards the original starting direction
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, startingDirection, 90 * Time.deltaTime);
+            }
+            // otherwise just sit content and look pretty.
+            // try uninterupting the conversation if you were having one!
+        }
+        else if (positions.Count > 1)
         {
             if (!agent.hasPath)
             {
@@ -153,13 +221,17 @@ public class GuardScript : MonoBehaviour
                 pathingTargetNumber++;
                 pathingTargetNumber %= positions.Count;
             }
-            if (agent.remainingDistance < .5f)
+            if (agent.hasPath && agent.remainingDistance < .5f)
             {
                 // then it's there, so move to the next point
                 agent.SetDestination(positions[pathingTargetNumber]);
                 pathingTargetNumber++;
                 pathingTargetNumber %= positions.Count;
             }
+        } else
+        {
+            // walk back to your original location
+            Debug.Log("here");
         }
 
         // spot the character
@@ -209,13 +281,33 @@ public class GuardScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private IEnumerator WaitUntilFinishedSpeaking(System.Action functionToCall)
+    public void RunFunctionAfterFinishedSpeaking(System.Action action, float timeAfter)
     {
-        Debug.Log("Started coroutine");
+        StartCoroutine(WaitUntilFinishedSpeaking(action, timeAfter));
+    }
+
+    public void RunFunctionAfterTime(System.Action action, float timeAfter)
+    {
+        StartCoroutine(WaitUntilFinishedSeconds(action, timeAfter));
+    }
+
+    private IEnumerator WaitUntilFinishedSeconds(System.Action functionToCall, float timeAfter)
+    {
+        // then wait however many additional seconds
+        yield return new WaitForSeconds(timeAfter);
+        // then call whatever
+        functionToCall.Invoke();
+    }
+
+
+    private IEnumerator WaitUntilFinishedSpeaking(System.Action functionToCall, float timeAfter = 0)
+    {
         if (conversationMember != null)
         {
             yield return new WaitUntil(() => conversationMember.IsFinished());
         }
+        // then wait however many additional seconds
+        yield return new WaitForSeconds(timeAfter);
         // then call whatever
         functionToCall.Invoke();
     }
@@ -256,6 +348,7 @@ public class GuardScript : MonoBehaviour
                                 // this may be incorrect if we have multiple visible objects of the same type... FIX
                                 visibility += visibleObjects[i].parts[j].visibilityPercent;
                                 suspicionTimer = suspicionTime;
+                                investigatePosition = visibleObjects[i].transform.position; // update the investigate position
                             }
                         }
                     }
@@ -267,13 +360,15 @@ public class GuardScript : MonoBehaviour
                 }
             }
             suspicion += Time.deltaTime * Mathf.Min(1, visibility) * suspicionMultiplier;
-            if (suspicion > 0)
+            if (suspicion > 0 && !isWalkingOverToInvestigate)
             {
-                // then reduce the suspiciontimer
+                // then reduce the suspiciontimer if the guard isn't walking over to investigate
                 suspicionTimer -= Time.deltaTime;
                 if (suspicionTimer <= 0 && hasFiredStartSuspicionEvent)
                 {
-                    // they ran out of suspicion. FIX this to work with investigation.
+                    isInvestigating = false; // force them to stop investigating
+                    // they ran out of suspicion.
+                    agent.ResetPath();
                     suspicion = Mathf.Max(0, suspicion - Time.deltaTime * suspicionFallMultiplier);
                 }
             }
@@ -281,20 +376,25 @@ public class GuardScript : MonoBehaviour
         //Debug.Log("Suspicion: " + suspicion);
     }
 
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        // draw text above your head please
+        UnityEditor.Handles.Label(guardHead.position + guardHead.up, "Suspicion level: " + suspicion + "\nIs investigating: " + isInvestigating + "\nIswalking over: " + isWalkingOverToInvestigate + "\ndisance: " + Vector3.Distance(investigatePosition, transform.position));
+    }
+#endif
+
     void HandleSuspicion()
     {
         // FIX INVESTIGATION
-        //if (suspicion > investigateSuspicionLevel)
-        //{
-        //    // record where we should investigate whenever we see things FIX
-        //    if (conversationMember != null && spottedSomethingQuips.Length > 0)
-        //    {
-        //        // say a random quip
-        //        string line = spottedSomethingQuips[Random.Range(0, spottedSomethingQuips.Length)];
-        //        conversationMember.InterruptConversation(line);
-        //    }
-        //    //onStartSuspicionEvent.Invoke();
-        //}
+        if (suspicion > investigateSuspicionLevel && !isWalkingOverToInvestigate)
+        {
+            // record where we should investigate whenever we see things fix
+            // then investigate
+            isWalkingOverToInvestigate = true; // once you get close to the target position then this is false, and then the timer falls
+            // and once the timer is down we stop investigating.
+            isInvestigating = true;
+        }
 
         if (suspicion > startSuspicionLevel && !hasFiredStartSuspicionEvent)
         {
@@ -322,11 +422,31 @@ public class GuardScript : MonoBehaviour
                 conversationMember.InterruptConversation(line);
             }
             onSightingEvent.Invoke();
+            animator.SetTrigger("AimAtPlayer");
+            // also call the code to trigger the start of the scene change!
+            // also point the camera at this guard! FIX
+            if (GameplayManager.instance.dayNum == dayNum)
+            {
+                GameLevelManager gameLevel = FindObjectOfType<GameLevelManager>();
+                Debug.Assert(gameLevel != null); // duh it can't be null we need it in all our levels
+                GameplayManager.instance.SkipDay(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, true, gameLevel.HasFoundEverything()));
+                if (conversationMember != null && sightedPlayerQuips.Length > 0)
+                {
+                    RunFunctionAfterFinishedSpeaking(GameplayManager.instance.VisitHubScene, 1);
+                } else
+                {
+                    RunFunctionAfterTime(GameplayManager.instance.VisitHubScene, 1);
+                }
+            }
             if (stopWalking)
             {
+                // just stop moving at all
                 positions.Clear();
+                isInvestigating = false;
+                isWalkingOverToInvestigate = false;
                 // FIX this this should be a bool rather than just clearing it
-                agent.SetDestination(transform.position);
+                agent.ResetPath();
+                agent.speed = 0; // force the agent to stop lol this is bad practice FIX
             }
         }
 

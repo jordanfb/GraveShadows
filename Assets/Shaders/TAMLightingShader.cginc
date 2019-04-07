@@ -163,7 +163,7 @@ float4 MyFragmentProgram (Interpolators i) : SV_TARGET {
     
     
     fixed l = Luminance(c);
-    l*=1.5;
+    l*=3.0;
     fixed texI = (1 - l) * 8.0;
     float2 worldUV;
     float levels = 8.0;

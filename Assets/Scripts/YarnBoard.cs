@@ -44,7 +44,7 @@ public class YarnBoard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        GenerateContent(); // load the content from the evidence manager
         /*
         //For use with randomly placing pins
         _collider = GetComponent<Collider>();
@@ -108,6 +108,28 @@ public class YarnBoard : MonoBehaviour
 
         }
         */
+    }
+
+    public void GenerateContent()
+    {
+        for (int i = 0; i < EvidenceManager.AllEvidence.Count; i++)
+        {
+            // spawn the evidence that's on the board or off it, and do nothing to the rest
+            SerializedEvidence se = EvidenceManager.AllEvidence[i];
+            YarnBoardEntity ybe = EvidenceManager.instance.ReferencedEntity(se);
+
+            Evidence e = ybe as Evidence;
+            Suspect s = ybe as Suspect;
+            if (e != null)
+            {
+                // it's regular evidence
+
+            } else if (s != null)
+            {
+                // then create a suspect evidence thing
+
+            }
+        }
     }
 
     private float PinOffset(Collider c)

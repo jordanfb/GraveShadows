@@ -34,6 +34,8 @@ public class ConversationManagerEditor : Editor
             EditorGUILayout.LabelField("Description: " + m.conversationDescription);
         }
 
+        m.associatedEvidence = (Evidence)EditorGUILayout.ObjectField("Associated Evidence:", m.associatedEvidence, typeof(Evidence), true);
+
         // then add a list of all of the members of the conversation
         displaySlaves = EditorGUILayout.Foldout(displaySlaves, "Characters");
         if (displaySlaves)

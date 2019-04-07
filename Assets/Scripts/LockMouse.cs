@@ -36,4 +36,16 @@ public class LockMouse : MonoBehaviour
             Cursor.visible = true;
         }
     }
+
+    public static void LockTheMouse()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public static void UnlockTheMouse()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 }
