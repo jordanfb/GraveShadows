@@ -28,6 +28,11 @@ public class YarnBoard : MonoBehaviour
     private YarnBoardCamera _yarnBoardCamera;
     [SerializeField]
     private Sprite _placeholderSprite;
+    [SerializeField]
+    private float _photoScalar;
+    [SerializeField]
+    private Transform _yarnBoardParent;
+
 
     private List<GameObject> _pins;
     private YarnBoardMode mode = YarnBoardMode.None;
@@ -131,10 +136,12 @@ public class YarnBoard : MonoBehaviour
             {
                 // it's regular evidence
                 go = new GameObject(e.Name);
-                go.transform.parent = this.gameObject.transform;
+                go.transform.localScale *= _photoScalar;
+                //go.transform.parent = _yarnBoardParent;
+                go.transform.Rotate(0f, 90f, 0f);
+                go.transform.position = _yarnBoardParent.position;
                 go.AddComponent<SpriteRenderer>().sprite = _placeholderSprite;
                 go.AddComponent<BoxCollider>();
-                go.AddComponent<EvidenceMono>().EvidenceInfo = e;
                 go.tag = "Evidence";
 
 
@@ -142,6 +149,10 @@ public class YarnBoard : MonoBehaviour
             {
                 // then create a suspect evidence thing
                 go = new GameObject(s.CodeName);
+                go.transform.localScale *= _photoScalar;
+                //go.transform.parent = _yarnBoardParent;
+                go.transform.Rotate(0f, -90f, 0f);
+                go.transform.position = _yarnBoardParent.position;
                 go.AddComponent<SpriteRenderer>().sprite = _placeholderSprite;
                 go.AddComponent<BoxCollider>();
                 go.tag = "Suspect";
@@ -155,10 +166,7 @@ public class YarnBoard : MonoBehaviour
                 go.transform.position = new Vector3(se.location.x, se.location.y, this.gameObject.transform.position.z);
 
             }
-            else if (se.evidenceState == SerializedEvidence.EvidenceState.OffYarnBoard)
-            {
-                go.transform.position = new Vector3();
-            } 
+            
             
             
         }
