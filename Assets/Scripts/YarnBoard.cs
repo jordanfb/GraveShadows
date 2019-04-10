@@ -164,10 +164,14 @@ public class YarnBoard : MonoBehaviour
             if (se.evidenceState == SerializedEvidence.EvidenceState.OnYarnBoard)
             {
                 go.transform.position = new Vector3(se.location.x, se.location.y, this.gameObject.transform.position.z);
-
             }
-            
-            
+
+            GameObject pin = Instantiate(_pinPrefab, go.transform);
+            pin.transform.localPosition = Vector3.zero;
+            pin.transform.localScale = new Vector3(10f, 10f, 10f);
+            pin.transform.Rotate(0f, 0f, 180f);
+            //GameObject pinChild = pin.transform.GetChild(0).gameObject;
+            //pinChild.transform.Rotate(0f, 0f, 180f);
             
         }
     }
