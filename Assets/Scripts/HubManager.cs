@@ -16,10 +16,15 @@ public class HubManager : MonoBehaviour
      * deal with the player camera wanting to follow the player but being required to lerp to the yarnboard or the desk
      * save and load the text for what happened each day in playerprefs (steal code from my yarnboard stuff)
      */
-
+    public GameObject cameraGameObject;
+    public ThirdPersonCamera characterCamera;
     public Transform DeskCameraLocation;
     public Transform YarnBoardCameraLocation;
-    public CameraMode cameraMode = CameraMode.LookAtDesk; // looking at desk, player, or yarnboard
+    private float cameraLerpPos = 0; // 0 is the player
+    public CameraMode cameraMode = CameraMode.FollowPlayer; // looking at desk, player, or yarnboard
+
+    [Header("Player")]
+    public simplePlayerMovement player; // used for entering colliders to see the desk
 
     [Header("Desk Item Variables")]
     public Transform deskItemParent;
@@ -28,14 +33,20 @@ public class HubManager : MonoBehaviour
     public float deskItemsLerpSpeed = 1;
     public Vector3 deskItemCameraOffset = Vector3.down * .5f;
     public GameObject deskCollider;
+    public BoxCollider enterDeskCollider;
 
     [Header("Gun variables")]
     public Transform gunTransform;
     public Transform finalGunPosition;
     public Material GlowingGunMaterial; // for the final day it's highlighted
+    public EndgameManager endgameManager;
 
     [Header("Yarn Board")]
     public GameObject yarnBoardExitCollider; // for exiting the yarnboard via click
+    public BoxCollider enterYarnCollider;
+
+
+    private Transform otherCameraTransformPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +54,7 @@ public class HubManager : MonoBehaviour
         // it needs to load all the summaries of the days here
         // it gets the info from the static gameplaymanager
         LoadDesk();
+        otherCameraTransformPosition = DeskCameraLocation;
     }
 
     public void ExitDesk()
@@ -55,7 +67,8 @@ public class HubManager : MonoBehaviour
             deskItems[i].ResetPosition(); // they should go back to the table not nearby the camera duh
         }
 
-
+        LockMouse.LockTheMouse();
+        endgameManager.gameObject.SetActive(false);
         deskCollider.SetActive(false);
     }
 
@@ -63,12 +76,16 @@ public class HubManager : MonoBehaviour
     {
         cameraMode = CameraMode.LookAtDesk;
         deskCollider.SetActive(true);
+        LockMouse.UnlockTheMouse();
+        otherCameraTransformPosition = DeskCameraLocation;
     }
 
     public void EnterYarnBoard()
     {
         cameraMode = CameraMode.LookAtYarnBoard;
         yarnBoardExitCollider.SetActive(false);
+        LockMouse.UnlockTheMouse();
+        otherCameraTransformPosition = YarnBoardCameraLocation;
     }
     
     public void ExitYarnBoard()
@@ -76,6 +93,7 @@ public class HubManager : MonoBehaviour
         // this is called when the collider is clicked probably
         cameraMode = CameraMode.FollowPlayer; // go back to following the player
         yarnBoardExitCollider.SetActive(false);
+        LockMouse.LockTheMouse();
     }
 
     // Update is called once per frame
@@ -103,7 +121,54 @@ public class HubManager : MonoBehaviour
         else if (cameraMode == CameraMode.LookAtYarnBoard && Input.GetKeyDown(KeyCode.E))
         {
             ExitYarnBoard();
+        } else if (cameraMode == CameraMode.FollowPlayer && Input.GetKeyDown(KeyCode.E))
+        {
+            // then check if the player is inside a collider or whatever
+            //if (player.gameObject.GetComponent<Collider>())
+            float distanceToDesk = Vector3.Distance(player.transform.position, enterDeskCollider.transform.position);
+            float distanceToYarn = Vector3.Distance(player.transform.position, enterYarnCollider.transform.position);
+            if (distanceToDesk < distanceToYarn)
+            {
+                // enter the desk
+                EnterDesk();
+            } else
+            {
+                EnterYarnBoard();
+            }
         }
+    }
+
+    private void LateUpdate()
+    {
+        UpdateCamera();
+    }
+
+    private void UpdateCamera()
+    {
+
+        if (cameraMode == CameraMode.FollowPlayer && cameraLerpPos > 0)
+        {
+            cameraLerpPos -= Time.deltaTime;
+            if (cameraLerpPos < 0)
+            {
+                cameraLerpPos = 0;
+            }
+        }
+        else if (cameraLerpPos < 1)
+        {
+            cameraLerpPos += Time.deltaTime;
+            if (cameraLerpPos > 1)
+            {
+                cameraLerpPos = 1;
+            }
+        }
+
+
+        // now lerp the camera using smootherstep
+        // now lerp between them
+        float t = DeskDayDescriptionItem.Smootherstep(cameraLerpPos);
+        cameraGameObject.transform.position = Vector3.Lerp(characterCamera.mainCam.transform.position, otherCameraTransformPosition.position, t);
+        cameraGameObject.transform.rotation = Quaternion.Lerp(characterCamera.mainCam.transform.rotation, otherCameraTransformPosition.rotation, t);
     }
 
     public void ClickOnGun()
@@ -112,6 +177,8 @@ public class HubManager : MonoBehaviour
         {
             // only do anything if you click on it at the right time
             Debug.Log("Clicked on the gun");
+            // FIX
+            endgameManager.gameObject.SetActive(true);
         }
     }
 

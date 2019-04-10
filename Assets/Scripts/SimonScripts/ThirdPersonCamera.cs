@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThirdPersonCamera : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Camera mainCam;
+    public GameObject mainCam;
 
     private Vector3 lookAtVec;
 
@@ -56,7 +56,11 @@ public class ThirdPersonCamera : MonoBehaviour
     {
 
         SRmanager = GetComponent<ShadowRealmManager>();
-        mainCam = Camera.main;
+        if (mainCam == null) {
+            Debug.Log("Picked default main camera for third person camera controller");
+            // this is so that we can set a gameobject in its place instead of the main camera for the hubworld camera system to lerp between
+            mainCam = Camera.main.gameObject;
+        }
         lookAtVec = gameObject.transform.position;
         currentDistance = REGULAR_CAMERA_DISTANCE;
 

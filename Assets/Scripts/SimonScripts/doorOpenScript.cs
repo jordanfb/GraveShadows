@@ -69,6 +69,7 @@ public class doorOpenScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (isMoving)
         {
             return;

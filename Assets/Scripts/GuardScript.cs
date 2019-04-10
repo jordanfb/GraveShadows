@@ -49,6 +49,8 @@ public class GuardScript : MonoBehaviour
     private string[] sightedPlayerQuips;
     [Tooltip("This event is fired as soon as the guard's suspicion reaches critical levels")]
     public UnityEvent onSightingEvent;
+    [Tooltip("if we're in the crime scene then we reload the level, otherwise we skip")]
+    public bool isCrimeScene = false;
 
     [Header("What should happen if the guard looses sight of something?")]
     public TextAsset lostSightQuipsTextAsset;
@@ -425,17 +427,37 @@ public class GuardScript : MonoBehaviour
             animator.SetTrigger("AimAtPlayer");
             // also call the code to trigger the start of the scene change!
             // also point the camera at this guard! FIX
-            if (GameplayManager.instance.dayNum == dayNum)
+            if (!isCrimeScene)
             {
+                if (GameplayManager.instance.dayNum == dayNum)
+                {
+                    GameLevelManager gameLevel = FindObjectOfType<GameLevelManager>();
+                    Debug.Assert(gameLevel != null); // duh it can't be null we need it in all our levels
+                    GameplayManager.instance.SkipDay(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, true, gameLevel.HasFoundEverything()));
+                    if (conversationMember != null && sightedPlayerQuips.Length > 0)
+                    {
+                        RunFunctionAfterFinishedSpeaking(GameplayManager.instance.VisitHubScene, 1);
+                    }
+                    else
+                    {
+                        RunFunctionAfterTime(GameplayManager.instance.VisitHubScene, 1);
+                    }
+                }
+            }
+            else
+            {
+                // this is the crime scene
+                // don't skip the day, instead reload the day
                 GameLevelManager gameLevel = FindObjectOfType<GameLevelManager>();
                 Debug.Assert(gameLevel != null); // duh it can't be null we need it in all our levels
-                GameplayManager.instance.SkipDay(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, true, gameLevel.HasFoundEverything()));
+                //GameplayManager.instance.ReloadLevel(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, true, gameLevel.HasFoundEverything()));
                 if (conversationMember != null && sightedPlayerQuips.Length > 0)
                 {
-                    RunFunctionAfterFinishedSpeaking(GameplayManager.instance.VisitHubScene, 1);
-                } else
+                    RunFunctionAfterFinishedSpeaking(() => { GameplayManager.instance.VisitScene(SceneManager.GetActiveScene().name); }, 1);
+                }
+                else
                 {
-                    RunFunctionAfterTime(GameplayManager.instance.VisitHubScene, 1);
+                    RunFunctionAfterTime(() => { GameplayManager.instance.VisitScene(SceneManager.GetActiveScene().name); }, 1);
                 }
             }
             if (stopWalking)

@@ -11,11 +11,20 @@ public class OnTriggerEnterHandler : MonoBehaviour
     [System.Serializable]
     public struct colliderActions {
         public Collider collider;
+        [Tooltip("If left empty no conversation will play")]
+        public string optionalConversationName;
         public UnityEvent events;
         public bool onlyRunOnce;
     }
 
+    private ConversationMetaManager conversationManager;
     public List<colliderActions> triggerEventPairs;
+
+    public void Start()
+    {
+        // get the reference to a metamanager
+        conversationManager = FindObjectOfType<ConversationMetaManager>();
+    }
 
     public void TriggerOnTrigger(Collider other)
     {
@@ -39,6 +48,14 @@ public class OnTriggerEnterHandler : MonoBehaviour
                 }
             }
             i++;
+        }
+    }
+
+    private void StartConversationIfPossible(string convoName)
+    {
+        if (conversationManager != null && convoName.Length > 0)
+        {
+            conversationManager.PlayConversationOfName(convoName);
         }
     }
 }

@@ -22,14 +22,14 @@ public class YarnBoardCamera : MonoBehaviour
     void Update()
     {
         float dzoom = Input.mouseScrollDelta.y * scrollSpeed;
-        transform.position += Vector3.forward * dzoom;
+        transform.localPosition += Vector3.forward * dzoom; // zoom towards the camera
         if (!lookingAtEvidence)
         {
             // move around the world with middle mouse down
             if (Input.GetMouseButton(2))
             {
                 // middle mouse down
-                transform.position += new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0) * moveSpeed;
+                transform.localPosition += (Vector3.right * Input.GetAxis("Mouse X") + Vector3.up * Input.GetAxis("Mouse Y")) * moveSpeed;
             }
             startPos = transform.position; // set the zoom of the start pos probably?
         }
@@ -37,7 +37,7 @@ public class YarnBoardCamera : MonoBehaviour
 
     public void LookAtEvidence(Transform target)
     {
-        Vector3 endPos = new Vector3(target.position.x, target.position.y, transform.position.z);
+        Vector3 endPos = new Vector3(target.position.x, target.position.y, transform.position.z) - transform.forward*.7f; // move it back some
         lookingAtEvidence = true;
         StartCoroutine(CameraLerp(transform.position, endPos));
     }
