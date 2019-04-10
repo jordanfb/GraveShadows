@@ -150,6 +150,7 @@ public class YarnBoard : MonoBehaviour
                 go.transform.position = _yarnBoardParent.position;
                 go.AddComponent<SpriteRenderer>().sprite = _placeholderSprite;
                 go.AddComponent<BoxCollider>();
+                go.AddComponent<EvidenceMono>().EvidenceInfo = e;
                 go.tag = "Evidence";
 
 
@@ -163,7 +164,8 @@ public class YarnBoard : MonoBehaviour
                 go.transform.position = new Vector3(_evidenceXOffset, _evidenceYOffset, _yarnBoardParent.position.z);
                 go.AddComponent<SpriteRenderer>().sprite = _placeholderSprite;
                 go.AddComponent<BoxCollider>();
-                go.tag = "Suspect";
+                go.AddComponent<SuspectMono>().SuspectInfo = s;
+                go.tag = "Evidence";
             }
 
             if (go == null)
