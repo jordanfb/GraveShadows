@@ -182,6 +182,20 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    public void VisitScene(string sceneName)
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            f.FadeOut(() => { SceneManager.LoadScene(sceneName); });
+        }
+    }
+
     public void VisitHubScene()
     {
         FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();

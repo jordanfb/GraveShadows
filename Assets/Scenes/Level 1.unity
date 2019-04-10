@@ -249,6 +249,11 @@ PrefabInstance:
       propertyPath: editPositions
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: isCrimeScene
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -2176,6 +2181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerEventPairs:
   - collider: {fileID: 621683792}
+    optionalConversationName: 
     events:
       m_PersistentCalls:
         m_Calls:
@@ -2784,6 +2790,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: isCrimeScene
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
         type: 3}
@@ -6140,6 +6151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1339247584}
   - component: {fileID: 1339247583}
+  - component: {fileID: 1339247585}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -6175,6 +6187,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1339247585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339247582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a64da2d28b7724eb32803d9d002843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerEventPairs:
+  - collider: {fileID: 0}
+    optionalConversationName: 
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
+  - collider: {fileID: 0}
+    optionalConversationName: 
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
+  - collider: {fileID: 0}
+    optionalConversationName: 
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
+  - collider: {fileID: 0}
+    optionalConversationName: 
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
+  - collider: {fileID: 0}
+    optionalConversationName: 
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
 --- !u!1 &1361514682
 GameObject:
   m_ObjectHideFlags: 0
@@ -6273,6 +6338,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  isCrimeScene: 0
   lostSightQuipsTextAsset: {fileID: 4900000, guid: 3bc298830ea54a748b058ed95252653a,
     type: 3}
   onLoseSuspicionEvent:
@@ -7114,6 +7180,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  isCrimeScene: 0
   lostSightQuipsTextAsset: {fileID: 4900000, guid: 3bc298830ea54a748b058ed95252653a,
     type: 3}
   onLoseSuspicionEvent:
