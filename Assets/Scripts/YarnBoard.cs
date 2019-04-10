@@ -20,6 +20,12 @@ public class YarnBoard : MonoBehaviour
     [SerializeField]
     private Text _flavorTextAsset;
     [SerializeField]
+    private GameObject _suspectInfoPanel;
+    [SerializeField]
+    private Text _suspectCodeName;
+    [SerializeField]
+    private Text _suspectBio;
+    [SerializeField]
     private float _pinZOffset = 0.0f;
     [SerializeField]
     private float _offsetRatio;
@@ -242,18 +248,19 @@ public class YarnBoard : MonoBehaviour
                 if (evidence.tag == "Evidence")
                 {
                     _yarnBoardCamera.LookAtEvidence(evidence.transform);
-                    _flavorTextPanel.SetActive(true);
                     EvidenceMono em = evidence.GetComponent<EvidenceMono>();
                     SuspectMono sm = evidence.GetComponent<SuspectMono>();
                     mode = YarnBoardMode.Displaying;
                     if (em != null)
                     {
+                        _flavorTextPanel.SetActive(true);
                         _flavorTextAsset.text = em.EvidenceInfo.FlavorText;
                         _evidenceTitle.text = em.EvidenceInfo.Name;
                     } else if (sm != null)
                     {
-                        _flavorTextAsset.text = sm.SuspectInfo.Bio;
-                        _evidenceTitle.text = sm.SuspectInfo.CodeName;
+                        _suspectInfoPanel.SetActive(true);
+                        _suspectCodeName.text = sm.SuspectInfo.CodeName;
+                        _suspectBio.text = sm.SuspectInfo.Bio;
                     } else
                     {
                         // some weird error occured so just don't go anywhere
@@ -347,6 +354,15 @@ public class YarnBoard : MonoBehaviour
     {
         _flavorTextPanel.SetActive(false);
         _flavorTextAsset.text = "";
+        //displaying = false;
+        mode = YarnBoardMode.None;
+    }
+
+    public void DeactivateSuspectPanel()
+    {
+        _suspectInfoPanel.SetActive(false);
+        _suspectCodeName.text = "";
+        _suspectBio.text = "";
         //displaying = false;
         mode = YarnBoardMode.None;
     }
