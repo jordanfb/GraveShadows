@@ -582,14 +582,32 @@ PrefabInstance:
       propertyPath: choosingRedicle
       value: 
       objectReference: {fileID: 53394928}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: mainCam
       value: 
       objectReference: {fileID: 1686817873}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1693832147, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: scene
-      value: HubWorld
+      value: Level 0 HUB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693832147, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: scene
+      value: Level 0 HUB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693832147, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4962411602723374852, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
@@ -646,10 +664,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ea34227b6095b3b4e9eda97ac29c4912, type: 2}
-    - target: {fileID: 1693832147, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: scene
-      value: Level 0 HUB
-      objectReference: {fileID: 0}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -688,6 +702,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693832145, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1315,7 +1342,7 @@ PrefabInstance:
     - target: {fileID: 7576271182610077073, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7576271182610077077, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
@@ -4662,10 +4689,9 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300224, guid: bb25c1603800aa94f9ff8fc60ea0a09f, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.02348833, y: 0.021022, z: 0.004644126}
+  m_Center: {x: -1.8616899e-26, y: 0.010500488, z: 0.00055496243}
 --- !u!1001 &1965054617875954299
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4681,7 +4707,7 @@ PrefabInstance:
     - target: {fileID: 1965054617247375744, guid: e50ee44d988d0f94aa57c1c62a624be1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 884755916162151838, guid: 9130fae8525a1f441b3efbe1dbd4ac9a,
         type: 3}
