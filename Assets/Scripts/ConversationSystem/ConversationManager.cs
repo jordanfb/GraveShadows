@@ -241,12 +241,17 @@ public class ConversationManager : MonoBehaviour
     public void StartRunningScript()
     {
         // we give the evidence to the player since it started playing the conversation:
+        // we also check to see if we've already collected it in which case we don't play the conversation
         if (associatedEvidence)
         {
             // then collect it!
             if (PlayerManager.instance == null)
             {
                 Debug.LogError("NO PLAYER MANAGER WHY");
+            }
+            else if (PlayerManager.instance.HasCollected(associatedEvidence))
+            {
+                return; // don't play the evidence we've already collected it!
             }
             else
             {
