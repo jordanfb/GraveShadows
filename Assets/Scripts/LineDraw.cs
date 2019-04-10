@@ -9,6 +9,8 @@ public class LineDraw : MonoBehaviour
     private GameObject _startPin;
     private List<LineRenderer> _lines;
 
+    private YarnBoardEntity originalEvidence;
+
     public Material material;
     public float _lineWidth = 0.15f;
 
@@ -38,6 +40,16 @@ public class LineDraw : MonoBehaviour
                         //Create a line if it's a pin object
                         _startPin = coll.gameObject;
                         CreateLine(coll.gameObject.transform.position);
+                        SuspectMono sm = coll.gameObject.GetComponentInChildren<SuspectMono>();
+                        if (sm != null)
+                        {
+                            originalEvidence = sm.SuspectInfo;
+                        }
+                        EvidenceMono em = coll.gameObject.GetComponentInChildren<EvidenceMono>();
+                        if (em != null)
+                        {
+                            originalEvidence = em.EvidenceInfo;
+                        }
                     }
                 }
             }
@@ -64,12 +76,35 @@ public class LineDraw : MonoBehaviour
                     yarnLine.point1 = _startPin.transform;
                     yarnLine.point2 = endColl.gameObject.transform;
                     yarnLine.lockToPoints = true;
+
+                    // find the final evidence and connect them
+                    SuspectMono sm = endColl.gameObject.GetComponentInChildren<SuspectMono>();
+                    YarnBoardEntity endEvidence = null;
+                    if (sm != null)
+                    {
+                        endEvidence = sm.SuspectInfo;
+                    }
+                    EvidenceMono em = endColl.gameObject.GetComponentInChildren<EvidenceMono>();
+                    if (em != null)
+                    {
+                        endEvidence = em.EvidenceInfo;
+                    }
+                    if (endEvidence != null && originalEvidence != null)
+                    {
+                        // then connect it!
+                        EvidenceManager.instance.ConnectEvidence(originalEvidence, endEvidence);
+                    }
+                    else
+                    {
+                        Debug.LogError("Unable to find end pin entity or the first one whatever");
+                    }
                 }
                 else
                 {
                     //Line is invalid, destroy
                     _lines.Remove(_line);
                     Destroy(_line.gameObject);
+                    originalEvidence = null;
                 }
             }
             _line = null;
@@ -112,6 +147,8 @@ public class LineDraw : MonoBehaviour
                     _lines.Remove(delLine);
                     Destroy(delColl.transform.parent.gameObject);
                 }
+                // then remove it from the stored connections as well in the evidencemanager
+                EvidenceManager.instance.DisconnectEvidence();
             }
         }
     }

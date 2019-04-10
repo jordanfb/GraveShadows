@@ -335,4 +335,29 @@ public class EvidenceManager : MonoBehaviour
         Debug.LogError("UNABLE TO FIND EVIDENCE OH DEAR");
         return null;
     }
+
+    public void ConnectEvidence(int e1, int e2)
+    {
+        if (e1 == e2 || e1 > AllEvidence.Count || e2 > AllEvidence.Count)
+        {
+            return; // can't connect them if they're you or they don't exist
+        }
+        SerializedEvidence e1e = AllEvidence[e1];
+        SerializedEvidence e2e = AllEvidence[e2];
+    }
+
+    public void ConnectEvidence(YarnBoardEntity e1, YarnBoardEntity e2)
+    {
+        ConnectEvidence(FindSerializedEvidence(e1).evidenceindex, FindSerializedEvidence(e2).evidenceindex);
+    }
+
+    public void DisconnectEvidence(int e1, int e2)
+    {
+        // delete the connection
+    }
+
+    public void DisconnectEvidence(Evidence e1, Evidence e2)
+    {
+        DisconnectEvidence(FindSerializedEvidence(e1).evidenceindex, FindSerializedEvidence(e2).evidenceindex);
+    }
 }
