@@ -15,4 +15,9 @@ public class Suspect : YarnBoardEntity
     {
         get { return _codeName; }
     }
+
+    public string Bio
+    {
+        get { return _bio; }
+    }
 }

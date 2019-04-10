@@ -5,14 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame()
+    public void NewGame()
     {
-        SceneManager.LoadScene("Level1");
+        GameplayManager.instance.NewGame();
+        GameplayManager.instance.VisitCrimeScene();
+    }
+
+    public void LoadGame()
+    {
+        GameplayManager.instance.LoadGameFromPlayerPrefs();
+        Debug.LogWarning("This isn't implemented and may never be");
+        GameplayManager.instance.VisitCrimeScene();
     }
 
     public void QuitGame()
     {
-        Debug.Log("QuitGame");
+        Debug.Log("Quit Game");
         Application.Quit();
     }
 }
