@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Type Writer MAT
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: OutlineBankerLamp Mat
+  m_Shader: {fileID: 4800000, guid: edad60f98b72a4a58a539318032f9f7a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 96f6f9f05f40a444f9a0977d8212c9c2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 87cd1e649e0a8ef428dbc7623e2d11b7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -68,7 +68,7 @@ Material:
         m_Scale: {x: 5, y: 5}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Angle: 89
+    - _Angle: 75
     - _BumpScale: 1
     - _ContrastAdjustment: 1
     - _Cutoff: 0.5
@@ -82,6 +82,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OutlineWidth: 0.02
     - _Parallax: 0.02
     - _SecondOutlineWidth: 0
     - _Smoothness: 0.1
@@ -95,5 +96,6 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FirstOutlineColor: {r: 1, g: 1, b: 1, a: 0.5}
-    - _SecondOutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SecondOutlineColor: {r: 0, g: 0, b: 1, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}

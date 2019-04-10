@@ -195,7 +195,13 @@ public class simplePlayerMovement : MonoBehaviour
             //Evidence e = emono.EvidenceInfo;
             //PlayerManager.instance.CollectEvidence(e);
             StartCoroutine(DestroyAfterTime(1f, other.gameObject));
-            anim.SetTrigger("pickUp");
+            if (emono.isWaistLevel) {
+                anim.SetTrigger("reachOver");
+            }
+            else {
+                anim.SetTrigger("pickUp");
+            }
+
 
         }
     }
