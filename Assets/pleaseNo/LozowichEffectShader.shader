@@ -3,7 +3,9 @@
         _MainTex ("Base (RGB)", 2D) = "white" {}
         _bwBlend ("Black & White blend", Range (0, 1)) = 0
         _tile ("tileAmount", Range (0, 10)) = 1
-        _TonalArtMap("Tonal art map", 2DArray) = "white" {}
+        _TonalArtMap1("Tonal art map", 2DArray) = "white" {}
+        _TonalArtMap2("Tonal art map", 2DArray) = "white" {}
+        _TonalArtMap3("Tonal art map", 2DArray) = "white" {}
         _blurTex1("blurTexture", 2D) = "white" {}
         _blurTex2("blurTexture", 2D) = "white" {}
         _blurTex3("blurTexture", 2D) = "white" {}
@@ -27,7 +29,9 @@
             uniform float _bwBlend;
             uniform float _tile;
             uniform float _mitigationAmount;
-            UNITY_DECLARE_TEX2DARRAY(_TonalArtMap);
+            UNITY_DECLARE_TEX2DARRAY(_TonalArtMap1);
+            UNITY_DECLARE_TEX2DARRAY(_TonalArtMap2);
+            UNITY_DECLARE_TEX2DARRAY(_TonalArtMap3);
             
             float2 rotateUV(float2 inUV, float rotAmount){
                 float _RotationSpeed = rotAmount;
@@ -64,18 +68,18 @@
                 float3 normalValues;
                 DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.uv), depthValue, normalValues);
                 //_mitigationAmount* clamp((depthValue * _ProjectionParams.z)/5, 0, 1.0)
-                float frame = fmod(_Time.y / 0.2, 3.0);
+                float frame = fmod(_Time.y / 0.1, 3.0);
                 int current = floor(frame);
                 
-                if(current == 0){
-                    mainUV.x += (blurTex1.x/_mitigationAmount)%1.0;
-                }
-                else if(current == 1){
-                    mainUV.x += (blurTex2.x/_mitigationAmount)%1.0;
-                }
-                else if(current == 2){
-                    mainUV.x += (blurTex3.x/_mitigationAmount)%1.0;
-                }
+                //if(current == 0){
+                //    mainUV.x += (blurTex1.x/_mitigationAmount)%1.0;
+                //}
+                //else if(current == 1){
+                //    mainUV.x += (blurTex2.x/_mitigationAmount)%1.0;
+                //}
+                //else if(current == 2){
+                //    mainUV.x += (blurTex3.x/_mitigationAmount)%1.0;
+                //}
                 
               
             
@@ -117,15 +121,19 @@
                 
                
                 TAMuv = rotateUV(mainUV, rand(normalValues)*10); 
-                
+                float4 col1 = float4(1.0,0,0,1.0);
+                float4 col2 = float4(1.0,0,0,1.0);
                 if(current == 0){
-                    TAMuv.x += 0.01;
+                    col1 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap1, float3(TAMuv * _tile, floor(texI)));
+                    col2 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap1, float3(TAMuv * _tile, ceil(texI)));
                 }
                 else if(current == 1){
-                    TAMuv.x += 0.00;
+                    col1 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap2, float3(TAMuv * _tile, floor(texI)));
+                    col2 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap2, float3(TAMuv * _tile, ceil(texI)));
                 }
                 else{
-                    TAMuv.x += 0.01;
+                    col1 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap3, float3(TAMuv * _tile, floor(texI)));
+                    col2 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap3, float3(TAMuv * _tile, ceil(texI)));
                 }
                 
                 
@@ -135,8 +143,7 @@
                 
                 
                 
-                float4 col1 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(TAMuv * _tile, floor(texI)));
-                float4 col2 = UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(TAMuv * _tile, ceil(texI)));
+                
                 float4 TAMcolor = lerp(col1, col2, texI - floor(texI));
                 result.rgb = lerp(color.rgb, TAMcolor, _bwBlend);
                 float4 d = tex2D(_CameraDepthTexture, i.uv);
