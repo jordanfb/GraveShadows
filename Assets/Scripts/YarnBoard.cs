@@ -225,7 +225,7 @@ public class YarnBoard : MonoBehaviour
             System.Random rng = new System.Random();
             int next = rng.Next(0, EvidenceManager.AllEvidence.Count - 1);
             EvidenceManager.AllEvidence[next].evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
-            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Evidence")) 
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Evidence"))
                 Destroy(go);
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("Suspect"))
                 Destroy(go);
