@@ -231,6 +231,8 @@ public class YarnBoard : MonoBehaviour
                 Destroy(go);
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("Pin"))
                 Destroy(go);
+            foreach (YarnLine go in GameObject.FindObjectsOfType<YarnLine>())
+                Destroy(go.gameObject);
             GenerateContent();
         }
 
