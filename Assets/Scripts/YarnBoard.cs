@@ -32,6 +32,14 @@ public class YarnBoard : MonoBehaviour
     private float _photoScalar;
     [SerializeField]
     private Transform _yarnBoardParent;
+    [SerializeField]
+    private float _evidenceXOffset;
+    [SerializeField]
+    private float _evidenceYOffset;
+    [SerializeField]
+    private float _pinScale;
+    [SerializeField]
+    private float _pinOffset;
 
 
     private List<GameObject> _pins;
@@ -152,7 +160,7 @@ public class YarnBoard : MonoBehaviour
                 go.transform.localScale *= _photoScalar;
                 //go.transform.parent = _yarnBoardParent;
                 go.transform.Rotate(0f, -90f, 0f);
-                go.transform.position = _yarnBoardParent.position;
+                go.transform.position = new Vector3(_evidenceXOffset, _evidenceYOffset, _yarnBoardParent.position.z);
                 go.AddComponent<SpriteRenderer>().sprite = _placeholderSprite;
                 go.AddComponent<BoxCollider>();
                 go.tag = "Suspect";
@@ -167,8 +175,8 @@ public class YarnBoard : MonoBehaviour
             }
 
             GameObject pin = Instantiate(_pinPrefab, go.transform);
-            pin.transform.localPosition = Vector3.zero;
-            pin.transform.localScale = new Vector3(10f, 10f, 10f);
+            pin.transform.localPosition = new Vector3(0f, _pinOffset, 0f);
+            pin.transform.localScale = new Vector3(_pinScale, _pinScale, _pinScale);
             pin.transform.Rotate(0f, 0f, 180f);
             //GameObject pinChild = pin.transform.GetChild(0).gameObject;
             //pinChild.transform.Rotate(0f, 0f, 180f);
