@@ -46,6 +46,11 @@ public class EvidenceManager : MonoBehaviour
         }
     }
 
+    public bool Generated
+    {
+        set { generated = value; }
+    }
+
     public void Awake()
     {
         // initialize yourself and the list of all evidence
@@ -135,6 +140,7 @@ public class EvidenceManager : MonoBehaviour
         PlayerPrefs.DeleteKey("EvidenceSaved");
         PlayerPrefs.Save();
         // then it also makes a new game
+        Random.InitState(System.DateTime.Now.Millisecond);
         instance.InitializeSerializedEvidence();
     }
 
@@ -156,8 +162,7 @@ public class EvidenceManager : MonoBehaviour
             }
         }
 
-        System.Random rng = new System.Random();
-        int j = rng.Next(0, 4);
+        int j = Random.Range(0, 4);
         culprit = ReferencedEntity(allSerializedEvidence[j]) as Suspect;
         if(culprit == null)
         {
@@ -243,14 +248,13 @@ public class EvidenceManager : MonoBehaviour
             
         }
                 
-        System.Random rng = new System.Random();
         while(office < 15 || factory < 15)
         {
             if (remainingEvidence.Count == 0)
                 break;
 
             // Generate the next piece of evidence and check if it can be added.
-            int next = rng.Next(0, remainingEvidence.Count - 1);
+            int next = Random.Range(0, remainingEvidence.Count - 1);
             SerializedEvidence se = remainingEvidence[next];
             Evidence ev = ReferencedEntity(se) as Evidence;
             if(ev == null)
