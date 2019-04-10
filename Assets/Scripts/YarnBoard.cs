@@ -222,8 +222,7 @@ public class YarnBoard : MonoBehaviour
 #if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.T))
         {
-            System.Random rng = new System.Random();
-            int next = rng.Next(0, EvidenceManager.AllEvidence.Count - 1);
+            int next = Random.Range(0, EvidenceManager.AllEvidence.Count - 1);
             EvidenceManager.AllEvidence[next].evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("Evidence"))
                 Destroy(go);
