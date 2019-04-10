@@ -102,11 +102,11 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   returnToConversationQuipsTextAsset: {fileID: 4900000, guid: 66aa4e94c0cab2a449dbc23b7f768a6e,
     type: 3}
-  animator: {fileID: 895096677743352100}
+  animator: {fileID: 529486725720881989}
   conversationMember: {fileID: 12188629915876987}
   editPositions: 1
   positions: []
-  guardHead: {fileID: 895096677735642926}
+  guardHead: {fileID: 529486725713909071}
   viewConeDistance: 5
   viewConeAngle: 30
   editIndex: 0
@@ -221,6 +221,18 @@ PrefabInstance:
 --- !u!4 &529486725713908903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 318960fa7b8a00a40a2d2d826846373c,
+    type: 3}
+  m_PrefabInstance: {fileID: 529486725713514021}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &529486725720881989 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 318960fa7b8a00a40a2d2d826846373c,
+    type: 3}
+  m_PrefabInstance: {fileID: 529486725713514021}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &529486725713909071 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400234, guid: 318960fa7b8a00a40a2d2d826846373c,
     type: 3}
   m_PrefabInstance: {fileID: 529486725713514021}
   m_PrefabAsset: {fileID: 0}
@@ -1192,18 +1204,6 @@ PrefabInstance:
 --- !u!4 &895096677735642822 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 57d94f3ac85659e4ea5da45d87a66624,
-    type: 3}
-  m_PrefabInstance: {fileID: 895096677736033348}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &895096677743352100 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9500000, guid: 57d94f3ac85659e4ea5da45d87a66624,
-    type: 3}
-  m_PrefabInstance: {fileID: 895096677736033348}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &895096677735642926 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400234, guid: 57d94f3ac85659e4ea5da45d87a66624,
     type: 3}
   m_PrefabInstance: {fileID: 895096677736033348}
   m_PrefabAsset: {fileID: 0}
