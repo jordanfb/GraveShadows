@@ -79,14 +79,12 @@ public class LineDraw : MonoBehaviour
         
         else if(Input.GetMouseButton(0) && _line != null) 
         {
-            Debug.Log("HERE");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit endHit;
             if (Physics.Raycast(ray, out endHit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
             {
-                Debug.Log("HITHITHIT");
                 Vector3 pos = endHit.point;
-                pos.z = _line.GetPosition(0).z;
+                pos.x = _line.GetPosition(0).x; // This doesn't work with arbitrary yarn boards which sucks but we need to finish the game
                 // this is a bit of an issue since it means it doesn't perfectly align with
                 // the mouse but it does mean it stays above the evidence. It doesn't work for rotated yarn boards though
 
@@ -130,6 +128,7 @@ public class LineDraw : MonoBehaviour
         _line.material = material;
         _line.positionCount = 2;
         _line.startWidth = _lineWidth;
+        _line.endWidth = _lineWidth;
         _line.useWorldSpace = true;
 
         //Set both vertices to the start pin
@@ -155,16 +154,16 @@ public class LineDraw : MonoBehaviour
 
         //Z-size is arbitrary, and we might need to change these around
         //depending on what axis the yarn board faces
-        lineColl.size = new Vector3(lineLength, lineWidth, 1f);
+        lineColl.size = new Vector3(lineLength, lineWidth * 1.5f, lineWidth * 1.5f);
 
         //Tne line collider GO will lie at the midpoint of the line to cover  the whole thing.
         Vector3 midPoint = (_line.GetPosition(0) + _line.GetPosition(1)) / 2;
         lineColl.transform.position = midPoint;
 
         //Rotate the line collider by a certain angle so that it's oriented correctly.
-        float angle = Mathf.Atan2((_line.GetPosition(1).y - _line.GetPosition(0).y), (_line.GetPosition(1).x - _line.GetPosition(0).x));
+        float angle = Mathf.Atan2((_line.GetPosition(1).y - _line.GetPosition(0).y), (_line.GetPosition(1).z - _line.GetPosition(0).z));
         angle *= Mathf.Rad2Deg;
-        lineColl.transform.Rotate(0f, 0f, angle);
+        lineColl.transform.Rotate(0f, -90, angle);
     }
 
     /**
