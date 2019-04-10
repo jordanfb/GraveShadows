@@ -18,6 +18,7 @@ public class EvidenceManager : MonoBehaviour
     [System.NonSerialized]
     public List<SerializedEvidence> apartmentEV = new List<SerializedEvidence>();
     private int[] suspectTotals = new int[5];
+    private bool generated = false;
 
 
     public static List<SerializedEvidence> AllEvidence
@@ -88,6 +89,8 @@ public class EvidenceManager : MonoBehaviour
 
     public void InitializeSerializedEvidence()
     {
+        if (generated)
+            return;
         // then initialize all the evidence with the correct indices:
         for (int i = 0; i < allEvidenceEntities.Count; i++)
         {
@@ -97,6 +100,7 @@ public class EvidenceManager : MonoBehaviour
         // this is called and then later you'd initialize whether the evidence is in the game or not and store that in this info
         // you may also store spawn points or something but not for now TODO
         RandomlySpawnEvidence(); // this chooses what to place into the game world and disables everything else
+        generated = true;
     }
 
     public static bool LoadEvidenceFromPlayerPrefs()

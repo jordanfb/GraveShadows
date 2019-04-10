@@ -62,27 +62,27 @@ public class GameplayManager : MonoBehaviour
 
     private void StartFactoryScene()
     {
-        SceneManager.LoadScene("Level1"); // TODO
+        SceneManager.LoadScene("Level 3");
     }
 
     private void StartHubScene()
     {
-        SceneManager.LoadScene("HubWorld");
+        SceneManager.LoadScene("Level 0 HUB");
     }
 
     private void StartOfficeScene()
     {
-        SceneManager.LoadScene("OfficeLevel"); // TODO
+        SceneManager.LoadScene("Level 2");
     }
 
     private void StartMainMenuScene()
     {
-        SceneManager.LoadScene("MainMenu"); // TODO
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void StartCrimeScene()
     {
-        SceneManager.LoadScene("Level1"); // TODO
+        SceneManager.LoadScene("Level 1");
     }
 
     public string GenerateTodaysRecipt(Level visitedLocation, List<Evidence> evidenceFound, bool wasSpotted, bool foundAll)
@@ -179,6 +179,20 @@ public class GameplayManager : MonoBehaviour
         else
         {
             f.FadeOut(StartCrimeScene);
+        }
+    }
+
+    public void VisitScene(string sceneName)
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            f.FadeOut(() => { SceneManager.LoadScene(sceneName); });
         }
     }
 

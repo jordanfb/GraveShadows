@@ -26,6 +26,21 @@ public class YarnBoard : MonoBehaviour
     private int _charTextFontSize;
     [SerializeField]
     private YarnBoardCamera _yarnBoardCamera;
+    [SerializeField]
+    private Sprite _placeholderSprite;
+    [SerializeField]
+    private float _photoScalar;
+    [SerializeField]
+    private Transform _yarnBoardParent;
+    [SerializeField]
+    private float _evidenceXOffset;
+    [SerializeField]
+    private float _evidenceYOffset;
+    [SerializeField]
+    private float _pinScale;
+    [SerializeField]
+    private float _pinOffset;
+
 
     private List<GameObject> _pins;
     private YarnBoardMode mode = YarnBoardMode.None;
@@ -118,17 +133,56 @@ public class YarnBoard : MonoBehaviour
             SerializedEvidence se = EvidenceManager.AllEvidence[i];
             YarnBoardEntity ybe = EvidenceManager.instance.ReferencedEntity(se);
 
+            // We're only worried about evidence we have available for the yarn board
+            if (se.evidenceState == SerializedEvidence.EvidenceState.NotInGame || se.evidenceState == SerializedEvidence.EvidenceState.NotFound)
+                continue;
+
             Evidence e = ybe as Evidence;
             Suspect s = ybe as Suspect;
+            GameObject go = null;
             if (e != null)
             {
                 // it's regular evidence
+                go = new GameObject(e.Name);
+                go.transform.localScale *= _photoScalar;
+                //go.transform.parent = _yarnBoardParent;
+                go.transform.Rotate(0f, 90f, 0f);
+                go.transform.position = _yarnBoardParent.position;
+                go.AddComponent<SpriteRenderer>().sprite = _placeholderSprite;
+                go.AddComponent<BoxCollider>();
+                go.AddComponent<EvidenceMono>().EvidenceInfo = e;
+                go.tag = "Evidence";
+
 
             } else if (s != null)
             {
                 // then create a suspect evidence thing
-
+                go = new GameObject(s.CodeName);
+                go.transform.localScale *= _photoScalar;
+                //go.transform.parent = _yarnBoardParent;
+                go.transform.Rotate(0f, -90f, 0f);
+                go.transform.position = new Vector3(_evidenceXOffset, _evidenceYOffset, _yarnBoardParent.position.z);
+                go.AddComponent<SpriteRenderer>().sprite = _placeholderSprite;
+                go.AddComponent<BoxCollider>();
+                go.AddComponent<SuspectMono>().SuspectInfo = s;
+                go.tag = "Evidence";
             }
+
+            if (go == null)
+                continue;
+
+            if (se.evidenceState == SerializedEvidence.EvidenceState.OnYarnBoard)
+            {
+                go.transform.position = new Vector3(se.location.x, se.location.y, this.gameObject.transform.position.z);
+            }
+
+            GameObject pin = Instantiate(_pinPrefab, go.transform);
+            pin.transform.localPosition = new Vector3(0f, _pinOffset, 0f);
+            pin.transform.localScale = new Vector3(_pinScale, _pinScale, _pinScale);
+            pin.transform.Rotate(0f, 0f, 180f);
+            //GameObject pinChild = pin.transform.GetChild(0).gameObject;
+            //pinChild.transform.Rotate(0f, 0f, 180f);
+            
         }
     }
 
@@ -139,7 +193,23 @@ public class YarnBoard : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && mode == YarnBoardMode.None)
+#if UNITY_EDITOR
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            System.Random rng = new System.Random();
+            int next = rng.Next(0, EvidenceManager.AllEvidence.Count - 1);
+            EvidenceManager.AllEvidence[next].evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Evidence")) 
+                Destroy(go);
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Suspect"))
+                Destroy(go);
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Pin"))
+                Destroy(go);
+            GenerateContent();
+        }
+
+#endif
+            if (Input.GetMouseButtonDown(0) && mode == YarnBoardMode.None)
         {
             //Raycast to screen
             RaycastHit hit;
