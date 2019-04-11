@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class breakerBoxScript : Interactable
+using UnityEngine.UI;
+public class breakerBoxScript : MonoBehaviour
 {
-    private GameObject interactText;
-    public GameObject interactTextPrefab;
+
     public List<GameObject> affiliatedLights;
     // Start is called before the first frame update
     void Start()
@@ -16,29 +15,43 @@ public class breakerBoxScript : Interactable
         }
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+
+
+    private void OnTriggerStay(Collider other)
     {
-        displayUI();
-
-    }
 
 
-    public override void ColliderBehavior(Collider other)
-    {
-        interactText = Instantiate(interactText);
+
+
+
         if (other.gameObject.tag == "Player")
         {
 
             if (Input.GetKeyDown(KeyCode.E)) {
                 other.GetComponent<simplePlayerMovement>().getAnim().SetTrigger("reachOver");
+                float counter = 0.0f;
                 foreach (GameObject l in affiliatedLights)
                 {
-                    l.SetActive(true);
+
+                    StartCoroutine(turnOnLight(0.5f + counter, l));
+                    //l.SetActive(true);
+                    GetComponent<Interactable>().setActivatedText();
+                    counter += 0.3f;
                 }
 
             }
 
         }
     }
+
+    IEnumerator turnOnLight(float secs, GameObject assocLight)
+    {
+
+        yield return new WaitForSeconds(secs);
+        assocLight.SetActive(true);
+    }
+
+
 }

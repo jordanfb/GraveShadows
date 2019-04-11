@@ -15,18 +15,7 @@ public class doorOpenScript : MonoBehaviour
     public bool isOpen = false;
     public GameObject assocDoor;
     float lastOpenDir;
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
-
-    }
 
     //dir 
     IEnumerator OpenDoorAnim(float dir) {
@@ -91,6 +80,7 @@ public class doorOpenScript : MonoBehaviour
 
                 IEnumerator coroutine = OpenDoorAnim(lastOpenDir);
                 StartCoroutine(coroutine);
+                GetComponent<Interactable>().setActivatedText();
             }
 
         }

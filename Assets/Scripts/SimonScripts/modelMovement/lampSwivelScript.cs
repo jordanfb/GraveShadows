@@ -5,22 +5,13 @@ using UnityEngine;
 public class lampSwivelScript : MonoBehaviour
 {
 
+
     public GameObject assocLamp;
     public GameObject assocLight;
     private bool isMoving = false;
     public float speed = 50f;
     public float angleSpunEachTime;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -36,11 +27,12 @@ public class lampSwivelScript : MonoBehaviour
 
                 IEnumerator coroutine = rotateLightAndLamp(angleSpunEachTime);
                 StartCoroutine(coroutine);
-                //assocLight.transform.Rotate(assocLamp.transform.up, 90f);
+                GetComponent<Interactable>().setActivatedText();
             }
         }
     }
 
+  
 
     IEnumerator rotateLightAndLamp(float amount) {
 
