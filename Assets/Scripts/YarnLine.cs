@@ -5,6 +5,11 @@ using UnityEngine;
 public class YarnLine : MonoBehaviour
 {
 
+    // for undoing/redoing this yarn collider:
+    public SerializedEvidence e1;
+    public SerializedEvidence e2;
+
+    // for making the yarn itself
     public Transform point1;
     public Transform point2;
     //public Vector3 tempPoint;

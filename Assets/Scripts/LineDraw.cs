@@ -92,6 +92,8 @@ public class LineDraw : MonoBehaviour
                     if (endEvidence != null && originalEvidence != null)
                     {
                         // then connect it!
+                        yarnLine.e1 = EvidenceManager.instance.FindSerializedEvidence(originalEvidence);
+                        yarnLine.e2 = EvidenceManager.instance.FindSerializedEvidence(endEvidence);
                         EvidenceManager.instance.ConnectEvidence(originalEvidence, endEvidence);
                     }
                     else
@@ -145,10 +147,16 @@ public class LineDraw : MonoBehaviour
                 {
                     LineRenderer delLine = delColl.transform.parent.gameObject.GetComponent<LineRenderer>();
                     _lines.Remove(delLine);
+
+                    // then remove it from the stored connections as well in the evidencemanager
+                    YarnLine yl = delLine.GetComponent<YarnLine>();
+                    if (yl.e1 != null && yl.e2 != null)
+                    {
+                        EvidenceManager.instance.DisconnectEvidence(yl.e1.evidenceindex, yl.e2.evidenceindex);
+                    }
+
                     Destroy(delColl.transform.parent.gameObject);
                 }
-                // then remove it from the stored connections as well in the evidencemanager
-                EvidenceManager.instance.DisconnectEvidence();
             }
         }
     }
@@ -171,6 +179,19 @@ public class LineDraw : MonoBehaviour
         //Set both vertices to the start pin
         _line.SetPosition(0, position);
         _line.SetPosition(1, position);
+    }
+
+    public void DeleteAllLines()
+    {
+        foreach(LineRenderer lr in _lines)
+        {
+            Destroy(lr.gameObject);
+        }
+    }
+
+    public void CreateFullLine()
+    {
+
     }
 
     /**

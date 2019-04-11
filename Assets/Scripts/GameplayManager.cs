@@ -13,7 +13,7 @@ public class GameplayManager : MonoBehaviour
      */
     
     EvidenceManager evidenceManager;
-
+    
     public static GameplayManager instance;
 
     [Space]
