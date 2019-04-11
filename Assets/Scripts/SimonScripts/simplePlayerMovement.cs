@@ -21,7 +21,7 @@ public class simplePlayerMovement : MonoBehaviour
     public float SHADOW_SPEED;
     bool canExit = true; // to stop it from leaving twice
 
-    private Animator anim;
+    public Animator anim;
 
 
     const float PLAYER_WIDTH = 0.5f;
@@ -63,6 +63,12 @@ public class simplePlayerMovement : MonoBehaviour
         }
 
 
+    }
+
+    public Animator getAnim()
+    {
+
+        return anim;
     }
 
     void thirdPersonMovement(float _moveDirX, float _moveDirY) {
@@ -212,4 +218,6 @@ public class simplePlayerMovement : MonoBehaviour
 
         Destroy(gameObjectToDestroy);
     }
+
+
 }
