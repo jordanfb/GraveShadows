@@ -1709,7 +1709,6 @@ GameObject:
   - component: {fileID: 319980972}
   - component: {fileID: 319980971}
   - component: {fileID: 319980970}
-  - component: {fileID: 319980973}
   - component: {fileID: 319980975}
   - component: {fileID: 319980974}
   m_Layer: 8
@@ -1783,21 +1782,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &319980973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319980969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19295b8ed119d469c9137c4154a9b244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  intensity: 1
-  tileAmount: 4
-  mitigationAmount: 50
 --- !u!114 &319980974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1874,7 +1858,9 @@ MonoBehaviour:
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
-  m_AfterStackBundles: []
+  m_AfterStackBundles:
+  - assemblyQualifiedName: NoirEffect, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &324809412
 GameObject:
   m_ObjectHideFlags: 0
