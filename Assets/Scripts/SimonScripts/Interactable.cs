@@ -23,7 +23,7 @@ public class Interactable : MonoBehaviour
         if (!gameObject.activeInHierarchy) {
             return;
         }
-        interactText.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+        interactText.transform.position = Camera.main.WorldToScreenPoint(GameObject.Find("Player").transform.position+ Vector3.up*0.5f);
     }
 
     private void OnTriggerEnter(Collider other)
