@@ -21,7 +21,7 @@ public class simplePlayerMovement : MonoBehaviour
     public float SHADOW_SPEED;
     bool canExit = true; // to stop it from leaving twice
 
-    private Animator anim;
+    public Animator anim;
 
 
     const float PLAYER_WIDTH = 0.5f;
@@ -63,6 +63,12 @@ public class simplePlayerMovement : MonoBehaviour
         }
 
 
+    }
+
+    public Animator getAnim()
+    {
+
+        return anim;
     }
 
     void thirdPersonMovement(float _moveDirX, float _moveDirY) {
@@ -195,7 +201,13 @@ public class simplePlayerMovement : MonoBehaviour
             //Evidence e = emono.EvidenceInfo;
             //PlayerManager.instance.CollectEvidence(e);
             StartCoroutine(DestroyAfterTime(1f, other.gameObject));
-            anim.SetTrigger("pickUp");
+            if (emono.isWaistLevel) {
+                anim.SetTrigger("reachOver");
+            }
+            else {
+                anim.SetTrigger("pickUp");
+            }
+
 
         }
     }
@@ -206,4 +218,6 @@ public class simplePlayerMovement : MonoBehaviour
 
         Destroy(gameObjectToDestroy);
     }
+
+
 }
