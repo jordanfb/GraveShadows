@@ -21,6 +21,7 @@ MonoBehaviour:
   - {fileID: 114534405904754290}
   - {fileID: 114045384858180592}
   - {fileID: 114317453444324282}
+  - {fileID: 114387484186661312}
 --- !u!114 &114032566230141246
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -171,6 +172,25 @@ MonoBehaviour:
   fastMode:
     overrideState: 1
     value: 0
+--- !u!114 &114387484186661312
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7300b1d3d4d074ce4981ca4c7d1a46bc, type: 3}
+  m_Name: NoirEffect
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  blend:
+    overrideState: 0
+    value: 0.5
 --- !u!114 &114428642473448782
 MonoBehaviour:
   m_ObjectHideFlags: 3
