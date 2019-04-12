@@ -8,12 +8,13 @@ public class LozowichEffect : MonoBehaviour {
     public float tileAmount = 1f;
     public float mitigationAmount = 50f;
     private Material material;
-
+    public Texture2DArray test;
     // Creates a private material used to the effect
     
     void Awake ()
     {
         material = new Material( Shader.Find("Hidden/LozowichEffectShader") );
+        material.set
     }
 
     private void Start()
@@ -24,6 +25,7 @@ public class LozowichEffect : MonoBehaviour {
     // Postprocess the image
     void OnRenderImage (RenderTexture source, RenderTexture destination)
     {
+        
         if (intensity == 0)
         {
             Graphics.Blit (source, destination);

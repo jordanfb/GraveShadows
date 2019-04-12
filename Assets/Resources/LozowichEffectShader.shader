@@ -9,6 +9,7 @@
         _blurTex1("blurTexture", 2D) = "white" {}
         _blurTex2("blurTexture", 2D) = "white" {}
         _blurTex3("blurTexture", 2D) = "white" {}
+		_test("blurTexture", 2D) = "white" {}
         _mitigationAmount("mitigation", Range (0, 100)) = 50
         
     }
@@ -151,13 +152,9 @@
 
                 float4 n = float4(normalValues, 1.0);
                 //return depthValue * _ProjectionParams.z;
+				return color;
                 return result;
-                if(depthValue * _ProjectionParams.z){
-                    return result;
-                }
-                else{
-                    return color;
-                }
+                
                 
             }
             ENDCG
