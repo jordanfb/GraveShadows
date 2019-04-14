@@ -32,6 +32,7 @@ public class breakerBoxScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E)) {
                 other.GetComponent<simplePlayerMovement>().getAnim().SetTrigger("reachOver");
                 float counter = 0.0f;
+                print("Hey");
                 foreach (GameObject l in affiliatedLights)
                 {
 
@@ -39,6 +40,7 @@ public class breakerBoxScript : MonoBehaviour
                     //l.SetActive(true);
                     GetComponent<Interactable>().setActivatedText();
                     counter += 0.3f;
+                    
                 }
 
             }
