@@ -37,7 +37,7 @@ public class YarnBoardCamera : MonoBehaviour
 
     public void LookAtEvidence(Transform target)
     {
-        Vector3 endPos = new Vector3(target.position.x, target.position.y, transform.position.z) - transform.forward*.7f; // move it back some
+        Vector3 endPos = new Vector3(transform.position.x, target.position.y, target.position.z);// - transform.forward*.7f; // move it back some
         lookingAtEvidence = true;
         StartCoroutine(CameraLerp(transform.position, endPos));
     }

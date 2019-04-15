@@ -13,7 +13,7 @@ public class GameplayManager : MonoBehaviour
      */
     
     EvidenceManager evidenceManager;
-
+    
     public static GameplayManager instance;
 
     [Space]
@@ -268,6 +268,7 @@ public class GameplayManager : MonoBehaviour
         EvidenceManager.NewSaveGame();
 
         // then load the game data here:
+        dayNum = 0; // first day
         dayData = new List<DayData>();
         for (int i = 0; i < numExploringDays; i++)
         {

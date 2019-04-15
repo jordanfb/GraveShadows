@@ -20,6 +20,12 @@ public class YarnBoard : MonoBehaviour
     [SerializeField]
     private Text _flavorTextAsset;
     [SerializeField]
+    private GameObject _suspectInfoPanel;
+    [SerializeField]
+    private Text _suspectCodeName;
+    [SerializeField]
+    private Text _suspectBio;
+    [SerializeField]
     private float _pinZOffset = 0.0f;
     [SerializeField]
     private float _offsetRatio;
@@ -153,17 +159,6 @@ public class YarnBoard : MonoBehaviour
                 emono.EvidenceInfo = e;
                 SpriteRenderer sr = go.GetComponentInChildren<SpriteRenderer>();
                 sr.sprite = _placeholderSprite;
-
-                /*go = new GameObject(e.Name);
-                go.transform.parent = transform;
-                go.transform.localScale *= _photoScalar;
-                //go.transform.parent = _yarnBoardParent;
-                go.transform.Rotate(0f, 90f, 0f);
-                go.transform.position = _yarnBoardParent.position;
-                go.AddComponent<SpriteRenderer>().sprite = _placeholderSprite;
-                go.AddComponent<BoxCollider>();
-                go.AddComponent<EvidenceMono>().EvidenceInfo = e;
-                go.tag = "Evidence";*/
             }
             else if (s != null)
             {
@@ -174,18 +169,6 @@ public class YarnBoard : MonoBehaviour
                 susmono.SuspectInfo = s;
                 SpriteRenderer sr = go.GetComponentInChildren<SpriteRenderer>();
                 sr.sprite = _placeholderSprite;
-
-                /*
-                go = new GameObject(s.CodeName);
-                go.transform.parent = transform;
-                go.transform.localScale *= _photoScalar;
-                //go.transform.parent = _yarnBoardParent;
-                go.transform.Rotate(0f, -90f, 0f);
-                go.transform.position = new Vector3(_evidenceXOffset, _evidenceYOffset, _yarnBoardParent.position.z);
-                go.AddComponent<SpriteRenderer>().sprite = _placeholderSprite;
-                go.AddComponent<BoxCollider>();
-                go.AddComponent<SuspectMono>().SuspectInfo = s;
-                go.tag = "Evidence";*/
             }
 
             if (go == null)
@@ -193,16 +176,9 @@ public class YarnBoard : MonoBehaviour
 
             if (se.evidenceState == SerializedEvidence.EvidenceState.OnYarnBoard)
             {
+                Debug.LogError("This is going to need to be fixed since it's using global position");
                 go.transform.position = new Vector3(se.location.x, se.location.y, this.gameObject.transform.position.z);
             }
-
-            /*no longer need to do this because of the way we use prefabs
-            GameObject pin = Instantiate(_pinPrefab, go.transform);
-            pin.transform.localPosition = new Vector3(0f, _pinOffset, 0f);
-            pin.transform.localScale = new Vector3(_pinScale, _pinScale, _pinScale);
-            pin.transform.Rotate(0f, 0f, 180f);*/
-            //GameObject pinChild = pin.transform.GetChild(0).gameObject;
-            //pinChild.transform.Rotate(0f, 0f, 180f);
         }
     }
 
@@ -216,20 +192,21 @@ public class YarnBoard : MonoBehaviour
 #if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.T))
         {
-            System.Random rng = new System.Random();
-            int next = rng.Next(0, EvidenceManager.AllEvidence.Count - 1);
+            int next = Random.Range(0, EvidenceManager.AllEvidence.Count - 1);
             EvidenceManager.AllEvidence[next].evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
-            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Evidence")) 
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Evidence"))
                 Destroy(go);
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("Suspect"))
                 Destroy(go);
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("Pin"))
                 Destroy(go);
+            foreach (YarnLine go in GameObject.FindObjectsOfType<YarnLine>())
+                Destroy(go.gameObject);
             GenerateContent();
         }
 
 #endif
-            if (Input.GetMouseButtonDown(0) && mode == YarnBoardMode.None)
+        if (Input.GetMouseButtonDown(0) && mode == YarnBoardMode.None)
         {
             //Raycast to screen
             RaycastHit hit;
@@ -242,18 +219,19 @@ public class YarnBoard : MonoBehaviour
                 if (evidence.tag == "Evidence")
                 {
                     _yarnBoardCamera.LookAtEvidence(evidence.transform);
-                    _flavorTextPanel.SetActive(true);
                     EvidenceMono em = evidence.GetComponent<EvidenceMono>();
                     SuspectMono sm = evidence.GetComponent<SuspectMono>();
                     mode = YarnBoardMode.Displaying;
                     if (em != null)
                     {
+                        _flavorTextPanel.SetActive(true);
                         _flavorTextAsset.text = em.EvidenceInfo.FlavorText;
                         _evidenceTitle.text = em.EvidenceInfo.Name;
                     } else if (sm != null)
                     {
-                        _flavorTextAsset.text = sm.SuspectInfo.Bio;
-                        _evidenceTitle.text = sm.SuspectInfo.CodeName;
+                        _suspectInfoPanel.SetActive(true);
+                        _suspectCodeName.text = sm.SuspectInfo.CodeName;
+                        _suspectBio.text = sm.SuspectInfo.Bio;
                     } else
                     {
                         // some weird error occured so just don't go anywhere
@@ -347,6 +325,15 @@ public class YarnBoard : MonoBehaviour
     {
         _flavorTextPanel.SetActive(false);
         _flavorTextAsset.text = "";
+        //displaying = false;
+        mode = YarnBoardMode.None;
+    }
+
+    public void DeactivateSuspectPanel()
+    {
+        _suspectInfoPanel.SetActive(false);
+        _suspectCodeName.text = "";
+        _suspectBio.text = "";
         //displaying = false;
         mode = YarnBoardMode.None;
     }
