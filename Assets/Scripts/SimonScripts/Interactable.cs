@@ -29,7 +29,6 @@ public class Interactable : MonoBehaviour
         if (!interactText.activeInHierarchy) {
             return;
         }
-        print(interactText);
         interactText.transform.position = Camera.main.WorldToScreenPoint(Player.transform.position+ Vector3.up*0.5f);
     }
 
@@ -52,6 +51,10 @@ public class Interactable : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (interactText == null)
+        {
+            return;
+        }
         if (other.gameObject.tag == "Player")
         {
             interactText.SetActive(false);
@@ -59,6 +62,10 @@ public class Interactable : MonoBehaviour
     }
 
     public void setActivatedText() {
+        if (interactText == null)
+        {
+            return;
+        }
         interactText.GetComponent<Text>().text = onActivateText;
     }
 
