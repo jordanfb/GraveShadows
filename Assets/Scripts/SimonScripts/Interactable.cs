@@ -11,19 +11,26 @@ public class Interactable : MonoBehaviour
     public GameObject interactTextPrefab;
     public string baseText;
     public string onActivateText;
+    public GameObject Player;
 
     void Start()
     {
+        Player = GameObject.Find("Player");
 
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        if (!gameObject.activeInHierarchy) {
+        if(interactText == null) {
             return;
         }
-        interactText.transform.position = Camera.main.WorldToScreenPoint(GameObject.Find("Player").transform.position+ Vector3.up*0.5f);
+        if (!interactText.activeInHierarchy) {
+            return;
+        }
+        print(interactText);
+        interactText.transform.position = Camera.main.WorldToScreenPoint(Player.transform.position+ Vector3.up*0.5f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,6 +41,7 @@ public class Interactable : MonoBehaviour
             {
                 interactText = Instantiate(interactTextPrefab, GameObject.Find("Canvas").transform);
                 interactText.GetComponent<Text>().text = baseText;
+                interactText.SetActive(true);
             }
             else
             {

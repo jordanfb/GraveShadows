@@ -36,7 +36,7 @@ public class ShadowRealmManager : MonoBehaviour
     private ThirdPersonCamera tpc;
 
 
-    public GameObject choosingRedicle;
+    //public GameObject choosingRedicle;
     GameObject lightContainer;
     private bool abortIsChoosingWall = false;
 
@@ -73,12 +73,12 @@ public class ShadowRealmManager : MonoBehaviour
         //    checkForShadows();
         //}
 
-        if (isChoosingWall) {
-            choosingRedicle.SetActive(true);
-        }
-        else {
-            choosingRedicle.SetActive(false);
-        }
+        //if (isChoosingWall) {
+        //    choosingRedicle.SetActive(true);
+        //}
+        //else {
+        //    choosingRedicle.SetActive(false);
+        //}
         if (Input.GetKey(KeyCode.Space))
         {
             if (abortIsChoosingWall) {
