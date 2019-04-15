@@ -21,6 +21,7 @@
             #include "UnityCG.cginc"
 
             uniform sampler2D _MainTex;
+            uniform sampler2D _testTex;
             uniform sampler2D _CameraDepthTexture;
             uniform sampler2D _CameraDepthNormalsTexture;
             uniform sampler2D _blurTex1;
@@ -56,6 +57,8 @@
             
             float4 frag(v2f_img i) : COLOR {
             
+                
+                
                 
                 float2 rotUV = rotateUV(i.uv, 1.0);
                 float4 blurTex1 = tex2D(_blurTex1, i.uv);
@@ -102,18 +105,6 @@
                 
                 float2 TAMuv = i.uv;
                 
-               
-                
-                //if(normalValues.r>0.5){
-                    
-                //}
-                //else if(normalValues.b>0.5){
-                //    TAMuv = rotateUV(mainUV, 10.0); 
-                //}
-                //else{
-                //    TAMuv = rotateUV(mainUV, 0);
-                //}
-                
                 
                 
                
@@ -152,12 +143,7 @@
                 float4 n = float4(normalValues, 1.0);
                 //return depthValue * _ProjectionParams.z;
                 return result;
-                if(depthValue * _ProjectionParams.z){
-                    return result;
-                }
-                else{
-                    return color;
-                }
+                
                 
             }
             ENDCG

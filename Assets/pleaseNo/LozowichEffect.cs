@@ -8,27 +8,35 @@ public class LozowichEffect : MonoBehaviour {
     public float tileAmount = 1f;
     public float mitigationAmount = 50f;
     private Material material;
-
-    // Creates a private material used to the effect
-    
+    public Texture2DArray TAM1;
+    public Texture2DArray TAM2;
+    public Texture2DArray TAM3;
+    public Texture testTex;
+    int propID;
     void Awake ()
     {
         material = new Material( Shader.Find("Hidden/LozowichEffectShader") );
+
     }
 
     private void Start()
     {
+
         GetComponent<Camera>().depthTextureMode = DepthTextureMode.DepthNormals;
+        material.SetTexture("_TonalArtMap1", TAM1);
+        material.SetTexture("_TonalArtMap2", TAM2);
+        material.SetTexture("_TonalArtMap3", TAM3);
     }
 
     // Postprocess the image
     void OnRenderImage (RenderTexture source, RenderTexture destination)
     {
-        if (intensity == 0)
-        {
-            Graphics.Blit (source, destination);
-            return;
-        }
+        //if (intensity == 0)
+        //{
+        //    Graphics.Blit (source, destination);
+        //    return;
+        //}
+
 
         material.SetFloat("_bwBlend", Mathf.Clamp(intensity,0f, 1f)); 
         material.SetFloat("_tile", Mathf.Clamp(tileAmount, 0f, 10f));
