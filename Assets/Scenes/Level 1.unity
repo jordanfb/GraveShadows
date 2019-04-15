@@ -3037,7 +3037,7 @@ PrefabInstance:
     - target: {fileID: 2300012, guid: bb25c1603800aa94f9ff8fc60ea0a09f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 86ecc0921118d41748a81a280323f361, type: 2}
+      objectReference: {fileID: 2100000, guid: e30723c7afe6a654ea11d6d1dcbeeaac, type: 2}
     - target: {fileID: 2300014, guid: bb25c1603800aa94f9ff8fc60ea0a09f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -5051,7 +5051,7 @@ MonoBehaviour:
     m_Bits: 256
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 1
-  antialiasingMode: 0
+  antialiasingMode: 1
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
