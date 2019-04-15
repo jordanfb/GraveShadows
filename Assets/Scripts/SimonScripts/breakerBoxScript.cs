@@ -6,13 +6,19 @@ public class breakerBoxScript : MonoBehaviour
 {
 
     public List<GameObject> affiliatedLights;
+    public bool isElevator;
+
     // Start is called before the first frame update
     void Start()
     {
-        foreach (GameObject l in affiliatedLights)
+        if (isElevator == false)
         {
-            l.SetActive(false);
+            foreach (GameObject l in affiliatedLights)
+            {
+                l.SetActive(false);
+            }
         }
+ 
     }
 
 
@@ -31,17 +37,28 @@ public class breakerBoxScript : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E)) {
                 other.GetComponent<simplePlayerMovement>().getAnim().SetTrigger("reachOver");
-                float counter = 0.0f;
-                print("Hey");
-                foreach (GameObject l in affiliatedLights)
+                if (isElevator == false)
                 {
+                    float counter = 0.0f;
 
-                    StartCoroutine(turnOnLight(0.5f + counter, l));
-                    //l.SetActive(true);
-                    GetComponent<Interactable>().setActivatedText();
-                    counter += 0.3f;
-                    
+                    foreach (GameObject l in affiliatedLights)
+                    {
+
+                        StartCoroutine(turnOnLight(0.5f + counter, l));
+                        //l.SetActive(true);
+                        GetComponent<Interactable>().setActivatedText();
+                        counter += 0.3f;
+
+                    }
                 }
+                else if (isElevator == true)
+                {
+                    foreach (GameObject l in affiliatedLights)
+                    {
+                        GetComponent<ElevatorUpDown>().LetsMove();
+                    }
+                }
+
 
             }
 
