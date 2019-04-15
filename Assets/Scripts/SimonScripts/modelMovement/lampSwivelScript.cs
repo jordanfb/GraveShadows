@@ -12,6 +12,11 @@ public class lampSwivelScript : MonoBehaviour
     public float speed = 50f;
     public float angleSpunEachTime;
     // Start is called before the first frame update
+    void Start()
+    {
+        assocLight.SetActive(false);
+    }
+
 
     private void OnTriggerStay(Collider other)
     {
@@ -24,7 +29,7 @@ public class lampSwivelScript : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             if (Input.GetKeyDown(KeyCode.E)) {
-
+                assocLight.SetActive(true);
                 IEnumerator coroutine = rotateLightAndLamp(angleSpunEachTime);
                 StartCoroutine(coroutine);
                 GetComponent<Interactable>().setActivatedText();
