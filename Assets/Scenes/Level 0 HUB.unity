@@ -212,6 +212,10 @@ MonoBehaviour:
   intensity: 1
   tileAmount: 8
   mitigationAmount: 100
+  TAM1: {fileID: 18700000, guid: 921da6c83892d48da8457e28c83c7f41, type: 2}
+  TAM2: {fileID: 18700000, guid: 27f187d39d492409bb3fd8aaa48a4293, type: 2}
+  TAM3: {fileID: 18700000, guid: fcea2e632ceaf4291aa81051017d3af9, type: 2}
+  testTex: {fileID: 2800000, guid: 0cf615845f5384992b47e9920e60d291, type: 3}
 --- !u!114 &43419571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9033,10 +9037,6 @@ PrefabInstance:
       propertyPath: scene
       value: Level 0 HUB
       objectReference: {fileID: 0}
-    - target: {fileID: 1125838775, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4962411602723374852, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -9092,6 +9092,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ea34227b6095b3b4e9eda97ac29c4912, type: 2}
+    - target: {fileID: 1125838775, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1693832145, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
