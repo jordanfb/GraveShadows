@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   affiliatedLights:
   - {fileID: 0}
+  isElevator: 0
 --- !u!65 &606043693102462999
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -75,4 +76,5 @@ MonoBehaviour:
   interactTextPrefab: {fileID: 1704617898835638000, guid: 12f9ec766228d4c0c8562e1d2693257e,
     type: 3}
   baseText: Press "e" to turn on
-  onActivateText: activated
+  onActivateText: Activated
+  Player: {fileID: 0}
