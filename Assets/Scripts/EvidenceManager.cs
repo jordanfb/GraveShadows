@@ -8,6 +8,7 @@ public class EvidenceManager : MonoBehaviour
     public int maxEvidence = 30;
     public int otherSuspectMax = 3;
     public List<YarnBoardEntity> allEvidenceEntities;
+    public List<GameObject> allEvidencePrefabs;
     public Suspect culprit;
     private List<SerializedEvidence> allSerializedEvidence = new List<SerializedEvidence>(); // this is private so that it doesn't get saved. It's initialized either from save data or by code
     private List<Suspect> suspects = new List<Suspect>();
@@ -20,6 +21,10 @@ public class EvidenceManager : MonoBehaviour
     private int[] suspectTotals = new int[5];
     private bool generated = false;
 
+    public static List<GameObject> AllEvidencePrefabs
+    {
+        get { return instance.allEvidencePrefabs; }
+    }
 
     public static List<SerializedEvidence> AllEvidence
     {
@@ -44,6 +49,15 @@ public class EvidenceManager : MonoBehaviour
         {
             instance.allEvidenceEntities = value;
         }
+    }
+
+    public GameObject GetAssociatedPrefab(Evidence e)
+    {
+        int index = allEvidenceEntities.IndexOf(e);
+        if (index == -1)
+            return null;
+        // Have to account for suspects existing as yarn board entities
+        return allEvidencePrefabs[index - 5];
     }
 
     public bool Generated
