@@ -308,14 +308,23 @@ public class ShadowRealmManager : MonoBehaviour
 
 
 
-        gameObject.transform.position = shadowRealmTransform.position;
+        gameObject.transform.position = shadowRealmTransform.position + shadowRealmTransform.forward*100f;
+        StartCoroutine(moveBodyToWall());
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         gameObject.transform.rotation = Quaternion.AngleAxis(90f, Vector3.up);
         isInShadowRealm = !isInShadowRealm;
         GetComponent<simplePlayerMovement>().setCurrentWallCollider(targetWall);
 
 
+    }
 
+    IEnumerator moveBodyToWall() {
+        yield return new WaitForSeconds(0.01f);
+        print("moving");
+        while((gameObject.transform.position - shadowRealmTransform.transform.position).magnitude > 0.1f) {
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, shadowRealmTransform.transform.position, 0.1f);
+        }
 
     }
 

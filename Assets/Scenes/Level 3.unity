@@ -6952,6 +6952,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 692728986}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &65223127 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 942726421144131578, guid: c16a4fdeecf104c7898d04976f09544e,
+    type: 3}
+  m_PrefabInstance: {fileID: 692728986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &70885580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16039,6 +16045,11 @@ PrefabInstance:
       propertyPath: playerMesh
       value: 
       objectReference: {fileID: 65223125}
+    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 65223127}
     - target: {fileID: 4962411602718099990, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_IsActive
