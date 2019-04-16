@@ -7116,6 +7116,12 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300108, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
+--- !u!4 &1316298859 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6126351079475538141, guid: ac28acca241f94be6bad660081440ba7,
+    type: 3}
+  m_PrefabInstance: {fileID: 520814490}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1337551874
 GameObject:
   m_ObjectHideFlags: 0
@@ -8850,6 +8856,16 @@ PrefabInstance:
       propertyPath: shadowPlane
       value: 
       objectReference: {fileID: 1472679718}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: shadowRealmTransform
+      value: 
+      objectReference: {fileID: 1316298859}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: checkIfFreeCollider
+      value: 
+      objectReference: {fileID: 1731666907}
     - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: mainCam
@@ -8858,6 +8874,10 @@ PrefabInstance:
     - target: {fileID: 1693832147, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: scene
       value: Level 0 HUB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125838775, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4962411602723374852, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
@@ -8914,10 +8934,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ea34227b6095b3b4e9eda97ac29c4912, type: 2}
-    - target: {fileID: 1125838775, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1693832145, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
@@ -9174,6 +9190,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685266502}
   m_CullTransparentMesh: 0
+--- !u!136 &1731666907 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 3011720941199878812, guid: f35ed56bdd5a94a53964c3ad3e10822d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1472679717}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1732233236
 PrefabInstance:
   m_ObjectHideFlags: 0
