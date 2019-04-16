@@ -44,6 +44,7 @@ public class HubManager : MonoBehaviour
     [Header("Yarn Board")]
     public GameObject yarnBoardExitCollider; // for exiting the yarnboard via click
     public BoxCollider enterYarnCollider;
+    public YarnBoard yarnBoard;
 
 
     private Transform otherCameraTransformPosition;
@@ -91,6 +92,13 @@ public class HubManager : MonoBehaviour
     public void ExitYarnBoard()
     {
         // this is called when the collider is clicked probably
+
+        // Remove YarnBoard UI from screen so we can do things!
+        if (yarnBoard._suspectInfoPanel.activeInHierarchy)
+            yarnBoard.DeactivateSuspectPanel();
+        if (yarnBoard._flavorTextPanel.activeInHierarchy)
+            yarnBoard.DeactivateFlavorText();
+
         cameraMode = CameraMode.FollowPlayer; // go back to following the player
         yarnBoardExitCollider.SetActive(false);
         LockMouse.LockTheMouse();
