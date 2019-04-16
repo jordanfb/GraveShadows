@@ -39,6 +39,7 @@ public class ShadowRealmManager : MonoBehaviour
     //public GameObject choosingRedicle;
     GameObject lightContainer;
     private bool abortIsChoosingWall = false;
+    public GameObject particleSystemGO;
 
     private void Awake()
     {
@@ -306,9 +307,11 @@ public class ShadowRealmManager : MonoBehaviour
         shadowPlane.transform.position -= targetWall.transform.right*0.01f;
         //moves it a bit away); = new Vector3(
 
+        Vector3 partDir = midPoint- gameObject.transform.position;
+        StartCoroutine(spawnParticleSystem(gameObject.transform.position, partDir));
 
-
-        gameObject.transform.position = shadowRealmTransform.position + shadowRealmTransform.forward*100f;
+        gameObject.transform.position = shadowRealmTransform.position;
+        gameObject.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
         StartCoroutine(moveBodyToWall());
         gameObject.GetComponent<Rigidbody>().useGravity = false;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -320,11 +323,14 @@ public class ShadowRealmManager : MonoBehaviour
     }
 
     IEnumerator moveBodyToWall() {
-        yield return new WaitForSeconds(0.01f);
-        print("moving");
-        while((gameObject.transform.position - shadowRealmTransform.transform.position).magnitude > 0.1f) {
-            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, shadowRealmTransform.transform.position, 0.1f);
+
+
+        while(gameObject.transform.localScale.x<1f) {
+            print("moving");
+            gameObject.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+            yield return null;
         }
+        yield return 0;
 
     }
 
@@ -346,6 +352,14 @@ public class ShadowRealmManager : MonoBehaviour
         return average/(pointList.Count);
     }
 
-    
+    IEnumerator spawnParticleSystem(Vector3 location, Vector3 direction) {
+        GameObject partSys = Instantiate(particleSystemGO);
+        partSys.transform.position = location;
+        partSys.transform.rotation = Quaternion.LookRotation(direction);
+        yield return 0;
+
+    }
+
+
 
 }
