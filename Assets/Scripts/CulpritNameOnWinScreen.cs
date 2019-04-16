@@ -24,6 +24,6 @@ public class CulpritNameOnWinScreen : MonoBehaviour
     void Update()
     {
         //Sets the text displaying in the textBox game object to the first third of the article and replaces it with the culprit's name
-        displayText.text = "    The crime syndicate known as the Nuclear Family met its end Friday night. " + nameOfCulprit + ", now known as the head of the group, was found dead in their home. Federal agents stepped in to assist local police and quickly discovered Police Chief Harold Clap- ton had been receiving payments from " + nameOfCulprit + " to turn a blind eye to the Family’s crimes. \n    Federal agents believe they have arrested all remaining members of the Nuclear Family, who have all ag- reed in interrogation that the murder victim was their boss. The Family has been accused for the murder of Detec- tive Marvin Mitchell, whose death had ";
+        displayText.text = "    The crime syndicate known as the Nuclear Family met its end Friday night. " + nameOfCulprit + ", now known as the head of the group, was found dead in their home. Federal agents stepped in to assist local police and quickly discovered Police Chief Harold Clap- ton had been receiving payments from " + nameOfCulprit + " to turn a blind eye to the Family’s crimes. \n    Federal agents believe they have arrested all remaining members of the Nuclear Family, who have all agreed in interrogation that the murder victim was their boss. The Family has been accused for the murder of Detec- tive Marvin Mitchell, whose death had ";
     }
 }
