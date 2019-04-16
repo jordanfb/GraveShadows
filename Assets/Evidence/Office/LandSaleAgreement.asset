@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58cf8e09ad1515346ac4ea8116fb1640, type: 3}
+  m_Name: LandSaleAgreement
+  m_EditorClassIdentifier: 
+  _name: Land Sale Agreement
+  _photo: {fileID: 21300000, guid: 450a404e1b1057d479fe5a7297918f1a, type: 3}
+  _flavorText: '"Someone bought land out west. For a hefty sum too."'
+  _evidenceType: 2
+  _level: 0
+  _associatedSuspects:
+  - {fileID: 11400000, guid: af4e56eea5ce5594b9480f728ddaceab, type: 2}
+  - {fileID: 11400000, guid: c4dd0be71f18a214db5ed7730dbb66d1, type: 2}
+  _characters: []

@@ -78,6 +78,8 @@ public class ConversationMemberEditor : Editor
 
         // display the text component
         m.text = (TextMeshProUGUI)EditorGUILayout.ObjectField(m.text, typeof(TextMeshProUGUI), true);
+        EditorGUILayout.LabelField("Speech Bubble Parent:");
+        m.enableDisableUponSpeaking = (GameObject)EditorGUILayout.ObjectField(m.enableDisableUponSpeaking, typeof(GameObject), true);
 
         // now we set other things like booleans to always face the camera
         m.alwaysFaceCamera = EditorGUILayout.Toggle("Always Face Camera", m.alwaysFaceCamera);

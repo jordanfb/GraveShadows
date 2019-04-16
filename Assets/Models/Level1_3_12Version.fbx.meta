@@ -1,0 +1,689 @@
+fileFormatVersion: 2
+guid: 747ba9c1aebd9494fa94be3d72250d32
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: AllDoors_GRP
+    100002: BankerLamp2
+    100004: BankerLamp_GRP
+    100006: Barricade1
+    100008: Barricade2
+    100010: Barricade3
+    100012: Barricades
+    100014: Base
+    100016: BigPot1
+    100018: BigPot2
+    100020: BigPot3
+    100022: Bin1
+    100024: Bin2
+    100026: Bin_GRP
+    100028: Bone2
+    100030: Book2
+    100032: Book3
+    100034: Book4
+    100036: Book5
+    100038: Book6
+    100040: Book7
+    100042: Books_GRp
+    100044: BookShelf
+    100046: Box
+    100048: Box1
+    100050: Box10
+    100052: Box11
+    100054: Box12
+    100056: Box13
+    100058: Box14
+    100060: Box15
+    100062: Box16
+    100064: Box2
+    100066: Box3
+    100068: Box4
+    100070: Box5
+    100072: Box6
+    100074: Box8
+    100076: Box9
+    100078: Boxes
+    100080: Ceiling2
+    100082: Ceiling_GRp
+    100084: CoatRack
+    100086: CorkBoard
+    100088: Decoration_GRP
+    100090: Desk
+    100092: Doors_GRP
+    100094: Drawe2
+    100096: Drawe2 1
+    100098: Drawe2 2
+    100100: Drawe2 3
+    100102: Drawer1
+    100104: Drawer1 1
+    100106: Drawer1 2
+    100108: Drawer1 3
+    100110: Drawer3
+    100112: Drawer3 1
+    100114: Drawer3 2
+    100116: Drawer3 3
+    100118: Drawer4
+    100120: Drawer4 1
+    100122: Drawer4 2
+    100124: Drawer4 3
+    100126: Easter_Egg
+    100128: Elevator_Ceiling
+    100130: Elevator_Doors_GRP
+    100132: enterprise_d:pCube1
+    100134: enterprise_d:pCube2
+    100136: enterprise_d:pCube3
+    100138: enterprise_d:pCylinder1
+    100140: Filing_Cabinet1
+    100142: Filing_Cabinet2
+    100144: Filing_Cabinet3
+    100146: Filing_Cabinet4
+    100148: Filing_Cabinet_GRP
+    100150: Filing_Housing
+    100152: Filing_Housing 1
+    100154: Filing_Housing 2
+    100156: Filing_Housing 3
+    100158: Floor
+    100160: Floor2
+    100162: Floor_GRP
+    100164: group1
+    100166: group2
+    100168: group3
+    100170: group4
+    100172: Hall_Door1
+    100174: Hall_Door2
+    100176: Hall_Door3
+    100178: Hallway_Ceiling
+    100180: Hallway_GRP
+    100182: Hallway_Walls
+    100184: InteriorDoor1
+    100186: InteriorDoor2
+    100188: Joint
+    100190: L_Elevator_Door
+    100192: Lamps
+    100194: Lamps1
+    100196: Lamps2
+    100198: Lamps3
+    100200: Lamps4
+    100202: Lamps5
+    100204: Lamps_GRP
+    100206: //RootNode
+    100208: Misc_Office_Deco_GRP
+    100210: Office_Chair
+    100212: OverElevator_GRP
+    100214: OverElevator_Symbol
+    100216: Picture1
+    100218: Picture2
+    100220: Picture3
+    100222: Picture4
+    100224: Picture5
+    100226: Picture6
+    100228: Picture7
+    100230: Picture8
+    100232: Picture9
+    100234: Pictures_GRP
+    100236: Pivot_LAmp
+    100238: Plant_GRP
+    100240: Pot1
+    100242: Pot2
+    100244: Pot3
+    100246: Pot4
+    100248: R_Elevator_Door
+    100250: Shade
+    100252: Shattered_Glass
+    100254: Shattered_Glass1
+    100256: Shattered_Glass2
+    100258: Shattered_Window
+    100260: ShatteredGlass_GRP
+    100262: Swivel_Point
+    100264: Table
+    100266: Walls2
+    100268: Window1
+    100270: Window2
+    100272: Window3
+    100274: Windows_GRP
+    400000: AllDoors_GRP
+    400002: BankerLamp2
+    400004: BankerLamp_GRP
+    400006: Barricade1
+    400008: Barricade2
+    400010: Barricade3
+    400012: Barricades
+    400014: Base
+    400016: BigPot1
+    400018: BigPot2
+    400020: BigPot3
+    400022: Bin1
+    400024: Bin2
+    400026: Bin_GRP
+    400028: Bone2
+    400030: Book2
+    400032: Book3
+    400034: Book4
+    400036: Book5
+    400038: Book6
+    400040: Book7
+    400042: Books_GRp
+    400044: BookShelf
+    400046: Box
+    400048: Box1
+    400050: Box10
+    400052: Box11
+    400054: Box12
+    400056: Box13
+    400058: Box14
+    400060: Box15
+    400062: Box16
+    400064: Box2
+    400066: Box3
+    400068: Box4
+    400070: Box5
+    400072: Box6
+    400074: Box8
+    400076: Box9
+    400078: Boxes
+    400080: Ceiling2
+    400082: Ceiling_GRp
+    400084: CoatRack
+    400086: CorkBoard
+    400088: Decoration_GRP
+    400090: Desk
+    400092: Doors_GRP
+    400094: Drawe2
+    400096: Drawe2 1
+    400098: Drawe2 2
+    400100: Drawe2 3
+    400102: Drawer1
+    400104: Drawer1 1
+    400106: Drawer1 2
+    400108: Drawer1 3
+    400110: Drawer3
+    400112: Drawer3 1
+    400114: Drawer3 2
+    400116: Drawer3 3
+    400118: Drawer4
+    400120: Drawer4 1
+    400122: Drawer4 2
+    400124: Drawer4 3
+    400126: Easter_Egg
+    400128: Elevator_Ceiling
+    400130: Elevator_Doors_GRP
+    400132: enterprise_d:pCube1
+    400134: enterprise_d:pCube2
+    400136: enterprise_d:pCube3
+    400138: enterprise_d:pCylinder1
+    400140: Filing_Cabinet1
+    400142: Filing_Cabinet2
+    400144: Filing_Cabinet3
+    400146: Filing_Cabinet4
+    400148: Filing_Cabinet_GRP
+    400150: Filing_Housing
+    400152: Filing_Housing 1
+    400154: Filing_Housing 2
+    400156: Filing_Housing 3
+    400158: Floor
+    400160: Floor2
+    400162: Floor_GRP
+    400164: group1
+    400166: group2
+    400168: group3
+    400170: group4
+    400172: Hall_Door1
+    400174: Hall_Door2
+    400176: Hall_Door3
+    400178: Hallway_Ceiling
+    400180: Hallway_GRP
+    400182: Hallway_Walls
+    400184: InteriorDoor1
+    400186: InteriorDoor2
+    400188: Joint
+    400190: L_Elevator_Door
+    400192: Lamps
+    400194: Lamps1
+    400196: Lamps2
+    400198: Lamps3
+    400200: Lamps4
+    400202: Lamps5
+    400204: Lamps_GRP
+    400206: //RootNode
+    400208: Misc_Office_Deco_GRP
+    400210: Office_Chair
+    400212: OverElevator_GRP
+    400214: OverElevator_Symbol
+    400216: Picture1
+    400218: Picture2
+    400220: Picture3
+    400222: Picture4
+    400224: Picture5
+    400226: Picture6
+    400228: Picture7
+    400230: Picture8
+    400232: Picture9
+    400234: Pictures_GRP
+    400236: Pivot_LAmp
+    400238: Plant_GRP
+    400240: Pot1
+    400242: Pot2
+    400244: Pot3
+    400246: Pot4
+    400248: R_Elevator_Door
+    400250: Shade
+    400252: Shattered_Glass
+    400254: Shattered_Glass1
+    400256: Shattered_Glass2
+    400258: Shattered_Window
+    400260: ShatteredGlass_GRP
+    400262: Swivel_Point
+    400264: Table
+    400266: Walls2
+    400268: Window1
+    400270: Window2
+    400272: Window3
+    400274: Windows_GRP
+    2100000: lambert1
+    2300000: BankerLamp2
+    2300002: Barricade1
+    2300004: Barricade2
+    2300006: Barricade3
+    2300008: Base
+    2300010: BigPot1
+    2300012: BigPot2
+    2300014: BigPot3
+    2300016: Bin1
+    2300018: Bin2
+    2300020: Bone2
+    2300022: Book2
+    2300024: Book3
+    2300026: Book4
+    2300028: Book5
+    2300030: Book6
+    2300032: Book7
+    2300034: BookShelf
+    2300036: Box
+    2300038: Box1
+    2300040: Box10
+    2300042: Box11
+    2300044: Box12
+    2300046: Box13
+    2300048: Box14
+    2300050: Box15
+    2300052: Box16
+    2300054: Box2
+    2300056: Box3
+    2300058: Box4
+    2300060: Box5
+    2300062: Box6
+    2300064: Box8
+    2300066: Box9
+    2300068: Ceiling2
+    2300070: CoatRack
+    2300072: CorkBoard
+    2300074: Desk
+    2300076: Drawe2
+    2300078: Drawe2 1
+    2300080: Drawe2 2
+    2300082: Drawe2 3
+    2300084: Drawer1
+    2300086: Drawer1 1
+    2300088: Drawer1 2
+    2300090: Drawer1 3
+    2300092: Drawer3
+    2300094: Drawer3 1
+    2300096: Drawer3 2
+    2300098: Drawer3 3
+    2300100: Drawer4
+    2300102: Drawer4 1
+    2300104: Drawer4 2
+    2300106: Drawer4 3
+    2300108: Elevator_Ceiling
+    2300110: enterprise_d:pCube1
+    2300112: enterprise_d:pCube2
+    2300114: enterprise_d:pCube3
+    2300116: enterprise_d:pCylinder1
+    2300118: Filing_Housing
+    2300120: Filing_Housing 1
+    2300122: Filing_Housing 2
+    2300124: Filing_Housing 3
+    2300126: Floor
+    2300128: Floor2
+    2300130: Hall_Door1
+    2300132: Hall_Door2
+    2300134: Hall_Door3
+    2300136: Hallway_Ceiling
+    2300138: Hallway_Walls
+    2300140: InteriorDoor1
+    2300142: InteriorDoor2
+    2300144: Joint
+    2300146: L_Elevator_Door
+    2300148: Lamps
+    2300150: Lamps1
+    2300152: Lamps2
+    2300154: Lamps3
+    2300156: Lamps4
+    2300158: Lamps5
+    2300160: Office_Chair
+    2300162: OverElevator_Symbol
+    2300164: Picture1
+    2300166: Picture2
+    2300168: Picture3
+    2300170: Picture4
+    2300172: Picture5
+    2300174: Picture6
+    2300176: Picture7
+    2300178: Picture8
+    2300180: Picture9
+    2300182: Pot1
+    2300184: Pot2
+    2300186: Pot3
+    2300188: Pot4
+    2300190: R_Elevator_Door
+    2300192: Shade
+    2300194: Shattered_Glass
+    2300196: Shattered_Glass1
+    2300198: Shattered_Glass2
+    2300200: Shattered_Window
+    2300202: Swivel_Point
+    2300204: Table
+    2300206: Walls2
+    2300208: Window1
+    2300210: Window2
+    2300212: Window3
+    3300000: BankerLamp2
+    3300002: Barricade1
+    3300004: Barricade2
+    3300006: Barricade3
+    3300008: Base
+    3300010: BigPot1
+    3300012: BigPot2
+    3300014: BigPot3
+    3300016: Bin1
+    3300018: Bin2
+    3300020: Bone2
+    3300022: Book2
+    3300024: Book3
+    3300026: Book4
+    3300028: Book5
+    3300030: Book6
+    3300032: Book7
+    3300034: BookShelf
+    3300036: Box
+    3300038: Box1
+    3300040: Box10
+    3300042: Box11
+    3300044: Box12
+    3300046: Box13
+    3300048: Box14
+    3300050: Box15
+    3300052: Box16
+    3300054: Box2
+    3300056: Box3
+    3300058: Box4
+    3300060: Box5
+    3300062: Box6
+    3300064: Box8
+    3300066: Box9
+    3300068: Ceiling2
+    3300070: CoatRack
+    3300072: CorkBoard
+    3300074: Desk
+    3300076: Drawe2
+    3300078: Drawe2 1
+    3300080: Drawe2 2
+    3300082: Drawe2 3
+    3300084: Drawer1
+    3300086: Drawer1 1
+    3300088: Drawer1 2
+    3300090: Drawer1 3
+    3300092: Drawer3
+    3300094: Drawer3 1
+    3300096: Drawer3 2
+    3300098: Drawer3 3
+    3300100: Drawer4
+    3300102: Drawer4 1
+    3300104: Drawer4 2
+    3300106: Drawer4 3
+    3300108: Elevator_Ceiling
+    3300110: enterprise_d:pCube1
+    3300112: enterprise_d:pCube2
+    3300114: enterprise_d:pCube3
+    3300116: enterprise_d:pCylinder1
+    3300118: Filing_Housing
+    3300120: Filing_Housing 1
+    3300122: Filing_Housing 2
+    3300124: Filing_Housing 3
+    3300126: Floor
+    3300128: Floor2
+    3300130: Hall_Door1
+    3300132: Hall_Door2
+    3300134: Hall_Door3
+    3300136: Hallway_Ceiling
+    3300138: Hallway_Walls
+    3300140: InteriorDoor1
+    3300142: InteriorDoor2
+    3300144: Joint
+    3300146: L_Elevator_Door
+    3300148: Lamps
+    3300150: Lamps1
+    3300152: Lamps2
+    3300154: Lamps3
+    3300156: Lamps4
+    3300158: Lamps5
+    3300160: Office_Chair
+    3300162: OverElevator_Symbol
+    3300164: Picture1
+    3300166: Picture2
+    3300168: Picture3
+    3300170: Picture4
+    3300172: Picture5
+    3300174: Picture6
+    3300176: Picture7
+    3300178: Picture8
+    3300180: Picture9
+    3300182: Pot1
+    3300184: Pot2
+    3300186: Pot3
+    3300188: Pot4
+    3300190: R_Elevator_Door
+    3300192: Shade
+    3300194: Shattered_Glass
+    3300196: Shattered_Glass1
+    3300198: Shattered_Glass2
+    3300200: Shattered_Window
+    3300202: Swivel_Point
+    3300204: Table
+    3300206: Walls2
+    3300208: Window1
+    3300210: Window2
+    3300212: Window3
+    4300000: enterprise_d:pCube1
+    4300002: enterprise_d:pCylinder1
+    4300004: enterprise_d:pCube2
+    4300006: enterprise_d:pCube3
+    4300008: Hallway_Walls
+    4300010: Walls2
+    4300012: Floor
+    4300014: Floor2
+    4300016: Elevator_Ceiling
+    4300018: Hallway_Ceiling
+    4300020: Ceiling2
+    4300022: Bin1
+    4300024: Bin2
+    4300026: Base
+    4300028: Swivel_Point
+    4300030: Bone2
+    4300032: Shade
+    4300034: Joint
+    4300036: Window1
+    4300038: Window2
+    4300040: Window3
+    4300042: BankerLamp2
+    4300044: Shattered_Glass2
+    4300046: Shattered_Glass1
+    4300048: Shattered_Glass
+    4300050: Shattered_Window
+    4300052: Picture9
+    4300054: Picture8
+    4300056: Picture7
+    4300058: Picture6
+    4300060: Picture5
+    4300062: Picture4
+    4300064: Picture3
+    4300066: Picture2
+    4300068: Picture1
+    4300070: Book3
+    4300072: Book4
+    4300074: Book5
+    4300076: Book6
+    4300078: Book7
+    4300080: Book2
+    4300082: Desk
+    4300084: Office_Chair
+    4300086: CorkBoard
+    4300088: Table
+    4300090: BookShelf
+    4300092: CoatRack
+    4300094: Pot4
+    4300096: Pot3
+    4300098: Pot2
+    4300100: BigPot3
+    4300102: BigPot2
+    4300104: BigPot1
+    4300106: Pot1
+    4300108: Lamps
+    4300110: Lamps1
+    4300112: Lamps2
+    4300114: Lamps3
+    4300116: Lamps4
+    4300118: Lamps5
+    4300120: OverElevator_Symbol
+    4300122: Box11
+    4300124: Box
+    4300126: Box1
+    4300128: Box2
+    4300130: Box3
+    4300132: Box4
+    4300134: Box5
+    4300136: Box6
+    4300138: Box8
+    4300140: Box9
+    4300142: Box10
+    4300144: Box12
+    4300146: Box13
+    4300148: Box14
+    4300150: Box15
+    4300152: Box16
+    4300154: Barricade3
+    4300156: Barricade1
+    4300158: Barricade2
+    4300160: Filing_Housing
+    4300162: Drawer1
+    4300164: Drawe2
+    4300166: Drawer3
+    4300168: Drawer4
+    4300170: Filing_Housing
+    4300172: Drawer1
+    4300174: Drawe2
+    4300176: Drawer3
+    4300178: Drawer4
+    4300180: Filing_Housing
+    4300182: Drawer1
+    4300184: Drawe2
+    4300186: Drawer3
+    4300188: Drawer4
+    4300190: Filing_Housing
+    4300192: Drawer1
+    4300194: Drawe2
+    4300196: Drawer3
+    4300198: Drawer4
+    4300200: Hall_Door1
+    4300202: Hall_Door2
+    4300204: Hall_Door3
+    4300206: InteriorDoor1
+    4300208: InteriorDoor2
+    4300210: R_Elevator_Door
+    4300212: L_Elevator_Door
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

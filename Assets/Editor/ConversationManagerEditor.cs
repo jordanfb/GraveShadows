@@ -23,11 +23,18 @@ public class ConversationManagerEditor : Editor
 
         // first select the script
         m.script = (TextAsset)EditorGUILayout.ObjectField("Script:", m.script, typeof(TextAsset), true);
+        if (m.scriptName.Length > 0)
+        {
+            // show the script description:
+            EditorGUILayout.LabelField("Script Name: " + m.scriptName);
+        }
         if (m.conversationDescription.Length > 0)
         {
             // show the script description:
             EditorGUILayout.LabelField("Description: " + m.conversationDescription);
         }
+
+        m.associatedEvidence = (Evidence)EditorGUILayout.ObjectField("Associated Evidence:", m.associatedEvidence, typeof(Evidence), true);
 
         // then add a list of all of the members of the conversation
         displaySlaves = EditorGUILayout.Foldout(displaySlaves, "Characters");

@@ -8,13 +8,21 @@ public class YarnBoard : MonoBehaviour
     [SerializeField]
     private GameObject _pinPrefab;
     [SerializeField]
-    private GameObject _boardCanvas;
+    private GameObject _evidencePrefab;
     [SerializeField]
-    private GameObject _flavorTextPanel;
+    private GameObject _suspectPrefab;
+    [SerializeField]
+    private GameObject _boardCanvas;
+    public GameObject _flavorTextPanel;
     [SerializeField]
     private Text _evidenceTitle;
     [SerializeField]
     private Text _flavorTextAsset;
+    public GameObject _suspectInfoPanel;
+    [SerializeField]
+    private Text _suspectCodeName;
+    [SerializeField]
+    private Text _suspectBio;
     [SerializeField]
     private float _pinZOffset = 0.0f;
     [SerializeField]
@@ -26,17 +34,40 @@ public class YarnBoard : MonoBehaviour
     private int _charTextFontSize;
     [SerializeField]
     private YarnBoardCamera _yarnBoardCamera;
+    [SerializeField]
+    private Sprite _placeholderSprite;
+    [SerializeField]
+    private float _photoScalar;
+    [SerializeField]
+    private Transform _yarnBoardParent;
+    [SerializeField]
+    private float _evidenceXOffset;
+    [SerializeField]
+    private float _evidenceYOffset;
+    [SerializeField]
+    private float _pinScale;
+    [SerializeField]
+    private float _pinOffset;
+
 
     private List<GameObject> _pins;
-    private bool displaying = false;
+    private YarnBoardMode mode = YarnBoardMode.None;
     private Collider _collider;
     private Vector2 _minPinPos;
     private Vector2 _maxPinPos;
 
+    // evidene moving info:
+    private GameObject movingYarnboardItem;
+
+    public enum YarnBoardMode
+    {
+        None, Displaying, Moving
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-
+        GenerateContent(); // load the content from the evidence manager
         /*
         //For use with randomly placing pins
         _collider = GetComponent<Collider>();
@@ -102,6 +133,53 @@ public class YarnBoard : MonoBehaviour
         */
     }
 
+    public void GenerateContent()
+    {
+        for (int i = 0; i < EvidenceManager.AllEvidence.Count; i++)
+        {
+            // spawn the evidence that's on the board or off it, and do nothing to the rest
+            SerializedEvidence se = EvidenceManager.AllEvidence[i];
+            YarnBoardEntity ybe = EvidenceManager.instance.ReferencedEntity(se);
+
+            // We're only worried about evidence we have available for the yarn board
+            if (se.evidenceState == SerializedEvidence.EvidenceState.NotInGame || se.evidenceState == SerializedEvidence.EvidenceState.NotFound)
+                continue;
+
+            Evidence e = ybe as Evidence;
+            Suspect s = ybe as Suspect;
+            GameObject go = null;
+            if (e != null)
+            {
+                // it's regular evidence
+                // spawn an evidence prefab:
+                go = Instantiate(_evidencePrefab, transform.parent);
+                EvidenceMono emono = go.GetComponentInChildren<EvidenceMono>();
+                emono.EvidenceInfo = e;
+                SpriteRenderer sr = go.GetComponentInChildren<SpriteRenderer>();
+                sr.sprite = _placeholderSprite;
+            }
+            else if (s != null)
+            {
+                // then create a suspect evidence thing
+                // spawn an evidence prefab:
+                go = Instantiate(_suspectPrefab, transform.parent);
+                SuspectMono susmono = go.GetComponentInChildren<SuspectMono>();
+                susmono.SuspectInfo = s;
+                SpriteRenderer sr = go.GetComponentInChildren<SpriteRenderer>();
+                sr.sprite = _placeholderSprite;
+            }
+
+            if (go == null)
+                continue;
+
+            if (se.evidenceState == SerializedEvidence.EvidenceState.OnYarnBoard)
+            {
+                Debug.LogError("This is going to need to be fixed since it's using global position");
+                go.transform.position = new Vector3(se.location.x, se.location.y, this.gameObject.transform.position.z);
+            }
+        }
+    }
+
     private float PinOffset(Collider c)
     {
         return (1f / _offsetRatio) * (c.bounds.max.y - c.bounds.center.y);
@@ -109,25 +187,110 @@ public class YarnBoard : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0) && !displaying)
+#if UNITY_EDITOR
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            int next = Random.Range(0, EvidenceManager.AllEvidence.Count - 1);
+            EvidenceManager.AllEvidence[next].evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Evidence"))
+                Destroy(go);
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Suspect"))
+                Destroy(go);
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Pin"))
+                Destroy(go);
+            foreach (YarnLine go in GameObject.FindObjectsOfType<YarnLine>())
+                Destroy(go.gameObject);
+            GenerateContent();
+        }
+
+#endif
+        if (Input.GetMouseButtonDown(0) && mode == YarnBoardMode.None)
         {
             //Raycast to screen
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            
+
             // On hit, check if it's a piece of evidence
-            if(Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit))
             {
                 GameObject evidence = hit.collider.gameObject;
-                if(evidence.tag == "Evidence")
+                if (evidence.tag == "Evidence")
                 {
                     _yarnBoardCamera.LookAtEvidence(evidence.transform);
-                    _flavorTextPanel.SetActive(true);
-                    _flavorTextAsset.text = evidence.GetComponent<EvidenceMono>().EvidenceInfo.FlavorText;
-                    _evidenceTitle.text = evidence.GetComponent<EvidenceMono>().EvidenceInfo.Name;
-                    displaying = true;
+                    EvidenceMono em = evidence.GetComponent<EvidenceMono>();
+                    SuspectMono sm = evidence.GetComponent<SuspectMono>();
+                    mode = YarnBoardMode.Displaying;
+                    if (em != null)
+                    {
+                        _flavorTextPanel.SetActive(true);
+                        _flavorTextAsset.text = em.EvidenceInfo.FlavorText;
+                        _evidenceTitle.text = em.EvidenceInfo.Name;
+                    } else if (sm != null)
+                    {
+                        _suspectInfoPanel.SetActive(true);
+                        _suspectCodeName.text = sm.SuspectInfo.CodeName + "\n(" + sm.SuspectInfo.Name + ")";
+                        _suspectBio.text = sm.SuspectInfo.Bio;
+                    } else
+                    {
+                        // some weird error occured so just don't go anywhere
+                        Debug.LogWarning("Couldn't find suspect or evidence monobehavior");
+                        mode = YarnBoardMode.None;
+                    }                    
                 }
             }
+        }
+        else if (Input.GetMouseButtonDown(1) && mode == YarnBoardMode.None)
+        {
+            // move the item you clicked on
+            //Debug.Log("Mtrying to oving now");
+            //Raycast to screen
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // On hit, check if it's a piece of evidence
+            if (Physics.Raycast(ray, out hit))
+            {
+                GameObject evidence = hit.collider.gameObject;
+                if (evidence.tag == "Evidence")
+                {
+                    //Debug.Log("Moving now");
+                    // get the correct object to move
+                    movingYarnboardItem = hit.collider.transform.parent.gameObject;
+                    mode = YarnBoardMode.Moving;
+                }
+            }
+        }
+        else if (Input.GetMouseButton(1) && mode == YarnBoardMode.Moving)
+        {
+            //Debug.Log("clicking annd holding");
+
+            // move the item you clicked on
+
+            //Raycast to screen
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // On hit, check if it's a piece of evidence
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
+            {
+                movingYarnboardItem.transform.position = hit.point;
+            }
+        }
+        else if (Input.GetMouseButtonUp(1) && mode == YarnBoardMode.Moving)
+        {
+            // move the item you clicked on
+            //Debug.Log("nolonger clicking");
+
+            //Raycast to screen
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // On hit, check if it's a piece of evidence
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
+            {
+                movingYarnboardItem.transform.position = hit.point;
+            }
+            mode = YarnBoardMode.None;
         }
     }
 
@@ -160,6 +323,16 @@ public class YarnBoard : MonoBehaviour
     {
         _flavorTextPanel.SetActive(false);
         _flavorTextAsset.text = "";
-        displaying = false;
+        //displaying = false;
+        mode = YarnBoardMode.None;
+    }
+
+    public void DeactivateSuspectPanel()
+    {
+        _suspectInfoPanel.SetActive(false);
+        _suspectCodeName.text = "";
+        _suspectBio.text = "";
+        //displaying = false;
+        mode = YarnBoardMode.None;
     }
 }

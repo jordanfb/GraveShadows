@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
     void Awake()
     {
         //This ensures we don't have multiple instances of the Player Manager
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
@@ -32,10 +32,29 @@ public class PlayerManager : MonoBehaviour
         get { return _collectedEvidence; }
     }
 
+    public bool HasCollected(Evidence ev)
+    {
+        // returns whether or not we've already collected that evidence
+        return _collectedEvidence.Contains(ev);
+    }
+
     public void CollectEvidence(Evidence ev)
     {
         if (_collectedEvidence.Contains(ev))
             return;
         _collectedEvidence.Add(ev);
+
+
+        // then collect it with other things as well!
+        EvidenceManager.instance.FindEvidence(ev);
+        GameLevelManager lm = FindObjectOfType<GameLevelManager>();
+        if (lm)
+        {
+            lm.evidenceFoundThisDay.Add(ev);
+        }
+        else
+        {
+            Debug.LogError("Unable to log evidence unable to find gamelevelmanager");
+        }
     }
 }

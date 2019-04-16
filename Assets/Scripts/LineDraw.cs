@@ -9,6 +9,8 @@ public class LineDraw : MonoBehaviour
     private GameObject _startPin;
     private List<LineRenderer> _lines;
 
+    private YarnBoardEntity originalEvidence;
+
     public Material material;
     public float _lineWidth = 0.15f;
 
@@ -38,6 +40,16 @@ public class LineDraw : MonoBehaviour
                         //Create a line if it's a pin object
                         _startPin = coll.gameObject;
                         CreateLine(coll.gameObject.transform.position);
+                        SuspectMono sm = coll.gameObject.GetComponentInChildren<SuspectMono>();
+                        if (sm != null)
+                        {
+                            originalEvidence = sm.SuspectInfo;
+                        }
+                        EvidenceMono em = coll.gameObject.GetComponentInChildren<EvidenceMono>();
+                        if (em != null)
+                        {
+                            originalEvidence = em.EvidenceInfo;
+                        }
                     }
                 }
             }
@@ -60,12 +72,41 @@ public class LineDraw : MonoBehaviour
                     _line.SetPosition(1, endColl.gameObject.transform.position);
                     AddCollider();
                     _lines.Add(_line);
+                    YarnLine yarnLine = _line.gameObject.AddComponent<YarnLine>();
+                    yarnLine.point1 = _startPin.transform;
+                    yarnLine.point2 = endColl.gameObject.transform;
+                    yarnLine.lockToPoints = true;
+
+                    // find the final evidence and connect them
+                    SuspectMono sm = endColl.gameObject.GetComponentInChildren<SuspectMono>();
+                    YarnBoardEntity endEvidence = null;
+                    if (sm != null)
+                    {
+                        endEvidence = sm.SuspectInfo;
+                    }
+                    EvidenceMono em = endColl.gameObject.GetComponentInChildren<EvidenceMono>();
+                    if (em != null)
+                    {
+                        endEvidence = em.EvidenceInfo;
+                    }
+                    if (endEvidence != null && originalEvidence != null)
+                    {
+                        // then connect it!
+                        yarnLine.e1 = EvidenceManager.instance.FindSerializedEvidence(originalEvidence);
+                        yarnLine.e2 = EvidenceManager.instance.FindSerializedEvidence(endEvidence);
+                        EvidenceManager.instance.ConnectEvidence(originalEvidence, endEvidence);
+                    }
+                    else
+                    {
+                        Debug.LogError("Unable to find end pin entity or the first one whatever");
+                    }
                 }
                 else
                 {
                     //Line is invalid, destroy
                     _lines.Remove(_line);
                     Destroy(_line.gameObject);
+                    originalEvidence = null;
                 }
             }
             _line = null;
@@ -80,12 +121,12 @@ public class LineDraw : MonoBehaviour
             if (Physics.Raycast(ray, out endHit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
             {
                 Vector3 pos = endHit.point;
-                // pos.z = _line.GetPosition(0).z;
+                pos.x = _line.GetPosition(0).x; // This doesn't work with arbitrary yarn boards which sucks but we need to finish the game
                 // this is a bit of an issue since it means it doesn't perfectly align with
                 // the mouse but it does mean it stays above the evidence. It doesn't work for rotated yarn boards though
 
                 // this method is slightly better maybe but still not great
-                pos += endHit.normal; // move it up by 1 so it's above the evidence while still allowing a tilted yarn board
+                // pos += endHit.normal; // move it up by 1 so it's above the evidence while still allowing a tilted yarn board
 
                 _line.SetPosition(1, pos);
             }
@@ -106,11 +147,18 @@ public class LineDraw : MonoBehaviour
                 {
                     LineRenderer delLine = delColl.transform.parent.gameObject.GetComponent<LineRenderer>();
                     _lines.Remove(delLine);
+
+                    // then remove it from the stored connections as well in the evidencemanager
+                    YarnLine yl = delLine.GetComponent<YarnLine>();
+                    if (yl.e1 != null && yl.e2 != null)
+                    {
+                        EvidenceManager.instance.DisconnectEvidence(yl.e1.evidenceindex, yl.e2.evidenceindex);
+                    }
+
                     Destroy(delColl.transform.parent.gameObject);
                 }
             }
         }
-
     }
 
     /**
@@ -125,11 +173,25 @@ public class LineDraw : MonoBehaviour
         _line.material = material;
         _line.positionCount = 2;
         _line.startWidth = _lineWidth;
+        _line.endWidth = _lineWidth;
         _line.useWorldSpace = true;
 
         //Set both vertices to the start pin
         _line.SetPosition(0, position);
         _line.SetPosition(1, position);
+    }
+
+    public void DeleteAllLines()
+    {
+        foreach(LineRenderer lr in _lines)
+        {
+            Destroy(lr.gameObject);
+        }
+    }
+
+    public void CreateFullLine()
+    {
+
     }
 
     /**
@@ -150,16 +212,16 @@ public class LineDraw : MonoBehaviour
 
         //Z-size is arbitrary, and we might need to change these around
         //depending on what axis the yarn board faces
-        lineColl.size = new Vector3(lineLength, lineWidth, 1f);
+        lineColl.size = new Vector3(lineLength, lineWidth * 1.5f, lineWidth * 1.5f);
 
         //Tne line collider GO will lie at the midpoint of the line to cover  the whole thing.
         Vector3 midPoint = (_line.GetPosition(0) + _line.GetPosition(1)) / 2;
         lineColl.transform.position = midPoint;
 
         //Rotate the line collider by a certain angle so that it's oriented correctly.
-        float angle = Mathf.Atan2((_line.GetPosition(1).y - _line.GetPosition(0).y), (_line.GetPosition(1).x - _line.GetPosition(0).x));
+        float angle = Mathf.Atan2((_line.GetPosition(1).y - _line.GetPosition(0).y), (_line.GetPosition(1).z - _line.GetPosition(0).z));
         angle *= Mathf.Rad2Deg;
-        lineColl.transform.Rotate(0f, 0f, angle);
+        lineColl.transform.Rotate(0f, -90, angle);
     }
 
     /**
