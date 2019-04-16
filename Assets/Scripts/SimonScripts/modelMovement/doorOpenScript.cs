@@ -15,9 +15,13 @@ public class doorOpenScript : MonoBehaviour
     public bool isOpen = false;
     public GameObject assocDoor;
     float lastOpenDir;
-
+    simplePlayerMovement spm;
 
     //dir 
+    private void Start()
+    {
+        spm = GameObject.Find("Player").GetComponent<simplePlayerMovement>();
+    }
     IEnumerator OpenDoorAnim(float dir) {
 
 
@@ -77,7 +81,7 @@ public class doorOpenScript : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-
+                spm.anim.SetTrigger("reachOver");
                 IEnumerator coroutine = OpenDoorAnim(lastOpenDir);
                 StartCoroutine(coroutine);
                 GetComponent<Interactable>().setActivatedText();
