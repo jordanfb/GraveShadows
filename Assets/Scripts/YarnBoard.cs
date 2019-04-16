@@ -244,7 +244,7 @@ public class YarnBoard : MonoBehaviour
         else if (Input.GetMouseButtonDown(1) && mode == YarnBoardMode.None)
         {
             // move the item you clicked on
-            Debug.Log("Mtrying to oving now");
+            //Debug.Log("Mtrying to oving now");
             //Raycast to screen
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -255,7 +255,7 @@ public class YarnBoard : MonoBehaviour
                 GameObject evidence = hit.collider.gameObject;
                 if (evidence.tag == "Evidence")
                 {
-                    Debug.Log("Moving now");
+                    //Debug.Log("Moving now");
                     // get the correct object to move
                     movingYarnboardItem = hit.collider.transform.parent.gameObject;
                     mode = YarnBoardMode.Moving;
@@ -264,7 +264,7 @@ public class YarnBoard : MonoBehaviour
         }
         else if (Input.GetMouseButton(1) && mode == YarnBoardMode.Moving)
         {
-            Debug.Log("clicking annd holding");
+            //Debug.Log("clicking annd holding");
 
             // move the item you clicked on
 
@@ -281,7 +281,7 @@ public class YarnBoard : MonoBehaviour
         else if (Input.GetMouseButtonUp(1) && mode == YarnBoardMode.Moving)
         {
             // move the item you clicked on
-            Debug.Log("nolonger clicking");
+            //Debug.Log("nolonger clicking");
 
             //Raycast to screen
             RaycastHit hit;

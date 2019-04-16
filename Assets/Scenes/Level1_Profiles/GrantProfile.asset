@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6050e2d5de785ce4d931e4dbdbf2d755, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -208,8 +208,8 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   gradingMode:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 0
   externalLut:
     overrideState: 0
     value: {fileID: 0}
@@ -244,28 +244,28 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 1
-    value: -100
+    value: -96.61
   tint:
     overrideState: 1
-    value: 85
+    value: 76.4
   colorFilter:
     overrideState: 0
     value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: -0.19
   saturation:
     overrideState: 1
     value: -100
   brightness:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 21.33
   postExposure:
     overrideState: 1
     value: -0.06
   contrast:
     overrideState: 1
-    value: 10
+    value: 38.31
   mixerRedOutRedIn:
     overrideState: 0
     value: 100
@@ -1557,10 +1557,10 @@ MonoBehaviour:
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.186
+    value: 0.17
   smoothness:
     overrideState: 1
-    value: 0.443
+    value: 1
   roundness:
     overrideState: 0
     value: 1

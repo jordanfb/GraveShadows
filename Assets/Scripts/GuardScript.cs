@@ -52,6 +52,9 @@ public class GuardScript : MonoBehaviour
     [Tooltip("if we're in the crime scene then we reload the level, otherwise we skip")]
     public bool isCrimeScene = false;
 
+    public bool spotCameraSpin = true; // spin the camera towards the cop that spots you.
+    public bool spotPlayerStopWalking = true; // stop the player walking when the cop spots you
+
     [Header("What should happen if the guard looses sight of something?")]
     public TextAsset lostSightQuipsTextAsset;
     private string[] lostSightQuips;
@@ -460,6 +463,15 @@ public class GuardScript : MonoBehaviour
                     RunFunctionAfterTime(() => { GameplayManager.instance.VisitScene(SceneManager.GetActiveScene().name); }, 1);
                 }
             }
+            if (spotCameraSpin)
+            {
+                StartCoroutine(SpinMainCameraTowards(guardHead.gameObject));
+            }
+            if (spotPlayerStopWalking)
+            {
+                // stop the player walking
+                FindObjectOfType<simplePlayerMovement>().isAllowedToWalk = false; // stop the player from walking!
+            }
             if (stopWalking)
             {
                 // just stop moving at all
@@ -487,5 +499,32 @@ public class GuardScript : MonoBehaviour
 
             // here we should go back to our conversation after a segue. FIX
         }
+    }
+
+    public IEnumerator SpinMainCameraTowards(GameObject go, float time = .5f)
+    {
+        // spins the main camera towards this
+        Transform mc = Camera.main.transform;
+        Quaternion targetDir = Quaternion.LookRotation(go.transform.position - mc.position);
+        Quaternion startRot = mc.rotation;
+        // disable anything controlling it here:
+        ThirdPersonCamera[] thirdPersonCameras = FindObjectsOfType<ThirdPersonCamera>();
+        // disable them all
+        for (int j = 0; j < thirdPersonCameras.Length; j++)
+        {
+            thirdPersonCameras[j].enabled = false;
+            // disable them. This is the nuclear option but that's thematically appropriate for our game and also we don't need the camera
+            // later anyways
+        }
+
+        float i = 0;
+        while (i < 1)
+        {
+            mc.rotation = Quaternion.Lerp(startRot, targetDir, i);
+            i += Time.deltaTime / time;
+            yield return null;
+        }
+        i = 1;
+        mc.rotation = Quaternion.Lerp(startRot, targetDir, i);
     }
 }
