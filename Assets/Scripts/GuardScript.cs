@@ -90,6 +90,11 @@ public class GuardScript : MonoBehaviour
     private float suspicion = 0;
     private float suspicionTimer = 0; // if not seen something then suspicion goes down after a bit
 
+    [Space]
+    [Header("Graphics stuff")]
+    public SkinnedMeshRenderer[] skinnedMeshRenderers;
+    public Material[] skinnedMaterials;
+
     [HideInInspector]
     public int editIndex = 0;
 
@@ -236,6 +241,7 @@ public class GuardScript : MonoBehaviour
         } else
         {
             // walk back to your original location
+            // FIX
             Debug.Log("here");
         }
 
@@ -520,11 +526,39 @@ public class GuardScript : MonoBehaviour
         float i = 0;
         while (i < 1)
         {
-            mc.rotation = Quaternion.Lerp(startRot, targetDir, i);
+            mc.rotation = Quaternion.Lerp(startRot, targetDir, DeskDayDescriptionItem.Smootherstep(i));
             i += Time.deltaTime / time;
             yield return null;
         }
         i = 1;
         mc.rotation = Quaternion.Lerp(startRot, targetDir, i);
+    }
+
+    public void SetMaterials(Material mat)
+    {
+        for (int i = 0; i < skinnedMeshRenderers.Length; i++)
+        {
+            skinnedMeshRenderers[i].material = mat;
+        }
+    }
+
+    public void ResetMaterials()
+    {
+        for (int i = 0; i < skinnedMeshRenderers.Length; i++)
+        {
+            skinnedMeshRenderers[i].material = skinnedMaterials[i];
+        }
+    }
+
+    [ContextMenu("Find skinned mesh renderers")]
+    public void FindSkinnedMaterials()
+    {
+        skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        skinnedMaterials = new Material[skinnedMeshRenderers.Length];
+        for (int i =0; i < skinnedMeshRenderers.Length; i++)
+        {
+            skinnedMaterials[i] = skinnedMeshRenderers[i].material;
+        }
+        Debug.Log("Found " + skinnedMeshRenderers.Length + " mesh renderers and materials");
     }
 }
