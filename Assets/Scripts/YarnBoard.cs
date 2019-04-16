@@ -13,14 +13,12 @@ public class YarnBoard : MonoBehaviour
     private GameObject _suspectPrefab;
     [SerializeField]
     private GameObject _boardCanvas;
-    [SerializeField]
-    private GameObject _flavorTextPanel;
+    public GameObject _flavorTextPanel;
     [SerializeField]
     private Text _evidenceTitle;
     [SerializeField]
     private Text _flavorTextAsset;
-    [SerializeField]
-    private GameObject _suspectInfoPanel;
+    public GameObject _suspectInfoPanel;
     [SerializeField]
     private Text _suspectCodeName;
     [SerializeField]
