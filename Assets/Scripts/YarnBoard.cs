@@ -13,14 +13,12 @@ public class YarnBoard : MonoBehaviour
     private GameObject _suspectPrefab;
     [SerializeField]
     private GameObject _boardCanvas;
-    [SerializeField]
-    private GameObject _flavorTextPanel;
+    public GameObject _flavorTextPanel;
     [SerializeField]
     private Text _evidenceTitle;
     [SerializeField]
     private Text _flavorTextAsset;
-    [SerializeField]
-    private GameObject _suspectInfoPanel;
+    public GameObject _suspectInfoPanel;
     [SerializeField]
     private Text _suspectCodeName;
     [SerializeField]
@@ -230,7 +228,7 @@ public class YarnBoard : MonoBehaviour
                     } else if (sm != null)
                     {
                         _suspectInfoPanel.SetActive(true);
-                        _suspectCodeName.text = sm.SuspectInfo.CodeName;
+                        _suspectCodeName.text = sm.SuspectInfo.CodeName + "\n(" + sm.SuspectInfo.Name + ")";
                         _suspectBio.text = sm.SuspectInfo.Bio;
                     } else
                     {
