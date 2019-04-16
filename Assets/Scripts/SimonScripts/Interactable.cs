@@ -7,7 +7,7 @@ public class Interactable : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private GameObject interactText;
+    private GameObject interactTextInGame;
     public GameObject interactTextPrefab;
     public string baseText;
     public string onActivateText;
@@ -16,57 +16,62 @@ public class Interactable : MonoBehaviour
     void Start()
     {
         Player = GameObject.Find("Player");
-
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if(interactText == null) {
+        if(interactTextInGame == null) {
             return;
         }
-        if (!interactText.activeInHierarchy) {
+        if (!interactTextInGame.activeInHierarchy) {
             return;
         }
-        interactText.transform.position = Camera.main.WorldToScreenPoint(Player.transform.position+ Vector3.up*0.5f);
+
+        Vector3 velocity = Vector3.zero;
+        interactTextInGame.transform.position = Vector3.SmoothDamp(interactTextInGame.transform.position, 
+                                                Camera.main.WorldToScreenPoint(Player.transform.position + Vector3.up * 0.5f), ref velocity, 0.01f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            if (interactText == null)
+            if (interactTextInGame == null)
             {
-                interactText = Instantiate(interactTextPrefab, GameObject.Find("Canvas").transform);
-                interactText.GetComponent<Text>().text = baseText;
-                interactText.SetActive(true);
+                print(interactTextInGame);
+
+                interactTextInGame = Instantiate(interactTextPrefab, GameObject.Find("Canvas").transform);
+                print(interactTextInGame);
+                interactTextInGame.GetComponent<Text>().text = baseText;
+                interactTextInGame.SetActive(true);
             }
             else
             {
-                interactText.SetActive(true);
+                interactTextInGame.SetActive(true);
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (interactText == null)
+        if (interactTextInGame == null)
         {
             return;
         }
         if (other.gameObject.tag == "Player")
         {
-            interactText.SetActive(false);
+            interactTextInGame.SetActive(false);
         }
     }
 
     public void setActivatedText() {
-        if (interactText == null)
+        if (interactTextInGame == null)
         {
             return;
         }
-        interactText.GetComponent<Text>().text = onActivateText;
+        interactTextInGame.GetComponent<Text>().text = onActivateText;
     }
 
 
