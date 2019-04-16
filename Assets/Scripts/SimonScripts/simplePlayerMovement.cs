@@ -23,6 +23,7 @@ public class simplePlayerMovement : MonoBehaviour
 
     public Animator anim;
 
+    public bool isAllowedToWalk = true;
 
     const float PLAYER_WIDTH = 0.5f;
 
@@ -49,20 +50,20 @@ public class simplePlayerMovement : MonoBehaviour
             return;
         }
 
-
-        float moveDirX = Input.GetAxis("Horizontal");
-        float moveDirY = Input.GetAxis("Vertical");
-        if (!SRmanager.isInShadowRealm) {
-            thirdPersonMovement(moveDirX, moveDirY);
-            //arbitrary speed in which player has to move, will need to change when I get Anims
-
-
+        if (isAllowedToWalk)
+        {
+            float moveDirX = Input.GetAxis("Horizontal");
+            float moveDirY = Input.GetAxis("Vertical");
+            if (!SRmanager.isInShadowRealm)
+            {
+                thirdPersonMovement(moveDirX, moveDirY);
+                //arbitrary speed in which player has to move, will need to change when I get Anims
+            }
+            else
+            {
+                wallMovement(moveDirX, moveDirY, currentWallCollider);
+            }
         }
-        else {
-            wallMovement(moveDirX, moveDirY, currentWallCollider);
-        }
-
-
     }
 
     public Animator getAnim()
