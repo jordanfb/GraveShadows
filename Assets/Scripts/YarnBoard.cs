@@ -228,7 +228,7 @@ public class YarnBoard : MonoBehaviour
                     } else if (sm != null)
                     {
                         _suspectInfoPanel.SetActive(true);
-                        _suspectCodeName.text = sm.SuspectInfo.CodeName;
+                        _suspectCodeName.text = sm.SuspectInfo.CodeName + "\n(" + sm.SuspectInfo.Name + ")";
                         _suspectBio.text = sm.SuspectInfo.Bio;
                     } else
                     {
