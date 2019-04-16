@@ -75,12 +75,12 @@ public class FadeToBlack : MonoBehaviour
 
     private IEnumerator Fade(float speed, System.Action callback = null)
     {
-        alpha += speed * Time.deltaTime;
+        alpha += speed * Time.unscaledDeltaTime; // use unscaled deltatime for working during pause screens
         SetAlpha();
         while (alpha > 0 && alpha < 1)
         {
             yield return null;
-            alpha += speed * Time.deltaTime;
+            alpha += speed * Time.unscaledDeltaTime;
             SetAlpha();
         }
         alpha = Mathf.Clamp01(alpha);

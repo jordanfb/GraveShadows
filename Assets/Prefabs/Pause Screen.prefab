@@ -116,9 +116,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1779180787954352948}
-        m_MethodName: 
-        m_Mode: 5
+      - m_Target: {fileID: 2750998990597254664}
+        m_MethodName: ReturnToGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 1779180788188359548}
   - component: {fileID: 1779180788188359549}
   - component: {fileID: 1779180788188359550}
+  - component: {fileID: 8444219558337991892}
   m_Layer: 5
   m_Name: Pause Screen
   m_TagString: Untagged
@@ -228,6 +229,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8444219558337991892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779180788188359551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d34e0e4bc29d845a5467839b101a5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1779180788555879914
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,9 +436,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: FadeToScene
-        m_Mode: 5
+      - m_Target: {fileID: 2750998990597254664}
+        m_MethodName: ReturnToMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -658,11 +671,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -687,7 +700,7 @@ GameObject:
   - component: {fileID: 1779180789636929664}
   - component: {fileID: 1779180789636929669}
   - component: {fileID: 1779180789636929670}
-  - component: {fileID: 1779180789636929671}
+  - component: {fileID: 2750998990597254664}
   m_Layer: 5
   m_Name: background
   m_TagString: Untagged
@@ -752,7 +765,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &1779180789636929671
+--- !u!114 &2750998990597254664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -761,9 +774,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1779180789636929665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d2d750058d60be49891e9199b6d0283, type: 3}
+  m_Script: {fileID: 11500000, guid: e4e16903478e6e4498c8e0d3761dc5ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1779180789636929670}
-  startingAlpha: 1
-  speed: 1

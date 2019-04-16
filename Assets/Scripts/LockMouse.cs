@@ -6,11 +6,12 @@ public class LockMouse : MonoBehaviour
 {
 
     public bool lockMouse = true;
+    public bool lockMouseOnStart = true;
     public bool unlockOnEscape = true;
     // Start is called before the first frame update
     void Start()
     {
-        if (lockMouse)
+        if (lockMouse || lockMouseOnStart)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
