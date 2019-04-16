@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -602,6 +602,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: playerMesh
+      value: 
+      objectReference: {fileID: 268049408}
     - target: {fileID: 1693832145, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -981,6 +986,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &268049408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 942726421136712762, guid: c16a4fdeecf104c7898d04976f09544e,
+    type: 3}
+  m_PrefabInstance: {fileID: 57381342}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &290916457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,7 +1444,7 @@ PrefabInstance:
     - target: {fileID: 7576271182610077073, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7576271182610077077, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
@@ -5294,7 +5305,7 @@ PrefabInstance:
     - target: {fileID: 6126351079475538141, guid: ac28acca241f94be6bad660081440ba7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6271877
+      value: 5.65
       objectReference: {fileID: 0}
     - target: {fileID: 6126351079475538141, guid: ac28acca241f94be6bad660081440ba7,
         type: 3}
@@ -5345,6 +5356,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 805827115445530723, guid: ac28acca241f94be6bad660081440ba7,
+        type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 805827115445530723, guid: ac28acca241f94be6bad660081440ba7,
+        type: 3}
+      propertyPath: field of view
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6279228481640449565, guid: ac28acca241f94be6bad660081440ba7, type: 3}
@@ -5805,6 +5826,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 884755916162151838, guid: 9130fae8525a1f441b3efbe1dbd4ac9a,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas
+      objectReference: {fileID: 0}
     - target: {fileID: 1965054617247375748, guid: e50ee44d988d0f94aa57c1c62a624be1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5899,11 +5925,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 884755916162151838, guid: 9130fae8525a1f441b3efbe1dbd4ac9a,
-        type: 3}
-      propertyPath: m_Name
-      value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 6270547507505116478, guid: 5c8ccf5bd53c1cf4d9b3ea38d09d03bc,
         type: 3}
