@@ -40,6 +40,7 @@ public class ShadowRealmManager : MonoBehaviour
     GameObject lightContainer;
     private bool abortIsChoosingWall = false;
     public GameObject particleSystemGO;
+    public GameObject copContainer;
 
     private void Awake()
     {
@@ -282,7 +283,10 @@ public class ShadowRealmManager : MonoBehaviour
         }
 
 
-
+        for(int i = 0; i< copContainer.transform.childCount; i++) {
+            copContainer.transform.GetChild(i).gameObject.GetComponent<GuardScript>().ResetMaterials();
+        }
+        gameObject.transform.localScale = new Vector3(1.0f, 1f, 1f);
 
         gameObject.transform.position = checkIfFreeCollider.transform.position;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -308,17 +312,22 @@ public class ShadowRealmManager : MonoBehaviour
         //moves it a bit away); = new Vector3(
 
         Vector3 partDir = midPoint- gameObject.transform.position;
-        StartCoroutine(spawnParticleSystem(gameObject.transform.position, partDir));
+        StartCoroutine(spawnParticleSystem(gameObject.transform.position, midPoint, partDir));
 
         gameObject.transform.position = shadowRealmTransform.position;
         gameObject.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
         StartCoroutine(moveBodyToWall());
-        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        //gameObject.GetComponent<Rigidbody>().useGravity = false;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         gameObject.transform.rotation = Quaternion.AngleAxis(90f, Vector3.up);
         isInShadowRealm = !isInShadowRealm;
         GetComponent<simplePlayerMovement>().setCurrentWallCollider(targetWall);
 
+        for (int i = 0; i < copContainer.transform.childCount; i++)
+        {
+            copContainer.transform.GetChild(i).gameObject.GetComponent<GuardScript>().setShader(Shader.Find("Outlined/Silhouetted Diffuse"));
+
+        }
 
     }
 
@@ -327,7 +336,7 @@ public class ShadowRealmManager : MonoBehaviour
 
         while(gameObject.transform.localScale.x<1f) {
             print("moving");
-            gameObject.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+            gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
             yield return null;
         }
         yield return 0;
@@ -352,10 +361,18 @@ public class ShadowRealmManager : MonoBehaviour
         return average/(pointList.Count);
     }
 
-    IEnumerator spawnParticleSystem(Vector3 location, Vector3 direction) {
+    IEnumerator spawnParticleSystem(Vector3 startLoc, Vector3 endLoc, Vector3 direction) {
         GameObject partSys = Instantiate(particleSystemGO);
-        partSys.transform.position = location;
+        partSys.transform.position = startLoc;
         partSys.transform.rotation = Quaternion.LookRotation(direction);
+        while ((partSys.transform.position - endLoc).magnitude > 0.01f) {
+            partSys.transform.position = Vector3.Lerp(partSys.transform.position, endLoc, 0.02f);
+            yield return null;
+        }
+        Destroy(partSys);
+
+
+
         yield return 0;
 
     }

@@ -541,11 +541,13 @@ public class GuardScript : MonoBehaviour
         mc.rotation = Quaternion.Lerp(startRot, targetDir, i);
     }
 
-    public void SetMaterials(Material mat)
+    public void setShader(Shader s)
     {
         for (int i = 0; i < skinnedMeshRenderers.Length; i++)
         {
-            skinnedMeshRenderers[i].material = mat;
+            skinnedMeshRenderers[i].material.shader = s;
+            skinnedMeshRenderers[i].material.SetColor("_OutlineColor", Color.white);
+            
         }
     }
 
