@@ -39,6 +39,7 @@ public class ShadowRealmManager : MonoBehaviour
     //public GameObject choosingRedicle;
     GameObject lightContainer;
     private bool abortIsChoosingWall = false;
+    public GameObject particleSystemGO;
 
     private void Awake()
     {
@@ -79,6 +80,8 @@ public class ShadowRealmManager : MonoBehaviour
         //else {
         //    choosingRedicle.SetActive(false);
         //}
+
+        Debug.DrawRay(checkIfFreeCollider.transform.position, -transform.up + -transform.up*0.1f);
         if (Input.GetKey(KeyCode.Space))
         {
             if (abortIsChoosingWall) {
@@ -142,6 +145,7 @@ public class ShadowRealmManager : MonoBehaviour
                     if (wallToTeleportTo.gameObject.transform.Find("selectionQuad") != null) {
                         
                         wallToTeleportTo.gameObject.transform.Find("selectionQuad").gameObject.SetActive(true);
+                        Debug.DrawRay(transform.position, findMiddlePos(checkForShadows()[wallToTeleportTo].Distinct().ToList()), Color.magenta);
 
                     }
 
@@ -274,41 +278,59 @@ public class ShadowRealmManager : MonoBehaviour
     {
         if (checkIfFreeCollider.GetComponent<checkIfFreeColliderScript>().isColliding) {
             Debug.Log("ERROR, player trying to enter real world but would be colliding with something");
+            return;
         }
-        else {
 
 
-            gameObject.transform.position = checkIfFreeCollider.transform.position;
-            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            isInShadowRealm = !isInShadowRealm;
-            shadowPlane.transform.position = shadowRealmTransform.position;
-        }
+
+
+        gameObject.transform.position = checkIfFreeCollider.transform.position;
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        isInShadowRealm = !isInShadowRealm;
+        shadowPlane.transform.position = shadowRealmTransform.position;
+
     }
 
     void teleportToWall(Collider targetWall, List<Vector3> pointList) {
 
 
-        Debug.DrawLine(transform.position, findMiddlePos(pointList), Color.green);
+        Debug.DrawLine(transform.position, findMiddlePos(pointList), Color.magenta);
+
         Vector3 midPoint = findMiddlePos(pointList);
         //make constant for shadow plane height
         //teleport to average of all points
-        shadowPlane.transform.position = new Vector3(midPoint.x, SHADOWPLANE_HEIGHT, midPoint.z);
+        float yPos = targetWall.transform.position.y - (targetWall.bounds.size.y / 2f) + SHADOWPLANE_HEIGHT;
+        shadowPlane.transform.position = new Vector3(midPoint.x, yPos, midPoint.z);
         //adjust rotation to be thjat of the parent of the collider. i.e. the gameobject wall
 
         shadowPlane.transform.rotation = targetWall.transform.rotation;
         shadowPlane.transform.position -= targetWall.transform.right*0.01f;
         //moves it a bit away); = new Vector3(
 
-
+        Vector3 partDir = midPoint- gameObject.transform.position;
+        StartCoroutine(spawnParticleSystem(gameObject.transform.position, partDir));
 
         gameObject.transform.position = shadowRealmTransform.position;
+        gameObject.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+        StartCoroutine(moveBodyToWall());
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         gameObject.transform.rotation = Quaternion.AngleAxis(90f, Vector3.up);
         isInShadowRealm = !isInShadowRealm;
         GetComponent<simplePlayerMovement>().setCurrentWallCollider(targetWall);
 
 
+    }
 
+    IEnumerator moveBodyToWall() {
+
+
+        while(gameObject.transform.localScale.x<1f) {
+            print("moving");
+            gameObject.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+            yield return null;
+        }
+        yield return 0;
 
     }
 
@@ -330,6 +352,14 @@ public class ShadowRealmManager : MonoBehaviour
         return average/(pointList.Count);
     }
 
-    
+    IEnumerator spawnParticleSystem(Vector3 location, Vector3 direction) {
+        GameObject partSys = Instantiate(particleSystemGO);
+        partSys.transform.position = location;
+        partSys.transform.rotation = Quaternion.LookRotation(direction);
+        yield return 0;
+
+    }
+
+
 
 }

@@ -133,6 +133,13 @@ public class GuardScript : MonoBehaviour
         }
         visibleObjects = FindObjectsOfType<AIObjectVisibility>();
         Debug.Assert(visibleObjects.Length == 1); // if it's not 1 then we're in trouble for the investigate code
+
+        if (skinnedMaterials.Length == 0)
+        {
+            // then find them!
+            FindSkinnedMaterials();
+            Debug.LogError("Cop without skinned mesh materials found!");
+        }
     }
 
     private void LoadQuips()
