@@ -564,7 +564,7 @@ public class GuardScript : MonoBehaviour
         skinnedMaterials = new Material[skinnedMeshRenderers.Length];
         for (int i =0; i < skinnedMeshRenderers.Length; i++)
         {
-            skinnedMaterials[i] = skinnedMeshRenderers[i].material;
+            skinnedMaterials[i] = skinnedMeshRenderers[i].sharedMaterial;
         }
         Debug.Log("Found " + skinnedMeshRenderers.Length + " mesh renderers and materials");
     }
