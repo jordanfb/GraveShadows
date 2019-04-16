@@ -9,11 +9,12 @@ public class SerializedEvidence
     public int evidenceindex = -1; // the index of the evidence on the global list of all evidence
     public EvidenceState evidenceState = EvidenceState.NotInGame;
     public Vector2 location; // where the evidence is located on the yarn board
-    public List<int> connectedEvidence; // the list of evidence connected to this evidence on (or off) the yarn board.
+    public List<int> connectedEvidence = new List<int>(); // the list of evidence connected to this evidence on (or off) the yarn board.
 
     public SerializedEvidence(int evidence)
     {
         evidenceindex = evidence;
+        connectedEvidence = new List<int>();
     }
 
     public enum EvidenceState

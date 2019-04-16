@@ -7,7 +7,10 @@ public class EvidenceMono : MonoBehaviour
 {
     [SerializeField]
     private Evidence _evidenceInfo;
+    public bool isWaistLevel;
     [System.Serializable]
+
+
     public class EvidenceEvent : UnityEvent<Evidence>
     {
 

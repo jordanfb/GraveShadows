@@ -13,11 +13,10 @@ public class GameplayManager : MonoBehaviour
      */
     
     EvidenceManager evidenceManager;
-
+    
     public static GameplayManager instance;
 
     [Space]
-    public Texture2D fadeToBlackTexture;
 
     [Tooltip("Can you miss the last day if you get caught on the second to last?")]
     public bool allowSkippingLastDay = true;
@@ -53,29 +52,79 @@ public class GameplayManager : MonoBehaviour
         
     }
 
+    public void ExitBackToHubNextDay()
+    {
+        GameLevelManager gameLevel = FindObjectOfType<GameLevelManager>();
+        Debug.Assert(gameLevel != null); // duh it can't be null we need it in all our levels
+        GameplayManager.instance.NextDay(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, false, gameLevel.HasFoundEverything()));
+        VisitHubScene();
+    }
+
     private void StartFactoryScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("Level 3");
     }
 
     private void StartHubScene()
     {
-        SceneManager.LoadScene("HubWorld");
+        SceneManager.LoadScene("Level 0 HUB");
     }
 
     private void StartOfficeScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("Level 2");
     }
 
     private void StartMainMenuScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void StartCrimeScene()
     {
-        SceneManager.LoadScene("HubWorld"); // TODO
+        SceneManager.LoadScene("Level 1");
+    }
+
+    public string GenerateTodaysRecipt(Level visitedLocation, List<Evidence> evidenceFound, bool wasSpotted, bool foundAll)
+    {
+        string visitedLocationString = "";
+        switch (visitedLocation)
+        {
+            case Level.Apartment:
+                visitedLocationString = "The Apartment";
+                break;
+            case Level.Factory:
+                visitedLocationString = "The Factory";
+                break;
+            case Level.Hub:
+                visitedLocationString = "My Office";
+                break;
+            case Level.Office:
+                visitedLocationString = "The Office";
+                break;
+        }
+        string s = "<u>Visited:</u>\n" + visitedLocationString + "\n<u>Found:</u>\n";
+        if (evidenceFound.Count == 0)
+        {
+            s += "Nothing\n";
+        } else
+        {
+            // loop through the evidence found and print their names
+            for (int i = 0; i < evidenceFound.Count; i++)
+            {
+                s += evidenceFound[i].Name + "\n";
+            }
+        }
+
+        if (wasSpotted)
+        {
+            s += "\nThey caught me. Damn.";
+        }
+        if (foundAll)
+        {
+            s += "\nI think I found everything.";
+        }
+        return s;
     }
 
     public void VisitFactory()
@@ -88,6 +137,20 @@ public class GameplayManager : MonoBehaviour
         } else
         {
             f.FadeOut(StartFactoryScene);
+        }
+    }
+
+    public void FadeOut(System.Action a)
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            a.Invoke();
+        }
+        else
+        {
+            f.FadeOut(a);
         }
     }
 
@@ -116,6 +179,20 @@ public class GameplayManager : MonoBehaviour
         else
         {
             f.FadeOut(StartCrimeScene);
+        }
+    }
+
+    public void VisitScene(string sceneName)
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            f.FadeOut(() => { SceneManager.LoadScene(sceneName); });
         }
     }
 
@@ -191,6 +268,7 @@ public class GameplayManager : MonoBehaviour
         EvidenceManager.NewSaveGame();
 
         // then load the game data here:
+        dayNum = 0; // first day
         dayData = new List<DayData>();
         for (int i = 0; i < numExploringDays; i++)
         {

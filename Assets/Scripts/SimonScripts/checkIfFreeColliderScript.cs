@@ -12,6 +12,10 @@ public class checkIfFreeColliderScript : MonoBehaviour
         if (other.CompareTag("Evidence")) {
             return;
         }
+        if (other.gameObject.layer == LayerMask.GetMask("Ignore Raycast") || other.gameObject.layer == 2)
+        {
+            return; // don't collide with the conversation starter collider
+        }
         isColliding = true;
     }
 

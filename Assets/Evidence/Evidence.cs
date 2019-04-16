@@ -52,5 +52,5 @@ public enum EvidenceType
 
 public enum Level
 {
-    Office, Factory
+    Office, Factory, Apartment, Hub
 }

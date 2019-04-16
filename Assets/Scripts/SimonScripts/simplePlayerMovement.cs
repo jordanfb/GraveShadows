@@ -19,9 +19,11 @@ public class simplePlayerMovement : MonoBehaviour
     public float PLAYER_SPEED_FORWARD;
     public float PLAYER_SPEED_STRAFE;
     public float SHADOW_SPEED;
+    bool canExit = true; // to stop it from leaving twice
 
-    private Animator anim;
+    public Animator anim;
 
+    public bool isAllowedToWalk = true;
 
     const float PLAYER_WIDTH = 0.5f;
 
@@ -48,20 +50,26 @@ public class simplePlayerMovement : MonoBehaviour
             return;
         }
 
-
-        float moveDirX = Input.GetAxis("Horizontal");
-        float moveDirY = Input.GetAxis("Vertical");
-        if (!SRmanager.isInShadowRealm) {
-            thirdPersonMovement(moveDirX, moveDirY);
-            //arbitrary speed in which player has to move, will need to change when I get Anims
-
-
+        if (isAllowedToWalk)
+        {
+            float moveDirX = Input.GetAxis("Horizontal");
+            float moveDirY = Input.GetAxis("Vertical");
+            if (!SRmanager.isInShadowRealm)
+            {
+                thirdPersonMovement(moveDirX, moveDirY);
+                //arbitrary speed in which player has to move, will need to change when I get Anims
+            }
+            else
+            {
+                wallMovement(moveDirX, moveDirY, currentWallCollider);
+            }
         }
-        else {
-            wallMovement(moveDirX, moveDirY, currentWallCollider);
-        }
+    }
 
+    public Animator getAnim()
+    {
 
+        return anim;
     }
 
     void thirdPersonMovement(float _moveDirX, float _moveDirY) {
@@ -169,6 +177,15 @@ public class simplePlayerMovement : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "Exit" && canExit)
+        {
+            canExit = false;
+            GameplayManager.instance.ExitBackToHubNextDay();
+        }
+    }
+
 
     public Collider setCurrentWallCollider(Collider newCurrentWallCollider) {
         currentWallCollider = newCurrentWallCollider;
@@ -185,7 +202,13 @@ public class simplePlayerMovement : MonoBehaviour
             //Evidence e = emono.EvidenceInfo;
             //PlayerManager.instance.CollectEvidence(e);
             StartCoroutine(DestroyAfterTime(1f, other.gameObject));
-            anim.SetTrigger("pickUp");
+            if (emono.isWaistLevel) {
+                anim.SetTrigger("reachOver");
+            }
+            else {
+                anim.SetTrigger("pickUp");
+            }
+
 
         }
     }
@@ -196,4 +219,6 @@ public class simplePlayerMovement : MonoBehaviour
 
         Destroy(gameObjectToDestroy);
     }
+
+
 }
