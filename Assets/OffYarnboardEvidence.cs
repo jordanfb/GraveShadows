@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class OffYarnboardEvidence : MonoBehaviour
 {
@@ -9,20 +10,15 @@ public class OffYarnboardEvidence : MonoBehaviour
     [SerializeField]
     private SpriteRenderer spriteRenderer;
     [SerializeField]
-    private Text evidenceNameText;
+    private TextMeshPro evidenceNameText;
 
     private YarnBoardEntity entity;
+    private YarnBoard yarnboard;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    public void SetContents(YarnBoardEntity e)
+    public void SetContents(YarnBoard yb, YarnBoardEntity e)
     {
         entity = e;
+        yarnboard = yb;
         spriteRenderer.sprite = e.Photo;
         Suspect s = e as Suspect;
         if (s != null)
@@ -32,12 +28,6 @@ public class OffYarnboardEvidence : MonoBehaviour
         {
             evidenceNameText.text = "Evidence: " + e.Name;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnMouseEnter()

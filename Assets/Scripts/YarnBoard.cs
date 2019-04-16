@@ -35,8 +35,6 @@ public class YarnBoard : MonoBehaviour
     [SerializeField]
     private YarnBoardCamera _yarnBoardCamera;
     [SerializeField]
-    private Sprite _placeholderSprite;
-    [SerializeField]
     private float _photoScalar;
     [SerializeField]
     private Transform _yarnBoardParent;
@@ -156,7 +154,7 @@ public class YarnBoard : MonoBehaviour
                 EvidenceMono emono = go.GetComponentInChildren<EvidenceMono>();
                 emono.EvidenceInfo = e;
                 SpriteRenderer sr = go.GetComponentInChildren<SpriteRenderer>();
-                sr.sprite = _placeholderSprite;
+                sr.sprite = e.Photo;
             }
             else if (s != null)
             {
@@ -166,7 +164,7 @@ public class YarnBoard : MonoBehaviour
                 SuspectMono susmono = go.GetComponentInChildren<SuspectMono>();
                 susmono.SuspectInfo = s;
                 SpriteRenderer sr = go.GetComponentInChildren<SpriteRenderer>();
-                sr.sprite = _placeholderSprite;
+                sr.sprite = s.Photo;
             }
 
             if (go == null)

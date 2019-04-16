@@ -51,6 +51,34 @@ public class EvidenceManager : MonoBehaviour
         set { generated = value; }
     }
 
+    public List<YarnBoardEntity> GetEvidenceNotOnYarnboard()
+    {
+        List<YarnBoardEntity> output = new List<YarnBoardEntity>();
+        for (int i = 0; i < allSerializedEvidence.Count; i++)
+        {
+            if (allSerializedEvidence[i].evidenceState == SerializedEvidence.EvidenceState.OffYarnBoard)
+            {
+                // then add the connected evidence to the output list
+                output.Add(allEvidenceEntities[allSerializedEvidence[i].evidenceindex]);
+            }
+        }
+        return output;
+    }
+
+    public int GetEvidenceNotOnYarnboardCount()
+    {
+        int num = 0;
+        for (int i = 0; i < allSerializedEvidence.Count; i++)
+        {
+            if (allSerializedEvidence[i].evidenceState == SerializedEvidence.EvidenceState.OffYarnBoard)
+            {
+                // then add the connected evidence to the output list
+                num++;
+            }
+        }
+        return num;
+    }
+
     public void Awake()
     {
         // initialize yourself and the list of all evidence
