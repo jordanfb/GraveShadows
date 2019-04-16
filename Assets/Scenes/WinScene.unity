@@ -375,16 +375,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2764293053896457568, guid: c8366da139b71d04fa52d4e10ed0d922,
-        type: 3}
-      propertyPath: m_Text
-      value: LOCAL CRIME FAMILY TAKEN DOWN, CORRUPTION EXPOSED
-      objectReference: {fileID: 0}
-    - target: {fileID: 2764293053896457568, guid: c8366da139b71d04fa52d4e10ed0d922,
-        type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 22
-      objectReference: {fileID: 0}
     - target: {fileID: 2764293052241083374, guid: c8366da139b71d04fa52d4e10ed0d922,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -395,25 +385,22 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 216.71
       objectReference: {fileID: 0}
-    - target: {fileID: 2764293052241083375, guid: c8366da139b71d04fa52d4e10ed0d922,
-        type: 3}
-      propertyPath: m_Text
-      value: "    The crime syndicate known as the Nuclear Family met its end Friday
-        night. NAME OF CULPRIT, now known as the head of the group, was found dead
-        in their home. Federal agents stepped in to assist local police and quickly
-        discovered Police Chief Harold Clap- ton had been receiving payments from
-        NAME OF CULPRIT to turn a blind eye to the Family\u2019s crimes. \r\n    Federal
-        agents believe they have arrested all remaining members of the Nuclear Family,
-        who have all ag- reed in interrogation that the murder victim was their boss.
-        The Family has been accused for the murder of Detec- tive Marvin Mitchell,
-        whose death had "
-      objectReference: {fileID: 0}
     - target: {fileID: 2764293052189729345, guid: c8366da139b71d04fa52d4e10ed0d922,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -22.048
       objectReference: {fileID: 0}
     - target: {fileID: 2764293052189729345, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 216.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293052302104908, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -22.046
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293052302104908, guid: c8366da139b71d04fa52d4e10ed0d922,
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 216.71
@@ -429,15 +416,18 @@ PrefabInstance:
         never had reason to step in,\u201D said one agent, who wished to remain anonymous.
         \u201CThree unexpected deaths in a short timespan was \n"
       objectReference: {fileID: 0}
-    - target: {fileID: 2764293052302104908, guid: c8366da139b71d04fa52d4e10ed0d922,
+    - target: {fileID: 2764293052241083375, guid: c8366da139b71d04fa52d4e10ed0d922,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -22.046
-      objectReference: {fileID: 0}
-    - target: {fileID: 2764293052302104908, guid: c8366da139b71d04fa52d4e10ed0d922,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 216.71
+      propertyPath: m_Text
+      value: "    The crime syndicate known as the Nuclear Family met its end Friday
+        night. NAME OF CULPRIT, now known as the head of the group, was found dead
+        in their home. Federal agents stepped in to assist local police and quickly
+        discovered Police Chief Harold Clap- ton had been receiving payments from
+        NAME OF CULPRIT to turn a blind eye to the Family\u2019s crimes. \r\n    Federal
+        agents believe they have arrested all remaining members of the Nuclear Family,
+        who have all ag- reed in interrogation that the murder victim was their boss.
+        The Family has been accused for the murder of Detec- tive Marvin Mitchell,
+        whose death had "
       objectReference: {fileID: 0}
     - target: {fileID: 2764293052302104909, guid: c8366da139b71d04fa52d4e10ed0d922,
         type: 3}
@@ -450,6 +440,16 @@ PrefabInstance:
         are no leads into finding the culprit. No fingerprints were left at the scene,
         no doors or windows showed sign of entry. \u201CIt\u2019s like he came in
         and left like smoke. It looks like our vic got murdered by a shadow.\u201D\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293053896457568, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_Text
+      value: LOCAL CRIME FAMILY TAKEN DOWN, CORRUPTION EXPOSED
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293053896457568, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 22
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8366da139b71d04fa52d4e10ed0d922, type: 3}
@@ -1336,3 +1336,72 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textBox: {fileID: 1896408087}
   nameOfCulprit: 
+--- !u!1001 &1045127115560614805
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1045127116878428064, guid: 6e3a39b7808575e48ad22997f9ff5b29,
+        type: 3}
+      propertyPath: m_Name
+      value: SingleShotObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045127116878428066, guid: 6e3a39b7808575e48ad22997f9ff5b29,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 414.13135
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045127116878428066, guid: 6e3a39b7808575e48ad22997f9ff5b29,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 148.91573
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045127116878428066, guid: 6e3a39b7808575e48ad22997f9ff5b29,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 57.691826
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045127116878428066, guid: 6e3a39b7808575e48ad22997f9ff5b29,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045127116878428066, guid: 6e3a39b7808575e48ad22997f9ff5b29,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045127116878428066, guid: 6e3a39b7808575e48ad22997f9ff5b29,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045127116878428066, guid: 6e3a39b7808575e48ad22997f9ff5b29,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045127116878428066, guid: 6e3a39b7808575e48ad22997f9ff5b29,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045127116878428066, guid: 6e3a39b7808575e48ad22997f9ff5b29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045127116878428066, guid: 6e3a39b7808575e48ad22997f9ff5b29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045127116878428066, guid: 6e3a39b7808575e48ad22997f9ff5b29,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6e3a39b7808575e48ad22997f9ff5b29, type: 3}
