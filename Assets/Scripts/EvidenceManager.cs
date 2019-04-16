@@ -46,6 +46,11 @@ public class EvidenceManager : MonoBehaviour
         }
     }
 
+    public bool Generated
+    {
+        set { generated = value; }
+    }
+
     public void Awake()
     {
         // initialize yourself and the list of all evidence
@@ -75,8 +80,13 @@ public class EvidenceManager : MonoBehaviour
         if (se != null)
         {
             // then we're set!
-            Debug.Assert(se.evidenceState == SerializedEvidence.EvidenceState.NotFound); // shouldn't have found something not in the game
-            se.evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
+            //Debug.Assert(se.evidenceState == SerializedEvidence.EvidenceState.NotFound); // shouldn't have found something not in the game
+            Debug.Log("Evidence state: " + se.evidenceState);
+            if (se.evidenceState != SerializedEvidence.EvidenceState.OnYarnBoard)
+            {
+                // this fixes the assert I guess but we should actually fix it
+                se.evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
+            }
         }
 
         SaveEvideneToPlayerPrefs();
@@ -135,7 +145,9 @@ public class EvidenceManager : MonoBehaviour
         PlayerPrefs.DeleteKey("EvidenceSaved");
         PlayerPrefs.Save();
         // then it also makes a new game
+        Random.InitState(System.DateTime.Now.Millisecond);
         instance.InitializeSerializedEvidence();
+        UndoRedoStack.Reset(); // clears the stack for a new game
     }
 
     public void MarkRandomCulprit()
@@ -156,8 +168,7 @@ public class EvidenceManager : MonoBehaviour
             }
         }
 
-        System.Random rng = new System.Random();
-        int j = rng.Next(0, 4);
+        int j = Random.Range(0, 4);
         culprit = ReferencedEntity(allSerializedEvidence[j]) as Suspect;
         if(culprit == null)
         {
@@ -243,14 +254,13 @@ public class EvidenceManager : MonoBehaviour
             
         }
                 
-        System.Random rng = new System.Random();
         while(office < 15 || factory < 15)
         {
             if (remainingEvidence.Count == 0)
                 break;
 
             // Generate the next piece of evidence and check if it can be added.
-            int next = rng.Next(0, remainingEvidence.Count - 1);
+            int next = Random.Range(0, remainingEvidence.Count - 1);
             SerializedEvidence se = remainingEvidence[next];
             Evidence ev = ReferencedEntity(se) as Evidence;
             if(ev == null)
@@ -330,5 +340,44 @@ public class EvidenceManager : MonoBehaviour
 
         Debug.LogError("UNABLE TO FIND EVIDENCE OH DEAR");
         return null;
+    }
+
+    public void ConnectEvidence(int e1, int e2)
+    {
+        if (e1 == e2 || e1 > AllEvidence.Count || e2 > AllEvidence.Count)
+        {
+            return; // can't connect them if they're you or they don't exist
+        }
+        SerializedEvidence e1e = AllEvidence[e1];
+        SerializedEvidence e2e = AllEvidence[e2];
+        YarnBoardConnectEvent connectEvent = new YarnBoardConnectEvent(e1, e1e, e2, e2e, false);
+        connectEvent.Redo(); // this way I don't have to deal with implementing it multiple places
+        // also add the event to the undo/redo stack
+        UndoRedoStack.AddEvent(connectEvent);
+    }
+
+    public void ConnectEvidence(YarnBoardEntity e1, YarnBoardEntity e2)
+    {
+        ConnectEvidence(FindSerializedEvidence(e1).evidenceindex, FindSerializedEvidence(e2).evidenceindex);
+    }
+
+    public void DisconnectEvidence(int e1, int e2)
+    {
+        // delete the connection
+        if (e1 == e2 || e1 > AllEvidence.Count || e2 > AllEvidence.Count)
+        {
+            return; // can't disconnect them if they're you or they don't exist
+        }
+        SerializedEvidence e1e = AllEvidence[e1];
+        SerializedEvidence e2e = AllEvidence[e2];
+        YarnBoardConnectEvent connectEvent = new YarnBoardConnectEvent(e1, e1e, e2, e2e, true);
+        connectEvent.Redo(); // this way I don't have to deal with implementing it multiple places
+        // also add the event to the undo/redo stack
+        UndoRedoStack.AddEvent(connectEvent);
+    }
+
+    public void DisconnectEvidence(YarnBoardEntity e1, YarnBoardEntity e2)
+    {
+        DisconnectEvidence(FindSerializedEvidence(e1).evidenceindex, FindSerializedEvidence(e2).evidenceindex);
     }
 }

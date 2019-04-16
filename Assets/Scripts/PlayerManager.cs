@@ -32,6 +32,12 @@ public class PlayerManager : MonoBehaviour
         get { return _collectedEvidence; }
     }
 
+    public bool HasCollected(Evidence ev)
+    {
+        // returns whether or not we've already collected that evidence
+        return _collectedEvidence.Contains(ev);
+    }
+
     public void CollectEvidence(Evidence ev)
     {
         if (_collectedEvidence.Contains(ev))

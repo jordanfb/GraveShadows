@@ -92,6 +92,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _evidenceInfo: {fileID: 11400000, guid: 5122288511a212649aed932c7e7adea3, type: 2}
+  isWaistLevel: 0
+  onEvidenceCollected:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: EvidenceMono+EvidenceEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!65 &951892173100570251
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -103,5 +109,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.47147393, y: 0.48619992, z: 0.65212154}
-  m_Center: {x: -0.00045918673, y: 0.23611209, z: 0.010522366}
+  m_Size: {x: 1.9359031, y: 0.68036705, z: 1.9459372}
+  m_Center: {x: -0.06754005, y: 0.33319566, z: 0.047353268}

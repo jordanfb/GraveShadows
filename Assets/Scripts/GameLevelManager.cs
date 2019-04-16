@@ -49,9 +49,10 @@ public class GameLevelManager : MonoBehaviour
     public bool HasFoundEverything()
     {
         // returns if everything has been disabled
-        for (int i = 0; i < GetEvidence().Length; i++)
+        EvidenceMono[] currentAliveEvidence = FindObjectsOfType<EvidenceMono>();
+        for (int i = 0; i < currentAliveEvidence.Length; i++)
         {
-            if (GetEvidence()[i].gameObject.activeInHierarchy)
+            if (currentAliveEvidence[i].gameObject.activeInHierarchy)
             {
                 return false;
             }

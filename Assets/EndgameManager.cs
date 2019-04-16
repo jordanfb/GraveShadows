@@ -61,10 +61,12 @@ public class EndgameManager : MonoBehaviour
         if (EvidenceManager.instance.culprit == s)
         {
             Debug.Log("YOU WIN");
+            EvidenceManager.instance.Generated = false;
             GameplayManager.instance.FadeOut(() => { SceneManager.LoadScene("WinScene"); });
         } else
         {
             Debug.Log("UGGGGH");
+            EvidenceManager.instance.Generated = false;
             GameplayManager.instance.FadeOut(() => { SceneManager.LoadScene("LoseScene"); });
         }
     }

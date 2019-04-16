@@ -140,6 +140,29 @@ public class HubManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        // update the yarnboard undo/redo stack as well
+        if (cameraMode == CameraMode.LookAtYarnBoard)
+        {
+            // then check for control+z or control+shift+z or control+y
+            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+            {
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+                    {
+                        // redo
+                        UndoRedoStack.Redo();
+                    } else
+                    {
+                        UndoRedoStack.Undo();
+                    }
+                }
+                else if (Input.GetKeyDown(KeyCode.Y)) {
+                    // redo
+                    UndoRedoStack.Redo();
+                }
+            }
+        }
         UpdateCamera();
     }
 
