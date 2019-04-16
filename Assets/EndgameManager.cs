@@ -48,7 +48,7 @@ public class EndgameManager : MonoBehaviour
             Suspect s = suspects[i];
             clickButtonEvent[i] += () => { SuspectChosen(s); };
             egc.SetStuff(suspects[i], clickButtonEvent[i]);
-            egc.nameText.text = suspects[i].Name;
+            egc.nameText.text = suspects[i].CodeName;
 
             currentDegrees += degrees;
         }
@@ -65,7 +65,7 @@ public class EndgameManager : MonoBehaviour
             GameplayManager.instance.FadeOut(() => { SceneManager.LoadScene("WinScene"); });
         } else
         {
-            Debug.Log("UGGGGH");
+            Debug.Log("UGGGGH You lose");
             EvidenceManager.instance.Generated = false;
             GameplayManager.instance.FadeOut(() => { SceneManager.LoadScene("LoseScene"); });
         }
