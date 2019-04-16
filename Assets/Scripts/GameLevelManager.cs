@@ -7,6 +7,8 @@ public class GameLevelManager : MonoBehaviour
     public Level level;
     public List<Evidence> evidenceFoundThisDay = new List<Evidence>(); // this is used to keep track of the recipts of what's found this day
     private EvidenceMono[] evidenceMonos; // these are all the evidence in this level
+    private List<Transform> evidenceLocations;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,12 @@ public class GameLevelManager : MonoBehaviour
         {
             Debug.LogWarning("Need to be able to spawn in the evidence!!!!");
         }
+
+        // We need the transforms for all the placeholders
+        GameObject[] placeholders = GameObject.FindGameObjectsWithTag("Evidence");
+        foreach (GameObject go in placeholders)
+            evidenceLocations.Add(go.transform);
+
         for (int i = 0; i < allEvidence.Count; i++)
         {
             if (i >= evidenceMonos.Length)
