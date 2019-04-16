@@ -266,6 +266,7 @@ public class GameplayManager : MonoBehaviour
         // starts a new game!
         // chooses the evidence and whatever
         EvidenceManager.NewSaveGame();
+        UndoRedoStack.Reset(); // make sure to reset the undo redo stack otherwise weird bugs
 
         // then load the game data here:
         dayNum = 0; // first day

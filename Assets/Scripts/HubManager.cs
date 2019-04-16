@@ -160,14 +160,18 @@ public class HubManager : MonoBehaviour
                     {
                         // redo
                         UndoRedoStack.Redo();
-                    } else
+                        yarnBoard.GenerateContent();
+                    }
+                    else
                     {
                         UndoRedoStack.Undo();
+                        yarnBoard.GenerateContent();
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.Y)) {
                     // redo
                     UndoRedoStack.Redo();
+                    yarnBoard.GenerateContent();
                 }
             }
         }

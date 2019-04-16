@@ -7,16 +7,46 @@ public class LineDraw : MonoBehaviour
     private LineRenderer _line;
     private Vector3 _mousePos;
     private GameObject _startPin;
-    private List<LineRenderer> _lines;
+    private List<LineRenderer> _lines = new List<LineRenderer>();
 
     private YarnBoardEntity originalEvidence;
 
     public Material material;
     public float _lineWidth = 0.15f;
 
-    private void Start()
+    public void DestroyAll()
     {
-        _lines = new List<LineRenderer>();
+        for (int i = 0; i < _lines.Count; i++)
+        {
+            Destroy(_lines[i].gameObject);
+        }
+        _lines.Clear();
+        if (_line != null)
+        {
+            Destroy(_line.gameObject);
+            _line = null;
+        }
+    }
+
+    public void CreateFullLine(GameObject o1, GameObject o2, SerializedEvidence e1, SerializedEvidence e2)
+    {
+        // create a line between two gameobjects (used for respawning the lines in generatecontent)
+        _startPin = o1;
+        CreateLine(o1.transform.position);
+
+        // then set the other point
+        _line.SetPosition(1, o2.transform.position);
+        AddCollider();
+        _lines.Add(_line);
+        YarnLine yarnLine = _line.gameObject.AddComponent<YarnLine>();
+        yarnLine.point1 = _startPin.transform;
+        yarnLine.point2 = o2.transform;
+        yarnLine.lockToPoints = true;
+        yarnLine.e1 = e1;
+        yarnLine.e2 = e2;
+
+        _line = null;
+        _startPin = null;
     }
 
     // Update is called once per frame
@@ -153,6 +183,9 @@ public class LineDraw : MonoBehaviour
                     if (yl.e1 != null && yl.e2 != null)
                     {
                         EvidenceManager.instance.DisconnectEvidence(yl.e1.evidenceindex, yl.e2.evidenceindex);
+                    } else
+                    {
+                        Debug.LogError("Error disconnecting evidence");
                     }
 
                     Destroy(delColl.transform.parent.gameObject);
@@ -179,19 +212,6 @@ public class LineDraw : MonoBehaviour
         //Set both vertices to the start pin
         _line.SetPosition(0, position);
         _line.SetPosition(1, position);
-    }
-
-    public void DeleteAllLines()
-    {
-        foreach(LineRenderer lr in _lines)
-        {
-            Destroy(lr.gameObject);
-        }
-    }
-
-    public void CreateFullLine()
-    {
-
     }
 
     /**
