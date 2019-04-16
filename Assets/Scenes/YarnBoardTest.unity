@@ -160,15 +160,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pinPrefab: {fileID: 1028937597040469467, guid: a3138ee9596874342a39dc55238d0138,
     type: 3}
+  _evidencePrefab: {fileID: 0}
+  _suspectPrefab: {fileID: 0}
   _boardCanvas: {fileID: 688817990}
   _flavorTextPanel: {fileID: 916344329}
   _evidenceTitle: {fileID: 187938121634506923}
   _flavorTextAsset: {fileID: 7913503140815203466}
+  _suspectInfoPanel: {fileID: 0}
+  _suspectCodeName: {fileID: 0}
+  _suspectBio: {fileID: 0}
   _pinZOffset: 0
   _offsetRatio: 0.75
   _textPositionXOffset: -1
   _charTextFontSize: 8
   _yarnBoardCamera: {fileID: 1367367182}
+  _placeholderSprite: {fileID: 0}
+  _photoScalar: 0
+  _yarnBoardParent: {fileID: 0}
+  _evidenceXOffset: 0
+  _evidenceYOffset: 0
+  _pinScale: 0
+  _pinOffset: 0
 --- !u!4 &182159752 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: d978d0ac6a396644dbf835ac1cea26c7,
@@ -862,6 +874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _evidenceInfo: {fileID: 11400000, guid: 9db0c0a49182a474cbf698d6a8820016, type: 2}
+  isWaistLevel: 0
   onEvidenceCollected:
     m_PersistentCalls:
       m_Calls: []
@@ -1063,6 +1076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _evidenceInfo: {fileID: 11400000, guid: 5122288511a212649aed932c7e7adea3, type: 2}
+  isWaistLevel: 0
   onEvidenceCollected:
     m_PersistentCalls:
       m_Calls: []
@@ -1367,8 +1381,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c32d07de0637834f93b802038cb4a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementInverted: 0
   scrollSpeed: 1
   moveSpeed: 0.1
+  minCoords: {x: -1, y: -1}
+  maxCoords: {x: 1, y: 1}
+  zoomBounds: {x: 0, y: 1}
   duration: 0.5
 --- !u!1 &1386444201
 GameObject:
