@@ -70,6 +70,16 @@ public class GameplayManager : MonoBehaviour
         SceneManager.LoadScene("Level 0 HUB");
     }
 
+    private void StartOptions()
+    {
+        SceneManager.LoadScene("Options");
+    }
+
+    private void StartCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
     private void StartOfficeScene()
     {
         SceneManager.LoadScene("Level 2");
@@ -221,6 +231,33 @@ public class GameplayManager : MonoBehaviour
         else
         {
             f.FadeOut(StartMainMenuScene);
+        }
+    }
+
+    public void VisitOptions()
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            StartOptions();
+        }
+        else
+        {
+            f.FadeOut(StartOptions);
+        }
+    }
+    public void VisitCreditsScene()
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            StartCredits();
+        }
+        else
+        {
+            f.FadeOut(StartCredits);
         }
     }
 
