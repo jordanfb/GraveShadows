@@ -38,6 +38,11 @@ public class PlayerManager : MonoBehaviour
         return _collectedEvidence.Contains(ev);
     }
 
+    public void NewGame()
+    {
+        _collectedEvidence = new List<Evidence>();
+    }
+
     public void CollectEvidence(Evidence ev)
     {
         if (_collectedEvidence.Contains(ev))

@@ -152,6 +152,7 @@ public class EvidenceManager : MonoBehaviour
         for (int i = 0; i < allEvidenceEntities.Count; i++)
         {
             SerializedEvidence e = new SerializedEvidence(i);
+            e.evidenceState = SerializedEvidence.EvidenceState.NotInGame; // make sure it's all not found so that it doesn't mess your second game up
             AllEvidence.Add(e);
         }
         // this is called and then later you'd initialize whether the evidence is in the game or not and store that in this info
