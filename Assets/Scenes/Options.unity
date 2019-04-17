@@ -552,7 +552,7 @@ RectTransform:
   m_Children:
   - {fileID: 230905738}
   m_Father: {fileID: 861113118}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -706,6 +706,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a75c3474f12cf9e46906405c366f3d77, type: 2}
   - {fileID: 11400000, guid: 6b5af51fba1759f42b643d52e018a167, type: 2}
   - {fileID: 11400000, guid: ce0827cdbcc8afb489229872713580d5, type: 2}
+  allEvidencePrefabs: []
   culprit: {fileID: 0}
 --- !u!114 &476573212
 MonoBehaviour:
@@ -764,6 +765,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 100078, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 101472, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
@@ -3092,10 +3097,6 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 101470, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 101472, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
@@ -13392,8 +13393,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1778965296}
   - {fileID: 355125127}
+  - {fileID: 1778965296}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13801,7 +13802,7 @@ RectTransform:
   m_LocalScale: {x: 1.0973938, y: 1.0973938, z: 1.0973938}
   m_Children: []
   m_Father: {fileID: 861113118}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
