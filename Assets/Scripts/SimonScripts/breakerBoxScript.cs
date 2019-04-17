@@ -55,7 +55,7 @@ public class breakerBoxScript : MonoBehaviour
                 {
                     foreach (GameObject l in affiliatedLights)
                     {
-                        GetComponent<ElevatorUpDown>().LetsMove();
+                        l.GetComponent<ElevatorUpDown>().LetsMove();
                     }
                 }
 

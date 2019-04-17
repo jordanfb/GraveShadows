@@ -24533,153 +24533,30 @@ PrefabInstance:
       objectReference: {fileID: 1101760096}
     - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
-      propertyPath: choosingRedicle
+      propertyPath: copContainer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2135275096}
     - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: mainCam
       value: 
       objectReference: {fileID: 319980969}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 319980969}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_TypeName
-      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].collider
-      value: 
-      objectReference: {fileID: 1931812038}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].optionalConversationName
-      value: Break Room Conversation
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[2].collider
-      value: 
-      objectReference: {fileID: 441427562}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[2].optionalConversationName
-      value: Office Floor Conversation
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[2].events.m_TypeName
-      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[2].onlyRunOnce
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[1].onlyRunOnce
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[0].collider
       value: 
       objectReference: {fileID: 144661068}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 793053458}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: triggerEventPairs.Array.data[0].onlyRunOnce
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: triggerEventPairs.Array.data[1].collider
+      value: 
+      objectReference: {fileID: 1931812038}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[2].collider
+      value: 
+      objectReference: {fileID: 441427562}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
 --- !u!1001 &1086447152
