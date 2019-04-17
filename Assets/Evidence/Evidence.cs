@@ -46,6 +46,11 @@ public class Evidence : YarnBoardEntity
     {
         get { return _characters; }
     }
+
+    public bool UseScrollableTextDisplay
+    {
+        get { return _useScrollableTextDisplay; }
+    }
 }
 
 public enum EvidenceType
