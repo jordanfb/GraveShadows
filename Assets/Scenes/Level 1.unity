@@ -850,7 +850,7 @@ PrefabInstance:
       objectReference: {fileID: 1686817873}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[1].events.m_PersistentCalls.m_Calls.Array.size
@@ -964,10 +964,10 @@ PrefabInstance:
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[2].collider
       value: 
-      objectReference: {fileID: 698109086}
+      objectReference: {fileID: 1384992094}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[2].optionalConversationName
-      value: Monologue Exit First Wall
+      value: Monologue Exit Too Early
       objectReference: {fileID: 0}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[2].events.m_TypeName
@@ -976,15 +976,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[2].onlyRunOnce
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[3].collider
       value: 
-      objectReference: {fileID: 1384992094}
+      objectReference: {fileID: 1602128911}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[3].optionalConversationName
-      value: Monologue Exit Too Early
+      value: Monologue Exit Building
       objectReference: {fileID: 0}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[3].events.m_TypeName
@@ -1840,7 +1840,15 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-    onlyRunOnce: 0
+    onlyRunOnce: 1
+  - collider: {fileID: 698109086}
+    optionalConversationName: Monologue Exit First Wall
+    events:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 1
 --- !u!21 &397241520
 Material:
   serializedVersion: 6
