@@ -17,6 +17,24 @@ public class EvidenceMono : MonoBehaviour
     }
     public EvidenceEvent onEvidenceCollected; // what gets invoked upon collecting this element of evidence
 
+    private void Start()
+    {
+        Renderer mat = GetComponent<Renderer>();
+        if(mat == null)
+        {
+            Renderer[] mats = GetComponentsInChildren<Renderer>();
+            foreach(Renderer m in mats)
+            {
+                m.material.shader = Shader.Find("Outlined/Uniform");
+                m.material.SetFloat("_OutlineWidth", 0.02f);
+            }
+        }
+        else
+        {
+            mat.material.shader = Shader.Find("Outlined/Uniform");
+            mat.material.SetFloat("_OutlineWidth", 0.02f);
+        }
+    }
 
     // Update is called once per frame
     void Update()
