@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2816470492079757873}
   - component: {fileID: 8141985695850423293}
+  - component: {fileID: 8828909138389049043}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Evidence
@@ -142,3 +143,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 107.66709, y: 1.5403987, z: 2.2372036}
   m_Center: {x: -53.333538, y: -0.011841468, z: -0.062105693}
+--- !u!114 &8828909138389049043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582141873671032068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77001834fa0e8465a854bbd0d7dff923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextPrefab: {fileID: 1704617898835638000, guid: 12f9ec766228d4c0c8562e1d2693257e,
+    type: 3}
+  baseText: Press E to pick up
+  onActivateText: 
+  Player: {fileID: 0}
