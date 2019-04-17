@@ -93,8 +93,8 @@ public class simplePlayerMovement : MonoBehaviour
 
         anim.SetFloat("yVelocity", transform.InverseTransformDirection(rb.velocity).z);
         anim.SetFloat("xVelocity", transform.InverseTransformDirection(rb.velocity).x);
-        rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0f, mainCam.transform.forward.z).normalized * _moveDirY * PLAYER_SPEED_FORWARD) 
-                                    + (mainCam.transform.right.normalized * _moveDirX)* PLAYER_SPEED_STRAFE);
+        rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z).normalized * _moveDirY * PLAYER_SPEED_FORWARD)
+                                    + (mainCam.transform.right.normalized * _moveDirX) * PLAYER_SPEED_STRAFE) + rb.velocity.y * transform.up;
 
 
 
