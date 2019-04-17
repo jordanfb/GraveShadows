@@ -201,7 +201,8 @@ public class simplePlayerMovement : MonoBehaviour
             emono.CollectThisEvidence();
             //Evidence e = emono.EvidenceInfo;
             //PlayerManager.instance.CollectEvidence(e);
-            StartCoroutine(DestroyAfterTime(1f, other.gameObject));
+            StartCoroutine(DestroyAfterTime(1f, other.transform.parent.gameObject));
+            Destroy(other.gameObject.GetComponent<Interactable>().interactTextInGame);
             if (emono.isWaistLevel) {
                 anim.SetTrigger("reachOver");
             }

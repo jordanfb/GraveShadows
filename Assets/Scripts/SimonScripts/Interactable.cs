@@ -7,7 +7,7 @@ public class Interactable : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private GameObject interactTextInGame;
+    public GameObject interactTextInGame;
     public GameObject interactTextPrefab;
     public string baseText;
     public string onActivateText;
@@ -18,7 +18,10 @@ public class Interactable : MonoBehaviour
         Player = GameObject.Find("Player");
     }
 
+    ~Interactable() {
 
+        Destroy(interactTextInGame);
+    }
     // Update is called once per frame
     void Update()
     {
