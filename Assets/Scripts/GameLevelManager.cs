@@ -17,6 +17,12 @@ public class GameLevelManager : MonoBehaviour
             Debug.Log("EvidenceManager not found");
             return;
         }
+
+        if(level == Level.Apartment || level == Level.Hub)
+        {
+            return;
+        }
+
         evidenceMonos = FindObjectsOfType<EvidenceMono>();
         List<SerializedEvidence> allEvidence = new List<SerializedEvidence>();
         if (level == Level.Office)
