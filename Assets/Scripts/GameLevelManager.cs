@@ -66,7 +66,9 @@ public class GameLevelManager : MonoBehaviour
                     {
                         em.EvidenceInfo = e;
                     }
-                    // Something about waist level stuff (Jordan?)
+                    // Something about waist level stuff
+                    if (placeholders[i].GetComponent<EvidenceMono>().isWaistLevel)
+                        em.isWaistLevel = true;
                 }
                 else
                 {
