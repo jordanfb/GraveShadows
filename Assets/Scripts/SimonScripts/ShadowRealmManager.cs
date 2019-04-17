@@ -366,7 +366,7 @@ public class ShadowRealmManager : MonoBehaviour
         partSys.transform.position = startLoc;
         partSys.transform.rotation = Quaternion.LookRotation(direction);
         while ((partSys.transform.position - endLoc).magnitude > 0.01f) {
-            partSys.transform.position = Vector3.Lerp(partSys.transform.position, endLoc, 0.02f);
+            partSys.transform.position = Vector3.Lerp(partSys.transform.position, endLoc, 0.2f);
             yield return null;
         }
         Destroy(partSys);
