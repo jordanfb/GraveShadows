@@ -127,7 +127,7 @@ PrefabInstance:
     - target: {fileID: 7576271182610077073, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7576271182610077077, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
@@ -744,6 +744,7 @@ GameObject:
   - component: {fileID: 1100479106}
   - component: {fileID: 1100479105}
   - component: {fileID: 1100479104}
+  - component: {fileID: 1100479107}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -815,6 +816,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1100479107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100479103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4620d876d79a04cb65bfe2761fc8bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockMouse: 0
+  lockMouseOnStart: 0
+  unlockOnEscape: 1
 --- !u!1 &1201080683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,6 +1436,11 @@ PrefabInstance:
         government and police can shut them down before their actions leave us nothing
         more than shadows on the wall.\r\n"
       objectReference: {fileID: 0}
+    - target: {fileID: 2764293053944468132, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8366da139b71d04fa52d4e10ed0d922, type: 3}
 --- !u!1 &3471917386111789003
@@ -1473,7 +1494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
