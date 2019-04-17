@@ -53,11 +53,11 @@ public class EvidenceManager : MonoBehaviour
 
     public GameObject GetAssociatedPrefab(Evidence e)
     {
-        int index = allEvidenceEntities.IndexOf(e);
-        if (index == -1)
+        int index = allEvidenceEntities.IndexOf(e) - 5;
+        if (index < 0 || index >= allEvidencePrefabs.Count)
             return null;
         // Have to account for suspects existing as yarn board entities
-        return allEvidencePrefabs[index - 5];
+        return allEvidencePrefabs[index];
     }
 
     public bool Generated
@@ -223,12 +223,14 @@ public class EvidenceManager : MonoBehaviour
                     if (ev.GetLevel == Level.Office)
                     {
                         office++;
-                        officeEv.Add(se);
+                        if(ev.GetEvidenceType != EvidenceType.Conversation)
+                            officeEv.Add(se);
                     }
                     else if (ev.GetLevel == Level.Factory)
                     {
                         factory++;
-                        factoryEv.Add(se);
+                        if (ev.GetEvidenceType != EvidenceType.Conversation)
+                            officeEv.Add(se);
                     } else if (ev.GetLevel == Level.Apartment)
                     {
                         apartmentEV.Add(se);
@@ -240,18 +242,6 @@ public class EvidenceManager : MonoBehaviour
                 }                       
                 else if(ev.GetEvidenceType == EvidenceType.Conversation)
                 {
-                    se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
-                    if (ev.GetLevel == Level.Office)
-                    {
-                        office++;
-                        officeEv.Add(se);
-                    }
-                    else
-                    {
-                        factory++;
-                        factoryEv.Add(se);
-                    }
-
                     foreach (Suspect s in ev.AssociatedSuspects)
                         suspectTotals[suspects.IndexOf(s)]++;
                 }
@@ -268,7 +258,7 @@ public class EvidenceManager : MonoBehaviour
             
         }
                 
-        while(office < 15 || factory < 15)
+        while(office < 12 /*&& factory < 15*/)
         {
             if (remainingEvidence.Count == 0)
                 break;
@@ -290,7 +280,7 @@ public class EvidenceManager : MonoBehaviour
             switch(ev.GetLevel)
             {
                 case Level.Office:
-                    if(office < maxEvidence / 2)
+                    if(office < 12)
                     {
                         // Add it to the game!
                         se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
@@ -321,8 +311,22 @@ public class EvidenceManager : MonoBehaviour
             if (se.evidenceState == SerializedEvidence.EvidenceState.NotFound)
                 count++;
         }
-        Debug.Log(culprit.CodeName);
-        Debug.Log(count);
+
+
+        ClampEvidenceLists();
+    }
+
+    private void ClampEvidenceLists()
+    {
+        while(officeEv.Count > 12)
+        {
+            int index = Random.Range(0, officeEv.Count - 1);
+            SerializedEvidence se = officeEv[index];
+            se.evidenceState = SerializedEvidence.EvidenceState.NotInGame;
+            officeEv.Remove(se);
+        }
+
+        // Include for factory level
     }
 
     private bool CheckIfPlaceable(Evidence ev)

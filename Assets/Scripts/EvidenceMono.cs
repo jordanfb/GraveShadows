@@ -21,11 +21,7 @@ public class EvidenceMono : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Send an error if Evidence Info contains character info when it is not a conversation
-        if (_evidenceInfo.GetEvidenceType != EvidenceType.Conversation && _evidenceInfo.Characters.Count > 0)
-        {
-            Debug.LogError("ERROR: Evidence type provides character information but is not a conversation!");
-        }
+        
     }
 
     public Evidence EvidenceInfo
