@@ -41,7 +41,7 @@ public class ShadowRealmManager : MonoBehaviour
     private bool abortIsChoosingWall = false;
     public GameObject particleSystemGO;
     public GameObject copContainer;
-
+    public float shadowAppearSpeed = 0.5f;
     private void Awake()
     {
 
@@ -286,8 +286,7 @@ public class ShadowRealmManager : MonoBehaviour
         for(int i = 0; i< copContainer.transform.childCount; i++) {
             copContainer.transform.GetChild(i).gameObject.GetComponent<GuardScript>().ResetMaterials();
         }
-        gameObject.transform.localScale = new Vector3(1.0f, 1f, 1f);
-
+        StartCoroutine(spawnParticleSystem(shadowPlane.transform.position, checkIfFreeCollider.transform.position, shadowPlane.transform.position - checkIfFreeCollider.transform.position));
         gameObject.transform.position = checkIfFreeCollider.transform.position;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         isInShadowRealm = !isInShadowRealm;
@@ -315,7 +314,6 @@ public class ShadowRealmManager : MonoBehaviour
         StartCoroutine(spawnParticleSystem(gameObject.transform.position, midPoint, partDir));
 
         gameObject.transform.position = shadowRealmTransform.position;
-        gameObject.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
         StartCoroutine(moveBodyToWall());
         //gameObject.GetComponent<Rigidbody>().useGravity = false;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -333,10 +331,10 @@ public class ShadowRealmManager : MonoBehaviour
 
     IEnumerator moveBodyToWall() {
 
-
-        while(gameObject.transform.localScale.x<1f) {
-            print("moving");
-            gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+        float alpha = 0.0f;
+        while(alpha<1f) {
+            alpha += shadowAppearSpeed * Time.deltaTime;
+            shadowPlane.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetFloat("_Transparency", alpha);
             yield return null;
         }
         yield return 0;
@@ -366,7 +364,7 @@ public class ShadowRealmManager : MonoBehaviour
         partSys.transform.position = startLoc;
         partSys.transform.rotation = Quaternion.LookRotation(direction);
         while ((partSys.transform.position - endLoc).magnitude > 0.01f) {
-            partSys.transform.position = Vector3.Lerp(partSys.transform.position, endLoc, 0.2f);
+            partSys.transform.position = Vector3.Lerp(partSys.transform.position, endLoc, 0.1f);
             yield return null;
         }
         Destroy(partSys);

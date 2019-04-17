@@ -5,12 +5,17 @@
         
         _ShadowTex ("shadowTex", 2D) = "white" {}
         _TonalArtMap ("Tonal Art Map", 2DArray) = "" {}
+        _Transparency("Transparency", float) = 1.0
         
     }
     SubShader
     {
         // Draw ourselves after all opaque geometry
-        Tags { "Queue" = "Transparent" }
+        Tags { "Queue"="Transparent" "RenderType"="Transparent" }
+        
+        ZWrite Off
+        Blend SrcAlpha OneMinusSrcAlpha
+
 
         // Grab the screen behind the object into _BackgroundTexture
         GrabPass
@@ -33,7 +38,7 @@
             float2 uv_ShadowTex;
             UNITY_DECLARE_TEX2DARRAY(_TonalArtMap);
             float4 _TonalArtMap_ST;
-            
+            float _Transparency;
             
             
             struct v2f
@@ -67,7 +72,9 @@
 					return bgcolor;
 				}
                 else{
-                    return bgcolor * UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(i.uv, 5.0));
+                    float4 finalColor = bgcolor * UNITY_SAMPLE_TEX2DARRAY(_TonalArtMap, float3(i.uv, 5.0));
+                    finalColor.a = _Transparency;
+                    return finalColor;
                 }
 				
                 //return tex2D(_ShadowTex, i.uv);
