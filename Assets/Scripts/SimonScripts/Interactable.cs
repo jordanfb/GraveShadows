@@ -68,7 +68,13 @@ public class Interactable : MonoBehaviour
 
     public void DisableText()
     {
-        interactTextInGame.SetActive(false);
+        if (interactTextInGame != null)
+        {
+            interactTextInGame.SetActive(false);
+        } else
+        {
+            Debug.LogWarning("Error no interact text on this for some reason somehow. gameobject name: " + gameObject.name);
+        }
     }
 
     public void setActivatedText() {
