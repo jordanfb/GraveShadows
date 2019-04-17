@@ -125,7 +125,7 @@ public class EvidenceManager : MonoBehaviour
             //Debug.Log("Evidence state: " + se.evidenceState);
             if (se.evidenceState != SerializedEvidence.EvidenceState.OnYarnBoard)
             {
-                // this fixes the assert I guess but we should actually fix it
+                // this fixes the assert I guess but we should actually fix it. THings aren't set correctly unfortunately... Whatever.
                 se.evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
             }
         }
