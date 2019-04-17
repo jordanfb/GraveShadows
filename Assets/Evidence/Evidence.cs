@@ -11,6 +11,9 @@ public class Evidence : YarnBoardEntity
     private string _flavorText;
     //All evidence MUST have a type
     [SerializeField]
+    [Tooltip("If true use the full screen evidence display rather than just the bottom screen thing")]
+    private bool _useScrollableTextDisplay = false;
+    [SerializeField]
     private EvidenceType _evidenceType;
     [SerializeField]
     private Level _level;
