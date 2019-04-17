@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7882049575693576179}
   - component: {fileID: 7284559241883634631}
   - component: {fileID: 9010419866700944652}
-  - component: {fileID: 9022990730158340944}
   m_Layer: 0
   m_Name: Flask
   m_TagString: Evidence
@@ -30,7 +29,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -13.866596, y: 1.9256959, z: -4.627402}
   m_LocalScale: {x: 0.38535, y: 0.5103, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 354355494293343396}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -98,16 +98,47 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: EvidenceMono+EvidenceEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!65 &9022990730158340944
+--- !u!1 &5004880823483899672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 354355494293343396}
+  - component: {fileID: 3480090296732154101}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &354355494293343396
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004880823483899672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.142, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7399642348147920891}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3480090296732154101
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4151716779820757482}
+  m_GameObject: {fileID: 5004880823483899672}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13.446106, y: 2.9741225, z: 4.7308874}
-  m_Center: {x: 0, y: 0.22362933, z: 0}
+  m_Size: {x: 1.3448142, y: 1, z: 0.49310827}
+  m_Center: {x: 0, y: 0, z: 0}
