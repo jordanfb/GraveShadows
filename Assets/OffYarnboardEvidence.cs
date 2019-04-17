@@ -32,9 +32,15 @@ public class OffYarnboardEvidence : MonoBehaviour
         if (s != null)
         {
             evidenceNameText.text = "Suspect: " + s.CodeName;
+            evidenceNameText.transform.localPosition = new Vector3(0, 3.2f, 0);
+            BoxCollider b = GetComponent<BoxCollider>();
+            b.size = new Vector3(3.7f, 4.5f, .2f);
         } else
         {
             evidenceNameText.text = "Evidence: " + e.Name;
+            evidenceNameText.transform.localPosition = new Vector3(0, 2.26f, 0);
+            BoxCollider b = GetComponent<BoxCollider>();
+            b.size = new Vector3(2.048f, 2.436001f, .2f);
         }
     }
 
