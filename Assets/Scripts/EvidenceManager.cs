@@ -129,6 +129,7 @@ public class EvidenceManager : MonoBehaviour
     {
         if (generated)
             return;
+        AllEvidence = new List<SerializedEvidence>(); // clear this on new games
         // then initialize all the evidence with the correct indices:
         for (int i = 0; i < allEvidenceEntities.Count; i++)
         {
@@ -382,6 +383,7 @@ public class EvidenceManager : MonoBehaviour
         connectEvent.Redo(); // this way I don't have to deal with implementing it multiple places
         // also add the event to the undo/redo stack
         UndoRedoStack.AddEvent(connectEvent);
+        SaveEvideneToPlayerPrefs();
     }
 
     public void ConnectEvidence(YarnBoardEntity e1, YarnBoardEntity e2)
@@ -402,6 +404,7 @@ public class EvidenceManager : MonoBehaviour
         connectEvent.Redo(); // this way I don't have to deal with implementing it multiple places
         // also add the event to the undo/redo stack
         UndoRedoStack.AddEvent(connectEvent);
+        SaveEvideneToPlayerPrefs();
     }
 
     public void DisconnectEvidence(YarnBoardEntity e1, YarnBoardEntity e2)
