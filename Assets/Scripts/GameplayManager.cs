@@ -77,7 +77,7 @@ public class GameplayManager : MonoBehaviour
 
     private void StartMainMenuScene()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenuNew");
     }
 
     private void StartCrimeScene()
