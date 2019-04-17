@@ -23,4 +23,14 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Quit Game");
         Application.Quit();
     }
+
+    public void Options()
+    {
+        GameplayManager.instance.VisitOptions();
+    }
+
+    public void Credits()
+    {
+        GameplayManager.instance.VisitCreditsScene();
+    }
 }

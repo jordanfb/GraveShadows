@@ -18,7 +18,6 @@ public class ElevatorUpDown : MonoBehaviour
         moving = false;
         maxHeight = transform.position;
         minHeight = new Vector3(transform.position.x, 0f, transform.position.z);
-        LetsMove();
     }
 
     // Update is called once per frame
