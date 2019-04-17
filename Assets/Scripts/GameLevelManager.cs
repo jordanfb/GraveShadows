@@ -7,6 +7,8 @@ public class GameLevelManager : MonoBehaviour
     public Level level;
     public List<Evidence> evidenceFoundThisDay = new List<Evidence>(); // this is used to keep track of the recipts of what's found this day
     private EvidenceMono[] evidenceMonos; // these are all the evidence in this level
+    private List<Transform> evidenceLocations = new List<Transform>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,21 +29,43 @@ public class GameLevelManager : MonoBehaviour
         {
             Debug.LogWarning("Need to be able to spawn in the evidence!!!!");
         }
-        for (int i = 0; i < allEvidence.Count; i++)
+
+        // We need the transforms for all the placeholders
+        GameObject[] placeholders = GameObject.FindGameObjectsWithTag("Evidence");
+        foreach (GameObject go in placeholders)
         {
-            if (i >= evidenceMonos.Length)
+            evidenceLocations.Add(go.transform);
+            go.SetActive(false);
+        }
+            
+        
+        for(int i = 0; i < allEvidence.Count; i++)
+        {
+            Evidence e = EvidenceManager.instance.ReferencedEntity(allEvidence[i]) as Evidence;
+            if(e == null)
             {
-                Debug.LogWarning("Not enough evidence monos in this scene for the evidence");
-                break; // we can't do anything we don't have enough evidence monos so I guess we just die
+                Debug.LogError("Suspect exists in the evidence list!");
+                continue;
             }
-            evidenceMonos[i].EvidenceInfo = EvidenceManager.instance.ReferencedEntity(allEvidence[i]) as Evidence;
-            if (allEvidence[i].evidenceState == SerializedEvidence.EvidenceState.NotFound)
+
+            if(allEvidence[i].evidenceState == SerializedEvidence.EvidenceState.NotFound)
             {
-                evidenceMonos[i].gameObject.SetActive(true);
-            }
-            else
-            {
-                evidenceMonos[i].gameObject.SetActive(false);
+                GameObject prefab = EvidenceManager.instance.GetAssociatedPrefab(e);
+                if(prefab != null)
+                {
+                    GameObject go = Instantiate(prefab);
+                    go.transform.position = evidenceLocations[i].position;
+                    EvidenceMono em = go.GetComponent<EvidenceMono>();
+                    if(em.EvidenceInfo == null)
+                    {
+                        em.EvidenceInfo = e;
+                    }
+                    // Something about waist level stuff (Jordan?)
+                }
+                else
+                {
+                    Debug.LogError("Missing gameobject in prefab list!");
+                }
             }
         }
     }
