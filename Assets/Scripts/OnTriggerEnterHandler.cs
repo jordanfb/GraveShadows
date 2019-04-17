@@ -41,6 +41,7 @@ public class OnTriggerEnterHandler : MonoBehaviour
             if (triggerEventPairs[i].collider == other)
             {
                 triggerEventPairs[i].events.Invoke();
+                StartConversationIfPossible(triggerEventPairs[i].optionalConversationName);
                 if (triggerEventPairs[i].onlyRunOnce)
                 {
                     triggerEventPairs.RemoveAt(i);
