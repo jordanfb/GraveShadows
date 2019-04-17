@@ -8366,6 +8366,7 @@ MonoBehaviour:
   maxEvidence: 30
   otherSuspectMax: 3
   allEvidenceEntities: []
+  allEvidencePrefabs: []
   culprit: {fileID: 0}
 --- !u!1 &1494007665 stripped
 GameObject:
@@ -9090,6 +9091,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1418463136}
     - target: {fileID: 2701277236420419687, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_LocalPosition.x
