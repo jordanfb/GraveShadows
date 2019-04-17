@@ -1,5 +1,4 @@
-﻿//https://github.com/Shrimpey/UltimateOutline/blob/master/UltimateOutlineShadows.shader
-Shader "Outlined/UltimateOutlineShadows"
+﻿Shader "Outlined/UltimateOutline"
 {
     Properties
     {
@@ -38,8 +37,10 @@ Shader "Outlined/UltimateOutlineShadows"
     SubShader{
         //First outline
         Pass{
-            Tags{ "Queue" = "Geometry" }
-            Cull Front
+            Tags{ "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
+            Blend SrcAlpha OneMinusSrcAlpha
+            ZWrite Off
+            Cull Back
             CGPROGRAM
 
             struct v2f {
@@ -69,9 +70,7 @@ Shader "Outlined/UltimateOutlineShadows"
             }
 
             half4 frag(v2f i) : COLOR{
-                float4 color = _FirstOutlineColor;
-                color.a = 1;
-                return color;
+                return _FirstOutlineColor;
             }
 
             ENDCG
@@ -80,8 +79,10 @@ Shader "Outlined/UltimateOutlineShadows"
 
         //Second outline
         Pass{
-            Tags{ "Queue" = "Geometry" }
-            Cull Front
+            Tags{ "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
+            Blend SrcAlpha OneMinusSrcAlpha
+            ZWrite Off
+            Cull Back
             CGPROGRAM
 
             struct v2f {
@@ -112,28 +113,27 @@ Shader "Outlined/UltimateOutlineShadows"
             }
 
             half4 frag(v2f i) : COLOR{
-                float4 color = _SecondOutlineColor;
-                color.a = 1;
-                return color;
+                return _SecondOutlineColor;
             }
 
             ENDCG
         }
 
         //Surface shader
-        Tags{ "Queue" = "Geometry" "RenderType" = "Opaque" }
+        Tags{ "Queue" = "Transparent" }
 
         CGPROGRAM
-        #pragma surface surf Lambert fullforwardshadows
+        #pragma surface surf Lambert noshadow
 
         struct Input {
             float2 uv_MainTex;
+            float4 color : COLOR;
         };
 
         void surf(Input IN, inout SurfaceOutput  o) {
             fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
             o.Albedo = c.rgb;
-            o.Alpha = 1;
+            o.Alpha = c.a;
         }
         ENDCG
     }
