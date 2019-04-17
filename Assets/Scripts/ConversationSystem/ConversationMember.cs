@@ -24,6 +24,8 @@ public class ConversationMember : MonoBehaviour
     private ScriptLine line;
     private bool playing = true;
 
+    private float doneTalkingTimer = 0; // if this is 0 then it disables everything
+
     private ScriptLine interuptedLine;
 
     public void InterruptConversation(string newLine, float speed = .05f)
@@ -105,6 +107,21 @@ public class ConversationMember : MonoBehaviour
             if (enableDisableUponSpeaking != null)
             {
                 enableDisableUponSpeaking.SetActive(true);
+            }
+            doneTalkingTimer = 3; // so that the ui stays around for an extra second
+        }
+        if (IsFinished() && doneTalkingTimer > 0)
+        {
+            doneTalkingTimer -= Time.deltaTime;
+            if (doneTalkingTimer <= 0)
+            {
+                doneTalkingTimer = 0;
+                if (enableDisableUponSpeaking != null && enableDisableUponSpeaking.activeSelf)
+                {
+                    // empty the text and set it not active
+                    text.text = "";
+                    enableDisableUponSpeaking.SetActive(false); // disable it
+                }
             }
         }
     }
