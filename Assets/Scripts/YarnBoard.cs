@@ -294,7 +294,6 @@ public class YarnBoard : MonoBehaviour
                     YarnBoardMoveEvidenceEvent moveEvent = new YarnBoardMoveEvidenceEvent(movingYarnboardEvidence.evidenceindex, movingYarnboardEvidence, movingStartPos, hit.point);
                     moveEvent.Redo(); // set it in the location as well!
                     UndoRedoStack.AddEvent(moveEvent);
-                    EvidenceManager.SaveEvideneToPlayerPrefs();
                 }
             } else
             {
@@ -305,7 +304,6 @@ public class YarnBoard : MonoBehaviour
                                                        // then redo it to remove it from the yarnboard
                 undoredoevent.Redo(); // remove it from the yarnboard!
                 GenerateContent(); // re-generate content to deal with removing it from the yarnboard!
-                EvidenceManager.SaveEvideneToPlayerPrefs();
             }
             mode = YarnBoardMode.None;
         }
