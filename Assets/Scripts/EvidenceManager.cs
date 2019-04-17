@@ -360,7 +360,13 @@ public class EvidenceManager : MonoBehaviour
             officeEv.Remove(se);
         }
 
-        // Include for factory level
+        while(factoryEv.Count > 11)
+        {
+            int index = Random.Range(0, factoryEv.Count - 1);
+            SerializedEvidence se = factoryEv[index];
+            se.evidenceState = SerializedEvidence.EvidenceState.NotInGame;
+            factoryEv.Remove(se);
+        }
     }
 
     private bool CheckIfPlaceable(Evidence ev)
