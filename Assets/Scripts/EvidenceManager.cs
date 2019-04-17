@@ -122,7 +122,7 @@ public class EvidenceManager : MonoBehaviour
         {
             // then we're set!
             //Debug.Assert(se.evidenceState == SerializedEvidence.EvidenceState.NotFound); // shouldn't have found something not in the game
-            Debug.Log("Evidence state: " + se.evidenceState);
+            //Debug.Log("Evidence state: " + se.evidenceState);
             if (se.evidenceState != SerializedEvidence.EvidenceState.OnYarnBoard)
             {
                 // this fixes the assert I guess but we should actually fix it
