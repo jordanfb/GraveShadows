@@ -100,6 +100,5 @@ public class OffYarnboardEvidence : MonoBehaviour
 
         yarnboard.GenerateContent();
         offYarnboardManager.RebuildEvidenceItems();
-        EvidenceManager.SaveEvideneToPlayerPrefs();
     }
 }
