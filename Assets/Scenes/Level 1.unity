@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -520,6 +520,18 @@ PrefabInstance:
       objectReference: {fileID: 1761369434}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fd5d203a5d61bf4da34c53bbebadd30, type: 3}
+--- !u!114 &15126204 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 12188629915876987, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+    type: 3}
+  m_PrefabInstance: {fileID: 15126203}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0ab66d16ad96f4fa076536dcb51120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &28815776
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,16 +848,6 @@ PrefabInstance:
       propertyPath: mainCam
       value: 
       objectReference: {fileID: 1686817873}
-    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: playerHitPoints.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: playerHitPoints.Array.data[5]
-      value: 
-      objectReference: {fileID: 286174005}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.size
       value: 3
@@ -976,6 +978,16 @@ PrefabInstance:
       propertyPath: triggerEventPairs.Array.data[2].onlyRunOnce
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: playerHitPoints.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: playerHitPoints.Array.data[5]
+      value: 
+      objectReference: {fileID: 286174005}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
 --- !u!4 &57381354 stripped
@@ -1231,6 +1243,8 @@ GameObject:
   - component: {fileID: 201361093}
   - component: {fileID: 201361096}
   - component: {fileID: 201361097}
+  - component: {fileID: 201361099}
+  - component: {fileID: 201361098}
   m_Layer: 11
   m_Name: Conversation Manager
   m_TagString: Untagged
@@ -1252,13 +1266,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   script: {fileID: 4900000, guid: 03ca5a2de35d24beeba95d4b98d4ed35, type: 3}
   slaves:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 15126204}
+  - {fileID: 722219009}
   associatedEvidence: {fileID: 11400000, guid: 28d5d2efc2359ba44998de9826ed2afd, type: 2}
-  scriptName: 
+  scriptName: "Tutorial Conversation\r"
   conversationDescription: "Two crooked cops discussing the Family at the crime scene\r"
-  scriptHeader: "\r\n#description Two crooked cops discussing the Family at the crime
-    scene\r\n#character Cop1\r\n#character Cop2\r\n#speed .05\r\n#delay 1\r\n"
+  scriptHeader: "\r\n#scriptname Tutorial Conversation\r\n#description Two crooked
+    cops discussing the Family at the crime scene\r\n#character Cop1\r\n#character
+    Cop2\r\n#speed .05\r\n#delay 1\r\n"
   scriptContent: "\r\n\r\n\r\n#Cop1\r\nShame he had to go. If he\u2019d just let go
     of Graves\u2019 pipe dream this wouldn\u2019t have happened. \r\n#\r\n\r\n\r\n#Cop2\r\nReal
     shame. Still, I\u2019d rather go out in a hit than the way Graves did.\r\n#\r\n\r\n\r\n#Cop1\r\nYeah.
@@ -1319,31 +1334,14 @@ MonoBehaviour:
   slaves:
   - {fileID: 516852918}
   associatedEvidence: {fileID: 0}
-  scriptName: Monologue Level Load
-  conversationDescription: to tell the player to enter the shadow on the wall
-  scriptHeader: '
-
-    #scriptname Monologue Level Load
-
-    #description to tell the player to enter the shadow on the wall
-
-    #character Graves
-
-    #speed .05
-
-    #delay 1
-
-'
-  scriptContent: '
-
-
-    #Graves
-
-    Since the accident, I''ve had a weird relationship with shadows,<speed=.25> </speed>like
-    a dame you can''t shake.<speed=.25> </speed>I bet I can become one on the wall
-    to get past that guard.<speed=2> </speed>
-
-    #'
+  scriptName: "Monologue Level Load\r"
+  conversationDescription: "to tell the player to enter the shadow on the wall\r"
+  scriptHeader: "\r\n#scriptname Monologue Level Load\r\n#description to tell the
+    player to enter the shadow on the wall\r\n#character Graves\r\n#speed .05\r\n#delay
+    1\r\n"
+  scriptContent: "\r\n\r\n#Graves\r\nSince the accident, I've had a weird relationship
+    with shadows,<speed=.25> </speed>like a dame you can't shake.<speed=.25> </speed>I
+    bet I can become one on the wall to get past that guard.<speed=2> </speed>\r\n#"
   characterNames:
   - Graves
   defaultSpeed: 0.05
@@ -1365,29 +1363,69 @@ MonoBehaviour:
   slaves:
   - {fileID: 516852918}
   associatedEvidence: {fileID: 0}
-  scriptName: Monologue Exit First Wall
-  conversationDescription: teach the player how to exit the shadow
-  scriptHeader: '
-
-    #scriptname Monologue Exit First Wall
-
-    #description teach the player how to exit the shadow
-
-    #character Graves
-
-    #speed .05
-
-    #delay 1
-
-'
-  scriptContent: '
-
-
-    #Graves
-
-    Should be safe to step out of the shadows now. Same way I got in.<speed=2> </speed>
-
-    #'
+  scriptName: "Monologue Exit First Wall\r"
+  conversationDescription: "teach the player how to exit the shadow\r"
+  scriptHeader: "\r\n#scriptname Monologue Exit First Wall\r\n#description teach the
+    player how to exit the shadow\r\n#character Graves\r\n#speed .05\r\n#delay 1\r\n"
+  scriptContent: "\r\n\r\n#Graves\r\nShould be safe to step out of the shadows now.
+    Same way I got in.<speed=2> </speed>\r\n#"
+  characterNames:
+  - Graves
+  defaultSpeed: 0.05
+  defaultUsePostDelay: 1
+  defaultDelay: 1
+--- !u!114 &201361098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201361092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eabefa2f0f04ee4f8cf80e7f8ecca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 4900000, guid: ec5bbe16888a7c04b90d43db8fdf255d, type: 3}
+  slaves:
+  - {fileID: 516852918}
+  associatedEvidence: {fileID: 0}
+  scriptName: "Monologue Exit Too Early\r"
+  conversationDescription: "explain to the player why they can't leave yet\r"
+  scriptHeader: "\r\n#scriptname Monologue Exit Too Early\r\n#description explain
+    to the player why they can't leave yet\r\n#character Graves\r\n#speed .05\r\n#delay
+    1\r\n"
+  scriptContent: "\r\n\r\n#Graves\r\nNo, this can't be all Marv had. There's gotta
+    be something else I'm missing.<speed=2> </speed>\r\n#"
+  characterNames:
+  - Graves
+  defaultSpeed: 0.05
+  defaultUsePostDelay: 1
+  defaultDelay: 1
+--- !u!114 &201361099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201361092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eabefa2f0f04ee4f8cf80e7f8ecca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 4900000, guid: 0263d39ff2fe10a4fa430470c05edbda, type: 3}
+  slaves:
+  - {fileID: 516852918}
+  associatedEvidence: {fileID: 0}
+  scriptName: "Monologue Exit Building\r"
+  conversationDescription: "teach the player they won't know if they've gathered all
+    the evidence at the other locations\r"
+  scriptHeader: "\r\n#scriptname Monologue Exit Building\r\n#description teach the
+    player they won't know if they've gathered all the evidence at the other locations\r\n#character
+    Graves\r\n#speed .05\r\n#delay 1\r\n"
+  scriptContent: "\r\n\r\n#Graves\r\nI knew what I was looking for today. The next
+    time won't be so easy.<speed=2> </speed>\r\n#"
   characterNames:
   - Graves
   defaultSpeed: 0.05
@@ -1508,6 +1546,11 @@ PrefabInstance:
     - target: {fileID: 1779180788188359523, guid: 783957ad53e38934e8e7d945e4e82b7f,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1779180789636929665, guid: 783957ad53e38934e8e7d945e4e82b7f,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3621,6 +3664,18 @@ PrefabInstance:
       objectReference: {fileID: 803671129}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fd5d203a5d61bf4da34c53bbebadd30, type: 3}
+--- !u!114 &722219009 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 12188629915876987, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+    type: 3}
+  m_PrefabInstance: {fileID: 722219008}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0ab66d16ad96f4fa076536dcb51120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &733019290 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100146, guid: bb25c1603800aa94f9ff8fc60ea0a09f,
@@ -4718,6 +4773,8 @@ Transform:
   - {fileID: 621683793}
   - {fileID: 767930995}
   - {fileID: 698109085}
+  - {fileID: 1384992093}
+  - {fileID: 1602128910}
   m_Father: {fileID: 0}
   m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6786,6 +6843,50 @@ SkinnedMeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 15126203}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1384992092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1384992093}
+  - component: {fileID: 1384992094}
+  m_Layer: 0
+  m_Name: ExitTooEarly
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1384992093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384992092}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.867, y: -3.74, z: 10.756}
+  m_LocalScale: {x: 1.7202, y: 5.1303, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1108012966}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1384992094
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384992092}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1392840222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7249,6 +7350,50 @@ Material:
     - _Color: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1602128909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1602128910}
+  - component: {fileID: 1602128911}
+  m_Layer: 0
+  m_Name: ExitOnTime
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1602128910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602128909}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.867, y: -3.74, z: 10.756}
+  m_LocalScale: {x: 3.914487, y: 5.1303, z: 3.381697}
+  m_Children: []
+  m_Father: {fileID: 1108012966}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1602128911
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602128909}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1602191582 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100226, guid: bb25c1603800aa94f9ff8fc60ea0a09f,
