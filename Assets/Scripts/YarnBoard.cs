@@ -204,20 +204,32 @@ public class YarnBoard : MonoBehaviour
                     mode = YarnBoardMode.Displaying;
                     if (em != null)
                     {
-                        _flavorTextPanel.SetActive(true);
-                        _flavorTextAsset.text = em.EvidenceInfo.FlavorText;
-                        _evidenceTitle.text = em.EvidenceInfo.Name;
-                    } else if (sm != null)
+                        // choose how to display it
+                        if (em.EvidenceInfo.UseScrollableTextDisplay)
+                        {
+                            _suspectCodeName.text = em.EvidenceInfo.Name;
+                            _suspectBio.text = em.EvidenceInfo.FlavorText;
+                            _suspectInfoPanel.SetActive(true);
+                        }
+                        else
+                        {
+                            _flavorTextAsset.text = em.EvidenceInfo.FlavorText;
+                            _evidenceTitle.text = em.EvidenceInfo.Name;
+                            _flavorTextPanel.SetActive(true);
+                        }
+                    }
+                    else if (sm != null)
                     {
-                        _suspectInfoPanel.SetActive(true);
                         _suspectCodeName.text = sm.SuspectInfo.CodeName + "\n(" + sm.SuspectInfo.Name + ")";
                         _suspectBio.text = sm.SuspectInfo.Bio;
-                    } else
+                        _suspectInfoPanel.SetActive(true);
+                    }
+                    else
                     {
                         // some weird error occured so just don't go anywhere
                         Debug.LogWarning("Couldn't find suspect or evidence monobehavior");
                         mode = YarnBoardMode.None;
-                    }                    
+                    }    
                 }
             }
         }
