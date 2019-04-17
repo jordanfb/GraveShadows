@@ -14,7 +14,7 @@ public class EndgameComponent : MonoBehaviour
     public void SetStuff(Suspect s, UnityAction action)
     {
         suspect = s;
-        nameText.text = s.Name;
+        button.image.sprite = s.Photo;
         button.onClick.AddListener(action);
     }
 

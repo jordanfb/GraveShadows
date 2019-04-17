@@ -45,15 +45,15 @@ public class YarnLine : MonoBehaviour
 
         //Z-size is arbitrary, and we might need to change these around
         //depending on what axis the yarn board faces
-        lineColl.size = new Vector3(lineLength, lineWidth, lineWidth);
+        lineColl.size = new Vector3(lineLength, lineWidth * 1.5f, lineWidth * 1.5f);
 
         //Tne line collider GO will lie at the midpoint of the line to cover  the whole thing.
         Vector3 midPoint = (_line.GetPosition(0) + _line.GetPosition(1)) / 2;
         lineColl.transform.position = midPoint;
 
         //Rotate the line collider by a certain angle so that it's oriented correctly.
-        float angle = Mathf.Atan2((_line.GetPosition(1).y - _line.GetPosition(0).y), (_line.GetPosition(1).x - _line.GetPosition(0).x));
+        float angle = Mathf.Atan2((_line.GetPosition(1).y - _line.GetPosition(0).y), (_line.GetPosition(1).z - _line.GetPosition(0).z));
         angle *= Mathf.Rad2Deg;
-        lineColl.transform.localRotation = Quaternion.Euler(0f, 0f, angle);
+        lineColl.transform.localRotation = Quaternion.Euler(0f, -90, angle);
     }
 }

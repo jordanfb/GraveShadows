@@ -66,6 +66,11 @@ public class Interactable : MonoBehaviour
         }
     }
 
+    public void DisableText()
+    {
+        interactTextInGame.SetActive(false);
+    }
+
     public void setActivatedText() {
         if (interactTextInGame == null)
         {

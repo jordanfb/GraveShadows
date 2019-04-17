@@ -77,10 +77,10 @@ public class YarnBoardMoveEvidenceEvent : YarnBoardUndoRedoEvent
     int itemIndex;
     SerializedEvidence evidence;
 
-    Vector2 start;
-    Vector2 end;
+    Vector3 start;
+    Vector3 end;
 
-    public YarnBoardMoveEvidenceEvent(int index, SerializedEvidence e, Vector2 startPos, Vector2 endPos)
+    public YarnBoardMoveEvidenceEvent(int index, SerializedEvidence e, Vector3 startPos, Vector3 endPos)
     {
         itemIndex = index;
         evidence = e;

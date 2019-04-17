@@ -35,8 +35,6 @@ public class YarnBoard : MonoBehaviour
     [SerializeField]
     private YarnBoardCamera _yarnBoardCamera;
     [SerializeField]
-    private Sprite _placeholderSprite;
-    [SerializeField]
     private float _photoScalar;
     [SerializeField]
     private Transform _yarnBoardParent;
@@ -49,8 +47,13 @@ public class YarnBoard : MonoBehaviour
     [SerializeField]
     private float _pinOffset;
 
+    [Space]
+    [SerializeField]
+    public GameObject removeFromYarnboardText; // used to show that you're removing an evidence from the yarnboard
+    public LineDraw lineDraw;
 
-    private List<GameObject> _pins;
+    private List<GameObject> createdEvidenceOnBoard = new List<GameObject>();
+    private Dictionary<SerializedEvidence, GameObject> yarnboardConnectionEvidenceLocation = new Dictionary<SerializedEvidence, GameObject>();
     private YarnBoardMode mode = YarnBoardMode.None;
     private Collider _collider;
     private Vector2 _minPinPos;
@@ -58,6 +61,8 @@ public class YarnBoard : MonoBehaviour
 
     // evidene moving info:
     private GameObject movingYarnboardItem;
+    private SerializedEvidence movingYarnboardEvidence;
+    private Vector3 movingStartPos;
 
     public enum YarnBoardMode
     {
@@ -68,73 +73,20 @@ public class YarnBoard : MonoBehaviour
     void Start()
     {
         GenerateContent(); // load the content from the evidence manager
-        /*
-        //For use with randomly placing pins
-        _collider = GetComponent<Collider>();
-        _minPinPos = new Vector2(_collider.bounds.min.x, _collider.bounds.min.y);
-        _maxPinPos = new Vector2(_collider.bounds.max.x, _collider.bounds.max.y);
-
-        //Initialize Pins
-        _pins = new List<GameObject>();
-        foreach (Evidence evidence in PlayerManager.instance.CollectedEvidence)
-        {
-            GameObject pin = Instantiate(_pinPrefab) as GameObject;
-            // set the parent as the parent
-            // of the yarn board so we can move the whole thing around
-            RandomizePositionOnBoard(ref pin, _pins.IndexOf(pin));
-            _pins.Add(pin);
-
-            switch (evidence.GetEvidenceType)
-            {
-                case EvidenceType.Object:
-                    //Display photo associated with evidence SO & parent it to pin
-                    GameObject photo = new GameObject(evidence.Name);
-                    photo.tag = "Evidence";
-                    photo.transform.parent = pin.transform;
-                    photo.AddComponent<SpriteRenderer>().sprite = evidence.Photo;
-                    BoxCollider pColl = photo.AddComponent<BoxCollider>();
-                    photo.transform.localPosition = new Vector3(0f, 1f, PinOffset(pColl));
-                    photo.AddComponent<EvidenceMono>().EvidenceInfo = evidence;
-                    break;
-                case EvidenceType.Conversation:
-                    //Create a generic piece of paper sprite
-                    GameObject paper = new GameObject(evidence.Name);
-                    paper.tag = "Evidence";
-                    paper.transform.parent = pin.transform;
-                    paper.AddComponent<SpriteRenderer>().sprite = evidence.Photo;
-                    BoxCollider paColl = paper.AddComponent<BoxCollider>();
-                    //PINOFFSET SET TO Z BC PINS ARE ROTATED
-                    paper.transform.localPosition = new Vector3(0f, 1f, PinOffset(paColl)); 
-                    paper.AddComponent<EvidenceMono>().EvidenceInfo = evidence;
-                    //Create text object to display over paper
-                    GameObject text = new GameObject(evidence.Name + "Characters");
-                    text.transform.parent = paper.transform;
-                    text.transform.localPosition = new Vector3(0f, 0f, -1f);
-                    DisplayCharacters(ref text, evidence);
-                    break;
-                case EvidenceType.Document:
-                    //Display the gameObject as it exists in the world
-                    //Later on we might have to rotate it to face the camera
-                    //Because we are instantiating a stored go and not making a new one, 
-                    //adding a collider and EvidenceMono is unnecessary.
-                    GameObject document = new GameObject(evidence.Name);
-                    document.tag = "Evidence";
-                    document.name = evidence.Name;
-                    document.AddComponent<EvidenceMono>().EvidenceInfo = evidence;
-                    document.transform.parent = pin.transform;
-                    document.AddComponent<SpriteRenderer>().sprite = evidence.Photo;
-                    // CHANGE WHEN ACTUAL DOCUMENT MODELS ARE AVAILABLE
-                    BoxCollider dColl = document.AddComponent<BoxCollider>();
-                    document.transform.localPosition = new Vector3(0f, 6f, PinOffset(dColl));
-                    break;
-            }
-
-        }
-        */
     }
 
     public void GenerateContent()
     {
+        // destroy the old ones:
+        for (int i = 0; i < createdEvidenceOnBoard.Count; i++)
+        {
+            Destroy(createdEvidenceOnBoard[i]);
+        }
+        createdEvidenceOnBoard.Clear();
+        lineDraw.DestroyAll();
+        yarnboardConnectionEvidenceLocation.Clear();
+
+        // then make the new ones!
         for (int i = 0; i < EvidenceManager.AllEvidence.Count; i++)
         {
             // spawn the evidence that's on the board or off it, and do nothing to the rest
@@ -142,7 +94,7 @@ public class YarnBoard : MonoBehaviour
             YarnBoardEntity ybe = EvidenceManager.instance.ReferencedEntity(se);
 
             // We're only worried about evidence we have available for the yarn board
-            if (se.evidenceState == SerializedEvidence.EvidenceState.NotInGame || se.evidenceState == SerializedEvidence.EvidenceState.NotFound)
+            if (se.evidenceState != SerializedEvidence.EvidenceState.OnYarnBoard)
                 continue;
 
             Evidence e = ybe as Evidence;
@@ -156,7 +108,8 @@ public class YarnBoard : MonoBehaviour
                 EvidenceMono emono = go.GetComponentInChildren<EvidenceMono>();
                 emono.EvidenceInfo = e;
                 SpriteRenderer sr = go.GetComponentInChildren<SpriteRenderer>();
-                sr.sprite = _placeholderSprite;
+                sr.sprite = e.Photo;
+                createdEvidenceOnBoard.Add(go);
             }
             else if (s != null)
             {
@@ -166,18 +119,55 @@ public class YarnBoard : MonoBehaviour
                 SuspectMono susmono = go.GetComponentInChildren<SuspectMono>();
                 susmono.SuspectInfo = s;
                 SpriteRenderer sr = go.GetComponentInChildren<SpriteRenderer>();
-                sr.sprite = _placeholderSprite;
+                sr.sprite = s.Photo;
+                createdEvidenceOnBoard.Add(go);
             }
 
             if (go == null)
-                continue;
-
-            if (se.evidenceState == SerializedEvidence.EvidenceState.OnYarnBoard)
             {
-                Debug.LogError("This is going to need to be fixed since it's using global position");
-                go.transform.position = new Vector3(se.location.x, se.location.y, this.gameObject.transform.position.z);
+                Debug.LogError("GameObject is null for some reason figure it out Alexander");
+                continue;
             }
+            yarnboardConnectionEvidenceLocation.Add(se, go);
+            //if (se.evidenceState == SerializedEvidence.EvidenceState.OnYarnBoard)
+            //{
+            //    Debug.LogWarning("This is going to need to be fixed since it's using global position");
+            //}
+            go.transform.position = se.location; // new Vector3(se.location.x, se.location.y, 0);
         }
+
+        // then add the yarn connections:
+        // this is so inefficient but it's what I've got...
+        for (int i = 0; i < EvidenceManager.AllEvidence.Count; i++)
+        {
+            // spawn the evidence that's on the board or off it, and do nothing to the rest
+            SerializedEvidence se = EvidenceManager.AllEvidence[i];
+            if (se.evidenceState != SerializedEvidence.EvidenceState.OnYarnBoard)
+                continue;
+            if (!yarnboardConnectionEvidenceLocation.ContainsKey(se))
+            {
+                Debug.LogError("Key not found somehow");
+                continue;
+            }
+            // otherwise we connect it to all the evidence which is on the yarnboard
+            for (int j = 0; j < se.connectedEvidence.Count; j++)
+            {
+                // connect it to all of the other ones that exist
+                SerializedEvidence otherConnection = EvidenceManager.AllEvidence[se.connectedEvidence[j]];
+                if (yarnboardConnectionEvidenceLocation.ContainsKey(otherConnection))
+                {
+                    lineDraw.CreateFullLine(yarnboardConnectionEvidenceLocation[se], yarnboardConnectionEvidenceLocation[otherConnection], se, otherConnection);
+                }
+            }
+            // then remove it from the dictionary so that we don't get duplicate lines
+            yarnboardConnectionEvidenceLocation.Remove(se);
+        }
+    }
+
+    public void AddGeneratedGameobject(GameObject go)
+    {
+        // this is for the yarn items
+        createdEvidenceOnBoard.Add(go);
     }
 
     private float PinOffset(Collider c)
@@ -192,14 +182,6 @@ public class YarnBoard : MonoBehaviour
         {
             int next = Random.Range(0, EvidenceManager.AllEvidence.Count - 1);
             EvidenceManager.AllEvidence[next].evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
-            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Evidence"))
-                Destroy(go);
-            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Suspect"))
-                Destroy(go);
-            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Pin"))
-                Destroy(go);
-            foreach (YarnLine go in GameObject.FindObjectsOfType<YarnLine>())
-                Destroy(go.gameObject);
             GenerateContent();
         }
 
@@ -256,6 +238,18 @@ public class YarnBoard : MonoBehaviour
                     //Debug.Log("Moving now");
                     // get the correct object to move
                     movingYarnboardItem = hit.collider.transform.parent.gameObject;
+                    movingStartPos = evidence.transform.position;
+                    if (movingYarnboardItem.GetComponentInChildren<EvidenceMono>() != null)
+                    {
+                        movingYarnboardEvidence = EvidenceManager.instance.FindSerializedEvidence(movingYarnboardItem.GetComponentInChildren<EvidenceMono>().EvidenceInfo);
+                    } else if (movingYarnboardItem.GetComponentInChildren<SuspectMono>() != null)
+                    {
+                        movingYarnboardEvidence = EvidenceManager.instance.FindSerializedEvidence(movingYarnboardItem.GetComponentInChildren<SuspectMono>().SuspectInfo);
+                    } else
+                    {
+                        movingYarnboardEvidence = null;
+                        Debug.LogError("ERROR: UNABLE TO GET EVIDENCE FOR MOVING IT");
+                    }
                     mode = YarnBoardMode.Moving;
                 }
             }
@@ -274,13 +268,18 @@ public class YarnBoard : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
             {
                 movingYarnboardItem.transform.position = hit.point;
+                removeFromYarnboardText.SetActive(false);
+            } else
+            {
+                // highlight that you're going to remove it from the board! How the fuck? Probably interact text saying "Remove from board"
+                removeFromYarnboardText.SetActive(true);
             }
         }
         else if (Input.GetMouseButtonUp(1) && mode == YarnBoardMode.Moving)
         {
             // move the item you clicked on
             //Debug.Log("nolonger clicking");
-
+            removeFromYarnboardText.SetActive(false); // so that if we were removing it it's now no longer displayed
             //Raycast to screen
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -289,6 +288,22 @@ public class YarnBoard : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
             {
                 movingYarnboardItem.transform.position = hit.point;
+                // then create a movement event!
+                if (movingYarnboardEvidence != null)
+                {
+                    YarnBoardMoveEvidenceEvent moveEvent = new YarnBoardMoveEvidenceEvent(movingYarnboardEvidence.evidenceindex, movingYarnboardEvidence, movingStartPos, hit.point);
+                    moveEvent.Redo(); // set it in the location as well!
+                    UndoRedoStack.AddEvent(moveEvent);
+                }
+            } else
+            {
+                // remove it from the yarnboard!
+                YarnBoardAddToYarnBoardEvent undoredoevent = new YarnBoardAddToYarnBoardEvent(movingYarnboardEvidence.evidenceindex, movingYarnboardEvidence, true);
+                // it's inverted since we're removing it
+                UndoRedoStack.AddEvent(undoredoevent); // create the undo/redo event
+                                                       // then redo it to remove it from the yarnboard
+                undoredoevent.Redo(); // remove it from the yarnboard!
+                GenerateContent(); // re-generate content to deal with removing it from the yarnboard!
             }
             mode = YarnBoardMode.None;
         }
@@ -317,6 +332,11 @@ public class YarnBoard : MonoBehaviour
         t.text = charText;
         t.color = Color.black;
         t.fontSize = _charTextFontSize;
+    }
+
+    public Transform GetYarnboardParent()
+    {
+        return _yarnBoardParent;
     }
 
     public void DeactivateFlavorText()

@@ -62,7 +62,6 @@ public class HubManager : MonoBehaviour
     {
         // this is called when the collider is clicked probably
         cameraMode = CameraMode.FollowPlayer; // go back to following the player
-        Debug.Log("Exitintg desk");
         for (int i = 0; i < deskItems.Count; i++)
         {
             deskItems[i].ResetPosition(); // they should go back to the table not nearby the camera duh
@@ -102,6 +101,7 @@ public class HubManager : MonoBehaviour
         cameraMode = CameraMode.FollowPlayer; // go back to following the player
         yarnBoardExitCollider.SetActive(false);
         LockMouse.LockTheMouse();
+        EvidenceManager.SaveEvideneToPlayerPrefs(); // save the evidence after you leave the yarnboard.
     }
 
     // Update is called once per frame
@@ -160,14 +160,18 @@ public class HubManager : MonoBehaviour
                     {
                         // redo
                         UndoRedoStack.Redo();
-                    } else
+                        yarnBoard.GenerateContent();
+                    }
+                    else
                     {
                         UndoRedoStack.Undo();
+                        yarnBoard.GenerateContent();
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.Y)) {
                     // redo
                     UndoRedoStack.Redo();
+                    yarnBoard.GenerateContent();
                 }
             }
         }

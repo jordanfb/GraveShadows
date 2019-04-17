@@ -51,6 +51,34 @@ public class EvidenceManager : MonoBehaviour
         set { generated = value; }
     }
 
+    public List<YarnBoardEntity> GetEvidenceNotOnYarnboard()
+    {
+        List<YarnBoardEntity> output = new List<YarnBoardEntity>();
+        for (int i = 0; i < allSerializedEvidence.Count; i++)
+        {
+            if (allSerializedEvidence[i].evidenceState == SerializedEvidence.EvidenceState.OffYarnBoard)
+            {
+                // then add the connected evidence to the output list
+                output.Add(allEvidenceEntities[allSerializedEvidence[i].evidenceindex]);
+            }
+        }
+        return output;
+    }
+
+    public int GetEvidenceNotOnYarnboardCount()
+    {
+        int num = 0;
+        for (int i = 0; i < allSerializedEvidence.Count; i++)
+        {
+            if (allSerializedEvidence[i].evidenceState == SerializedEvidence.EvidenceState.OffYarnBoard)
+            {
+                // then add the connected evidence to the output list
+                num++;
+            }
+        }
+        return num;
+    }
+
     public void Awake()
     {
         // initialize yourself and the list of all evidence
@@ -68,7 +96,6 @@ public class EvidenceManager : MonoBehaviour
         {
             // if you weren't able to load a save, initialize everything for a new game.
             InitializeSerializedEvidence();
-            
         }
         // we can also just load a new game with pressing a button and calling NewSaveData()
     }
@@ -100,7 +127,13 @@ public class EvidenceManager : MonoBehaviour
     public void InitializeSerializedEvidence()
     {
         if (generated)
+        {
             return;
+        }
+        officeEv = new List<SerializedEvidence>();
+        factoryEv = new List<SerializedEvidence>();
+        apartmentEV = new List<SerializedEvidence>();
+        AllEvidence = new List<SerializedEvidence>(); // clear this on new games
         // then initialize all the evidence with the correct indices:
         for (int i = 0; i < allEvidenceEntities.Count; i++)
         {
@@ -144,6 +177,7 @@ public class EvidenceManager : MonoBehaviour
         // clears the player prefs
         PlayerPrefs.DeleteKey("EvidenceSaved");
         PlayerPrefs.Save();
+        instance.generated = false; // force it to generate again
         // then it also makes a new game
         Random.InitState(System.DateTime.Now.Millisecond);
         instance.InitializeSerializedEvidence();
