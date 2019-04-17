@@ -197,7 +197,7 @@ public class simplePlayerMovement : MonoBehaviour
     {
         if(other.gameObject.tag == "Evidence" && Input.GetKeyDown(KeyCode.E))
         {
-            EvidenceMono emono = other.gameObject.GetComponent<EvidenceMono>();
+            EvidenceMono emono = other.transform.parent.gameObject.GetComponentInChildren<EvidenceMono>();
             emono.CollectThisEvidence();
             //Evidence e = emono.EvidenceInfo;
             //PlayerManager.instance.CollectEvidence(e);
