@@ -127,7 +127,7 @@ PrefabInstance:
     - target: {fileID: 7576271182610077073, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7576271182610077077, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
@@ -506,6 +506,7 @@ RectTransform:
   m_Children:
   - {fileID: 977698238}
   - {fileID: 1548864889}
+  - {fileID: 3471917386740420253}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1244,6 +1245,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel - Article Text
       objectReference: {fileID: 0}
+    - target: {fileID: 2764293053944468134, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2764293053944468135, guid: c8366da139b71d04fa52d4e10ed0d922,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1349,5 +1355,310 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2764293052241083374, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -22.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293052241083374, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 216.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293052189729345, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -22.047
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293052189729345, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 216.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293052302104908, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -22.046
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293052302104908, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 216.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293052189729406, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_Text
+      value: "    When asked about what the best course of action is for the every-
+        man, the agent grimly responded, \u201Cshould our enemies choose to en- gage
+        with the volume of weapons supplied to them by the Family, may God save our
+        souls.\u201D\r\n    This sale comes after the recent disaster at the Westcliffe
+        Testing Facility, a site rumored to be oper- ated by the Family, which tragically
+        took the life of Detective Colton Graves. Graves\u2019 partner, Detective
+        Marvin Mitchell, also lost his life in an apparent suicide after Graves\u2019
+        death.\r\n\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293052241083375, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_Text
+      value: "    The looming threat of nuclear war grows as reports show the wea-
+        pon stockpiles of multiple commu- nist foreign powers have grown in the past
+        few days. Federal agents be- lieve that the crime group known as the Nuclear
+        Family is behind the illegal sale of weapons to hostile red states, yet police
+        in the area have been unable to find any leads that could lead to the arrest
+        of the group\u2019s leader.\r\n        \u201CThis isn\u2019t the first time
+        the [Nuclear] Family has sold weapons to our enemies,\u201D said one anonymous
+        agent, \u201Cbut it is certainly the larg- est and most threatening sale yet.\u201D
+        \r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293052302104909, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_Text
+      value: "    \u201CThe Family\u2019s deeds are despi- cable,\u201D said Police
+        Chief Harold Clapton, \u201Cand we\u2019re doing everything in our power to
+        bring these trai- tors to justice.\u201D\r\n    The Family remains a secret
+        threat to us, and a powerful ally to our enemies. We can only hope that the
+        government and police can shut them down before their actions leave us nothing
+        more than shadows on the wall.\r\n"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8366da139b71d04fa52d4e10ed0d922, type: 3}
+--- !u!1 &3471917386111789003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3471917386111789012}
+  - component: {fileID: 3471917386111789014}
+  - component: {fileID: 3471917386111789013}
+  m_Layer: 5
+  m_Name: Column 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3471917386111789012
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471917386111789003}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children: []
+  m_Father: {fileID: 3471917386740420253}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -84, y: 0}
+  m_SizeDelta: {x: 236.6, y: 251.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3471917386111789013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471917386111789003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: f1c5e44311ca4084e91a77f2d5493560, type: 3}
+    m_FontSize: 10
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 5
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "    The body of Detective Colton Graves was found riddled with bullets
+    in an alleyway. Graves was notorious for chasing dangerous crime groups, and as
+    such his death would not be such a surprise - if it were not for the fact that
+    he was assumed dead after inves- tigating the Westcliffe Nuclear Facility when
+    it partially exploded recently.\n    \"Graves liked to go after the big ones,\"
+    says Chief Harold Clapton. \"We admired that. It looks like we were too quick
+    to assume he was gone, but it came back to get him anyways.\""
+--- !u!222 &3471917386111789014
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471917386111789003}
+  m_CullTransparentMesh: 0
+--- !u!1 &3471917386734051672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3471917386734051673}
+  - component: {fileID: 3471917386734051675}
+  - component: {fileID: 3471917386734051674}
+  m_Layer: 5
+  m_Name: Headline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3471917386734051673
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471917386734051672}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3471917386740420253}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -222, y: 0}
+  m_SizeDelta: {x: 234.7, y: 28}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3471917386734051674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471917386734051672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: f1c5e44311ca4084e91a77f2d5493560, type: 3}
+    m_FontSize: 17
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: DETECTIVE REDISCOVERED
+--- !u!222 &3471917386734051675
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471917386734051672}
+  m_CullTransparentMesh: 0
+--- !u!1 &3471917386740420252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3471917386740420253}
+  - component: {fileID: 3471917386740420255}
+  - component: {fileID: 3471917386740420254}
+  m_Layer: 5
+  m_Name: Panel - Graves Death Article
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3471917386740420253
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471917386740420252}
+  m_LocalRotation: {x: -0, y: -0, z: 0.76810616, w: -0.64032257}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000001, y: 1.0750041, z: 1.0000001}
+  m_Children:
+  - {fileID: 3471917386734051673}
+  - {fileID: 3471917386111789012}
+  m_Father: {fileID: 694795433}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -100.368004}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 253, y: -290.2}
+  m_SizeDelta: {x: 546.9, y: 320.7}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3471917386740420254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471917386740420252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 63667ad2c778bce418aa60760930094b, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &3471917386740420255
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471917386740420252}
+  m_CullTransparentMesh: 0

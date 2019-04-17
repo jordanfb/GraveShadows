@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class YarnBoardCamera : MonoBehaviour
 {
+    public HubManager hubManager; // for enabling/disabling movement
+
     public bool movementInverted = false;
     public float scrollSpeed = 1;
     public float moveSpeed = 1;
@@ -28,6 +31,10 @@ public class YarnBoardCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (hubManager.cameraMode != HubManager.CameraMode.LookAtYarnBoard || EventSystem.current.IsPointerOverGameObject())
+        {
+            return; // we only allow movement if it's focused on the yarnboard and if the mouse isn't over UI
+        }
         Vector3 newPos = transform.localPosition;
 
         float dzoom = Input.mouseScrollDelta.y * scrollSpeed;

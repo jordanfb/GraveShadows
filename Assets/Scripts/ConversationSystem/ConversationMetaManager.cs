@@ -18,12 +18,13 @@ public class ConversationMetaManager : MonoBehaviour
     {
         for (int i = 0; i < managers.Length; i++)
         {
-            if (managers[i].scriptName == scriptName)
+            if (managers[i].scriptName.ToLower().Trim() == scriptName.ToLower())
             {
                 managers[i].StartRunningScript();
-                break;
+                return;
             }
         }
+        Debug.LogError("ERROR finding script " + scriptName);
     }
 
     public void PlayConversation(TextAsset script)

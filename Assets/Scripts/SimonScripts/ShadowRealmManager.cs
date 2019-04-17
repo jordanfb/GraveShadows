@@ -39,7 +39,9 @@ public class ShadowRealmManager : MonoBehaviour
     //public GameObject choosingRedicle;
     GameObject lightContainer;
     private bool abortIsChoosingWall = false;
-
+    public GameObject particleSystemGO;
+    public GameObject copContainer;
+    public float shadowAppearSpeed = 0.5f;
     private void Awake()
     {
 
@@ -281,8 +283,10 @@ public class ShadowRealmManager : MonoBehaviour
         }
 
 
-
-
+        for(int i = 0; i< copContainer.transform.childCount; i++) {
+            copContainer.transform.GetChild(i).gameObject.GetComponent<GuardScript>().ResetMaterials();
+        }
+        StartCoroutine(spawnParticleSystem(shadowPlane.transform.position, checkIfFreeCollider.transform.position, shadowPlane.transform.position - checkIfFreeCollider.transform.position));
         gameObject.transform.position = checkIfFreeCollider.transform.position;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         isInShadowRealm = !isInShadowRealm;
@@ -306,25 +310,34 @@ public class ShadowRealmManager : MonoBehaviour
         shadowPlane.transform.position -= targetWall.transform.right*0.01f;
         //moves it a bit away); = new Vector3(
 
+        Vector3 partDir = midPoint- gameObject.transform.position;
+        StartCoroutine(spawnParticleSystem(gameObject.transform.position, midPoint, partDir));
 
-
-        gameObject.transform.position = shadowRealmTransform.position + shadowRealmTransform.forward*100f;
+        gameObject.transform.position = shadowRealmTransform.position;
         StartCoroutine(moveBodyToWall());
-        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        //gameObject.GetComponent<Rigidbody>().useGravity = false;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         gameObject.transform.rotation = Quaternion.AngleAxis(90f, Vector3.up);
         isInShadowRealm = !isInShadowRealm;
         GetComponent<simplePlayerMovement>().setCurrentWallCollider(targetWall);
 
+        for (int i = 0; i < copContainer.transform.childCount; i++)
+        {
+            copContainer.transform.GetChild(i).gameObject.GetComponent<GuardScript>().setShader(Shader.Find("Outlined/Silhouetted Diffuse"));
+
+        }
 
     }
 
     IEnumerator moveBodyToWall() {
-        yield return new WaitForSeconds(0.01f);
-        print("moving");
-        while((gameObject.transform.position - shadowRealmTransform.transform.position).magnitude > 0.1f) {
-            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, shadowRealmTransform.transform.position, 0.1f);
+
+        float alpha = 0.0f;
+        while(alpha<1f) {
+            alpha += shadowAppearSpeed * Time.deltaTime;
+            shadowPlane.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetFloat("_Transparency", alpha);
+            yield return null;
         }
+        yield return 0;
 
     }
 
@@ -346,6 +359,22 @@ public class ShadowRealmManager : MonoBehaviour
         return average/(pointList.Count);
     }
 
-    
+    IEnumerator spawnParticleSystem(Vector3 startLoc, Vector3 endLoc, Vector3 direction) {
+        GameObject partSys = Instantiate(particleSystemGO);
+        partSys.transform.position = startLoc;
+        partSys.transform.rotation = Quaternion.LookRotation(direction);
+        while ((partSys.transform.position - endLoc).magnitude > 0.01f) {
+            partSys.transform.position = Vector3.Lerp(partSys.transform.position, endLoc, 0.1f);
+            yield return null;
+        }
+        Destroy(partSys);
+
+
+
+        yield return 0;
+
+    }
+
+
 
 }

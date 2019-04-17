@@ -90,6 +90,11 @@ public class GuardScript : MonoBehaviour
     private float suspicion = 0;
     private float suspicionTimer = 0; // if not seen something then suspicion goes down after a bit
 
+    [Space]
+    [Header("Graphics stuff")]
+    public SkinnedMeshRenderer[] skinnedMeshRenderers;
+    public Material[] skinnedMaterials;
+
     [HideInInspector]
     public int editIndex = 0;
 
@@ -128,6 +133,13 @@ public class GuardScript : MonoBehaviour
         }
         visibleObjects = FindObjectsOfType<AIObjectVisibility>();
         Debug.Assert(visibleObjects.Length == 1); // if it's not 1 then we're in trouble for the investigate code
+
+        if (skinnedMaterials.Length == 0)
+        {
+            // then find them!
+            FindSkinnedMaterials();
+            Debug.LogError("Cop without skinned mesh materials found!");
+        }
     }
 
     private void LoadQuips()
@@ -236,6 +248,7 @@ public class GuardScript : MonoBehaviour
         } else
         {
             // walk back to your original location
+            // FIX
             Debug.Log("here");
         }
 
@@ -520,11 +533,41 @@ public class GuardScript : MonoBehaviour
         float i = 0;
         while (i < 1)
         {
-            mc.rotation = Quaternion.Lerp(startRot, targetDir, i);
+            mc.rotation = Quaternion.Lerp(startRot, targetDir, DeskDayDescriptionItem.Smootherstep(i));
             i += Time.deltaTime / time;
             yield return null;
         }
         i = 1;
         mc.rotation = Quaternion.Lerp(startRot, targetDir, i);
+    }
+
+    public void setShader(Shader s)
+    {
+        for (int i = 0; i < skinnedMeshRenderers.Length; i++)
+        {
+            skinnedMeshRenderers[i].material.shader = s;
+            skinnedMeshRenderers[i].material.SetColor("_OutlineColor", Color.white);
+            
+        }
+    }
+
+    public void ResetMaterials()
+    {
+        for (int i = 0; i < skinnedMeshRenderers.Length; i++)
+        {
+            skinnedMeshRenderers[i].material = skinnedMaterials[i];
+        }
+    }
+
+    [ContextMenu("Find skinned mesh renderers")]
+    public void FindSkinnedMaterials()
+    {
+        skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        skinnedMaterials = new Material[skinnedMeshRenderers.Length];
+        for (int i =0; i < skinnedMeshRenderers.Length; i++)
+        {
+            skinnedMaterials[i] = skinnedMeshRenderers[i].sharedMaterial;
+        }
+        Debug.Log("Found " + skinnedMeshRenderers.Length + " mesh renderers and materials");
     }
 }
