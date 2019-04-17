@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6015254703192461160}
   - component: {fileID: 3662008811575765127}
   - component: {fileID: 1602241540}
-  - component: {fileID: 1602241539}
   m_Layer: 0
   m_Name: Pack of Smokes
   m_TagString: Evidence
@@ -30,7 +29,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -18.240108, y: 1.86, z: -5.5522966}
   m_LocalScale: {x: 6.9682336, y: 3.301355, z: 6.9682336}
-  m_Children: []
+  m_Children:
+  - {fileID: 3306259177526371504}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -98,16 +98,47 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: EvidenceMono+EvidenceEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!65 &1602241539
+--- !u!1 &7076251831980856012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3306259177526371504}
+  - component: {fileID: 6867705396588460065}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Evidence
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3306259177526371504
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7076251831980856012}
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.021, z: -0.004238699}
+  m_LocalScale: {x: 0.14350839, y: 0.30290592, z: 0.14350839}
+  m_Children: []
+  m_Father: {fileID: 5230489975898101670}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6867705396588460065
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1602241538}
+  m_GameObject: {fileID: 7076251831980856012}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.55498445, y: 0.41642562, z: 0.56999487}
-  m_Center: {x: 0, y: 0.20195642, z: -0.0042386823}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
