@@ -40,6 +40,7 @@ public class simplePlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
+    Vector3 camForwardOnEnteranceToShadowRealm;
     void Update()
     {
         anim.SetBool("isInShadowRealm", SRmanager.isInShadowRealm);
@@ -61,7 +62,10 @@ public class simplePlayerMovement : MonoBehaviour
             }
             else
             {
-                wallMovement(moveDirX, moveDirY, currentWallCollider);
+                if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) {
+                    camForwardOnEnteranceToShadowRealm = mainCam.transform.forward;
+                }
+                wallMovement(moveDirX, moveDirY, currentWallCollider, camForwardOnEnteranceToShadowRealm);
             }
         }
     }
@@ -105,7 +109,7 @@ public class simplePlayerMovement : MonoBehaviour
 
     bool touchingWall = true;
     Quaternion targetWallRot = Quaternion.AngleAxis(90f, Vector3.up);
-    void wallMovement(float _moveDirX, float _moveDirY, Collider _currentWallCollider) {
+    void wallMovement(float _moveDirX, float _moveDirY, Collider _currentWallCollider, Vector3 cameraForwardOnEnterance) {
 
         if (_currentWallCollider == null) {
             Debug.Log("ERROR: current wall is null");
@@ -115,8 +119,12 @@ public class simplePlayerMovement : MonoBehaviour
         LayerMask mask = LayerMask.GetMask("WallLayer");
         RaycastHit hitWall;
         touchingWall = false;
+
+
+
+
         Vector3 nextPos;
-        if (Vector3.Dot(SRmanager.shadowPlane.transform.right, mainCam.transform.forward) < -0.2f) {
+        if (Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < -0.2f) {
             nextPos = SRmanager.shadowPlane.transform.position + SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime
                             + (Mathf.Sign(_moveDirX) * SRmanager.shadowPlane.transform.forward * PLAYER_WIDTH);
         }
@@ -139,7 +147,7 @@ public class simplePlayerMovement : MonoBehaviour
         if (touchingWall)
         {
 
-            if(Vector3.Dot(SRmanager.shadowPlane.transform.right, mainCam.transform.forward) < -0.2f)
+            if(Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < -0.2f)
             {
                 SRmanager.shadowPlane.transform.position -= SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime;
             }
@@ -149,11 +157,11 @@ public class simplePlayerMovement : MonoBehaviour
 
             anim.SetFloat("xVelocityShadow", Mathf.Abs(-_moveDirX * SHADOW_SPEED) * Time.deltaTime);
 
-            if (_moveDirX>0) {
+            if (_moveDirX * Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) > 0) {
                 targetWallRot = Quaternion.AngleAxis(90f, Vector3.up);
 
             }
-            else if (_moveDirX < 0)
+            else if (_moveDirX * Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < 0)
             {
                 targetWallRot = Quaternion.AngleAxis(-90f, Vector3.up);
 

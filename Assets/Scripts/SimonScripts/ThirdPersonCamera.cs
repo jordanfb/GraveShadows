@@ -220,14 +220,13 @@ public class ThirdPersonCamera : MonoBehaviour
         //get first item of absolute and make it the first
         float signedFirst = Vector3.SignedAngle(signedSorted[0].gameObject.transform.right, gameObject.transform.forward, gameObject.transform.up);
         float signedLast = Vector3.SignedAngle(signedSorted[signedSorted.Count-1].gameObject.transform.right, gameObject.transform.forward, gameObject.transform.up);
-        if (Mathf.Abs(signedLast) > Mathf.Abs(signedFirst)) {
+        //if the last one is actually less:)
+        if (Mathf.Abs(signedLast) < Mathf.Abs(signedFirst)) {
+            print("swicharoo");
             signedSorted.Insert(0, signedSorted[signedSorted.Count - 1]);
             signedSorted.RemoveAt(signedSorted.Count - 1);
         }
-        print("signed sorted");
-        for(int i = 0; i<signedSorted.Count; i++) { 
-            print(signedSorted[i].gameObject.name + ": "+Vector3.SignedAngle(signedSorted[i].gameObject.transform.right, gameObject.transform.forward, gameObject.transform.up));
-        }
+
 
         return signedSorted;
 
