@@ -441,6 +441,16 @@ PrefabInstance:
         no doors or windows showed sign of entry. \u201CIt\u2019s like he came in
         and left like smoke. It looks like our vic got murdered by a shadow.\u201D\r\n"
       objectReference: {fileID: 0}
+    - target: {fileID: 2764293053944468132, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_FillCenter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293053944468132, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2764293053896457568, guid: c8366da139b71d04fa52d4e10ed0d922,
         type: 3}
       propertyPath: m_Text
@@ -828,6 +838,7 @@ GameObject:
   - component: {fileID: 1100479106}
   - component: {fileID: 1100479105}
   - component: {fileID: 1100479104}
+  - component: {fileID: 1100479107}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -899,6 +910,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1100479107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100479103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4620d876d79a04cb65bfe2761fc8bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockMouse: 0
+  lockMouseOnStart: 0
+  unlockOnEscape: 1
 --- !u!1 &1201080683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,7 +1157,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MainMenu
+          m_StringArgument: MainMenuNew
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,

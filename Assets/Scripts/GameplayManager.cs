@@ -304,7 +304,7 @@ public class GameplayManager : MonoBehaviour
         // chooses the evidence and whatever
         EvidenceManager.NewSaveGame();
         UndoRedoStack.Reset(); // make sure to reset the undo redo stack otherwise weird bugs
-
+        PlayerManager.instance.NewGame(); // reset the found evidence
         // then load the game data here:
         dayNum = 0; // first day
         dayData = new List<DayData>();
