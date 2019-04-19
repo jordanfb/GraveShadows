@@ -30,7 +30,6 @@ public class elevatorOpener : MonoBehaviour
     IEnumerator OpenDoorAnim(float dir)
     {
         float movedSoFar = 0;
-        print(movedSoFar);
         while (movedSoFar < ammoutToOpen)
         {
 
@@ -88,9 +87,11 @@ public class elevatorOpener : MonoBehaviour
         {
 
 
-
-            IEnumerator coroutine = OpenDoorAnim(lastOpenDir);
-            StartCoroutine(coroutine);
+            if (!isOpen)
+            {
+                IEnumerator coroutine = OpenDoorAnim(lastOpenDir);
+                StartCoroutine(coroutine);
+            }
 
 
         }
@@ -100,6 +101,9 @@ public class elevatorOpener : MonoBehaviour
     {
         if (isMoving)
         {
+            return;
+        }
+        if (!isOpen) {
             return;
         }
         if (other.gameObject.tag == "Player")
