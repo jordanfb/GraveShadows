@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -218,6 +218,7 @@ MonoBehaviour:
   intensity: 1
   tileAmount: 8
   mitigationAmount: 100
+  animateTexture: 0
   TAM1: {fileID: 18700000, guid: 921da6c83892d48da8457e28c83c7f41, type: 2}
   TAM2: {fileID: 18700000, guid: 27f187d39d492409bb3fd8aaa48a4293, type: 2}
   TAM3: {fileID: 18700000, guid: fcea2e632ceaf4291aa81051017d3af9, type: 2}
@@ -8852,6 +8853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowSkippingLastDay: 1
   dayNum: 0
+  debugMode: 0
   dayData: []
 --- !u!4 &1485509081
 Transform:
@@ -10429,7 +10431,7 @@ MonoBehaviour:
   hubManager: {fileID: 824428057}
   movementInverted: 0
   scrollSpeed: 0.2
-  moveSpeed: 0.2
+  moveSpeed: 0.02
   minCoords: {x: -1, y: 0.1}
   maxCoords: {x: 1, y: 1}
   zoomBounds: {x: 0, y: 1}
