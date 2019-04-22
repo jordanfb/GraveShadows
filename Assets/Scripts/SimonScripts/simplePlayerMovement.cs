@@ -55,6 +55,12 @@ public class simplePlayerMovement : MonoBehaviour
         {
             float moveDirX = Input.GetAxis("Horizontal");
             float moveDirY = Input.GetAxis("Vertical");
+            if(System.Math.Abs(moveDirY) < 0.01f && System.Math.Abs(moveDirY) < 0.01f) {
+                Camera.main.GetComponent<LozowichEffect>().animateTexture = 0;
+            }
+            else {
+                Camera.main.GetComponent<LozowichEffect>().animateTexture = 1;
+            }
             if (!SRmanager.isInShadowRealm)
             {
                 thirdPersonMovement(moveDirX, moveDirY);
