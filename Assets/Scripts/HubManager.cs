@@ -184,16 +184,19 @@ public class HubManager : MonoBehaviour
         if (cameraMode == CameraMode.FollowPlayer && cameraLerpPos > 0)
         {
             cameraLerpPos -= Time.deltaTime;
-            if (cameraLerpPos < 0)
+            if (cameraLerpPos <= 0)
             {
                 cameraLerpPos = 0;
+                cameraGameObject.transform.SetParent(characterCamera.mainCam.transform);
             }
         }
         else if (cameraLerpPos < 1)
         {
+
             cameraLerpPos += Time.deltaTime;
-            if (cameraLerpPos > 1)
+            if (cameraLerpPos >= 1)
             {
+                cameraGameObject.transform.SetParent(otherCameraTransformPosition);
                 cameraLerpPos = 1;
             }
         }
@@ -201,7 +204,9 @@ public class HubManager : MonoBehaviour
 
         // now lerp the camera using smootherstep
         // now lerp between them
+
         float t = DeskDayDescriptionItem.Smootherstep(cameraLerpPos);
+
         cameraGameObject.transform.position = Vector3.Lerp(characterCamera.mainCam.transform.position, otherCameraTransformPosition.position, t);
         cameraGameObject.transform.rotation = Quaternion.Lerp(characterCamera.mainCam.transform.rotation, otherCameraTransformPosition.rotation, t);
     }
