@@ -32,6 +32,10 @@ public class GameplayManager : MonoBehaviour
 
     private void Awake()
     {
+#if UNITY_EDITOR
+        // make it debug mode
+        debugMode = true;
+#endif
         if (instance == null)
         {
             instance = this;
