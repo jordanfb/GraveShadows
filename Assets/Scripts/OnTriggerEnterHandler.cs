@@ -15,6 +15,7 @@ public class OnTriggerEnterHandler : MonoBehaviour
         public string optionalConversationName;
         public UnityEvent events;
         public bool onlyRunOnce;
+        public float delayTime;
     }
 
     private ConversationMetaManager conversationManager;
@@ -40,8 +41,9 @@ public class OnTriggerEnterHandler : MonoBehaviour
         {
             if (triggerEventPairs[i].collider == other)
             {
+
                 triggerEventPairs[i].events.Invoke();
-                StartConversationIfPossible(triggerEventPairs[i].optionalConversationName);
+                StartConversationIfPossible(triggerEventPairs[i], other);
                 if (triggerEventPairs[i].onlyRunOnce)
                 {
                     triggerEventPairs.RemoveAt(i);
@@ -52,11 +54,17 @@ public class OnTriggerEnterHandler : MonoBehaviour
         }
     }
 
-    private void StartConversationIfPossible(string convoName)
+    private void StartConversationIfPossible(colliderActions convoData, Collider other)
     {
-        if (conversationManager != null && convoName.Length > 0)
+
+       
+       
+        if (conversationManager != null && convoData.optionalConversationName.Length > 0)
         {
-            conversationManager.PlayConversationOfName(convoName);
+            conversationManager.PlayConversationOfName(convoData.optionalConversationName);
         }
+        
+       
     }
 }
+

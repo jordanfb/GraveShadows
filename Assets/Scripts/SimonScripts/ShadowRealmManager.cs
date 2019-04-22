@@ -42,6 +42,8 @@ public class ShadowRealmManager : MonoBehaviour
     public GameObject particleSystemGO;
     public GameObject copContainer;
     public float shadowAppearSpeed = 0.5f;
+    public GameObject choosingUIPrefab;
+    private GameObject choosingUI;
     private void Awake()
     {
 
@@ -68,6 +70,9 @@ public class ShadowRealmManager : MonoBehaviour
         for(int i = 0; i< lightContainer.transform.childCount; i++) {
             lightsInScene.Add(lightContainer.transform.GetChild(i).gameObject);
         }
+        choosingUI = Instantiate(choosingUIPrefab);
+        choosingUI.SetActive(false);
+
     }
     private void Update()
     {
@@ -75,16 +80,17 @@ public class ShadowRealmManager : MonoBehaviour
         //    checkForShadows();
         //}
 
-        //if (isChoosingWall) {
-        //    choosingRedicle.SetActive(true);
-        //}
-        //else {
-        //    choosingRedicle.SetActive(false);
-        //}
+        if (isChoosingWall) {
+            choosingUI.SetActive(true);
+        }
+        else {
+            choosingUI.SetActive(false);
+        }
 
         Debug.DrawRay(checkIfFreeCollider.transform.position, -transform.up + -transform.up*0.1f);
         if (Input.GetKey(KeyCode.Space))
         {
+
             if (abortIsChoosingWall) {
                 return;
             }
@@ -112,6 +118,10 @@ public class ShadowRealmManager : MonoBehaviour
                 abortIsChoosingWall = true;
                 isChoosingWall = false;
 
+                return;
+            }
+            if (checkForShadows().Keys.Count == 0)
+            {
                 return;
             }
             isChoosingWall = true;
