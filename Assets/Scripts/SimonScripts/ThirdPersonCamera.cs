@@ -289,7 +289,6 @@ public class ThirdPersonCamera : MonoBehaviour
         }
 
 
-        print(currentMouseDelta + " " + lastMouseDelta);
 
 
 
