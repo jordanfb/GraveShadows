@@ -27,7 +27,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     public float scrollSpeedX;
     public float scrollSpeedY;
-
+    public float chooseWallSensitivity = 1f;
 
 
     //choosing a wall variables
@@ -42,15 +42,7 @@ public class ThirdPersonCamera : MonoBehaviour
     public Transform headTransform;
 
 
-
-    //void setAllMaterialTransparency(float newTransparency) { 
-    //    for(int i = 0; i< materialedObjectsParent.transform.childCount; i++) {
-    //        materialedObjectsParent.transform.GetChild(i).GetComponent<Renderer>().material.SetFloat("_Transparency", newTransparency);
-
-
-    //    }
-
-    //}
+    public float mouseDeltaOnChange = 3f;
 
     void Start()
     {
@@ -182,27 +174,112 @@ public class ThirdPersonCamera : MonoBehaviour
     }
 
 
-    
+    private int compareCollidersBySignedAngle(Collider a, Collider b)
+    {
+        float aSA = Vector3.SignedAngle(a.gameObject.transform.right, gameObject.transform.forward, gameObject.transform.up);
+        float bSA = Vector3.SignedAngle(b.gameObject.transform.right, gameObject.transform.forward, gameObject.transform.up);
+        if (aSA < 0f) {
+            aSA += 360f;
+        }
+        if (bSA < 0f) {
+            bSA += 360f;
+        }
+
+        if (a == null) { 
+            if(b == null) {
+                return 0;
+            }
+            return 1;
+        }
+        if (aSA > bSA) {
+            return -1;
+        }else if(bSA> aSA) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+
+    List<Collider> createColliderList(List<Collider> colliders) {
+        List<Collider> keyList = new List<Collider>(colliders);
+        List<Collider> signedSorted = new List<Collider>(keyList);
+
+        //sorted list based on the signed angle
+        signedSorted.Sort(compareCollidersBySignedAngle);
+
+        //get first item of absolute and make it the first
+        float signedFirst = Vector3.SignedAngle(signedSorted[0].gameObject.transform.right, gameObject.transform.forward, gameObject.transform.up);
+        float signedLast = Vector3.SignedAngle(signedSorted[signedSorted.Count-1].gameObject.transform.right, gameObject.transform.forward, gameObject.transform.up);
+        //if the last one is actually less:)
+        if (Mathf.Abs(signedLast) < Mathf.Abs(signedFirst)) {
+            signedSorted.Insert(0, signedSorted[signedSorted.Count - 1]);
+            signedSorted.RemoveAt(signedSorted.Count - 1);
+        }
+
+
+        return signedSorted;
+
+    }
+    float lastMouseDelta = 0;
+    float lastMousePos = 0;
+    float currentMouseDelta = 0;
+    Vector3 lastOffset;
+    bool justChanged = false;
     void handleIsChoosingWall(Dictionary<Collider, List<Vector3>> wallDict)
     {
 
+        if (justChanged) {
+            currentMouseDelta = 0;
+            if (lastMouseDelta < 1f) {
+                justChanged = false;
+            }
+
+        }
+        else {
+            currentMouseDelta = currentRotationX - lastMousePos;
+        }
 
         List<Collider> keyList = new List<Collider>(wallDict.Keys);
 
-
-        if (keyList.Count == 0) {
+        //keyList.Sort(compareCollidersByDirectionOfPlayer);
+        if (keyList.Count == 0)
+        {
             return;
         }
+
+        keyList = createColliderList(keyList);
+
+
+
 
         if (Input.GetKeyDown(KeyCode.A)) {
             currentWallToChooseFrom -= 1;
 
+
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             currentWallToChooseFrom += 1;
 
+
         }
+
+        //if(lastMouseDelta > mouseDeltaOnChange && !justChanged) {
+
+        //    currentWallToChooseFrom += 1;
+        //    justChanged = true;
+
+
+        //}
+
+        //if(lastMouseDelta < -mouseDeltaOnChange && !justChanged) {
+        //    currentWallToChooseFrom -= 1;
+        //    justChanged = true;
+        //}
+
+
         if (currentWallToChooseFrom < 0) {
             currentWallToChooseFrom = keyList.Count - 1;
         }
@@ -212,12 +289,22 @@ public class ThirdPersonCamera : MonoBehaviour
         }
 
 
-        Vector3 targetPos = findMiddlePos(wallDict[keyList[currentWallToChooseFrom]]);
+        print(currentMouseDelta + " " + lastMouseDelta);
+
+
+
+        //Vector3 offset = keyList[currentWallToChooseFrom].gameObject.transform.forward * lastMouseDelta;
+        Vector3 offset = Vector3.zero;
+
+        Vector3 targetPos = findMiddlePos(wallDict[keyList[currentWallToChooseFrom]]) - offset;
+
+        
+     
+
         Vector3 dir = targetPos - mainCam.transform.position;
 
         //camera rotation
         Quaternion lookAngle = Quaternion.LookRotation(dir, Vector3.up);
-        Debug.DrawRay(mainCam.transform.position, dir, Color.red);
         Quaternion newCamLook = Quaternion.RotateTowards(mainCam.transform.rotation, lookAngle, cameraWhileChoosingLerpRotateSpeed * Time.deltaTime);
         mainCam.transform.rotation = newCamLook;
 
@@ -228,11 +315,14 @@ public class ThirdPersonCamera : MonoBehaviour
         Vector3 startPos = Quaternion.LookRotation(headToWallDir, Vector3.up) * (headTransform.transform.position + headTransform.transform.forward);
 
 
-        Debug.DrawLine(headTransform.position, headTransform.position + startPos*0.1f, Color.yellow);
-        
+
 
         mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, headTransform.position + startPos*0.01f, cameraWhileChoosingLerpMoveSpeed * Time.deltaTime);
 
+
+        lastMouseDelta = Mathf.Lerp(lastMouseDelta, currentMouseDelta, Time.deltaTime* chooseWallSensitivity);
+        lastMousePos = currentRotationX;
+        lastOffset = offset;
 
     }
 
