@@ -11,7 +11,7 @@ public class LoadSceneOnButonPress : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(key))
+        if (GameplayManager.instance.debugMode && Input.GetKeyDown(key))
         {
             SceneManager.LoadScene(scene);
         }
