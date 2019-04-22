@@ -13047,11 +13047,11 @@ PrefabInstance:
     - target: {fileID: 2300972, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e977f30516287aa4b8d9c05c44dae2f1, type: 2}
+      objectReference: {fileID: 2100000, guid: d5e605b94d18d5040ac44fb7566cfa57, type: 2}
     - target: {fileID: 2300974, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e977f30516287aa4b8d9c05c44dae2f1, type: 2}
+      objectReference: {fileID: 2100000, guid: d5e605b94d18d5040ac44fb7566cfa57, type: 2}
     - target: {fileID: 2300976, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -29406,10 +29406,6 @@ PrefabInstance:
       propertyPath: affiliatedLights.Array.data[0]
       value: 
       objectReference: {fileID: 1490672204}
-    - target: {fileID: 829738813, guid: 790f465fa18b24d80b5b0055e7f1dc8d, type: 3}
-      propertyPath: onActivateText
-      value: Activated
-      objectReference: {fileID: 0}
     - target: {fileID: 82477812, guid: 790f465fa18b24d80b5b0055e7f1dc8d, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -29469,6 +29465,10 @@ PrefabInstance:
     - target: {fileID: 82477809, guid: 790f465fa18b24d80b5b0055e7f1dc8d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 829738813, guid: 790f465fa18b24d80b5b0055e7f1dc8d, type: 3}
+      propertyPath: onActivateText
+      value: Activated
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 790f465fa18b24d80b5b0055e7f1dc8d, type: 3}

@@ -177,15 +177,13 @@ public class YarnBoard : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_EDITOR
-        if(Input.GetKeyDown(KeyCode.T))
+        if(GameplayManager.instance.debugMode && Input.GetKeyDown(KeyCode.T))
         {
             int next = Random.Range(0, EvidenceManager.AllEvidence.Count - 1);
             EvidenceManager.AllEvidence[next].evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
             GenerateContent();
         }
 
-#endif
         if (Input.GetMouseButtonDown(0) && mode == YarnBoardMode.None)
         {
             //Raycast to screen

@@ -108,13 +108,13 @@ public class HubManager : MonoBehaviour
     void Update()
     {
         // only have these cheat keys if we're in the editor, not a build FIX
-        if (Input.GetKeyDown(KeyCode.M))
+        if (GameplayManager.instance.debugMode && Input.GetKeyDown(KeyCode.M))
         {
             // skip a day
             GameplayManager.instance.SkipDay("Visited stuff saw death la-di-da\n\nOh yeah and I was caught");
             LoadDesk();
         }
-        if (Input.GetKeyDown(KeyCode.N))
+        if (GameplayManager.instance.debugMode && Input.GetKeyDown(KeyCode.N))
         {
             // skip a day
             GameplayManager.instance.NextDay("Visited stuff found stuff whoop-di-do");

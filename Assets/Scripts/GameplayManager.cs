@@ -25,11 +25,17 @@ public class GameplayManager : MonoBehaviour
     public int dayNum = 0; // 0-4 are days when you can do stuff
     // day 5 is when you have to choose the evidence
 
+    public bool debugMode = false;
+
     [Tooltip("this gets set by the script don't edit it in the editor")]
     public List<DayData> dayData;
 
     private void Awake()
     {
+#if UNITY_EDITOR
+        // make it debug mode
+        debugMode = true;
+#endif
         if (instance == null)
         {
             instance = this;
@@ -49,7 +55,11 @@ public class GameplayManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.J) && Input.GetKey(KeyCode.Z) && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.G) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.E))
+        {
+            // enable or disable debug mode
+            debugMode = !debugMode;
+        }
     }
 
     public void ExitBackToHubNextDay()
