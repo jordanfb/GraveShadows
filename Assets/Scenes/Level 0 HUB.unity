@@ -9008,6 +9008,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1418463136}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1418463136}
     - target: {fileID: 2701277236420419687, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9083,16 +9093,6 @@ PrefabInstance:
       propertyPath: checkIfFreeCollider
       value: 
       objectReference: {fileID: 1731666907}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 1418463136}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 1418463136}
     - target: {fileID: 1693832147, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: scene
       value: Level 0 HUB
@@ -11677,7 +11677,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pick the killer
+  m_Text: Pick the leader
 --- !u!222 &2147371906
 CanvasRenderer:
   m_ObjectHideFlags: 0
