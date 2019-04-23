@@ -70,10 +70,12 @@ public class HubManager : MonoBehaviour
         LockMouse.LockTheMouse();
         endgameManager.gameObject.SetActive(false);
         deskCollider.SetActive(false);
+        player.isAllowedToWalk = true;
     }
 
     public void EnterDesk()
     {
+        player.isAllowedToWalk = false;
         cameraMode = CameraMode.LookAtDesk;
         deskCollider.SetActive(true);
         LockMouse.UnlockTheMouse();
@@ -82,6 +84,7 @@ public class HubManager : MonoBehaviour
 
     public void EnterYarnBoard()
     {
+        player.isAllowedToWalk = false;
         cameraMode = CameraMode.LookAtYarnBoard;
         yarnBoardExitCollider.SetActive(false);
         LockMouse.UnlockTheMouse();
@@ -91,7 +94,7 @@ public class HubManager : MonoBehaviour
     public void ExitYarnBoard()
     {
         // this is called when the collider is clicked probably
-
+        player.isAllowedToWalk = true;
         // Remove YarnBoard UI from screen so we can do things!
         if (yarnBoard._suspectInfoPanel.activeInHierarchy)
             yarnBoard.DeactivateSuspectPanel();
