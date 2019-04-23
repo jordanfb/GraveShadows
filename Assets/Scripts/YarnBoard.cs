@@ -184,7 +184,7 @@ public class YarnBoard : MonoBehaviour
             GenerateContent();
         }
 
-        if (Input.GetMouseButtonDown(0) && mode == YarnBoardMode.None)
+        if (Input.GetMouseButtonDown(1) && mode == YarnBoardMode.None)
         {
             //Raycast to screen
             RaycastHit hit;
@@ -231,7 +231,7 @@ public class YarnBoard : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetMouseButtonDown(1) && mode == YarnBoardMode.None)
+        else if (Input.GetMouseButtonDown(0) && mode == YarnBoardMode.None)
         {
             // move the item you clicked on
             //Debug.Log("Mtrying to oving now");
@@ -264,7 +264,7 @@ public class YarnBoard : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetMouseButton(1) && mode == YarnBoardMode.Moving)
+        else if (Input.GetMouseButton(0) && mode == YarnBoardMode.Moving)
         {
             //Debug.Log("clicking annd holding");
 
@@ -285,7 +285,7 @@ public class YarnBoard : MonoBehaviour
                 removeFromYarnboardText.SetActive(true);
             }
         }
-        else if (Input.GetMouseButtonUp(1) && mode == YarnBoardMode.Moving)
+        else if (Input.GetMouseButtonUp(0) && mode == YarnBoardMode.Moving)
         {
             // move the item you clicked on
             //Debug.Log("nolonger clicking");
