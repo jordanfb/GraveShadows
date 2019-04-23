@@ -61,6 +61,7 @@ public class HubManager : MonoBehaviour
     public void ExitDesk()
     {
         enterDeskCollider.gameObject.GetComponent<Interactable>().hubFocus = false;
+
         // this is called when the collider is clicked probably
         cameraMode = CameraMode.FollowPlayer; // go back to following the player
         for (int i = 0; i < deskItems.Count; i++)

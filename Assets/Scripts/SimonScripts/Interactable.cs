@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Interactable : MonoBehaviour
 {
@@ -18,46 +19,49 @@ public class Interactable : MonoBehaviour
     void Start()
     {
         Player = GameObject.Find("Player");
-       
+
 
     }
 
-    ~Interactable() {
-
-        Destroy(interactTextInGame);
-    }
     // Update is called once per frame
     Vector3 velocity = Vector3.zero;
     void Update()
     {
 
-
-
-
-
         if (interactTextInGame == null) {
+            return;
+        }
+
+
+
+        if (!interactTextInGame.activeInHierarchy ) {
             return;
         }
         interactTextInGame.transform.position = Vector3.SmoothDamp(interactTextInGame.transform.position,
                                             Camera.main.WorldToScreenPoint(Player.transform.position + Vector3.up * 0.5f), ref velocity, 0.1f);
-        if (hubFocus && touchingCollider)
-        {
-            print("hub focus");
-            interactTextInGame.SetActive(false);
-        }
-        if (!hubFocus && touchingCollider)
-        {
-            print("hub focus");
-            interactTextInGame.SetActive(true);
-        }
-        if (!interactTextInGame.activeInHierarchy ) {
-            return;
-        }
 
 
 
 
     }
+    private void OnTriggerStay(Collider other) {
+        if (other.gameObject.tag == "Player")
+        {
+
+            if (hubFocus)
+            {
+                print("hub focus");
+                interactTextInGame.SetActive(false);
+            }
+            else
+            {
+                interactTextInGame.SetActive(true);
+            }
+        }
+
+
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -90,7 +94,6 @@ public class Interactable : MonoBehaviour
         }
         if (other.gameObject.tag == "Player")
         {
-            hubFocus = false;
             interactTextInGame.SetActive(false);
         }
     }
@@ -101,6 +104,16 @@ public class Interactable : MonoBehaviour
         {
             interactTextInGame.SetActive(false);
         } else
+        {
+            Debug.LogWarning("Error no interact text on this for some reason somehow. gameobject name: " + gameObject.name);
+        }
+    }
+    public void enableText() {
+        if (interactTextInGame != null)
+        {
+            interactTextInGame.SetActive(true);
+        }
+        else
         {
             Debug.LogWarning("Error no interact text on this for some reason somehow. gameobject name: " + gameObject.name);
         }
