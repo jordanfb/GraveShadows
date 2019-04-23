@@ -72,7 +72,7 @@ public class GameLevelManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("Missing gameobject in prefab list!");
+                    Debug.LogError("Missing gameobject in prefab list. Does not exist for evidence: " + e.Name + "!");
                 }
             }
         }

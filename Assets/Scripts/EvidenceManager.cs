@@ -259,15 +259,13 @@ public class EvidenceManager : MonoBehaviour
                     se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
                     if (ev.GetLevel == Level.Office)
                     {
-                        office++;
                         if(ev.GetEvidenceType != EvidenceType.Conversation)
                             officeEv.Add(se);
                     }
                     else if (ev.GetLevel == Level.Factory)
                     {
-                        factory++;
                         if (ev.GetEvidenceType != EvidenceType.Conversation)
-                            officeEv.Add(se);
+                            factoryEv.Add(se);
                     } else if (ev.GetLevel == Level.Apartment)
                     {
                         apartmentEV.Add(se);
@@ -294,7 +292,8 @@ public class EvidenceManager : MonoBehaviour
             }
             
         }
-                
+
+        /*
         while(office < officeEvidenceCount || factory < factoryEvidenceCount)
         {
             if (remainingEvidence.Count == 0)
@@ -348,9 +347,61 @@ public class EvidenceManager : MonoBehaviour
             if (se.evidenceState == SerializedEvidence.EvidenceState.NotFound)
                 count++;
         }
+        */
 
+        while(officeEv.Count < officeEvidenceCount)
+        {
+            if (remainingEvidence.Count == 0)
+                break;
 
-        ClampEvidenceLists();
+            // Generate the next piece of evidence and check if it can be added.
+            int next = Random.Range(0, remainingEvidence.Count - 1);
+            SerializedEvidence se = remainingEvidence[next];
+            Evidence ev = ReferencedEntity(se) as Evidence;
+            
+            if(ev == null || !CheckIfPlaceable(ev))
+            {
+                remainingEvidence.Remove(se);
+                continue;
+            }
+
+            if(ev.GetLevel == Level.Office && !officeEv.Contains(se))
+            {
+                se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
+                officeEv.Add(se);
+            }
+
+            remainingEvidence.Remove(se);
+        }
+
+        remainingEvidence = new List<SerializedEvidence>(allSerializedEvidence);
+
+        while (factoryEv.Count < factoryEvidenceCount)
+        {
+            if (remainingEvidence.Count == 0)
+                break;
+
+            // Generate the next piece of evidence and check if it can be added.
+            int next = Random.Range(0, remainingEvidence.Count - 1);
+            SerializedEvidence se = remainingEvidence[next];
+            Evidence ev = ReferencedEntity(se) as Evidence;
+
+            if (ev == null || !CheckIfPlaceable(ev))
+            {
+                remainingEvidence.Remove(se);
+                continue;
+            }
+
+            if (ev.GetLevel == Level.Factory && !factoryEv.Contains(se))
+            {
+                se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
+                factoryEv.Add(se);
+            }
+
+            remainingEvidence.Remove(se);
+        }
+
+        //ClampEvidenceLists();
     }
 
     private void ClampEvidenceLists()
