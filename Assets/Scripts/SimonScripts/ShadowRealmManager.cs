@@ -94,7 +94,8 @@ public class ShadowRealmManager : MonoBehaviour
             if (abortIsChoosingWall) {
                 return;
             }
-            if (Input.GetKeyDown(KeyCode.S)){
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.Escape))
+            {
                 tpc.resetCurrentWallToChooseFrom();
                 foreach (KeyValuePair<Collider, List<Vector3>> entry in checkForShadows())
                 {

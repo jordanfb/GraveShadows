@@ -119,7 +119,6 @@ public class ThirdPersonCamera : MonoBehaviour
             Vector3 modVec = Vector3.Scale(dirFromCamToPlayer, new Vector3(1f, 0f, 1f));
 
 
-            //lookAtVec = gameObject.transform.position + modVec * 2f + mainCam.transform.right*0.2f;
             rotateAround = gameObject.transform.position;
             wallRaycastVec = gameObject.transform.position;
             currentDistance = REGULAR_CAMERA_DISTANCE;
@@ -128,11 +127,11 @@ public class ThirdPersonCamera : MonoBehaviour
 
         Quaternion rot = Quaternion.Euler(currentRotationY, currentRotationX, 0.0f);
 
-        newCamPos = rotateAround + (rot * (new Vector3(0f, 0f, -currentDistance)));
+        newCamPos = rotateAround + (rot * new Vector3(0f, 0f, -currentDistance));
 
 
 
-        if (Physics.Linecast(wallRaycastVec, newCamPos - mainCam.transform.forward*0.0f, out wallHit, mask)) {
+        if (Physics.Linecast(wallRaycastVec, newCamPos, out wallHit, mask)) {
             Vector3 hitPoint = wallHit.point;
             float wallHitDistance = -(rotateAround - wallHit.point).magnitude + 0.1f;
             if (-wallHitDistance < -currentDistance)
@@ -171,7 +170,7 @@ public class ThirdPersonCamera : MonoBehaviour
             Vector3 modVec = Vector3.Scale(dirFromCamToPlayer, new Vector3(1f, 0f, 1f));
 
 
-            lookAtVec = gameObject.transform.position + modVec * 2f + mainCam.transform.right * 1f;
+            lookAtVec = gameObject.transform.position + modVec * 2f + Vector3.up*0.1f;
             wallRaycastVec = gameObject.transform.position;
         }
 
