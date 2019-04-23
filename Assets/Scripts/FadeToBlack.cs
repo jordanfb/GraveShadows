@@ -9,6 +9,7 @@ public class FadeToBlack : MonoBehaviour
     public RawImage image;
     public float startingAlpha = 1; // what alpha to start at
     public float speed = 1; // 1 second I guess
+    public ConversationMember keepListeningTo; // this is the monologue, it won't fade to the next scene until this is done speaking
 
     private float alpha;
 
@@ -20,12 +21,6 @@ public class FadeToBlack : MonoBehaviour
         alpha = startingAlpha;
         SetAlpha();
         FadeIn(); // if it's already transparent no problem it'll exit
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void SetAlpha()
@@ -82,6 +77,13 @@ public class FadeToBlack : MonoBehaviour
             yield return null;
             alpha += speed * Time.unscaledDeltaTime;
             SetAlpha();
+        }
+        if (keepListeningTo != null)
+        {
+            while (!keepListeningTo.IsFinished())
+            {
+                yield return null; // wait until they're done
+            }
         }
         alpha = Mathf.Clamp01(alpha);
         SetAlpha();
