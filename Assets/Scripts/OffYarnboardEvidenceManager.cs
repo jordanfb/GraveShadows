@@ -28,6 +28,14 @@ public class OffYarnboardEvidenceManager : MonoBehaviour
         defaultRot = offYarnboardItemsParent.rotation;
     }
 
+    public void AddToYarnboard(OffYarnboardEvidence e)
+    {
+        // remove e from our lists
+        offYarnboardEvidenceItems.Remove(e);
+        Destroy(e.gameObject);
+        RebuildEvidenceItems();
+    }
+
     [ContextMenu("Rebuild items")]
     public void RebuildEvidenceItems()
     {
