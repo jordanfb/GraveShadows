@@ -371,6 +371,9 @@ public class EvidenceManager : MonoBehaviour
                 officeEv.Add(se);
             }
 
+            // Update suspect totals
+            foreach (Suspect s in ev.AssociatedSuspects)
+                suspectTotals[suspects.IndexOf(s)]++;
             remainingEvidence.Remove(se);
         }
 
@@ -398,6 +401,9 @@ public class EvidenceManager : MonoBehaviour
                 factoryEv.Add(se);
             }
 
+            // Update suspect totals
+            foreach (Suspect s in ev.AssociatedSuspects)
+                suspectTotals[suspects.IndexOf(s)]++;
             remainingEvidence.Remove(se);
         }
 
