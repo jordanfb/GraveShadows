@@ -224,7 +224,6 @@ public class GuardScript : MonoBehaviour
             } else if (Quaternion.Angle(transform.rotation, startingDirection) > 5)
             {
                 // rotate towards the original starting direction
-                Debug.Log("Turning towards the position");
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, startingDirection, 90 * Time.deltaTime);
             }
 
