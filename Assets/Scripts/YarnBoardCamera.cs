@@ -9,6 +9,7 @@ public class YarnBoardCamera : MonoBehaviour
 
     public bool movementInverted = false;
     public float scrollSpeed = 1;
+    public float keyboardScrollSpeed = 1;
     public float moveSpeed = 1;
     public float keyboardMoveSpeed = 1;
 
@@ -39,6 +40,7 @@ public class YarnBoardCamera : MonoBehaviour
         Vector3 newPos = transform.localPosition;
 
         float dzoom = Input.mouseScrollDelta.y * scrollSpeed;
+        dzoom += Input.GetAxis("Zoom") * keyboardScrollSpeed;
         zoom += dzoom;
         zoom = Mathf.Clamp(zoom, zoomBounds.x, zoomBounds.y);
         newPos.z = startingZoom + zoom;
