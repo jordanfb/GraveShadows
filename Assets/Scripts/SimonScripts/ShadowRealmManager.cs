@@ -80,7 +80,7 @@ public class ShadowRealmManager : MonoBehaviour
         //    checkForShadows();
         //}
 
-        if (isChoosingWall) {
+        if (isChoosingWall && checkForShadows().Count>1) {
             choosingUI.SetActive(true);
         }
         else {

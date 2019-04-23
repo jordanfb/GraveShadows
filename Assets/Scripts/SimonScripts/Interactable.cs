@@ -7,6 +7,7 @@ public class Interactable : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    [HideInInspector]
     public GameObject interactTextInGame;
     public GameObject interactTextPrefab;
     public string baseText;
@@ -23,6 +24,7 @@ public class Interactable : MonoBehaviour
         Destroy(interactTextInGame);
     }
     // Update is called once per frame
+    Vector3 velocity = Vector3.zero;
     void Update()
     {
         if(interactTextInGame == null) {
@@ -32,9 +34,9 @@ public class Interactable : MonoBehaviour
             return;
         }
 
-        Vector3 velocity = Vector3.zero;
+
         interactTextInGame.transform.position = Vector3.SmoothDamp(interactTextInGame.transform.position, 
-                                                Camera.main.WorldToScreenPoint(Player.transform.position + Vector3.up * 0.5f), ref velocity, 0.01f);
+                                                Camera.main.WorldToScreenPoint(Player.transform.position + Vector3.up * 0.5f), ref velocity, 0.1f);
     }
 
     private void OnTriggerEnter(Collider other)

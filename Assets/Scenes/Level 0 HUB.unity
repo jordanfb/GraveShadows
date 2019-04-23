@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -591,6 +591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 127533485}
   - component: {fileID: 127533484}
+  - component: {fileID: 127533483}
   m_Layer: 0
   m_Name: EnterDeskCollider
   m_TagString: Untagged
@@ -598,6 +599,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &127533483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127533482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77001834fa0e8465a854bbd0d7dff923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextInGame: {fileID: 0}
+  interactTextPrefab: {fileID: 1704617898835638000, guid: 12f9ec766228d4c0c8562e1d2693257e,
+    type: 3}
+  baseText: Press "e" To Look At Desk
+  onActivateText: Press "e" To Look At Desk
+  Player: {fileID: 1617351491}
 --- !u!65 &127533484
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -609,8 +628,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.649619, y: 1, z: 4.0333705}
-  m_Center: {x: -0.5417156, y: 0, z: -1.8019135}
+  m_Size: {x: 3.901311, y: 1, z: 4.0333705}
+  m_Center: {x: -0.91586965, y: 0, z: -1.8019135}
 --- !u!4 &127533485
 Transform:
   m_ObjectHideFlags: 0
@@ -3250,6 +3269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 585074453}
   - component: {fileID: 585074452}
+  - component: {fileID: 585074454}
   m_Layer: 0
   m_Name: EnterYarnBoardCollider
   m_TagString: Untagged
@@ -3268,8 +3288,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.745238, y: 1, z: 7.802494}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3.5973659, y: 1, z: 4.8966713}
+  m_Center: {x: 1.073936, y: 0, z: 1.4529115}
 --- !u!4 &585074453
 Transform:
   m_ObjectHideFlags: 0
@@ -3284,6 +3304,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &585074454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585074451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77001834fa0e8465a854bbd0d7dff923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextInGame: {fileID: 0}
+  interactTextPrefab: {fileID: 1704617898835638000, guid: 12f9ec766228d4c0c8562e1d2693257e,
+    type: 3}
+  baseText: Press "e" To Look At Yarnboard
+  onActivateText: Press "e" To Look At Yarnboard
+  Player: {fileID: 1617351491}
 --- !u!4 &594027548 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5942006216659094870, guid: fce033f46202453449abc7ff080cd5dc,
@@ -5980,7 +6018,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1617351490}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1617351491}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10b228ed5ec2c451d9a64aac788880b2, type: 3}
@@ -5992,7 +6030,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1617351490}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1617351491}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 319cff262630b4905966e06bba79b23c, type: 3}
@@ -9673,6 +9711,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1418463136}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1418463136}
     - target: {fileID: 2701277236420419687, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9748,16 +9796,6 @@ PrefabInstance:
       propertyPath: checkIfFreeCollider
       value: 
       objectReference: {fileID: 1731666907}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 1418463136}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 1418463136}
     - target: {fileID: 1693832147, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: scene
       value: Level 0 HUB
@@ -9824,6 +9862,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1693832145, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+--- !u!1 &1617351491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2701277236420419685, guid: c16a4fdeecf104c7898d04976f09544e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1617351490}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1626265601
 GameObject:
   m_ObjectHideFlags: 0

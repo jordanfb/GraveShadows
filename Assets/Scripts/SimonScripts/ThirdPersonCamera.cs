@@ -18,7 +18,7 @@ public class ThirdPersonCamera : MonoBehaviour
     private float max_x = 80f;
 
     private float min_y = 0;
-    private float max_y = 80f;
+    private float max_y = 70f;
 
     [SerializeField]
     public float SHADOW_CAMERA_DISTANCE;
