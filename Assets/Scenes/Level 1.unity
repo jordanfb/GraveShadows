@@ -1949,6 +1949,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1526454974}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[0].collider
       value: 
       objectReference: {fileID: 621683792}
@@ -1972,6 +1976,27 @@ PrefabInstance:
       propertyPath: triggerEventPairs.Array.data[4].collider
       value: 
       objectReference: {fileID: 1678520525}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[5].collider
+      value: 
+      objectReference: {fileID: 1181328580}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[5].optionalConversationName
+      value: Monologue Elevator Intro
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[5].events.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[5].onlyRunOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[5].delayTime
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 942726421136712762, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3796,6 +3821,7 @@ GameObject:
   - component: {fileID: 201361099}
   - component: {fileID: 201361098}
   - component: {fileID: 201361100}
+  - component: {fileID: 201361101}
   m_Layer: 11
   m_Name: Conversation Manager
   m_TagString: Untagged
@@ -4010,7 +4036,7 @@ MonoBehaviour:
 
     #speed .05
 
-    #delay 5
+    #delay 1
 
 '
   scriptContent: "\n\n#Graves\nWindow on the door to Marv\u2019s apartment. Could
@@ -4019,7 +4045,52 @@ MonoBehaviour:
   - Graves
   defaultSpeed: 0.05
   defaultUsePostDelay: 1
-  defaultDelay: 5
+  defaultDelay: 1
+--- !u!114 &201361101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201361092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eabefa2f0f04ee4f8cf80e7f8ecca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 4900000, guid: b311c3b09a6ed4c8dbf6e78ba0e1c2d3, type: 3}
+  slaves:
+  - {fileID: 516852918}
+  associatedEvidence: {fileID: 0}
+  scriptName: Monologue Elevator Intro
+  conversationDescription: introduction in the elevator
+  scriptHeader: '
+
+    #scriptname Monologue Elevator Intro
+
+    #description introduction in the elevator
+
+    #character Graves
+
+    #speed .05
+
+    #delay 1
+
+'
+  scriptContent: "\n\n#Graves\n\U0001F600 \U0001F601 \U0001F602 \U0001F923 \U0001F603
+    \U0001F604 \U0001F605 \U0001F606 \U0001F609 \U0001F60A \U0001F60B \U0001F60E \U0001F60D
+    \U0001F618 \U0001F970 \U0001F617 \U0001F619 \U0001F61A \u263A\uFE0F \U0001F642
+    \U0001F917 \U0001F929 \U0001F914 \U0001F928 \U0001F610 \U0001F611 \U0001F636 \U0001F644
+    \U0001F60F \U0001F623 \U0001F625 \U0001F62E \U0001F910 \U0001F62F \U0001F62A \U0001F62B
+    \U0001F634 \U0001F60C \U0001F61B \U0001F61C \U0001F61D \U0001F924 \U0001F612 \U0001F613
+    \U0001F614 \U0001F615 \U0001F643 \U0001F911 \U0001F632 \u2639\uFE0F<speed=.25>
+    </speed>like a dame you can't shake.<speed=.25> </speed>I bet I can become one
+    on the wall to get past that guard.<speed=2> </speed>\n#"
+  characterNames:
+  - Graves
+  defaultSpeed: 0.05
+  defaultUsePostDelay: 1
+  defaultDelay: 1
 --- !u!1001 &227900302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9023,6 +9094,7 @@ MonoBehaviour:
   baseText: Press 'e' to pick up
   onActivateText: 
   Player: {fileID: 2006359353}
+  hubFocus: 0
 --- !u!1001 &1086491158
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9364,6 +9436,7 @@ Transform:
   - {fileID: 1384992093}
   - {fileID: 1602128910}
   - {fileID: 1678520524}
+  - {fileID: 1181328579}
   m_Father: {fileID: 0}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11376,6 +11449,50 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300136, guid: bb25c1603800aa94f9ff8fc60ea0a09f, type: 3}
+--- !u!1 &1181328578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1181328579}
+  - component: {fileID: 1181328580}
+  m_Layer: 2
+  m_Name: onLevelEnterMonologue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1181328579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181328578}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.09, y: -3.74, z: -2.62}
+  m_LocalScale: {x: 1.865, y: 2.0247, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1108012966}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1181328580
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181328578}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1185588010 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100104, guid: bb25c1603800aa94f9ff8fc60ea0a09f,
@@ -11675,6 +11792,7 @@ MonoBehaviour:
   baseText: Press 'e' to pick up
   onActivateText: 
   Player: {fileID: 2006359353}
+  hubFocus: 0
 --- !u!137 &1300897741 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 529486725716723093, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
