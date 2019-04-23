@@ -131,7 +131,7 @@ public class simplePlayerMovement : MonoBehaviour
 
 
         Vector3 nextPos;
-        if (Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < -0.2f) {
+        if (Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < -0.1f) {
             nextPos = SRmanager.shadowPlane.transform.position + SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime
                             + (Mathf.Sign(_moveDirX) * SRmanager.shadowPlane.transform.forward * PLAYER_WIDTH);
         }
