@@ -9,7 +9,9 @@ public class YarnBoardCamera : MonoBehaviour
 
     public bool movementInverted = false;
     public float scrollSpeed = 1;
+    public float keyboardScrollSpeed = 1;
     public float moveSpeed = 1;
+    public float keyboardMoveSpeed = 1;
 
     [Space]
     public Vector2 minCoords = -Vector2.one;
@@ -38,6 +40,7 @@ public class YarnBoardCamera : MonoBehaviour
         Vector3 newPos = transform.localPosition;
 
         float dzoom = Input.mouseScrollDelta.y * scrollSpeed;
+        dzoom += Input.GetAxis("Zoom") * keyboardScrollSpeed;
         zoom += dzoom;
         zoom = Mathf.Clamp(zoom, zoomBounds.x, zoomBounds.y);
         newPos.z = startingZoom + zoom;
@@ -55,9 +58,13 @@ public class YarnBoardCamera : MonoBehaviour
                 {
                     newPos += (Vector3.right * Input.GetAxis("Mouse X") + Vector3.up * Input.GetAxis("Mouse Y")) * moveSpeed;
                 }
-                newPos.x = Mathf.Clamp(newPos.x, minCoords.x, maxCoords.x);
-                newPos.y = Mathf.Clamp(newPos.y, minCoords.y, maxCoords.y);
             }
+            // then you can also pan using wasd
+            // we disabled the player moving in the hubmanager
+            newPos.x += Input.GetAxis("Horizontal") * keyboardMoveSpeed;
+            newPos.y += Input.GetAxis("Vertical") * keyboardMoveSpeed;
+            newPos.x = Mathf.Clamp(newPos.x, minCoords.x, maxCoords.x);
+            newPos.y = Mathf.Clamp(newPos.y, minCoords.y, maxCoords.y);
             startPos = transform.position; // set the zoom of the start pos probably?
         }
         transform.localPosition = newPos; // zoom towards the camera

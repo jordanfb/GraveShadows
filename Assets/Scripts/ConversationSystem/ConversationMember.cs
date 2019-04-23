@@ -126,6 +126,11 @@ public class ConversationMember : MonoBehaviour
         }
     }
 
+    public bool IsStillTalking()
+    {
+        return doneTalkingTimer > 0;
+    }
+
     [ContextMenu("Clear Masters")]
     public void ClearMasters()
     {

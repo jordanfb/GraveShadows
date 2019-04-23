@@ -218,7 +218,7 @@ public class GuardScript : MonoBehaviour
         else if (positions.Count == 1)
         {
             // then return to the original position and look whatever way you're looking
-            if (Vector3.Distance(positions[0], transform.position) > .2f)
+            if (Vector3.Distance(positions[0], transform.position) > .5f)
             {
                 agent.SetDestination(positions[0]);
             } else if (Quaternion.Angle(transform.rotation, startingDirection) > 5)
@@ -226,6 +226,7 @@ public class GuardScript : MonoBehaviour
                 // rotate towards the original starting direction
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, startingDirection, 90 * Time.deltaTime);
             }
+
             // otherwise just sit content and look pretty.
             // try uninterupting the conversation if you were having one!
         }
@@ -247,9 +248,8 @@ public class GuardScript : MonoBehaviour
             }
         } else
         {
-            // walk back to your original location
-            // FIX
-            Debug.Log("here");
+            // this shouldn't happen
+            Debug.LogError("ERROR: There are zero positions how did this happen?");
         }
 
         // spot the character

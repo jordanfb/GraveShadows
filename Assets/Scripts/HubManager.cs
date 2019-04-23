@@ -20,7 +20,7 @@ public class HubManager : MonoBehaviour
     public ThirdPersonCamera characterCamera;
     public Transform DeskCameraLocation;
     public Transform YarnBoardCameraLocation;
-    private float cameraLerpPos = 0; // 0 is the player
+    private float cameraLerpPos = .01f; // 0 is the player
     public CameraMode cameraMode = CameraMode.FollowPlayer; // looking at desk, player, or yarnboard
 
     [Header("Player")]
@@ -70,10 +70,12 @@ public class HubManager : MonoBehaviour
         LockMouse.LockTheMouse();
         endgameManager.gameObject.SetActive(false);
         deskCollider.SetActive(false);
+        player.isAllowedToWalk = true;
     }
 
     public void EnterDesk()
     {
+        player.isAllowedToWalk = false;
         cameraMode = CameraMode.LookAtDesk;
         deskCollider.SetActive(true);
         LockMouse.UnlockTheMouse();
@@ -82,6 +84,7 @@ public class HubManager : MonoBehaviour
 
     public void EnterYarnBoard()
     {
+        player.isAllowedToWalk = false;
         cameraMode = CameraMode.LookAtYarnBoard;
         yarnBoardExitCollider.SetActive(false);
         LockMouse.UnlockTheMouse();
@@ -91,7 +94,7 @@ public class HubManager : MonoBehaviour
     public void ExitYarnBoard()
     {
         // this is called when the collider is clicked probably
-
+        player.isAllowedToWalk = true;
         // Remove YarnBoard UI from screen so we can do things!
         if (yarnBoard._suspectInfoPanel.activeInHierarchy)
             yarnBoard.DeactivateSuspectPanel();
@@ -180,9 +183,10 @@ public class HubManager : MonoBehaviour
 
     private void UpdateCamera()
     {
-
+        bool updatePos = false;
         if (cameraMode == CameraMode.FollowPlayer && cameraLerpPos > 0)
         {
+            updatePos = true;
             cameraLerpPos -= Time.deltaTime;
             if (cameraLerpPos <= 0)
             {
@@ -192,7 +196,7 @@ public class HubManager : MonoBehaviour
         }
         else if (cameraLerpPos < 1)
         {
-
+            updatePos = true;
             cameraLerpPos += Time.deltaTime;
             if (cameraLerpPos >= 1)
             {
@@ -204,11 +208,13 @@ public class HubManager : MonoBehaviour
 
         // now lerp the camera using smootherstep
         // now lerp between them
-
-        float t = DeskDayDescriptionItem.Smootherstep(cameraLerpPos);
-
-        cameraGameObject.transform.position = Vector3.Lerp(characterCamera.mainCam.transform.position, otherCameraTransformPosition.position, t);
-        cameraGameObject.transform.rotation = Quaternion.Lerp(characterCamera.mainCam.transform.rotation, otherCameraTransformPosition.rotation, t);
+        if (updatePos)
+        {
+            // only update the pos if the camera lerp has moved
+            float t = DeskDayDescriptionItem.Smootherstep(cameraLerpPos);
+            cameraGameObject.transform.position = Vector3.Lerp(characterCamera.mainCam.transform.position, otherCameraTransformPosition.position, t);
+            cameraGameObject.transform.rotation = Quaternion.Lerp(characterCamera.mainCam.transform.rotation, otherCameraTransformPosition.rotation, t);
+        }
     }
 
     public void ClickOnGun()

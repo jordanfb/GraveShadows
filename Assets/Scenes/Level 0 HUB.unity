@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -496,7 +496,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104414921}
   m_LocalRotation: {x: -0.43421915, y: 0.55808043, z: 0.4342192, w: 0.5580804}
-  m_LocalPosition: {x: 3.54, y: 1.132, z: -0.105}
+  m_LocalPosition: {x: 3.56, y: 1.132, z: -0.105}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1776,6 +1776,7 @@ MonoBehaviour:
   _evidenceYOffset: 1.3
   _pinScale: 20
   _pinOffset: 0.9
+  evidenceOffsetFromYarnboardHit: {x: -0.005, y: 0, z: 0}
   removeFromYarnboardText: {fileID: 1901050732}
   lineDraw: {fileID: 347321186}
 --- !u!114 &347321186
@@ -9672,16 +9673,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 1418463136}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 1418463136}
     - target: {fileID: 2701277236420419687, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9757,6 +9748,16 @@ PrefabInstance:
       propertyPath: checkIfFreeCollider
       value: 
       objectReference: {fileID: 1731666907}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1418463136}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 1418463136}
     - target: {fileID: 1693832147, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: scene
       value: Level 0 HUB
@@ -10431,7 +10432,9 @@ MonoBehaviour:
   hubManager: {fileID: 824428057}
   movementInverted: 0
   scrollSpeed: 0.2
+  keyboardScrollSpeed: 0.02
   moveSpeed: 0.02
+  keyboardMoveSpeed: 0.02
   minCoords: {x: -1, y: 0.1}
   maxCoords: {x: 1, y: 1}
   zoomBounds: {x: 0, y: 1}
