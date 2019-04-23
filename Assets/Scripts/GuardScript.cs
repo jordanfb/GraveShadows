@@ -226,11 +226,8 @@ public class GuardScript : MonoBehaviour
                 // rotate towards the original starting direction
                 Debug.Log("Turning towards the position");
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, startingDirection, 90 * Time.deltaTime);
-            } else
-            {
-                Debug.Log("Angle " + Quaternion.Angle(transform.rotation, startingDirection));
             }
-            Debug.Log("No matter what");
+
             // otherwise just sit content and look pretty.
             // try uninterupting the conversation if you were having one!
         }
