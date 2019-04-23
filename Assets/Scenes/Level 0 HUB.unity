@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -617,6 +617,7 @@ MonoBehaviour:
   baseText: Press "e" To Look At Desk
   onActivateText: Press "e" To Look At Desk
   Player: {fileID: 1617351491}
+  hubFocus: 0
 --- !u!65 &127533484
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3420,6 +3421,7 @@ MonoBehaviour:
   baseText: Press "e" To Look At Yarnboard
   onActivateText: Press "e" To Look At Yarnboard
   Player: {fileID: 1617351491}
+  hubFocus: 0
 --- !u!4 &594027548 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5942006216659094870, guid: fce033f46202453449abc7ff080cd5dc,
@@ -9020,6 +9022,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxEvidence: 30
   otherSuspectMax: 3
+  officeEvidenceCount: 0
+  factoryEvidenceCount: 0
   allEvidenceEntities: []
   allEvidencePrefabs: []
   culprit: {fileID: 0}
