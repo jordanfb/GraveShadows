@@ -150,7 +150,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         }
 
-        mainCam.transform.position = Vector3.SmoothDamp(mainCam.transform.position, newCamPos, ref velocity, 0.01f);
+        mainCam.transform.position = Vector3.SmoothDamp(mainCam.transform.position, newCamPos, ref velocity, 0.001f);
 
         if (SRmanager.isInShadowRealm)
         {
