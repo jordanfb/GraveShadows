@@ -7,6 +7,8 @@ public class EvidenceManager : MonoBehaviour
     public static EvidenceManager instance; // monobehavior
     public int maxEvidence = 30;
     public int otherSuspectMax = 3;
+    public int officeEvidenceCount;
+    public int factoryEvidenceCount;
     public List<YarnBoardEntity> allEvidenceEntities;
     public List<GameObject> allEvidencePrefabs;
     public Suspect culprit;
@@ -293,7 +295,7 @@ public class EvidenceManager : MonoBehaviour
             
         }
                 
-        while(office < 12 /*&& factory < 15*/)
+        while(office < officeEvidenceCount || factory < factoryEvidenceCount)
         {
             if (remainingEvidence.Count == 0)
                 break;
@@ -315,7 +317,7 @@ public class EvidenceManager : MonoBehaviour
             switch(ev.GetLevel)
             {
                 case Level.Office:
-                    if(office < 12)
+                    if(office < officeEvidenceCount)
                     {
                         // Add it to the game!
                         se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
@@ -324,7 +326,7 @@ public class EvidenceManager : MonoBehaviour
                     }
                     break;
                 case Level.Factory:
-                    if(factory < maxEvidence / 2)
+                    if(factory < factoryEvidenceCount)
                     {
                         // Add it to the game!
                         se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
@@ -353,7 +355,7 @@ public class EvidenceManager : MonoBehaviour
 
     private void ClampEvidenceLists()
     {
-        while(officeEv.Count > 12)
+        while(officeEv.Count > officeEvidenceCount)
         {
             int index = Random.Range(0, officeEv.Count - 1);
             SerializedEvidence se = officeEv[index];
@@ -361,7 +363,7 @@ public class EvidenceManager : MonoBehaviour
             officeEv.Remove(se);
         }
 
-        while(factoryEv.Count > 11)
+        while(factoryEv.Count > factoryEvidenceCount)
         {
             int index = Random.Range(0, factoryEv.Count - 1);
             SerializedEvidence se = factoryEv[index];

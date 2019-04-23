@@ -43,8 +43,8 @@ public class GameLevelManager : MonoBehaviour
             evidenceLocations.Add(go.transform);
             go.SetActive(false);
         }
-            
-        
+
+        Debug.Log("Evidence: " + allEvidence.Count);
         for(int i = 0; i < allEvidence.Count; i++)
         {
             Evidence e = EvidenceManager.instance.ReferencedEntity(allEvidence[i]) as Evidence;
