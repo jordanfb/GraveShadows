@@ -46,6 +46,8 @@ public class YarnBoard : MonoBehaviour
     private float _pinScale;
     [SerializeField]
     private float _pinOffset;
+    [SerializeField]
+    public Vector3 evidenceOffsetFromYarnboardHit = new Vector3(0, 0, .05f);
 
     [Space]
     [SerializeField]
@@ -84,6 +86,9 @@ public class YarnBoard : MonoBehaviour
         }
         createdEvidenceOnBoard.Clear();
         lineDraw.DestroyAll();
+        mode = YarnBoardMode.None;
+        movingYarnboardItem = null;
+        movingYarnboardEvidence = null;
         yarnboardConnectionEvidenceLocation.Clear();
 
         // then make the new ones!
@@ -248,14 +253,16 @@ public class YarnBoard : MonoBehaviour
                     //Debug.Log("Moving now");
                     // get the correct object to move
                     movingYarnboardItem = hit.collider.transform.parent.gameObject;
-                    movingStartPos = evidence.transform.position;
+                    movingStartPos = evidence.transform.position + evidenceOffsetFromYarnboardHit;
                     if (movingYarnboardItem.GetComponentInChildren<EvidenceMono>() != null)
                     {
                         movingYarnboardEvidence = EvidenceManager.instance.FindSerializedEvidence(movingYarnboardItem.GetComponentInChildren<EvidenceMono>().EvidenceInfo);
-                    } else if (movingYarnboardItem.GetComponentInChildren<SuspectMono>() != null)
+                    }
+                    else if (movingYarnboardItem.GetComponentInChildren<SuspectMono>() != null)
                     {
                         movingYarnboardEvidence = EvidenceManager.instance.FindSerializedEvidence(movingYarnboardItem.GetComponentInChildren<SuspectMono>().SuspectInfo);
-                    } else
+                    }
+                    else
                     {
                         movingYarnboardEvidence = null;
                         Debug.LogError("ERROR: UNABLE TO GET EVIDENCE FOR MOVING IT");
@@ -277,7 +284,7 @@ public class YarnBoard : MonoBehaviour
             // On hit, check if it's a piece of evidence
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
             {
-                movingYarnboardItem.transform.position = hit.point;
+                movingYarnboardItem.transform.position = hit.point + evidenceOffsetFromYarnboardHit;
                 removeFromYarnboardText.SetActive(false);
             } else
             {
@@ -297,15 +304,17 @@ public class YarnBoard : MonoBehaviour
             // On hit, check if it's a piece of evidence
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
             {
-                movingYarnboardItem.transform.position = hit.point;
+                Vector3 newPos = hit.point + evidenceOffsetFromYarnboardHit;
+                movingYarnboardItem.transform.position = newPos;
                 // then create a movement event!
                 if (movingYarnboardEvidence != null)
                 {
-                    YarnBoardMoveEvidenceEvent moveEvent = new YarnBoardMoveEvidenceEvent(movingYarnboardEvidence.evidenceindex, movingYarnboardEvidence, movingStartPos, hit.point);
+                    YarnBoardMoveEvidenceEvent moveEvent = new YarnBoardMoveEvidenceEvent(movingYarnboardEvidence.evidenceindex, movingYarnboardEvidence, movingStartPos, newPos);
                     moveEvent.Redo(); // set it in the location as well!
                     UndoRedoStack.AddEvent(moveEvent);
                 }
-            } else
+            }
+            else
             {
                 // remove it from the yarnboard!
                 YarnBoardAddToYarnBoardEvent undoredoevent = new YarnBoardAddToYarnBoardEvent(movingYarnboardEvidence.evidenceindex, movingYarnboardEvidence, true);

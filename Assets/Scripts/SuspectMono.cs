@@ -12,4 +12,9 @@ public class SuspectMono : MonoBehaviour
         get { return _suspect; }
         set { _suspect = value; }
     }
+
+    private void OnMouseEnter()
+    {
+        Debug.Log("Mouse entered! " + _suspect.CodeName);
+    }
 }
