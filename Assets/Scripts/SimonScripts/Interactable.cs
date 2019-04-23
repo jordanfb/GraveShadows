@@ -7,16 +7,19 @@ public class Interactable : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [HideInInspector]
     public GameObject interactTextInGame;
     public GameObject interactTextPrefab;
     public string baseText;
     public string onActivateText;
     public GameObject Player;
+    public bool hubFocus= false;
+    private bool touchingCollider = false;
 
     void Start()
     {
         Player = GameObject.Find("Player");
+       
+
     }
 
     ~Interactable() {
@@ -27,46 +30,67 @@ public class Interactable : MonoBehaviour
     Vector3 velocity = Vector3.zero;
     void Update()
     {
-        if(interactTextInGame == null) {
+
+
+
+
+
+        if (interactTextInGame == null) {
             return;
         }
-        if (!interactTextInGame.activeInHierarchy) {
+        interactTextInGame.transform.position = Vector3.SmoothDamp(interactTextInGame.transform.position,
+                                            Camera.main.WorldToScreenPoint(Player.transform.position + Vector3.up * 0.5f), ref velocity, 0.1f);
+        if (hubFocus && touchingCollider)
+        {
+            print("hub focus");
+            interactTextInGame.SetActive(false);
+        }
+        if (!hubFocus && touchingCollider)
+        {
+            print("hub focus");
+            interactTextInGame.SetActive(true);
+        }
+        if (!interactTextInGame.activeInHierarchy ) {
             return;
         }
 
 
-        interactTextInGame.transform.position = Vector3.SmoothDamp(interactTextInGame.transform.position, 
-                                                Camera.main.WorldToScreenPoint(Player.transform.position + Vector3.up * 0.5f), ref velocity, 0.1f);
+
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        touchingCollider = true;
         if (other.gameObject.tag == "Player")
         {
             if (interactTextInGame == null)
             {
-                print(interactTextInGame);
 
                 interactTextInGame = Instantiate(interactTextPrefab, GameObject.Find("Canvas").transform);
-                print(interactTextInGame);
                 interactTextInGame.GetComponent<Text>().text = baseText;
                 interactTextInGame.SetActive(true);
             }
             else
             {
+
                 interactTextInGame.SetActive(true);
+
+
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        touchingCollider = false;
         if (interactTextInGame == null)
         {
             return;
         }
         if (other.gameObject.tag == "Player")
         {
+            hubFocus = false;
             interactTextInGame.SetActive(false);
         }
     }
