@@ -6129,7 +6129,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.0000033106407, y: 0.0000038146973}
-  m_SizeDelta: {x: 0, y: 151.05486}
+  m_SizeDelta: {x: 0, y: 144.27481}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &954824077
 MonoBehaviour:
@@ -8436,8 +8436,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 99.99, y: -75.52743}
-  m_SizeDelta: {x: 199.98, y: 151.05486}
+  m_AnchoredPosition: {x: 99.99, y: -72.137405}
+  m_SizeDelta: {x: 199.98, y: 144.27481}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1373269779
 MonoBehaviour:
@@ -10244,13 +10244,13 @@ PrefabInstance:
       propertyPath: mainCam
       value: 
       objectReference: {fileID: 1418463136}
-    - target: {fileID: 1125838775, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1693832147, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: scene
       value: Level 0 HUB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125838775, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4962411602723374852, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
@@ -11199,7 +11199,18 @@ MonoBehaviour:
   m_VerticalScrollbarSpacing: -3
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1981504373}
+        m_MethodName: set_size
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1791792899 stripped
