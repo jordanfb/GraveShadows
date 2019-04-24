@@ -7,15 +7,14 @@ public class CustomLevel1Logic : MonoBehaviour
 {
     public UnityEvent onAllEvidenceCollected;
 
-    int numCollected = 0;
-    public int numEvidence = 0;
-
     bool alreadyInvoked = false;
+    LevelOneEvidenceManager evidenceManager;
 
     public void Start()
     {
+        evidenceManager = FindObjectOfType<LevelOneEvidenceManager>();
         // check to see if you've already found all the evidence
-        if (FindObjectOfType<LevelOneEvidenceManager>().AllEvidenceFound())
+        if (evidenceManager.AllEvidenceFound())
         {
             alreadyInvoked = true;
             onAllEvidenceCollected.Invoke();
@@ -25,9 +24,20 @@ public class CustomLevel1Logic : MonoBehaviour
 
     public void CollectedEvidence()
     {
-        numCollected++;
-        if (!alreadyInvoked && numCollected >= numEvidence)
+        //numEvidenceFound++;
+        //Debug.Log("COllected evidence already run: " + alreadyInvoked);
+        if (!alreadyInvoked && evidenceManager.AllEvidenceFound())
         {
+            alreadyInvoked = true;
+            onAllEvidenceCollected.Invoke();
+        }
+    }
+
+    private void Update()
+    {
+        if (!alreadyInvoked && evidenceManager.AllEvidenceFound())
+        {
+            alreadyInvoked = true;
             onAllEvidenceCollected.Invoke();
         }
     }

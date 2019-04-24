@@ -15,7 +15,7 @@ public class GameLevelManager : MonoBehaviour
     void Start()
     {
         if(EvidenceManager.instance == null) {
-            Debug.Log("EvidenceManager not found");
+            //Debug.Log("EvidenceManager not found");
             return;
         }
 
@@ -55,7 +55,7 @@ public class GameLevelManager : MonoBehaviour
             go.SetActive(false);
         }
 
-        Debug.Log("Evidence: " + allEvidence.Count);
+        //Debug.Log("Evidence: " + allEvidence.Count);
         for(int i = 0; i < allEvidence.Count; i++)
         {
             Evidence e = EvidenceManager.instance.ReferencedEntity(allEvidence[i]) as Evidence;

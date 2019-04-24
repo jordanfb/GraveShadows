@@ -56,16 +56,16 @@ public class EndgameManager : MonoBehaviour
 
     public void SuspectChosen(Suspect s)
     {
-        Debug.Log("suspect chosen " + s.Name);
-        Debug.Log("Real suspect " + EvidenceManager.instance.culprit.Name);
+        //Debug.Log("suspect chosen " + s.Name);
+        //Debug.Log("Real suspect " + EvidenceManager.instance.culprit.Name);
         if (EvidenceManager.instance.culprit == s)
         {
-            Debug.Log("YOU WIN");
+            //Debug.Log("YOU WIN");
             EvidenceManager.instance.Generated = false;
             GameplayManager.instance.FadeOut(() => { SceneManager.LoadScene("WinScene"); });
         } else
         {
-            Debug.Log("UGGGGH You lose");
+            //Debug.Log("UGGGGH You lose");
             EvidenceManager.instance.Generated = false;
             GameplayManager.instance.FadeOut(() => { SceneManager.LoadScene("LoseScene"); });
         }

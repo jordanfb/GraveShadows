@@ -8,22 +8,64 @@ public class LevelOneEvidenceManager : MonoBehaviour
     public bool receiptFound = false;
     public Evidence key;
     public Evidence receipt;
-    public GameObject keyObject;
-    public GameObject receiptObject;
+    private GameObject keyObject;
+    private GameObject receiptObject;
+
+    public static LevelOneEvidenceManager instance;
 
     private SerializedEvidence keySE;
     private SerializedEvidence receiptSE;
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject); // this gets destroyed once you reach the hubworld
+        instance = this;
         keySE = EvidenceManager.instance.apartmentEV[1];
         receiptSE = EvidenceManager.instance.apartmentEV[0];
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        // this is so that the don't destroy on load item which is keeping track of what we've found can destroy things
+        FindObjects();
+        if (keyFound && keyObject != null)
+        {
+            Destroy(keyObject);
+            keyObject = null;
+        }
+        if (receiptFound && receiptObject != null)
+        {
+            Destroy(receiptObject);
+            receiptObject = null;
+        }
+    }
+
+    public int NumEvidenceFound()
+    {
+        return (keyFound ? 1 : 0) + (receiptFound ? 1 : 0);
     }
 
     public bool AllEvidenceFound()
     {
         return keyFound && receiptFound;
+    }
+
+    private void FindObjects()
+    {
+        foreach(EvidenceMono m in FindObjectsOfType<EvidenceMono>()) {
+            if (m.EvidenceInfo == key)
+            {
+                keyObject = m.gameObject;
+            }
+            if (m.EvidenceInfo == receipt)
+            {
+                receiptObject = m.gameObject;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -33,17 +75,5 @@ public class LevelOneEvidenceManager : MonoBehaviour
             keyFound = true;
         if (receiptSE.evidenceState != SerializedEvidence.EvidenceState.NotFound)
             receiptFound = true;
-
-        if(keyFound && keyObject != null)
-        {
-            Destroy(keyObject);
-            keyObject = null;
-        }
-
-        if(receiptFound && receiptObject != null)
-        {
-            Destroy(receiptObject);
-            receiptObject = null;
-        }
     }
 }

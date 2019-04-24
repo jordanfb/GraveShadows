@@ -293,7 +293,7 @@ public class GuardScript : MonoBehaviour
     public void DebugLogString(string s)
     {
         // this is used as a simple testing function for the guard suspicion levels
-        Debug.Log(s);
+        //Debug.Log(s);
     }
 
     public void SpeakThenRestartLevel()
@@ -305,7 +305,7 @@ public class GuardScript : MonoBehaviour
 
     public void ResetLevel()
     {
-        Debug.Log("Reset the level");
+        //Debug.Log("Reset the level");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -595,6 +595,6 @@ public class GuardScript : MonoBehaviour
         {
             skinnedMaterials[i] = skinnedMeshRenderers[i].sharedMaterial;
         }
-        Debug.Log("Found " + skinnedMeshRenderers.Length + " mesh renderers and materials");
+        //Debug.Log("Found " + skinnedMeshRenderers.Length + " mesh renderers and materials");
     }
 }

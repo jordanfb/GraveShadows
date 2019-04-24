@@ -64,9 +64,9 @@ public class ShadowRealmManager : MonoBehaviour
         tpc = GetComponent<ThirdPersonCamera>();
         SHADOWPLANE_HEIGHT = shadowPlane.transform.GetChild(0).GetComponent<Renderer>().bounds.size.y/2f;
         lightContainer = GameObject.Find("lightContainer");
-        if(lightContainer == null) {
-            print("ERROR: light container not found");
-        }
+        //if(lightContainer == null) {
+        //    print("ERROR: light container not found");
+        //}
         for(int i = 0; i< lightContainer.transform.childCount; i++) {
             lightsInScene.Add(lightContainer.transform.GetChild(i).gameObject);
         }
@@ -101,12 +101,12 @@ public class ShadowRealmManager : MonoBehaviour
                 {
                     if (entry.Key == null)
                     {
-                        Debug.Log("ENTRY IS NULL");
+                        //Debug.Log("ENTRY IS NULL");
                         continue;
                     }
                     if (entry.Key.gameObject.transform.parent == null)
                     {
-                        Debug.Log("ENTRY PARENT IS NULL");
+                        //Debug.Log("ENTRY PARENT IS NULL");
                         continue;
                     }
 
@@ -129,12 +129,12 @@ public class ShadowRealmManager : MonoBehaviour
             foreach (KeyValuePair<Collider, List<Vector3>> entry in checkForShadows())
             {
                 if(entry.Key == null) {
-                    Debug.Log("ENTRY IS NULL");
+                    //Debug.Log("ENTRY IS NULL");
                     continue;
                 }
                 if (entry.Key.gameObject.transform.parent == null)
                 {
-                    Debug.Log("ENTRY PARENT IS NULL");
+                    //Debug.Log("ENTRY PARENT IS NULL");
                     continue;
                 }
 
@@ -189,7 +189,7 @@ public class ShadowRealmManager : MonoBehaviour
                 {
                     if (entry.Key == null)
                     {
-                        Debug.Log("ENTRY IS NULL");
+                        //Debug.Log("ENTRY IS NULL");
                         continue;
                     }
 
@@ -200,7 +200,7 @@ public class ShadowRealmManager : MonoBehaviour
                 }
                 if (wallToTeleportTo == null)
                 {
-                    Debug.Log("ERROR, no wall selected, teleport to no walls");
+                    //Debug.Log("ERROR, no wall selected, teleport to no walls");
                     return;
                 }
 
@@ -367,7 +367,7 @@ public class ShadowRealmManager : MonoBehaviour
     Vector3 findMiddlePos(List<Vector3> pointList) {
         if (pointList.Count == 0)
         {
-            Debug.Log("ERROR: Length of list is 0");
+            //Debug.Log("ERROR: Length of list is 0");
             return Vector3.negativeInfinity;
         }
         Vector3 average = Vector3.zero;

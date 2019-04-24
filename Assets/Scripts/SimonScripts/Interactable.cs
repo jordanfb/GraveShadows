@@ -58,7 +58,7 @@ public class Interactable : MonoBehaviour
 
             if (hubFocus)
             {
-                print("hub focus");
+                //print("hub focus");
                 interactTextInGame.SetActive(false);
             }
             else

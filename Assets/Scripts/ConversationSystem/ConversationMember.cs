@@ -231,7 +231,7 @@ public class ConversationMember : MonoBehaviour
             if (numNamed > 1)
             {
                 valid = false;
-                Debug.Log("ERROR: " + numNamed + " characters named " + members[i].characterName);
+                Debug.LogError("ERROR: " + numNamed + " characters named " + members[i].characterName);
             }
         }
         return valid;

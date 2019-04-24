@@ -128,7 +128,7 @@ public class simplePlayerMovement : MonoBehaviour
     void wallMovement(float _moveDirX, float _moveDirY, Collider _currentWallCollider, Vector3 cameraForwardOnEnterance) {
 
         if (_currentWallCollider == null) {
-            Debug.Log("ERROR: current wall is null");
+            //Debug.Log("ERROR: current wall is null");
             return;
 
         }

@@ -56,6 +56,14 @@ public class HubManager : MonoBehaviour
         // it gets the info from the static gameplaymanager
         LoadDesk();
         otherCameraTransformPosition = DeskCameraLocation;
+
+        // destroy the level 1 custom logic
+        LevelOneEvidenceManager level1CustomLogic = FindObjectOfType<LevelOneEvidenceManager>();
+        if (level1CustomLogic != null)
+        {
+            Destroy(level1CustomLogic.gameObject);
+            LevelOneEvidenceManager.instance = null;
+        }
     }
 
     public void ExitDesk()
@@ -97,7 +105,7 @@ public class HubManager : MonoBehaviour
     
     public void ExitYarnBoard()
     {
-        print("exit yarn board");
+        //print("exit yarn board");
         enterYarnCollider.gameObject.GetComponent<Interactable>().hubFocus = false;
         // this is called when the collider is clicked probably
         player.isAllowedToWalk = true;
@@ -228,8 +236,7 @@ public class HubManager : MonoBehaviour
         if (GameplayManager.instance.IsChoosingDay() && cameraMode == CameraMode.LookAtDesk)
         {
             // only do anything if you click on it at the right time
-            Debug.Log("Clicked on the gun");
-            // FIX
+            //Debug.Log("Clicked on the gun");
             endgameManager.gameObject.SetActive(true);
         }
     }
