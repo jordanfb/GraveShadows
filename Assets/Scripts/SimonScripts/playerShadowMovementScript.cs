@@ -30,7 +30,7 @@ public class playerShadowMovementScript : MonoBehaviour
         int layerMask = 1 << 8;
         if (Physics.Raycast(mainCamera.transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
         {
-            print(hit.collider.gameObject.name);
+            //print(hit.collider.gameObject.name);
             if(hit.collider.gameObject.tag == "Wall")
             {
 

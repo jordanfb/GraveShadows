@@ -105,7 +105,7 @@ public class HubManager : MonoBehaviour
     
     public void ExitYarnBoard()
     {
-        print("exit yarn board");
+        //print("exit yarn board");
         enterYarnCollider.gameObject.GetComponent<Interactable>().hubFocus = false;
         // this is called when the collider is clicked probably
         player.isAllowedToWalk = true;

@@ -64,9 +64,9 @@ public class ShadowRealmManager : MonoBehaviour
         tpc = GetComponent<ThirdPersonCamera>();
         SHADOWPLANE_HEIGHT = shadowPlane.transform.GetChild(0).GetComponent<Renderer>().bounds.size.y/2f;
         lightContainer = GameObject.Find("lightContainer");
-        if(lightContainer == null) {
-            print("ERROR: light container not found");
-        }
+        //if(lightContainer == null) {
+        //    print("ERROR: light container not found");
+        //}
         for(int i = 0; i< lightContainer.transform.childCount; i++) {
             lightsInScene.Add(lightContainer.transform.GetChild(i).gameObject);
         }

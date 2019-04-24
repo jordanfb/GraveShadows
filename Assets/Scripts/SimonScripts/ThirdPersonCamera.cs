@@ -191,11 +191,11 @@ public class ThirdPersonCamera : MonoBehaviour
         return new Vector4(min_x, max_x, min_y, max_y);
     }
     public void printCurrentRotationY() {
-        print(currentRotationY);
+        //print(currentRotationY);
     }
     public void printCurrentRotationX()
     {
-        print(currentRotationX);
+        //print(currentRotationX);
     }
 
 
