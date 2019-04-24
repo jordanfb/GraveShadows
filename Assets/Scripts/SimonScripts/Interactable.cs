@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Interactable : MonoBehaviour
 {
@@ -12,53 +13,81 @@ public class Interactable : MonoBehaviour
     public string baseText;
     public string onActivateText;
     public GameObject Player;
+    public bool hubFocus= false;
+    private bool touchingCollider = false;
 
     void Start()
     {
         Player = GameObject.Find("Player");
+
+
     }
 
-    ~Interactable() {
-
-        Destroy(interactTextInGame);
-    }
     // Update is called once per frame
+    Vector3 velocity = Vector3.zero;
     void Update()
     {
-        if(interactTextInGame == null) {
-            return;
-        }
-        if (!interactTextInGame.activeInHierarchy) {
+
+        if (interactTextInGame == null) {
             return;
         }
 
-        Vector3 velocity = Vector3.zero;
-        interactTextInGame.transform.position = Vector3.SmoothDamp(interactTextInGame.transform.position, 
-                                                Camera.main.WorldToScreenPoint(Player.transform.position + Vector3.up * 0.5f), ref velocity, 0.01f);
+
+
+        if (!interactTextInGame.activeInHierarchy ) {
+            return;
+        }
+        interactTextInGame.transform.position = Vector3.SmoothDamp(interactTextInGame.transform.position,
+                                            Camera.main.WorldToScreenPoint(Player.transform.position + Vector3.up * 0.5f), ref velocity, 0.1f);
+
+
+
+
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
+    private void OnTriggerStay(Collider other) {
         if (other.gameObject.tag == "Player")
         {
-            if (interactTextInGame == null)
-            {
-                print(interactTextInGame);
 
-                interactTextInGame = Instantiate(interactTextPrefab, GameObject.Find("Canvas").transform);
-                print(interactTextInGame);
-                interactTextInGame.GetComponent<Text>().text = baseText;
-                interactTextInGame.SetActive(true);
+            if (hubFocus)
+            {
+                print("hub focus");
+                interactTextInGame.SetActive(false);
             }
             else
             {
                 interactTextInGame.SetActive(true);
             }
         }
+
+
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        touchingCollider = true;
+        if (other.gameObject.tag == "Player")
+        {
+            if (interactTextInGame == null)
+            {
+
+                interactTextInGame = Instantiate(interactTextPrefab, GameObject.Find("Canvas").transform);
+                interactTextInGame.GetComponent<Text>().text = baseText;
+                interactTextInGame.SetActive(true);
+            }
+            else
+            {
+
+                interactTextInGame.SetActive(true);
+
+
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        touchingCollider = false;
         if (interactTextInGame == null)
         {
             return;
@@ -75,6 +104,16 @@ public class Interactable : MonoBehaviour
         {
             interactTextInGame.SetActive(false);
         } else
+        {
+            Debug.LogWarning("Error no interact text on this for some reason somehow. gameobject name: " + gameObject.name);
+        }
+    }
+    public void enableText() {
+        if (interactTextInGame != null)
+        {
+            interactTextInGame.SetActive(true);
+        }
+        else
         {
             Debug.LogWarning("Error no interact text on this for some reason somehow. gameobject name: " + gameObject.name);
         }

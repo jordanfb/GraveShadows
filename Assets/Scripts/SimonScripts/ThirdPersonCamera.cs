@@ -18,7 +18,7 @@ public class ThirdPersonCamera : MonoBehaviour
     private float max_x = 80f;
 
     private float min_y = 0;
-    private float max_y = 80f;
+    private float max_y = 70f;
 
     [SerializeField]
     public float SHADOW_CAMERA_DISTANCE;
@@ -86,8 +86,11 @@ public class ThirdPersonCamera : MonoBehaviour
     Vector3 lastLegalCamPos;
     Vector3 shadowModVec = Vector3.zero;
     Vector3 wallRaycastVec;
+    Vector3 velocity = Vector3.zero;
     void LateUpdate()
     {
+
+        Vector3 rotateAround;
         if (SRmanager.isChoosingWall)
         {
             handleIsChoosingWall(SRmanager.checkForShadows());
@@ -102,8 +105,8 @@ public class ThirdPersonCamera : MonoBehaviour
             GameObject shadowPlaneChild = SRmanager.shadowPlane.transform.GetChild(0).gameObject;
 
 
-            lookAtVec = shadowPlaneChild.transform.position + shadowPlaneChild.transform.up;
-            debugPoint = lookAtVec;
+            //lookAtVec = shadowPlaneChild.transform.position + shadowPlaneChild.transform.up;
+            rotateAround = shadowPlaneChild.transform.position + shadowPlaneChild.transform.up;
             wallRaycastVec = lookAtVec;
             currentDistance = SHADOW_CAMERA_DISTANCE;
 
@@ -111,43 +114,60 @@ public class ThirdPersonCamera : MonoBehaviour
         else
         {
 
-           
-            Vector3 modVec = Vector3.Scale(mainCam.transform.forward, new Vector3(1f, 0f, 1f));
-          
 
-            lookAtVec = gameObject.transform.position + modVec * 2f + mainCam.transform.right*0.2f;
+            Vector3 dirFromCamToPlayer = mainCam.transform.position - gameObject.transform.position;
+            Vector3 modVec = Vector3.Scale(dirFromCamToPlayer, new Vector3(1f, 0f, 1f));
+
+
+            rotateAround = gameObject.transform.position;
             wallRaycastVec = gameObject.transform.position;
-            debugPoint = lookAtVec;
-            currentDistance = REGULAR_CAMERA_DISTANCE;
+            //currentDistance = REGULAR_CAMERA_DISTANCE;
         }
 
 
         Quaternion rot = Quaternion.Euler(currentRotationY, currentRotationX, 0.0f);
 
-        newCamPos = lookAtVec + (rot * (new Vector3(0f, 0f, -currentDistance)));
 
-
-
-        if (Physics.Linecast(wallRaycastVec, newCamPos - mainCam.transform.forward*0.0f, out wallHit, mask)) {
+        newCamPos = rotateAround + (rot * new Vector3(0f, 0f, -currentDistance));
+        if (Physics.Linecast(wallRaycastVec, newCamPos, out wallHit, mask))
+        {
             Vector3 hitPoint = wallHit.point;
-            float wallHitDistance = -(lookAtVec - wallHit.point).magnitude + 0.1f;
+            float wallHitDistance = -(rotateAround - wallHit.point).magnitude + 0.1f;
             if (-wallHitDistance < -currentDistance)
             {
                 wallHitDistance = -currentDistance;
 
             }
-           
-
-            newCamPos = lookAtVec + rot * new Vector3(0f, 0f, wallHitDistance);
 
 
-
-
-
+            newCamPos = rotateAround + rot * new Vector3(0f, 0f, wallHitDistance);
 
         }
-        Vector3 velocity = Vector3.zero;
-        mainCam.transform.position = Vector3.SmoothDamp(mainCam.transform.position, newCamPos, ref velocity, 0.01f);
+
+
+        mainCam.transform.position = Vector3.SmoothDamp(mainCam.transform.position, newCamPos, ref velocity, 0.001f);
+
+        if (SRmanager.isInShadowRealm)
+        {
+
+            GameObject shadowPlaneChild = SRmanager.shadowPlane.transform.GetChild(0).gameObject;
+
+
+            lookAtVec = shadowPlaneChild.transform.position + shadowPlaneChild.transform.up;
+
+            wallRaycastVec = lookAtVec;
+        }
+        else
+        {
+
+
+            Vector3 dirFromCamToPlayer = gameObject.transform.position - mainCam.transform.position;
+            Vector3 modVec = Vector3.Scale(dirFromCamToPlayer, new Vector3(1f, 0f, 1f));
+
+
+            lookAtVec = gameObject.transform.position + modVec * 2f + Vector3.up*0.1f;
+            wallRaycastVec = gameObject.transform.position;
+        }
 
         mainCam.transform.LookAt(lookAtVec);
 

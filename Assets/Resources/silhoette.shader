@@ -48,7 +48,7 @@ v2f vert(appdata_full v) {
    
     
     
-    o.pos.xy += offset * (o.pos.z + sin(_Time.z)*0.6+0.6) * (_Outline);
+    o.pos.xy += offset * (o.pos.z) * (_Outline);
     
     o.color = _OutlineColor;
     return o;

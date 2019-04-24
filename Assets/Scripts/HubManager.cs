@@ -60,6 +60,8 @@ public class HubManager : MonoBehaviour
 
     public void ExitDesk()
     {
+        enterDeskCollider.gameObject.GetComponent<Interactable>().hubFocus = false;
+
         // this is called when the collider is clicked probably
         cameraMode = CameraMode.FollowPlayer; // go back to following the player
         for (int i = 0; i < deskItems.Count; i++)
@@ -75,6 +77,7 @@ public class HubManager : MonoBehaviour
 
     public void EnterDesk()
     {
+        enterDeskCollider.gameObject.GetComponent<Interactable>().hubFocus = true;
         player.isAllowedToWalk = false;
         cameraMode = CameraMode.LookAtDesk;
         deskCollider.SetActive(true);
@@ -84,6 +87,7 @@ public class HubManager : MonoBehaviour
 
     public void EnterYarnBoard()
     {
+        enterYarnCollider.gameObject.GetComponent<Interactable>().hubFocus = true;
         player.isAllowedToWalk = false;
         cameraMode = CameraMode.LookAtYarnBoard;
         yarnBoardExitCollider.SetActive(false);
@@ -93,6 +97,8 @@ public class HubManager : MonoBehaviour
     
     public void ExitYarnBoard()
     {
+        print("exit yarn board");
+        enterYarnCollider.gameObject.GetComponent<Interactable>().hubFocus = false;
         // this is called when the collider is clicked probably
         player.isAllowedToWalk = true;
         // Remove YarnBoard UI from screen so we can do things!
@@ -275,6 +281,7 @@ public class HubManager : MonoBehaviour
     [ContextMenu("To Desk Camera")]
     public void ToDeskLocation()
     {
+
         Camera.main.transform.position = DeskCameraLocation.position;
         Camera.main.transform.rotation = DeskCameraLocation.rotation;
     }

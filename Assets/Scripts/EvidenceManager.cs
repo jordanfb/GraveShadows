@@ -7,6 +7,8 @@ public class EvidenceManager : MonoBehaviour
     public static EvidenceManager instance; // monobehavior
     public int maxEvidence = 30;
     public int otherSuspectMax = 3;
+    public int officeEvidenceCount;
+    public int factoryEvidenceCount;
     public List<YarnBoardEntity> allEvidenceEntities;
     public List<GameObject> allEvidencePrefabs;
     public Suspect culprit;
@@ -257,15 +259,13 @@ public class EvidenceManager : MonoBehaviour
                     se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
                     if (ev.GetLevel == Level.Office)
                     {
-                        office++;
                         if(ev.GetEvidenceType != EvidenceType.Conversation)
                             officeEv.Add(se);
                     }
                     else if (ev.GetLevel == Level.Factory)
                     {
-                        factory++;
                         if (ev.GetEvidenceType != EvidenceType.Conversation)
-                            officeEv.Add(se);
+                            factoryEv.Add(se);
                     } else if (ev.GetLevel == Level.Apartment)
                     {
                         apartmentEV.Add(se);
@@ -292,8 +292,9 @@ public class EvidenceManager : MonoBehaviour
             }
             
         }
-                
-        while(office < 12 /*&& factory < 15*/)
+
+        /*
+        while(office < officeEvidenceCount || factory < factoryEvidenceCount)
         {
             if (remainingEvidence.Count == 0)
                 break;
@@ -315,7 +316,7 @@ public class EvidenceManager : MonoBehaviour
             switch(ev.GetLevel)
             {
                 case Level.Office:
-                    if(office < 12)
+                    if(office < officeEvidenceCount)
                     {
                         // Add it to the game!
                         se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
@@ -324,7 +325,7 @@ public class EvidenceManager : MonoBehaviour
                     }
                     break;
                 case Level.Factory:
-                    if(factory < maxEvidence / 2)
+                    if(factory < factoryEvidenceCount)
                     {
                         // Add it to the game!
                         se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
@@ -346,14 +347,72 @@ public class EvidenceManager : MonoBehaviour
             if (se.evidenceState == SerializedEvidence.EvidenceState.NotFound)
                 count++;
         }
+        */
 
+        while(officeEv.Count < officeEvidenceCount)
+        {
+            if (remainingEvidence.Count == 0)
+                break;
 
-        ClampEvidenceLists();
+            // Generate the next piece of evidence and check if it can be added.
+            int next = Random.Range(0, remainingEvidence.Count - 1);
+            SerializedEvidence se = remainingEvidence[next];
+            Evidence ev = ReferencedEntity(se) as Evidence;
+            
+            if(ev == null || !CheckIfPlaceable(ev))
+            {
+                remainingEvidence.Remove(se);
+                continue;
+            }
+
+            if(ev.GetLevel == Level.Office && !officeEv.Contains(se))
+            {
+                se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
+                officeEv.Add(se);
+            }
+
+            // Update suspect totals
+            foreach (Suspect s in ev.AssociatedSuspects)
+                suspectTotals[suspects.IndexOf(s)]++;
+            remainingEvidence.Remove(se);
+        }
+
+        remainingEvidence = new List<SerializedEvidence>(allSerializedEvidence);
+
+        while (factoryEv.Count < factoryEvidenceCount)
+        {
+            if (remainingEvidence.Count == 0)
+                break;
+
+            // Generate the next piece of evidence and check if it can be added.
+            int next = Random.Range(0, remainingEvidence.Count - 1);
+            SerializedEvidence se = remainingEvidence[next];
+            Evidence ev = ReferencedEntity(se) as Evidence;
+
+            if (ev == null || !CheckIfPlaceable(ev))
+            {
+                remainingEvidence.Remove(se);
+                continue;
+            }
+
+            if (ev.GetLevel == Level.Factory && !factoryEv.Contains(se))
+            {
+                se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
+                factoryEv.Add(se);
+            }
+
+            // Update suspect totals
+            foreach (Suspect s in ev.AssociatedSuspects)
+                suspectTotals[suspects.IndexOf(s)]++;
+            remainingEvidence.Remove(se);
+        }
+
+        //ClampEvidenceLists();
     }
 
     private void ClampEvidenceLists()
     {
-        while(officeEv.Count > 12)
+        while(officeEv.Count > officeEvidenceCount)
         {
             int index = Random.Range(0, officeEv.Count - 1);
             SerializedEvidence se = officeEv[index];
@@ -361,7 +420,7 @@ public class EvidenceManager : MonoBehaviour
             officeEv.Remove(se);
         }
 
-        while(factoryEv.Count > 11)
+        while(factoryEv.Count > factoryEvidenceCount)
         {
             int index = Random.Range(0, factoryEv.Count - 1);
             SerializedEvidence se = factoryEv[index];
