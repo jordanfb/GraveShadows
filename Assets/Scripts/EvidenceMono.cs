@@ -25,14 +25,14 @@ public class EvidenceMono : MonoBehaviour
             Renderer[] mats = GetComponentsInChildren<Renderer>();
             foreach(Renderer m in mats)
             {
-                m.material.shader = Shader.Find("Outlined/Uniform");
-                m.material.SetFloat("_OutlineWidth", 0.02f);
+                m.material.shader = Shader.Find("Outlined/Silhouetted Diffuse");
+                m.material.SetFloat("_Outline", 0.005f);
             }
         }
         else
         {
-            mat.material.shader = Shader.Find("Outlined/Uniform");
-            mat.material.SetFloat("_OutlineWidth", 0.02f);
+            mat.material.shader = Shader.Find("Outlined/Silhouetted Diffuse");
+            mat.material.SetFloat("_Outline", 0.005f);
         }
     }
 
