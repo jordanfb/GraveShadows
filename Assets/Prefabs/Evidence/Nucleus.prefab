@@ -57,11 +57,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77001834fa0e8465a854bbd0d7dff923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactTextInGame: {fileID: 0}
   interactTextPrefab: {fileID: 1704617898835638000, guid: 12f9ec766228d4c0c8562e1d2693257e,
     type: 3}
-  baseText: Press E to pick up
+  baseText: Press "e" to pick up
   onActivateText: 
   Player: {fileID: 0}
+  hubFocus: 0
 --- !u!1 &1401156306419320973
 GameObject:
   m_ObjectHideFlags: 0
