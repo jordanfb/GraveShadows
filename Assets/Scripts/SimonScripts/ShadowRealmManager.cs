@@ -289,7 +289,7 @@ public class ShadowRealmManager : MonoBehaviour
     void teleportFromShadowRealm()
     {
         if (checkIfFreeCollider.GetComponent<checkIfFreeColliderScript>().isColliding) {
-            Debug.Log("ERROR, player trying to enter real world but would be colliding with something");
+        Debug.Log("ERROR, player trying to enter real world but would be colliding with something");
             return;
         }
         foreach (GameObject ev in GameObject.FindGameObjectsWithTag("Evidence"))

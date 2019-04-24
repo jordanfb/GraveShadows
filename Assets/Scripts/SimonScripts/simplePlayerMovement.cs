@@ -234,8 +234,9 @@ public class simplePlayerMovement : MonoBehaviour
             emono.CollectThisEvidence();
             //Evidence e = emono.EvidenceInfo;
             //PlayerManager.instance.CollectEvidence(e);
-            StartCoroutine(DestroyAfterTime(1f, other.transform.parent.gameObject));
             Destroy(other.gameObject.GetComponent<Interactable>().interactTextInGame);
+            StartCoroutine(DestroyAfterTime(1f, other.transform.parent.gameObject));
+
             if (emono.isWaistLevel) {
                 anim.SetTrigger("reachOver");
             }
@@ -249,8 +250,9 @@ public class simplePlayerMovement : MonoBehaviour
 
     IEnumerator DestroyAfterTime(float time, GameObject gameObjectToDestroy)
     {
+        isAllowedToWalk = false;
         yield return new WaitForSeconds(time);
-
+        isAllowedToWalk = true;
         Destroy(gameObjectToDestroy);
     }
 

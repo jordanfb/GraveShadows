@@ -9,7 +9,7 @@ public class checkIfFreeColliderScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Evidence")) {
+        if (other.CompareTag("Evidence") || other.CompareTag("convoCollider")) {
             return;
         }
         if (other.gameObject.layer == LayerMask.GetMask("Ignore Raycast") || other.gameObject.layer == 2)
