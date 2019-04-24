@@ -109,6 +109,7 @@ public class GuardScript : MonoBehaviour
     private int pathingTargetNumber;
     private NavMeshAgent agent;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -140,6 +141,13 @@ public class GuardScript : MonoBehaviour
             // then find them!
             FindSkinnedMaterials();
             Debug.LogError("Cop without skinned mesh materials found!");
+        }
+
+        if (animator)
+        {
+            // start the guard idle animation on a random frame
+            AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+            animator.Play(state.fullPathHash, -1, Random.Range(0f, 100f)); // should randomize the time
         }
     }
 
