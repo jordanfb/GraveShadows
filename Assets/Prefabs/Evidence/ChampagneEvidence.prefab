@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2437141751249261334}
   - component: {fileID: 6131199734799716141}
   m_Layer: 0
-  m_Name: Champagne
+  m_Name: ChampagneEvidence
   m_TagString: Evidence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,7 +156,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactTextInGame: {fileID: 0}
-  interactTextPrefab: {fileID: 0}
+  interactTextPrefab: {fileID: 1704617898835638000, guid: 12f9ec766228d4c0c8562e1d2693257e,
+    type: 3}
   baseText: Press "e" to pick up
   onActivateText: 
   Player: {fileID: 0}
+  hubFocus: 0
