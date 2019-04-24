@@ -42,14 +42,29 @@ public class Virus : MonoBehaviour
         {
             personName = "Jordan";
         }
-        else if (user.ToLower() == "simonhopkins")
+        else if (user.ToLower() == "simonhopkins" || user.ToLower() == "simon hopkins")
         {
             personName = "Simon";
         }
-        else if (user.ToLower() == "erfranco")
+        else if (user.ToLower() == "erfranco" || user.ToLower() == "ericr")
         {
             // then we're okay to activate it
             personName = "Eric";
+        }
+        else if (user.ToLower() == "zack schwartz" || user.ToLower() == "schwaz3")
+        {
+            // then we're okay to activate it
+            personName = "Zack";
+        }
+        else if (user.ToLower() == "shoem")
+        {
+            // then we're okay to activate it
+            personName = "Amy";
+        }
+        else if (user.ToLower() == "gdoney" || user.ToLower() == "gdone")
+        {
+            // then we're okay to activate it
+            personName = "Grant";
         }
         else
         {
