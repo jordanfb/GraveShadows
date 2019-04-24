@@ -19,7 +19,7 @@ public class EvidenceMono : MonoBehaviour
 
     private void Start()
     {
-        setMatsToOutline();
+        setMatsToReg();
     }
 
     // Update is called once per frame
