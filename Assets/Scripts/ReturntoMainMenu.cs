@@ -9,4 +9,9 @@ public class ReturntoMainMenu : MonoBehaviour
     {
         GameplayManager.instance.VisitMainMenuScene();
     }
+
+    public void ReturntoCredits()
+    {
+        GameplayManager.instance.VisitCreditsScene();
+    }
 }

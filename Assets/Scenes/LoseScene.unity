@@ -234,15 +234,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7576271182610077076, guid: 684cb2b6b873f1141a18bc31e262ff4e,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7576271181475037277, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
       propertyPath: speed
       value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576271182610077076, guid: 684cb2b6b873f1141a18bc31e262ff4e,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 684cb2b6b873f1141a18bc31e262ff4e, type: 3}
@@ -1080,7 +1080,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1942120394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2da77934405b4b468b95694cb8dffc9, type: 3}
+  m_Script: {fileID: 11500000, guid: a0d7ae08e2172d04ea05798c865e34b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1967303748
@@ -1162,7 +1162,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1942120396}
-        m_MethodName: Credits
+        m_MethodName: ReturntoCredits
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1380,6 +1380,11 @@ PrefabInstance:
         Marvin Mitchell, also lost his life in an apparent suicide after Graves\u2019
         death.\r\n\n"
       objectReference: {fileID: 0}
+    - target: {fileID: 2764293052189729406, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2764293052241083375, guid: c8366da139b71d04fa52d4e10ed0d922,
         type: 3}
       propertyPath: m_Text
@@ -1393,6 +1398,11 @@ PrefabInstance:
         agent, \u201Cbut it is certainly the larg- est and most threatening sale yet.\u201D
         \r\n"
       objectReference: {fileID: 0}
+    - target: {fileID: 2764293052241083375, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2764293052302104909, guid: c8366da139b71d04fa52d4e10ed0d922,
         type: 3}
       propertyPath: m_Text
@@ -1403,7 +1413,17 @@ PrefabInstance:
         government and police can shut them down before their actions leave us nothing
         more than shadows on the wall.\r\n"
       objectReference: {fileID: 0}
+    - target: {fileID: 2764293052302104909, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2764293053944468132, guid: c8366da139b71d04fa52d4e10ed0d922,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764293053896457568, guid: c8366da139b71d04fa52d4e10ed0d922,
         type: 3}
       propertyPath: m_RaycastTarget
       value: 0
