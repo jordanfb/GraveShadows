@@ -28,6 +28,7 @@ public class YarnBoardCamera : MonoBehaviour
     {
         startPos = transform.position;
         startingZoom = transform.localPosition.z;
+        movementInverted = Options.instance.invertYarnboardPanning;
     }
 
     // Update is called once per frame

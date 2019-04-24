@@ -721,6 +721,7 @@ GameObject:
   - component: {fileID: 476573210}
   - component: {fileID: 476573209}
   - component: {fileID: 476573214}
+  - component: {fileID: 476573215}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: Untagged
@@ -1023,6 +1024,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &476573215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476573208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a8d7fa00ef7e447a27491e1c75decd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InvertY: 0
+  playMusic: 1
+  cameraSpeed: 1
 --- !u!1001 &509927950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1050,11 +1066,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 101472, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
+    - target: {fileID: 100078, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 100078, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
+    - target: {fileID: 101472, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
