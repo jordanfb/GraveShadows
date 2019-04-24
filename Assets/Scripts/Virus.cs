@@ -15,7 +15,8 @@ public class Virus : MonoBehaviour
     string personName = "buddy";
     float timer = 0;
 
-    string[] choices = { "HELLO PERSON HOW ARE YOU DOING TODAY??????", "I LOVE YOU", "Did you miss me?", "YOU've been HAxED", "AAAAAAAAAAAHHHH", "Peaches are for keepers", "Let's do this!", "YOU CAN WIN THIS I BELIEVE IN YOU" };
+    string[] choices = { "HELLO PERSON HOW ARE YOU DOING TODAY??????", "I LOVE YOU PERSON", "Did you miss me?", "YOU've been HAxED", "AAAAAAAAAAAHHHH", "Peaches are for keepers", "Let's do this!", "YOU CAN WIN THIS I BELIEVE IN YOU",
+    "PERSON what are you doing with your life?", "PERSON, why are you doing that?", "PERSON", "PERSON", "PERSON LOVES YOU"};
 
     private void SaveYourself()
     {
