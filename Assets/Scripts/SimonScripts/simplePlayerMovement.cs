@@ -131,7 +131,8 @@ public class simplePlayerMovement : MonoBehaviour
 
 
         Vector3 nextPos;
-        if (Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < -0.1f) {
+        float turnOnLessThan = -0.1f;
+        if (Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < turnOnLessThan) {
             nextPos = SRmanager.shadowPlane.transform.position + SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime
                             + (Mathf.Sign(_moveDirX) * SRmanager.shadowPlane.transform.forward * PLAYER_WIDTH);
         }
@@ -154,7 +155,7 @@ public class simplePlayerMovement : MonoBehaviour
         if (touchingWall)
         {
 
-            if(Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < -0.2f)
+            if(Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < turnOnLessThan)
             {
                 SRmanager.shadowPlane.transform.position -= SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime;
             }
