@@ -17,6 +17,7 @@ public class simplePlayerMovement : MonoBehaviour
     private Rigidbody rb;
     [SerializeField]
     public float PLAYER_SPEED_FORWARD;
+    public float PLAYER_SPRINT_SPEED_FORWARD;
     public float PLAYER_SPEED_STRAFE;
     public float SHADOW_SPEED;
     bool canExit = true; // to stop it from leaving twice
@@ -107,7 +108,12 @@ public class simplePlayerMovement : MonoBehaviour
 
         }
 
-        rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z).normalized * _moveDirY * PLAYER_SPEED_FORWARD)
+        float forwardsSpeed = PLAYER_SPEED_FORWARD;
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            forwardsSpeed = PLAYER_SPRINT_SPEED_FORWARD;
+        }
+        rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z).normalized * _moveDirY * forwardsSpeed)
                                     + (mainCam.transform.right.normalized * _moveDirX) * PLAYER_SPEED_STRAFE) + rb.velocity.y * transform.up;
 
 
