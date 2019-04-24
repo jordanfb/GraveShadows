@@ -277,7 +277,7 @@ public class GameplayManager : MonoBehaviour
         }
         else
         {
-            f.FadeOut(StartMainMenuScene);
+            f.FadeOut(StartMainMenuScene, false);
         }
     }
 
