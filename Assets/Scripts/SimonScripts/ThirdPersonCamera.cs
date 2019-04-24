@@ -56,6 +56,11 @@ public class ThirdPersonCamera : MonoBehaviour
         lookAtVec = gameObject.transform.position;
         currentDistance = REGULAR_CAMERA_DISTANCE;
 
+        if (Options.instance.InvertY)
+        {
+            scrollSpeedY = -scrollSpeedY; // invert the Y value! This is a terrible way to do it but it works
+        }
+
     }
 
     // Update is called once per frame

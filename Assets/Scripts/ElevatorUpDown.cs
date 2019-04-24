@@ -65,7 +65,7 @@ public class ElevatorUpDown : MonoBehaviour
             //going down
             while (elapsedTime < time) 
             {
-                transform.position = Vector3.Lerp(whereIStart, min, (elapsedTime / time));
+                transform.position = Vector3.Lerp(whereIStart, min, DeskDayDescriptionItem.Smootherstep(elapsedTime / time));
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
@@ -79,7 +79,7 @@ public class ElevatorUpDown : MonoBehaviour
             //going up
             while (elapsedTime < time)
             {
-                transform.position = Vector3.Lerp(whereIStart, max, (elapsedTime / time));
+                transform.position = Vector3.Lerp(whereIStart, max, DeskDayDescriptionItem.Smootherstep(elapsedTime / time));
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }

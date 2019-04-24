@@ -9,6 +9,7 @@ public class GameLevelManager : MonoBehaviour
     private EvidenceMono[] evidenceMonos; // these are all the evidence in this level
     private List<Transform> evidenceLocations = new List<Transform>();
 
+    private LevelOneEvidenceManager loem;
 
     // Start is called before the first frame update
     void Start()
@@ -18,8 +19,18 @@ public class GameLevelManager : MonoBehaviour
             return;
         }
 
-        if(level == Level.Apartment || level == Level.Hub)
+        if (level == Level.Hub)
+            return;
+
+        if(level == Level.Apartment)
         {
+            loem = GameObject.FindObjectOfType<LevelOneEvidenceManager>();
+            if (loem == null)
+            {
+                Debug.LogError("There is no level one evidence manager in the scene!");
+                return;
+            }                
+            CheckCollectedLevelOneEvidence();
             return;
         }
 
@@ -76,6 +87,14 @@ public class GameLevelManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    void CheckCollectedLevelOneEvidence()
+    {
+        if (loem.keyFound)
+            evidenceFoundThisDay.Add(loem.key);
+        if (loem.receiptFound)
+            evidenceFoundThisDay.Add(loem.receipt);
     }
 
     public bool HasFoundEverything()
