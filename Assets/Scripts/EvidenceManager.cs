@@ -280,6 +280,11 @@ public class EvidenceManager : MonoBehaviour
                     foreach (Suspect s in ev.AssociatedSuspects)
                         suspectTotals[suspects.IndexOf(s)]++;
                 }
+                else if(ev.GetLevel == Level.Apartment)
+                {
+                    apartmentEV.Add(se);
+                    se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
+                }
                 continue;
             }
 
