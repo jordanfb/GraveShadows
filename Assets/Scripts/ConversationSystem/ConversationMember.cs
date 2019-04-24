@@ -22,39 +22,68 @@ public class ConversationMember : MonoBehaviour
     private int characterNumber = 0;
     private int unformattedCharacterNumber = 0;
     private ScriptLine line;
-    private bool playing = true;
 
     private float doneTalkingTimer = 0; // if this is 0 then it disables everything
 
     private ScriptLine interuptedLine;
+    private List<ConversationManager> runningManagersWhenInterupted = new List<ConversationManager>();
 
-    public void InterruptConversation(string newLine, float speed = .05f)
+    public bool InterruptConversation(string newLine, float speed = .05f, bool keepTrackOfInteruppted = true)
     {
-        interuptedLine = line;
-        foreach(ConversationManager m in masters)
+        if (keepTrackOfInteruppted)
         {
-            if (m != null)
+            runningManagersWhenInterupted.Clear();
+            interuptedLine = line;
+            foreach (ConversationManager m in masters)
             {
-                m.StopRunningScript(); // FIX so it pauses the script instead
+                if (m != null)
+                {
+                    //Debug.Log("Have a conversation manager");
+                    //Debug.Log("Manager script " + m.scriptName);
+                    if (m.Running)
+                    {
+                        //Debug.Log("It's running, so add it to the list");
+                        runningManagersWhenInterupted.Add(m);
+                    }
+                    m.StopRunningScript(); // FIX so it pauses the script instead
+                }
+            }
+            if (runningManagersWhenInterupted.Count > 1)
+            {
+                Debug.LogError("ERROR: Multiple conversations running somehow");
             }
         }
         SayLine(new ScriptLine(characterName, newLine, speed));
+        return runningManagersWhenInterupted.Count > 0; // at least one was running
     }
 
-    public void StopConversation()
+    public void ResumeConversation()
     {
-
+        // resume the conversation then
+        // now that we've finished our line to say to merge back into the conversation again, we resume
+        foreach (ConversationManager m in runningManagersWhenInterupted)
+        {
+            //m.// resume the script I guess
+            m.ContinueScript();
+        }
+        //line = interuptedLine;
+        interuptedLine = null;
     }
 
-    public void PlayConversation()
-    {
+    //public void StopConversation()
+    //{
 
-    }
+    //}
 
-    public void PauseConversation()
-    {
+    //public void PlayConversation()
+    //{
 
-    }
+    //}
+
+    //public void PauseConversation()
+    //{
+
+    //}
 
     private void FaceCamera()
     {
@@ -153,10 +182,12 @@ public class ConversationMember : MonoBehaviour
     public void SayLine(ScriptLine line)
     {
         //Debug.Log("Being told to say:\n" + line.formattedText);
+        text.text = ""; // clear the text!
         timer = 0;
         characterNumber = 0;
         unformattedCharacterNumber = 0;
         this.line = line;
+        Debug.Log("Saying line " + line.unformattedText);
     }
 
     public bool IsFinished()
