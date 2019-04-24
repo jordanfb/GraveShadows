@@ -18,4 +18,5 @@ public class CustomLevel1Logic : MonoBehaviour
             onAllEvidenceCollected.Invoke();
         }
     }
+    
 }
