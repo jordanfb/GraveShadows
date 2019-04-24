@@ -36,14 +36,14 @@ public class FadeToBlack : MonoBehaviour
     }
 
     [ContextMenu("Fade Out")]
-    public void FadeOut(System.Action callback = null)
+    public void FadeOut(System.Action callback = null, bool waitForConversation = true)
     {
         // fade to black
         if (runningCoroutine != null)
         {
             StopCoroutine(runningCoroutine);
         }
-        runningCoroutine = StartCoroutine(Fade(speed, callback));
+        runningCoroutine = StartCoroutine(Fade(speed, callback, waitForConversation));
     }
 
     public float Smootherstep(float x)
@@ -68,7 +68,7 @@ public class FadeToBlack : MonoBehaviour
         runningCoroutine = StartCoroutine(Fade(-speed, callback));
     }
 
-    private IEnumerator Fade(float speed, System.Action callback = null)
+    private IEnumerator Fade(float speed, System.Action callback = null, bool waitForConversation = true)
     {
         alpha += speed * Time.unscaledDeltaTime; // use unscaled deltatime for working during pause screens
         SetAlpha();
@@ -78,7 +78,7 @@ public class FadeToBlack : MonoBehaviour
             alpha += speed * Time.unscaledDeltaTime;
             SetAlpha();
         }
-        if (keepListeningTo != null)
+        if (keepListeningTo != null && waitForConversation)
         {
             while (keepListeningTo.IsStillTalking())
             {
