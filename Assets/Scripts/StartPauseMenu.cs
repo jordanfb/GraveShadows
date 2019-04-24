@@ -12,7 +12,8 @@ public class StartPauseMenu : MonoBehaviour
             // enable all the children
             for (int i = 0; i < transform.childCount; i++)
             {
-                transform.GetChild(i).gameObject.SetActive(true);
+                // toggle it on or off because it's a pause menu!
+                transform.GetChild(i).gameObject.SetActive(!transform.GetChild(i).gameObject.activeInHierarchy);
             }
         }
     }
