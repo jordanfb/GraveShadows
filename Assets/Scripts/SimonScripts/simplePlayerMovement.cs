@@ -49,17 +49,23 @@ public class simplePlayerMovement : MonoBehaviour
             anim.SetFloat("xVelocity", 0f);
 
             return;
+        } else
+        {
+            // set the velocity here for the animation so that if it's not moving it won't animate
+            anim.SetFloat("yVelocity", transform.InverseTransformDirection(rb.velocity).z);
+            anim.SetFloat("xVelocity", transform.InverseTransformDirection(rb.velocity).x);
         }
 
         if (isAllowedToWalk)
         {
             float moveDirX = Input.GetAxis("Horizontal");
             float moveDirY = Input.GetAxis("Vertical");
-            if(System.Math.Abs(moveDirY) < 0.01f && System.Math.Abs(moveDirX) < 0.01f) {
+            if (System.Math.Abs(moveDirY) < 0.01f && System.Math.Abs(moveDirX) < 0.01f)
+            {
                 Camera.main.GetComponent<LozowichEffect>().animateTexture = 0;
             }
-
-            else {
+            else
+            {
                 Camera.main.GetComponent<LozowichEffect>().animateTexture = 1;
             }
             if (!SRmanager.isInShadowRealm)
@@ -79,7 +85,6 @@ public class simplePlayerMovement : MonoBehaviour
 
     public Animator getAnim()
     {
-
         return anim;
     }
 
@@ -101,9 +106,6 @@ public class simplePlayerMovement : MonoBehaviour
 
         }
 
-
-        anim.SetFloat("yVelocity", transform.InverseTransformDirection(rb.velocity).z);
-        anim.SetFloat("xVelocity", transform.InverseTransformDirection(rb.velocity).x);
         rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z).normalized * _moveDirY * PLAYER_SPEED_FORWARD)
                                     + (mainCam.transform.right.normalized * _moveDirX) * PLAYER_SPEED_STRAFE) + rb.velocity.y * transform.up;
 
