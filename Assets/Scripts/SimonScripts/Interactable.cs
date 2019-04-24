@@ -96,6 +96,8 @@ public class Interactable : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         touchingCollider = false;
+        Destroy(interactTextInGame);
+
         if (interactTextInGame == null)
         {
             return;
@@ -104,6 +106,8 @@ public class Interactable : MonoBehaviour
         {
             interactTextInGame.SetActive(false);
         }
+
+
     }
 
     public void DisableText()
