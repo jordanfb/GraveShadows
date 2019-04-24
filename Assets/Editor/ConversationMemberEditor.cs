@@ -26,7 +26,7 @@ public class ConversationMemberEditor : Editor
         {
             // then validate the character names after you finish editing the name
             Undo.RecordObject(m, "Set name of ConversationMember");
-            Debug.Log("Set character name");
+            //Debug.Log("Set character name");
             m.characterName = newName;
             ConversationMember.ValidateAllNames();
         }

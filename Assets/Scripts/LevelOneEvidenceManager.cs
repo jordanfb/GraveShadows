@@ -36,12 +36,10 @@ public class LevelOneEvidenceManager : MonoBehaviour
         {
             Destroy(keyObject);
             keyObject = null;
-            Debug.Log("Destroyed key");
         }
         if (receiptFound && receiptObject != null)
         {
             Destroy(receiptObject);
-            Debug.Log("Destroyed receipt");
             receiptObject = null;
         }
     }
@@ -61,12 +59,10 @@ public class LevelOneEvidenceManager : MonoBehaviour
         foreach(EvidenceMono m in FindObjectsOfType<EvidenceMono>()) {
             if (m.EvidenceInfo == key)
             {
-                Debug.Log("Found key");
                 keyObject = m.gameObject;
             }
             if (m.EvidenceInfo == receipt)
             {
-                Debug.Log("Found reciept");
                 receiptObject = m.gameObject;
             }
         }

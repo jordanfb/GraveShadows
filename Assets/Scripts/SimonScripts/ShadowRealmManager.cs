@@ -101,12 +101,12 @@ public class ShadowRealmManager : MonoBehaviour
                 {
                     if (entry.Key == null)
                     {
-                        Debug.Log("ENTRY IS NULL");
+                        //Debug.Log("ENTRY IS NULL");
                         continue;
                     }
                     if (entry.Key.gameObject.transform.parent == null)
                     {
-                        Debug.Log("ENTRY PARENT IS NULL");
+                        //Debug.Log("ENTRY PARENT IS NULL");
                         continue;
                     }
 
@@ -129,12 +129,12 @@ public class ShadowRealmManager : MonoBehaviour
             foreach (KeyValuePair<Collider, List<Vector3>> entry in checkForShadows())
             {
                 if(entry.Key == null) {
-                    Debug.Log("ENTRY IS NULL");
+                    //Debug.Log("ENTRY IS NULL");
                     continue;
                 }
                 if (entry.Key.gameObject.transform.parent == null)
                 {
-                    Debug.Log("ENTRY PARENT IS NULL");
+                    //Debug.Log("ENTRY PARENT IS NULL");
                     continue;
                 }
 
@@ -189,7 +189,7 @@ public class ShadowRealmManager : MonoBehaviour
                 {
                     if (entry.Key == null)
                     {
-                        Debug.Log("ENTRY IS NULL");
+                        //Debug.Log("ENTRY IS NULL");
                         continue;
                     }
 
@@ -200,7 +200,7 @@ public class ShadowRealmManager : MonoBehaviour
                 }
                 if (wallToTeleportTo == null)
                 {
-                    Debug.Log("ERROR, no wall selected, teleport to no walls");
+                    //Debug.Log("ERROR, no wall selected, teleport to no walls");
                     return;
                 }
 
@@ -289,7 +289,7 @@ public class ShadowRealmManager : MonoBehaviour
     void teleportFromShadowRealm()
     {
         if (checkIfFreeCollider.GetComponent<checkIfFreeColliderScript>().isColliding) {
-            Debug.Log("ERROR, player trying to enter real world but would be colliding with something");
+            //Debug.Log("ERROR, player trying to enter real world but would be colliding with something");
             return;
         }
         foreach (GameObject ev in GameObject.FindGameObjectsWithTag("Evidence"))
@@ -367,7 +367,7 @@ public class ShadowRealmManager : MonoBehaviour
     Vector3 findMiddlePos(List<Vector3> pointList) {
         if (pointList.Count == 0)
         {
-            Debug.Log("ERROR: Length of list is 0");
+            //Debug.Log("ERROR: Length of list is 0");
             return Vector3.negativeInfinity;
         }
         Vector3 average = Vector3.zero;

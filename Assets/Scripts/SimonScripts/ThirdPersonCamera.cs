@@ -49,7 +49,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         SRmanager = GetComponent<ShadowRealmManager>();
         if (mainCam == null) {
-            Debug.Log("Picked default main camera for third person camera controller");
+            //Debug.Log("Picked default main camera for third person camera controller");
             // this is so that we can set a gameobject in its place instead of the main camera for the hubworld camera system to lerp between
             mainCam = Camera.main.gameObject;
         }
@@ -354,7 +354,7 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         if (pointList.Count == 0)
         {
-            Debug.Log("ERROR: Length of list is 0");
+            //Debug.Log("ERROR: Length of list is 0");
             return Vector3.negativeInfinity;
         }
         Vector3 average = Vector3.zero;

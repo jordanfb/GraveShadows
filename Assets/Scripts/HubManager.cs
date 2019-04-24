@@ -236,8 +236,7 @@ public class HubManager : MonoBehaviour
         if (GameplayManager.instance.IsChoosingDay() && cameraMode == CameraMode.LookAtDesk)
         {
             // only do anything if you click on it at the right time
-            Debug.Log("Clicked on the gun");
-            // FIX
+            //Debug.Log("Clicked on the gun");
             endgameManager.gameObject.SetActive(true);
         }
     }

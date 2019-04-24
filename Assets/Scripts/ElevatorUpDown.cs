@@ -32,20 +32,20 @@ public class ElevatorUpDown : MonoBehaviour
             Collider[] cs = Physics.OverlapBox(insideElevatorTrigger.bounds.center, insideElevatorTrigger.bounds.size / 2, insideElevatorTrigger.transform.rotation, LayerMask.GetMask("Player"));
             if (cs.Length > 0)
             {
-                for (int i =0; i < cs.Length; i++)
-                {
-                    Debug.Log(gameObject.name + " found " + cs[i].name);
-                }
+                //for (int i =0; i < cs.Length; i++)
+                //{
+                //    Debug.Log(gameObject.name + " found " + cs[i].name);
+                //}
                 // then parent the player!
                 player.transform.parent = transform;
                 wasParented = true;
-                Debug.Log("Parented player");
+                //Debug.Log("Parented player");
             } else if (wasParented)
             {
                 // don't parent the player :(
                 player.transform.parent = null;
                 wasParented = false;
-                Debug.Log("Stopped parenting player");
+                //Debug.Log("Stopped parenting player");
             }
         }
     }
