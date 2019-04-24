@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3318,6 +3318,30 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a08026fce5194684cb99127ee659bfc8, type: 2}
+    - target: {fileID: 400010, guid: 190bc3b6499b7f2418214b2c33d58b69, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.14236
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 190bc3b6499b7f2418214b2c33d58b69, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 190bc3b6499b7f2418214b2c33d58b69, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.69327
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 190bc3b6499b7f2418214b2c33d58b69, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.69327
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 190bc3b6499b7f2418214b2c33d58b69, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.69327
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 190bc3b6499b7f2418214b2c33d58b69, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.82
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 190bc3b6499b7f2418214b2c33d58b69, type: 3}
 --- !u!1 &268454559 stripped
@@ -25179,6 +25203,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 319980969}
     - target: {fileID: 2701277236420419687, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -25254,11 +25283,6 @@ PrefabInstance:
       propertyPath: copContainer
       value: 
       objectReference: {fileID: 2135275096}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 319980969}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[0].collider
       value: 

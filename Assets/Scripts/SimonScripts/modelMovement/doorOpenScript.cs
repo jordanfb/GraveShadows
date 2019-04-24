@@ -27,6 +27,7 @@ public class doorOpenScript : MonoBehaviour
 
         while (Mathf.Abs(degrees) < 90) {
             isMoving = true;
+            GameObject.Find("Player").GetComponent<simplePlayerMovement>().isAllowedToWalk = false;
             yield return new WaitForSeconds(timeStep);
             elapsedTime += timeStep;
             float degreesChange = openSpeed * Mathf.Sqrt(elapsedTime*20) * Time.deltaTime * dir;
@@ -37,6 +38,7 @@ public class doorOpenScript : MonoBehaviour
         elapsedTime = 0;
         isMoving = false;
         isOpen = true;
+        GameObject.Find("Player").GetComponent<simplePlayerMovement>().isAllowedToWalk = true;
 
     }
 

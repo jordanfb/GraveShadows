@@ -292,9 +292,16 @@ public class ShadowRealmManager : MonoBehaviour
             Debug.Log("ERROR, player trying to enter real world but would be colliding with something");
             return;
         }
+        foreach (GameObject ev in GameObject.FindGameObjectsWithTag("Evidence"))
+        {
+            if(ev.GetComponent<EvidenceMono>() == null) {
+                continue;
+            }
+            ev.GetComponent<EvidenceMono>().setMatsToReg();
+        }
 
 
-        for(int i = 0; i< copContainer.transform.childCount; i++) {
+        for (int i = 0; i< copContainer.transform.childCount; i++) {
             copContainer.transform.GetChild(i).gameObject.GetComponent<GuardScript>().ResetMaterials();
         }
         StartCoroutine(spawnParticleSystem(shadowPlane.transform.position, checkIfFreeCollider.transform.position, shadowPlane.transform.position - checkIfFreeCollider.transform.position));
@@ -307,7 +314,12 @@ public class ShadowRealmManager : MonoBehaviour
 
     void teleportToWall(Collider targetWall, List<Vector3> pointList) {
 
-
+        foreach(GameObject ev in GameObject.FindGameObjectsWithTag("Evidence")) {
+            if(ev.GetComponent<EvidenceMono>() == null) {
+                continue;
+            }
+            ev.GetComponent<EvidenceMono>().setMatsToOutline();
+        }
         Debug.DrawLine(transform.position, findMiddlePos(pointList), Color.magenta);
 
         Vector3 midPoint = findMiddlePos(pointList);

@@ -19,21 +19,7 @@ public class EvidenceMono : MonoBehaviour
 
     private void Start()
     {
-        Renderer mat = GetComponent<Renderer>();
-        if(mat == null)
-        {
-            Renderer[] mats = GetComponentsInChildren<Renderer>();
-            foreach(Renderer m in mats)
-            {
-                m.material.shader = Shader.Find("Outlined/Silhouetted Diffuse");
-                m.material.SetFloat("_Outline", 0.005f);
-            }
-        }
-        else
-        {
-            mat.material.shader = Shader.Find("Outlined/Silhouetted Diffuse");
-            mat.material.SetFloat("_Outline", 0.005f);
-        }
+        setMatsToOutline();
     }
 
     // Update is called once per frame
@@ -52,5 +38,53 @@ public class EvidenceMono : MonoBehaviour
     {
         onEvidenceCollected.Invoke(EvidenceInfo);
         PlayerManager.instance.CollectEvidence(EvidenceInfo);
+    }
+
+    public void setMatsToReg() {
+        Renderer mat = GetComponent<Renderer>();
+        if (mat == null)
+        {
+            Renderer[] mats = GetComponentsInChildren<Renderer>();
+            foreach (Renderer m in mats)
+            {
+                m.material.shader = Shader.Find("Standard");
+                //m.material.SetFloat("_Outline", 0.005f);
+                //m.material.SetColor("_Color", Color.white);
+                //m.material.SetColor("_OutlineColor", Color.white);
+            }
+        }
+        else
+        {
+
+            mat.material.shader = Shader.Find("Standard");
+            //mat.material.SetFloat("_Outline", 0.005f);
+            //mat.material.SetColor("_Color", Color.white);
+            //mat.material.SetColor("_OutlineColor", Color.white);
+        }
+
+    }
+    public void setMatsToOutline()
+    {
+        Renderer mat = GetComponent<Renderer>();
+        if (mat == null)
+        {
+            Renderer[] mats = GetComponentsInChildren<Renderer>();
+            foreach (Renderer m in mats)
+            {
+                m.material.shader = Shader.Find("Outlined/Silhouetted Diffuse");
+                m.material.SetFloat("_Outline", 0.005f);
+                m.material.SetColor("_Color", Color.white);
+                m.material.SetColor("_OutlineColor", Color.white);
+            }
+        }
+        else
+        {
+
+            mat.material.shader = Shader.Find("Outlined/Silhouetted Diffuse");
+            mat.material.SetFloat("_Outline", 0.005f);
+            mat.material.SetColor("_Color", Color.white);
+            mat.material.SetColor("_OutlineColor", Color.white);
+        }
+
     }
 }
