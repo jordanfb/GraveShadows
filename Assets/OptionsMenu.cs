@@ -20,25 +20,25 @@ public class OptionsMenu : MonoBehaviour
     public void PlayMusicTogglePressed(bool value)
     {
         Options.instance.playMusic = value;
-        AudioSource[] music = FindObjectsOfType<AudioSource>();
-        for (int i =0; i < music.Length; i++)
-        {
-            music[i].enabled = value; // for now we're just assuming that it's the music one welp.
-        }
+        Options.instance.EnableOrDisableMusic();
+        Options.instance.SaveOptionsToPlayerPrefs();
     }
 
     public void YInvertedTogglePressed(bool value)
     {
         Options.instance.InvertY = value;
+        Options.instance.SaveOptionsToPlayerPrefs();
     }
 
     public void InvertYarnboardTogglePressed(bool value)
     {
         Options.instance.invertYarnboardPanning = value;
+        Options.instance.SaveOptionsToPlayerPrefs();
     }
 
     public void ReturnToMainMenu()
     {
         GameplayManager.instance.VisitMainMenuScene();
+        Options.instance.SaveOptionsToPlayerPrefs();
     }
 }
