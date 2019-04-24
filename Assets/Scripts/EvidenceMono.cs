@@ -72,7 +72,7 @@ public class EvidenceMono : MonoBehaviour
             foreach (Renderer m in mats)
             {
                 m.material.shader = Shader.Find("Outlined/Silhouetted Diffuse");
-                m.material.SetFloat("_Outline", 0.005f);
+                m.material.SetFloat("_Outline", 0.001f);
                 m.material.SetColor("_Color", Color.white);
                 m.material.SetColor("_OutlineColor", Color.white);
             }
@@ -81,7 +81,7 @@ public class EvidenceMono : MonoBehaviour
         {
 
             mat.material.shader = Shader.Find("Outlined/Silhouetted Diffuse");
-            mat.material.SetFloat("_Outline", 0.005f);
+            mat.material.SetFloat("_Outline", 0.001f);
             mat.material.SetColor("_Color", Color.white);
             mat.material.SetColor("_OutlineColor", Color.white);
         }
