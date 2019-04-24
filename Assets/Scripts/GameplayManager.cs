@@ -30,6 +30,9 @@ public class GameplayManager : MonoBehaviour
     [Tooltip("this gets set by the script don't edit it in the editor")]
     public List<DayData> dayData;
 
+    private string debugModeString = "zasegj";
+    private bool[] debugModeKeysPressed = new bool[6];
+
     private void Awake()
     {
 #if UNITY_EDITOR
@@ -55,10 +58,44 @@ public class GameplayManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J) && Input.GetKey(KeyCode.Z) && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.G) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.J))
         {
-            // enable or disable debug mode
+            debugModeKeysPressed[0] = true;
+            CheckToggleDebug();
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            debugModeKeysPressed[1] = true;
+            CheckToggleDebug();
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            debugModeKeysPressed[2] = true;
+            CheckToggleDebug();
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            debugModeKeysPressed[3] = true;
+            CheckToggleDebug();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            debugModeKeysPressed[4] = true;
+            CheckToggleDebug();
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            debugModeKeysPressed[5] = true;
+            CheckToggleDebug();
+        }
+    }
+
+    private void CheckToggleDebug()
+    {
+        if (debugModeKeysPressed[0] && debugModeKeysPressed[1] && debugModeKeysPressed[2] && debugModeKeysPressed[3] && debugModeKeysPressed[4] && debugModeKeysPressed[5])
+        {
             debugMode = !debugMode;
+            debugModeKeysPressed = new bool[6];
         }
     }
 

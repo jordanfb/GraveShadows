@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
     private void Update()
     {
         currentlyInShadowRealm = _srManager.isInShadowRealm;
-        if((Input.GetAxis("Horizontal") != 0.0f || Input.GetAxis("Vertical") > 0.0f) &&
+        if((Input.GetAxis("Horizontal") != 0.0f || Input.GetAxis("Vertical") != 0.0f) &&
             !_audioSource.isPlaying && !_srManager.isInShadowRealm)
         {
             _audioSource.clip = _clips[0];
