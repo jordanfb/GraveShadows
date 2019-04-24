@@ -187,7 +187,6 @@ public class ConversationMember : MonoBehaviour
         characterNumber = 0;
         unformattedCharacterNumber = 0;
         this.line = line;
-        Debug.Log("Saying line " + line.unformattedText);
     }
 
     public bool IsFinished()
