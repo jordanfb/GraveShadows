@@ -164,7 +164,8 @@ public class simplePlayerMovement : MonoBehaviour
 
             anim.SetFloat("xVelocityShadow", Mathf.Abs(-_moveDirX * SHADOW_SPEED) * Time.deltaTime);
 
-            if (_moveDirX * Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) > 0) {
+            if (_moveDirX * Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) > 0)
+            {
                 targetWallRot = Quaternion.AngleAxis(90f, Vector3.up);
 
             }
@@ -172,6 +173,9 @@ public class simplePlayerMovement : MonoBehaviour
             {
                 targetWallRot = Quaternion.AngleAxis(-90f, Vector3.up);
 
+            }
+            else {
+                targetWallRot = Quaternion.AngleAxis(0f, Vector3.up);
             }
 
             float turnSpeed = 0.1f;
