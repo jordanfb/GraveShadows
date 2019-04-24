@@ -54,13 +54,8 @@ public class simplePlayerMovement : MonoBehaviour
             // set the velocity here for the animation so that if it's not moving it won't animate
             anim.SetFloat("yVelocity", transform.InverseTransformDirection(rb.velocity).z);
             anim.SetFloat("xVelocity", transform.InverseTransformDirection(rb.velocity).x);
-        }
 
-        if (isAllowedToWalk)
-        {
-            float moveDirX = Input.GetAxis("Horizontal");
-            float moveDirY = Input.GetAxis("Vertical");
-            if (System.Math.Abs(moveDirY) < 0.01f && System.Math.Abs(moveDirX) < 0.01f)
+            if (rb.velocity.sqrMagnitude < .01f)
             {
                 Camera.main.GetComponent<LozowichEffect>().animateTexture = 0;
             }
@@ -68,6 +63,12 @@ public class simplePlayerMovement : MonoBehaviour
             {
                 Camera.main.GetComponent<LozowichEffect>().animateTexture = 1;
             }
+        }
+
+        if (isAllowedToWalk)
+        {
+            float moveDirX = Input.GetAxis("Horizontal");
+            float moveDirY = Input.GetAxis("Vertical");
             if (!SRmanager.isInShadowRealm)
             {
                 thirdPersonMovement(moveDirX, moveDirY);
