@@ -553,8 +553,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9082,7 +9082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9090,15 +9090,22 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: '<color=#000><size=.05><u>Controls</u></size>
 
+
     Click & drag evidence around.
 
     Right-Click to read more about evidence.
 
     Click & Drag on pins to create lines of yarn.
 
-    Scroll wheel to zoom in/out.
+    Middle mouse button and drag or
 
     WASD to pan around.
+
+    Scroll wheel or
+
+    +/- or r/f to zoom in and out.
+
+    Control Z to undo. Control Y to redo.
 
     Press E to exit the yarn board.'
   m_isRightToLeft: 0
@@ -9147,7 +9154,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 226
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -9170,12 +9177,12 @@ MonoBehaviour:
   m_margin: {x: -0.01240893, y: 0.02, z: -0.14074297, w: 0.4672507}
   m_textInfo:
     textComponent: {fileID: 1515223128}
-    characterCount: 206
+    characterCount: 295
     spriteCount: 0
-    spaceCount: 37
-    wordCount: 37
+    spaceCount: 58
+    wordCount: 57
     linkCount: 0
-    lineCount: 7
+    lineCount: 11
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -10156,13 +10163,13 @@ PrefabInstance:
       propertyPath: mainCam
       value: 
       objectReference: {fileID: 1418463136}
-    - target: {fileID: 1125838775, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1693832147, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: scene
       value: Level 0 HUB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125838775, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4962411602723374852, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
@@ -10840,7 +10847,7 @@ MonoBehaviour:
   moveSpeed: 0.02
   keyboardMoveSpeed: 0.02
   minCoords: {x: -1, y: 0.1}
-  maxCoords: {x: 1, y: 1}
+  maxCoords: {x: 1.5, y: 1}
   zoomBounds: {x: 0, y: 1}
   duration: 0.5
 --- !u!1001 &1760427686

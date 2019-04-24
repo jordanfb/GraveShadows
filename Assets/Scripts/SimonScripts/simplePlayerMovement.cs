@@ -49,19 +49,26 @@ public class simplePlayerMovement : MonoBehaviour
             anim.SetFloat("xVelocity", 0f);
 
             return;
+        } else
+        {
+            // set the velocity here for the animation so that if it's not moving it won't animate
+            anim.SetFloat("yVelocity", transform.InverseTransformDirection(rb.velocity).z);
+            anim.SetFloat("xVelocity", transform.InverseTransformDirection(rb.velocity).x);
+
+            if (rb.velocity.sqrMagnitude < .01f)
+            {
+                Camera.main.GetComponent<LozowichEffect>().animateTexture = 0;
+            }
+            else
+            {
+                Camera.main.GetComponent<LozowichEffect>().animateTexture = 1;
+            }
         }
 
         if (isAllowedToWalk)
         {
             float moveDirX = Input.GetAxis("Horizontal");
             float moveDirY = Input.GetAxis("Vertical");
-            if(System.Math.Abs(moveDirY) < 0.01f && System.Math.Abs(moveDirX) < 0.01f) {
-                Camera.main.GetComponent<LozowichEffect>().animateTexture = 0;
-            }
-
-            else {
-                Camera.main.GetComponent<LozowichEffect>().animateTexture = 1;
-            }
             if (!SRmanager.isInShadowRealm)
             {
                 thirdPersonMovement(moveDirX, moveDirY);
@@ -79,7 +86,6 @@ public class simplePlayerMovement : MonoBehaviour
 
     public Animator getAnim()
     {
-
         return anim;
     }
 
@@ -101,9 +107,6 @@ public class simplePlayerMovement : MonoBehaviour
 
         }
 
-
-        anim.SetFloat("yVelocity", transform.InverseTransformDirection(rb.velocity).z);
-        anim.SetFloat("xVelocity", transform.InverseTransformDirection(rb.velocity).x);
         rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z).normalized * _moveDirY * PLAYER_SPEED_FORWARD)
                                     + (mainCam.transform.right.normalized * _moveDirX) * PLAYER_SPEED_STRAFE) + rb.velocity.y * transform.up;
 
@@ -164,7 +167,8 @@ public class simplePlayerMovement : MonoBehaviour
 
             anim.SetFloat("xVelocityShadow", Mathf.Abs(-_moveDirX * SHADOW_SPEED) * Time.deltaTime);
 
-            if (_moveDirX * Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) > 0) {
+            if (_moveDirX * Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) > 0)
+            {
                 targetWallRot = Quaternion.AngleAxis(90f, Vector3.up);
 
             }
@@ -172,6 +176,9 @@ public class simplePlayerMovement : MonoBehaviour
             {
                 targetWallRot = Quaternion.AngleAxis(-90f, Vector3.up);
 
+            }
+            else {
+                targetWallRot = Quaternion.AngleAxis(0f, Vector3.up);
             }
 
             float turnSpeed = 0.1f;
