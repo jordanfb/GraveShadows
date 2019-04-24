@@ -21,6 +21,11 @@ public class LevelOneEvidenceManager : MonoBehaviour
         receiptSE = EvidenceManager.instance.apartmentEV[0];
     }
 
+    public bool AllEvidenceFound()
+    {
+        return keyFound && receiptFound;
+    }
+
     // Update is called once per frame
     void Update()
     {
