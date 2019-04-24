@@ -23,6 +23,11 @@ public class Interactable : MonoBehaviour
 
     }
 
+    ~Interactable() {
+
+        Destroy(gameObject);
+    }
+
     // Update is called once per frame
     Vector3 velocity = Vector3.zero;
     void Update()
@@ -47,6 +52,9 @@ public class Interactable : MonoBehaviour
     private void OnTriggerStay(Collider other) {
         if (other.gameObject.tag == "Player")
         {
+            if(interactTextInGame == null) {
+                return;
+            }
 
             if (hubFocus)
             {
