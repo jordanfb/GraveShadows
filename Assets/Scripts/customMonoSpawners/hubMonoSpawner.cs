@@ -10,9 +10,16 @@ public class hubMonoSpawner : MonoBehaviour
 
     void Start()
     {
+        
         if (GameplayManager.instance.dayNum < 2) {
-            col1.SetActive(true);
-            col2.SetActive(true);
+            if (col1 != null) {
+                col1.SetActive(true);
+            }
+            if (col2 != null)
+            {
+                col2.SetActive(true);
+            }
+
         }
         else {
             col1.SetActive(false);

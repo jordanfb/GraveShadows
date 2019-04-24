@@ -372,7 +372,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &70814337 stripped
 Transform:
@@ -916,7 +916,7 @@ RectTransform:
   m_Children:
   - {fileID: 2147371903}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2041,7 +2041,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &373360204
 GameObject:
@@ -2406,7 +2406,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &507990599
 GameObject:
@@ -2929,8 +2929,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 554014400}
-  - component: {fileID: 554014403}
-  - component: {fileID: 554014402}
   m_Layer: 0
   m_Name: monologueColliders
   m_TagString: Untagged
@@ -2953,48 +2951,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &554014402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554014399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eabefa2f0f04ee4f8cf80e7f8ecca6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  script: {fileID: 4900000, guid: 36a743bc4833447c4a7a6ecc4188f3ed, type: 3}
-  slaves:
-  - {fileID: 855961938}
-  associatedEvidence: {fileID: 0}
-  scriptName: Monologue Return From First
-  conversationDescription: 
-  scriptHeader: "\n#scriptname Monologue Return From First\n#description \n#character
-    Graves\n#speed .05\n#delay 1\n"
-  scriptContent: "\n\n#Graves\nThose weren\u2019t normal Family grunts at Marv\u2019s
-    office.<speed=0.5> </speed> Those were blueshirts from my old precinct.<speed=0.5>
-    </speed> The police are more involved than I realized...<speed=0.5> </speed> they\u2019ll
-    likely be crawling all over everywhere else I\u2019m headed.<speed=0.5> </speed>
-    I\u2019ll have to be careful.<speed=2> </speed>\n\n#"
-  characterNames:
-  - Graves
-  defaultSpeed: 0.05
-  defaultUsePostDelay: 1
-  defaultDelay: 1
---- !u!114 &554014403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554014399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77df6c8f39b1ed542b5e1e96b890cde7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &561712474
 GameObject:
   m_ObjectHideFlags: 0
@@ -4237,7 +4193,7 @@ PrefabInstance:
     - target: {fileID: 1779180788188359523, guid: 783957ad53e38934e8e7d945e4e82b7f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1779180788188359523, guid: 783957ad53e38934e8e7d945e4e82b7f,
         type: 3}
@@ -4808,7 +4764,7 @@ RectTransform:
   - {fileID: 536375759}
   - {fileID: 1901050731}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5230,6 +5186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 824428058}
   - component: {fileID: 824428057}
+  - component: {fileID: 824428059}
   m_Layer: 0
   m_Name: HubManager
   m_TagString: Untagged
@@ -5286,8 +5243,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &824428059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824428056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f637117f4944248a89a91cba5da13bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col1: {fileID: 687195792}
+  col2: {fileID: 0}
 --- !u!1 &848347214
 GameObject:
   m_ObjectHideFlags: 0
@@ -6351,7 +6322,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -129.643, z: 0}
 --- !u!1 &997744748
 GameObject:
@@ -6674,7 +6645,7 @@ PrefabInstance:
     - target: {fileID: 1965054617247375748, guid: e50ee44d988d0f94aa57c1c62a624be1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1965054617247375748, guid: e50ee44d988d0f94aa57c1c62a624be1,
         type: 3}
@@ -7246,7 +7217,7 @@ PrefabInstance:
     - target: {fileID: 7803348790522051510, guid: b0633d828e7de5d4ca0a727458d05eb3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7803348790522051510, guid: b0633d828e7de5d4ca0a727458d05eb3,
         type: 3}
@@ -7358,7 +7329,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1161317105
 MonoBehaviour:
@@ -9312,7 +9283,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1485509082
 MonoBehaviour:
@@ -10085,6 +10056,80 @@ RectTransform:
   m_AnchoredPosition: {x: 3.601, y: 1.686}
   m_SizeDelta: {x: 0.44, y: 0.6}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1571598939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1571598942}
+  - component: {fileID: 1571598941}
+  - component: {fileID: 1571598940}
+  m_Layer: 0
+  m_Name: ConversationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1571598940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571598939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eabefa2f0f04ee4f8cf80e7f8ecca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 4900000, guid: 36a743bc4833447c4a7a6ecc4188f3ed, type: 3}
+  slaves:
+  - {fileID: 855961938}
+  associatedEvidence: {fileID: 0}
+  scriptName: Monologue Return From First
+  conversationDescription: 
+  scriptHeader: "\n#scriptname Monologue Return From First\n#description \n#character
+    Graves\n#speed .05\n#delay 1\n"
+  scriptContent: "\n\n#Graves\nThose weren\u2019t normal Family grunts at Marv\u2019s
+    office.<speed=0.5> </speed> Those were blueshirts from my old precinct.<speed=0.5>
+    </speed> The police are more involved than I realized...<speed=0.5> </speed> they\u2019ll
+    likely be crawling all over everywhere else I\u2019m headed.<speed=0.5> </speed>
+    I\u2019ll have to be careful.<speed=2> </speed>\n#"
+  characterNames:
+  - Graves
+  defaultSpeed: 0.05
+  defaultUsePostDelay: 1
+  defaultDelay: 1
+--- !u!114 &1571598941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571598939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77df6c8f39b1ed542b5e1e96b890cde7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1571598942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571598939}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.8224075, y: 2.0259361, z: -1.8531723}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 38
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1577429785
 GameObject:
   m_ObjectHideFlags: 0
@@ -10496,7 +10541,7 @@ PrefabInstance:
       objectReference: {fileID: 1731666907}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[0].collider
@@ -13384,7 +13429,7 @@ PrefabInstance:
     - target: {fileID: 7576271182610077073, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: FadeToBlackCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 7576271182610077073, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
@@ -13429,7 +13474,7 @@ PrefabInstance:
     - target: {fileID: 7576271182610077077, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7576271182610077077, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
