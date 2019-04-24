@@ -19,11 +19,16 @@ public class hubMonoSpawner : MonoBehaviour
             {
                 col2.SetActive(true);
             }
-
         }
         else {
-            col1.SetActive(false);
-            col2.SetActive(false);
+            if (col1 != null)
+            {
+                col1.SetActive(false);
+            }
+            if (col2 != null)
+            {
+                col2.SetActive(false);
+            }
 
         }
     }
