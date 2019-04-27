@@ -112,6 +112,10 @@ public class simplePlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
             forwardsSpeed = PLAYER_SPRINT_SPEED_FORWARD;
+            anim.speed = PLAYER_SPRINT_SPEED_FORWARD / PLAYER_SPEED_FORWARD; // scale it up
+        } else
+        {
+            anim.speed = 1;
         }
         rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z).normalized * _moveDirY * forwardsSpeed)
                                     + (mainCam.transform.right.normalized * _moveDirX) * PLAYER_SPEED_STRAFE) + rb.velocity.y * transform.up;
