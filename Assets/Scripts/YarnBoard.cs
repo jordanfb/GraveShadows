@@ -226,8 +226,11 @@ public class YarnBoard : MonoBehaviour
                         _suspectCodeName.text = sm.SuspectInfo.CodeName + "\n(" + sm.SuspectInfo.Name + ")";
                         _suspectBio.text = sm.SuspectInfo.Bio + "\n";
                         _suspectInfoPanel.SetActive(true);
-                        _suspectInfoPanel.GetComponentInChildren<Scrollbar>().size = 0;
-                        _suspectInfoPanel.GetComponentInChildren<Scrollbar>().value = 1;
+                        if (_suspectInfoPanel.GetComponentInChildren<Scrollbar>() != null)
+                        {
+                            _suspectInfoPanel.GetComponentInChildren<Scrollbar>().size = 0;
+                            _suspectInfoPanel.GetComponentInChildren<Scrollbar>().value = 1;
+                        }
                         _closeEvidenceButton.SetActive(true);
                     }
                     else
