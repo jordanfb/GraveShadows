@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13652,18 +13652,6 @@ Transform:
   m_Father: {fileID: 1574898721}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -3.1330001, y: 42.152, z: -1.927}
---- !u!1 &65223125 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 942726421136712762, guid: c16a4fdeecf104c7898d04976f09544e,
-    type: 3}
-  m_PrefabInstance: {fileID: 692728986}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &65223127 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 942726421144131578, guid: c16a4fdeecf104c7898d04976f09544e,
-    type: 3}
-  m_PrefabInstance: {fileID: 692728986}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &71650015
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26559,26 +26547,6 @@ PrefabInstance:
       propertyPath: mainCam
       value: 
       objectReference: {fileID: 246805936}
-    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: playerMesh
-      value: 
-      objectReference: {fileID: 65223125}
-    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: anim
-      value: 
-      objectReference: {fileID: 65223127}
-    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: playerMesh
-      value: 
-      objectReference: {fileID: 65223125}
-    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: anim
-      value: 
-      objectReference: {fileID: 65223127}
     - target: {fileID: 2701277236420419687, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26813,7 +26781,7 @@ PrefabInstance:
         type: 3}
       propertyPath: anim
       value: 
-      objectReference: {fileID: 65223127}
+      objectReference: {fileID: 0}
     - target: {fileID: 942726421136712754, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_StaticEditorFlags
