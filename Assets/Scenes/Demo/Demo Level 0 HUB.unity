@@ -1299,7 +1299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -10677,22 +10677,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eabefa2f0f04ee4f8cf80e7f8ecca6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  script: {fileID: 4900000, guid: 36a743bc4833447c4a7a6ecc4188f3ed, type: 3}
+  script: {fileID: 4900000, guid: 4d535fe27f146474e8881d97d0cafbb2, type: 3}
   slaves:
-  - {fileID: 0}
+  - {fileID: 1013070726}
   associatedEvidence: {fileID: 0}
-  scriptName: Monologue Return From First
-  conversationDescription: 
-  scriptHeader: "\n#scriptname Monologue Return From First\n#description \n#character
-    Graves\n#speed .05\n#delay 1\n"
-  scriptContent: "\n\n#Graves\nThose weren\u2019t normal Family grunts at Marv\u2019s
-    office.<speed=0.5> </speed> Those were blueshirts from my old precinct.<speed=0.5>
-    </speed> The police are more involved than I realized...<speed=0.5> </speed> they\u2019ll
-    likely be crawling all over everywhere else I\u2019m headed.<speed=0.5> </speed>
-    I\u2019ll have to be careful.<speed=2> </speed>\n#"
+  scriptName: Demo Office Enter Monologue
+  conversationDescription: Demo Office Enter Monologue
+  scriptHeader: '
+
+    #scriptname Demo Office Enter Monologue
+
+    #description Demo Office Enter Monologue
+
+    #character Graves
+
+    #speed .1
+
+    #delay 1
+
+'
+  scriptContent: '
+
+
+
+    #Graves
+
+    I don''t have much time. Should try to piece together everything I''ve got and
+    take these bastards down.
+
+    #'
   characterNames:
   - Graves
-  defaultSpeed: 0.05
+  defaultSpeed: 0.1
   defaultUsePostDelay: 1
   defaultDelay: 1
 --- !u!114 &1571598941
@@ -10747,7 +10763,7 @@ MonoBehaviour:
 
     #character Graves
 
-    #speed .05
+    #speed .025
 
     #delay 1
 
@@ -10759,7 +10775,7 @@ MonoBehaviour:
     <speed=2> </speed>\n#"
   characterNames:
   - Graves
-  defaultSpeed: 0.05
+  defaultSpeed: 0.025
   defaultUsePostDelay: 1
   defaultDelay: 1
 --- !u!1 &1577429785

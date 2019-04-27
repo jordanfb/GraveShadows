@@ -210,7 +210,7 @@ public class YarnBoard : MonoBehaviour
                     {
                         // display it on the suspect board
                         _suspectCodeName.text = em.EvidenceInfo.Name;
-                        _suspectBio.text = em.EvidenceInfo.FlavorText;
+                        _suspectBio.text = em.EvidenceInfo.FlavorText + "\n";
                         _suspectInfoPanel.SetActive(true);
                         _suspectInfoPanel.GetComponentInChildren<Scrollbar>().size = 0;
                         _suspectInfoPanel.GetComponentInChildren<Scrollbar>().value = 1;
@@ -219,7 +219,7 @@ public class YarnBoard : MonoBehaviour
                     else if (sm != null)
                     {
                         _suspectCodeName.text = sm.SuspectInfo.CodeName + "\n(" + sm.SuspectInfo.Name + ")";
-                        _suspectBio.text = sm.SuspectInfo.Bio;
+                        _suspectBio.text = sm.SuspectInfo.Bio + "\n";
                         _suspectInfoPanel.SetActive(true);
                         _suspectInfoPanel.GetComponentInChildren<Scrollbar>().size = 0;
                         _suspectInfoPanel.GetComponentInChildren<Scrollbar>().value = 1;
