@@ -1132,121 +1132,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 114265095}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &117081927
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1905141297}
-    m_Modifications:
-    - target: {fileID: 6388640440935564958, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_Name
-      value: openDoorController (8)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -24.947
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 29.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.9999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564957, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: assocDoor
-      value: 
-      objectReference: {fileID: 1031255239}
-    - target: {fileID: 6388640440935564957, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: assocDoor
-      value: 
-      objectReference: {fileID: 1031255239}
-    - target: {fileID: 6388640440935564956, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_Size.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564956, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_Center.x
-      value: -0.2353976
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564956, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_Center.z
-      value: -0.09562092
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388640440935564956, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c11bf459ea6ef4010a56fc019ba52ab1, type: 3}
---- !u!4 &117081928 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
-    type: 3}
-  m_PrefabInstance: {fileID: 117081927}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &117508266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,7 +1714,7 @@ PrefabInstance:
     - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
         type: 3}
@@ -2616,6 +2501,65 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f35ed56bdd5a94a53964c3ad3e10822d, type: 3}
+--- !u!1 &224702892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3011720941516419545, guid: f35ed56bdd5a94a53964c3ad3e10822d,
+    type: 3}
+  m_PrefabInstance: {fileID: 224702891}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &224702893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224702892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a64da2d28b7724eb32803d9d002843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerEventPairs:
+  - collider: {fileID: 441427562}
+    optionalConversationName: Office Floor Conversation
+    events:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 441427560}
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 1
+    delayTime: 0
+  - collider: {fileID: 1931812038}
+    optionalConversationName: Break Room Conversation
+    events:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1931812036}
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    onlyRunOnce: 0
+    delayTime: 0
 --- !u!1 &225979694
 GameObject:
   m_ObjectHideFlags: 0
@@ -16296,6 +16240,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -38.11
       objectReference: {fileID: 0}
+    - target: {fileID: 400036, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400036, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400036, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400036, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 402402, guid: a319437bf60ebe84fbb8f78f0808bd9f, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
@@ -25500,6 +25460,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2135275096}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[2].events.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[0].collider
       value: 
       objectReference: {fileID: 144661068}
@@ -25515,6 +25479,42 @@ PrefabInstance:
       propertyPath: triggerEventPairs.Array.data[2].collider
       value: 
       objectReference: {fileID: 441427562}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[2].optionalConversationName
+      value: Office Floor Conversation
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[2].events.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[2].events.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[2].events.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 441427560}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[2].events.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[2].events.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[2].onlyRunOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[3].optionalConversationName
+      value: Break Room Conversation
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[3].collider
+      value: 
+      objectReference: {fileID: 1931812038}
     - target: {fileID: 1693832147, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: scene
       value: Demo Level 0 HUB
@@ -35929,7 +35929,6 @@ Transform:
   - {fileID: 1617475206}
   - {fileID: 476476053}
   - {fileID: 1994176437}
-  - {fileID: 117081928}
   - {fileID: 176264260}
   - {fileID: 1981620449}
   - {fileID: 1988216311}
@@ -37611,7 +37610,7 @@ PrefabInstance:
     - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
         type: 3}
@@ -37726,7 +37725,7 @@ PrefabInstance:
     - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6388640440935564959, guid: c11bf459ea6ef4010a56fc019ba52ab1,
         type: 3}
