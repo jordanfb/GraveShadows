@@ -12,7 +12,7 @@ public class elevatorOpener : MonoBehaviour
     public Vector3 leftStartingPos;
     public Vector3 rightStartingPos;
 
-    private bool isOpening = false;
+    public bool isOpening = false;
     float t = 0; // start closed
 
 
