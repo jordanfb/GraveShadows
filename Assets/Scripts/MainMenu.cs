@@ -1,14 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public Text playGameText;
+
+
+    public void Update()
+    {
+        // this is just here because it loads slowly I guess... this works, but FIX
+        if (Options.instance.demoMode)
+        {
+            playGameText.text = "Play Demo";
+        }
+    }
+
+
     public void NewGame()
     {
-        GameplayManager.instance.NewGame();
-        GameplayManager.instance.VisitCrimeScene();
+        if (Options.instance.demoMode)
+        {
+            GameplayManager.instance.NewDemoGame();
+            GameplayManager.instance.VisitDemoOffice();
+        }
+        else
+        {
+            // normal game
+            GameplayManager.instance.NewGame();
+            GameplayManager.instance.VisitCrimeScene();
+        }
     }
 
     public void LoadGame()
@@ -24,12 +47,12 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void Options()
+    public void OptionsMenu()
     {
         GameplayManager.instance.VisitOptions();
     }
 
-    public void Credits()
+    public void CreditsMenu()
     {
         GameplayManager.instance.VisitCreditsScene();
     }

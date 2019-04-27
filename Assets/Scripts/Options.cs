@@ -9,6 +9,7 @@ public class Options : MonoBehaviour
     public bool InvertY = false;
     public bool playMusic = true;
     public bool invertYarnboardPanning = false;
+    public bool demoMode = false; // only allow the demo mode if so
 
     [Space]
     public AudioClip musicClipInBackgroundToPlayPause;
@@ -34,6 +35,7 @@ public class Options : MonoBehaviour
         PlayerPrefs.SetInt("OptionsInvertMouseY", InvertY ? 1 : 0);
         PlayerPrefs.SetInt("OptionsInvertYarnboardPanning", invertYarnboardPanning ? 1 : 0);
         PlayerPrefs.SetInt("OptionsPlayMusic", playMusic ? 1 : 0);
+        PlayerPrefs.SetInt("OptionsDemoMode", demoMode ? 1 : 0);
         PlayerPrefs.Save();
     }
 
@@ -75,6 +77,14 @@ public class Options : MonoBehaviour
         else
         {
             playMusic = true;
+        }
+        if (PlayerPrefs.HasKey("OptionsDemoMode"))
+        {
+            demoMode = PlayerPrefs.GetInt("OptionsDemoMode") == 1;
+        }
+        else
+        {
+            demoMode = false; // default to normal game
         }
 
         EnableOrDisableMusic();

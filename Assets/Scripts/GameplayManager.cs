@@ -104,7 +104,14 @@ public class GameplayManager : MonoBehaviour
         GameLevelManager gameLevel = FindObjectOfType<GameLevelManager>();
         Debug.Assert(gameLevel != null); // duh it can't be null we need it in all our levels
         GameplayManager.instance.NextDay(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, false, gameLevel.HasFoundEverything()));
-        VisitHubScene();
+        if (Options.instance.demoMode)
+        {
+            VisitDemoHub(); // in demo mode just head straight back to kill someone (preferably first checking the evidence out...)
+        }
+        else
+        {
+            VisitHubScene();
+        }
     }
 
     private void StartFactoryScene()
@@ -130,6 +137,16 @@ public class GameplayManager : MonoBehaviour
     private void StartOfficeScene()
     {
         SceneManager.LoadScene("Level 2");
+    }
+
+    private void StartDemoOffice()
+    {
+        SceneManager.LoadScene("Demo Level 2");
+    }
+
+    private void StartDemoHub()
+    {
+        SceneManager.LoadScene("Demo Level 0 HUB");
     }
 
     private void StartMainMenuScene()
@@ -236,6 +253,34 @@ public class GameplayManager : MonoBehaviour
         else
         {
             f.FadeOut(StartCrimeScene);
+        }
+    }
+
+    public void VisitDemoOffice()
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            StartDemoOffice();
+        }
+        else
+        {
+            f.FadeOut(StartDemoOffice);
+        }
+    }
+
+    public void VisitDemoHub()
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            StartDemoHub();
+        }
+        else
+        {
+            f.FadeOut(StartDemoHub);
         }
     }
 
@@ -352,6 +397,25 @@ public class GameplayManager : MonoBehaviour
         EvidenceManager.NewSaveGame();
         UndoRedoStack.Reset(); // make sure to reset the undo redo stack otherwise weird bugs
         PlayerManager.instance.NewGame(); // reset the found evidence
+        // then load the game data here:
+        dayNum = 0; // first day
+        dayData = new List<DayData>();
+        for (int i = 0; i < numExploringDays; i++)
+        {
+            dayData.Add(new DayData());
+        }
+    }
+
+    public void NewDemoGame()
+    {
+        // starts a new game!
+        // chooses the evidence and whatever
+        EvidenceManager.NewSaveGame();
+        UndoRedoStack.Reset(); // make sure to reset the undo redo stack otherwise weird bugs
+        PlayerManager.instance.NewGame(); // reset the found evidence
+
+        // for the demo we don't really need a day summary since it's just the one day
+
         // then load the game data here:
         dayNum = 0; // first day
         dayData = new List<DayData>();

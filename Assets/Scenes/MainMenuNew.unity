@@ -601,7 +601,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 355125128}
-        m_MethodName: Credits
+        m_MethodName: CreditsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -692,7 +692,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 50}
+  m_AnchoredPosition: {x: -50, y: 20}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &355125128
@@ -707,6 +707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447a91b5eea4ff54c8e403b4ee564f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playGameText: {fileID: 1705794571}
 --- !u!1 &476573208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,6 +1040,7 @@ MonoBehaviour:
   InvertY: 0
   playMusic: 1
   invertYarnboardPanning: 0
+  demoMode: 0
   musicClipInBackgroundToPlayPause: {fileID: 8300000, guid: 3b92e00097482e64798e01c09bc5ed18,
     type: 3}
 --- !u!1001 &509927950
@@ -13773,7 +13775,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -170.19995, y: 198}
-  m_SizeDelta: {x: 160, y: 31}
+  m_SizeDelta: {x: 180, y: 31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1705794571
 MonoBehaviour:
@@ -14221,7 +14223,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 355125128}
-        m_MethodName: Options
+        m_MethodName: OptionsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
