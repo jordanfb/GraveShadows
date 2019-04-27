@@ -80,7 +80,8 @@ public class HubManager : MonoBehaviour
         }
 
         LockMouse.LockTheMouse();
-        endgameManager.gameObject.SetActive(false);
+        //endgameManager.gameObject.SetActive(false);
+        endgameManager.SetOpen(false);
         deskCollider.SetActive(false);
         player.isAllowedToWalk = true;
     }
@@ -239,7 +240,8 @@ public class HubManager : MonoBehaviour
         {
             // only do anything if you click on it at the right time
             //Debug.Log("Clicked on the gun");
-            endgameManager.gameObject.SetActive(true);
+            //endgameManager.gameObject.SetActive(true);
+            endgameManager.SetOpen(true);
         }
     }
 
