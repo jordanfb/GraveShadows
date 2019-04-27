@@ -212,6 +212,8 @@ public class YarnBoard : MonoBehaviour
                         _suspectCodeName.text = em.EvidenceInfo.Name;
                         _suspectBio.text = em.EvidenceInfo.FlavorText;
                         _suspectInfoPanel.SetActive(true);
+                        _suspectInfoPanel.GetComponentInChildren<Scrollbar>().size = 0;
+                        _suspectInfoPanel.GetComponentInChildren<Scrollbar>().value = 1;
                         _closeEvidenceButton.SetActive(true);
                     }
                     else if (sm != null)
@@ -219,6 +221,8 @@ public class YarnBoard : MonoBehaviour
                         _suspectCodeName.text = sm.SuspectInfo.CodeName + "\n(" + sm.SuspectInfo.Name + ")";
                         _suspectBio.text = sm.SuspectInfo.Bio;
                         _suspectInfoPanel.SetActive(true);
+                        _suspectInfoPanel.GetComponentInChildren<Scrollbar>().size = 0;
+                        _suspectInfoPanel.GetComponentInChildren<Scrollbar>().value = 1;
                         _closeEvidenceButton.SetActive(true);
                     }
                     else
