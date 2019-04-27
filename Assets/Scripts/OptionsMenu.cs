@@ -16,6 +16,7 @@ public class OptionsMenu : MonoBehaviour
         playMusicToggle.isOn = Options.instance.playMusic;
         yInvertedToggle.isOn = Options.instance.InvertY;
         invertYarnboardPanning.isOn = Options.instance.invertYarnboardPanning;
+        demoMode.isOn = Options.instance.demoMode;
     }
 
     public void PlayMusicTogglePressed(bool value)
