@@ -15,6 +15,7 @@ public class Interactable : MonoBehaviour
     public GameObject Player;
     public bool hubFocus= false;
     private bool touchingCollider = false;
+    private bool beenInteracted = false;
 
     void Start()
     {
@@ -80,7 +81,14 @@ public class Interactable : MonoBehaviour
             {
 
                 interactTextInGame = Instantiate(interactTextPrefab, GameObject.Find("Canvas").transform);
-                interactTextInGame.GetComponent<Text>().text = baseText;
+                if (beenInteracted)
+                {
+                    interactTextInGame.GetComponent<Text>().text = onActivateText;
+                }
+                else
+                {
+                    interactTextInGame.GetComponent<Text>().text = baseText;
+                }
                 interactTextInGame.SetActive(true);
             }
             else
@@ -136,6 +144,7 @@ public class Interactable : MonoBehaviour
         {
             return;
         }
+        beenInteracted = true;
         interactTextInGame.GetComponent<Text>().text = onActivateText;
     }
 
