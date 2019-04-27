@@ -235,7 +235,7 @@ public class HubManager : MonoBehaviour
 
     public void ClickOnGun()
     {
-        if (GameplayManager.instance.IsChoosingDay() && cameraMode == CameraMode.LookAtDesk)
+        if ((Options.instance.demoMode || GameplayManager.instance.IsChoosingDay()) && cameraMode == CameraMode.LookAtDesk)
         {
             // only do anything if you click on it at the right time
             //Debug.Log("Clicked on the gun");
@@ -247,30 +247,34 @@ public class HubManager : MonoBehaviour
     {
         // load the desk UI stuff here
         // setting the text and whatever
-        string[] dayNames = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday\nLast Day" };
-        for (int i = 0; i < deskItems.Count; i++)
+        if (!Options.instance.demoMode)
         {
-            string content = "<size=.05><u>" + dayNames[i] + "</u></size>\n";
-            if (GameplayManager.instance.dayData.Count > i)
+            string[] dayNames = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday\nLast Day" };
+            for (int i = 0; i < deskItems.Count; i++)
             {
-                content += GameplayManager.instance.dayData[i].dayContent;
+                string content = "<size=.05><u>" + dayNames[i] + "</u></size>\n";
+                if (GameplayManager.instance.dayData.Count > i)
+                {
+                    content += GameplayManager.instance.dayData[i].dayContent;
+                }
+                if (i == GameplayManager.instance.dayNum)
+                {
+                    // activate that day's buttons
+                    deskItems[i].EnableButtons();
+                    content += "<size=.03>Where should I look for evidence?</size>";
+                }
+                else
+                {
+                    // deactivate them
+                    deskItems[i].DisableButtons();
+                }
+                deskItems[i].SetContents(content);
             }
-            if (i == GameplayManager.instance.dayNum)
-            {
-                // activate that day's buttons
-                deskItems[i].EnableButtons();
-                content += "<size=.03>Where should I look for evidence?</size>";
-            } else
-            {
-                // deactivate them
-                deskItems[i].DisableButtons();
-            }
-            deskItems[i].SetContents(content);
         }
 
         // if it's the last day then move the desk item parent up,
         // move the gun down, and enable the gun and stuff like that
-        if (GameplayManager.instance.IsChoosingDay())
+        if (GameplayManager.instance.IsChoosingDay() || Options.instance.demoMode)
         {
             // then move everything
             deskItemParent.position += deskItemFinalOffset;
