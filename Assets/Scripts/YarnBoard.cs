@@ -206,14 +206,19 @@ public class YarnBoard : MonoBehaviour
                     EvidenceMono em = evidence.GetComponent<EvidenceMono>();
                     SuspectMono sm = evidence.GetComponent<SuspectMono>();
                     mode = YarnBoardMode.Displaying;
+                    _closeEvidenceButton.SetActive(true);
                     if (em != null)
                     {
                         // display it on the suspect board
                         _suspectCodeName.text = em.EvidenceInfo.Name;
                         _suspectBio.text = em.EvidenceInfo.FlavorText + "\n";
                         _suspectInfoPanel.SetActive(true);
-                        _suspectInfoPanel.GetComponentInChildren<Scrollbar>().size = 0;
-                        _suspectInfoPanel.GetComponentInChildren<Scrollbar>().value = 1;
+                        if (_suspectInfoPanel.GetComponentInChildren<Scrollbar>() != null)
+                        {
+                            // this can be null if there's not enough to scroll
+                            _suspectInfoPanel.GetComponentInChildren<Scrollbar>().size = 0;
+                            _suspectInfoPanel.GetComponentInChildren<Scrollbar>().value = 1;
+                        }
                         _closeEvidenceButton.SetActive(true);
                     }
                     else if (sm != null)

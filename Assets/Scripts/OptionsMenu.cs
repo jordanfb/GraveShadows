@@ -9,6 +9,7 @@ public class OptionsMenu : MonoBehaviour
     public Toggle yInvertedToggle;
     public Toggle invertYarnboardPanning;
     public Toggle demoMode;
+    public Toggle demoModeTutorial;
     public Text mouseSensitivity;
 
     private void Start()
@@ -17,6 +18,7 @@ public class OptionsMenu : MonoBehaviour
         yInvertedToggle.isOn = Options.instance.InvertY;
         invertYarnboardPanning.isOn = Options.instance.invertYarnboardPanning;
         demoMode.isOn = Options.instance.demoMode;
+        demoModeTutorial.isOn = Options.instance.demoModeEnableTutorial;
     }
 
     public void PlayMusicTogglePressed(bool value)
@@ -29,6 +31,12 @@ public class OptionsMenu : MonoBehaviour
     public void DemoModeTogglePressed(bool value)
     {
         Options.instance.demoMode = value;
+        Options.instance.SaveOptionsToPlayerPrefs();
+    }
+
+    public void DemoModeTutorialTogglePressed(bool value)
+    {
+        Options.instance.demoModeEnableTutorial = value;
         Options.instance.SaveOptionsToPlayerPrefs();
     }
 

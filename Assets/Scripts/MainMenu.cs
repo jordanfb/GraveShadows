@@ -24,7 +24,13 @@ public class MainMenu : MonoBehaviour
         if (Options.instance.demoMode)
         {
             GameplayManager.instance.NewDemoGame();
-            GameplayManager.instance.VisitDemoOffice();
+            if (Options.instance.demoModeEnableTutorial) {
+                GameplayManager.instance.VisitCrimeScene();
+            }
+            else
+            {
+                GameplayManager.instance.VisitDemoOffice();
+            }
         }
         else
         {

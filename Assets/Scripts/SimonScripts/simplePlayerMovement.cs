@@ -219,7 +219,22 @@ public class simplePlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Exit" && canExit)
         {
             canExit = false;
-            GameplayManager.instance.ExitBackToHubNextDay();
+            if (Options.instance.demoMode && Options.instance.demoModeEnableTutorial)
+            {
+                // if we're in level 1 then go to Demo Level 2, else go to the hub
+                if (GetComponent<CustomLevel1Logic>() != null)
+                {
+                    // it's level 1
+                    GameplayManager.instance.VisitDemoOffice(); // straight into the office!
+                } else
+                {
+                    // otherwise go to the next day which will take you to the hub correctly
+                    GameplayManager.instance.ExitBackToHubNextDay();
+                }
+            } else
+            {
+                GameplayManager.instance.ExitBackToHubNextDay();
+            }
         }
     }
 
