@@ -19,6 +19,7 @@ public class YarnBoard : MonoBehaviour
     [SerializeField]
     private Text _flavorTextAsset;
     public GameObject _suspectInfoPanel;
+    public GameObject _closeEvidenceButton;
     [SerializeField]
     private Text _suspectCodeName;
     [SerializeField]
@@ -207,32 +208,25 @@ public class YarnBoard : MonoBehaviour
                     mode = YarnBoardMode.Displaying;
                     if (em != null)
                     {
-                        // choose how to display it
-                        if (em.EvidenceInfo.UseScrollableTextDisplay)
-                        {
-                            _suspectCodeName.text = em.EvidenceInfo.Name;
-                            _suspectBio.text = em.EvidenceInfo.FlavorText;
-                            _suspectInfoPanel.SetActive(true);
-                        }
-                        else
-                        {
-                            _flavorTextAsset.text = em.EvidenceInfo.FlavorText;
-                            _evidenceTitle.text = em.EvidenceInfo.Name;
-                            _flavorTextPanel.SetActive(true);
-                        }
+                        // display it on the suspect board
+                        _suspectCodeName.text = em.EvidenceInfo.Name;
+                        _suspectBio.text = em.EvidenceInfo.FlavorText;
+                        _suspectInfoPanel.SetActive(true);
+                        _closeEvidenceButton.SetActive(true);
                     }
                     else if (sm != null)
                     {
                         _suspectCodeName.text = sm.SuspectInfo.CodeName + "\n(" + sm.SuspectInfo.Name + ")";
                         _suspectBio.text = sm.SuspectInfo.Bio;
                         _suspectInfoPanel.SetActive(true);
+                        _closeEvidenceButton.SetActive(true);
                     }
                     else
                     {
                         // some weird error occured so just don't go anywhere
                         Debug.LogWarning("Couldn't find suspect or evidence monobehavior");
                         mode = YarnBoardMode.None;
-                    }    
+                    }
                 }
             }
         }
@@ -360,18 +354,18 @@ public class YarnBoard : MonoBehaviour
 
     public void DeactivateFlavorText()
     {
+        _closeEvidenceButton.SetActive(false);
         _flavorTextPanel.SetActive(false);
         _flavorTextAsset.text = "";
-        //displaying = false;
         mode = YarnBoardMode.None;
     }
 
     public void DeactivateSuspectPanel()
     {
+        _closeEvidenceButton.SetActive(false);
         _suspectInfoPanel.SetActive(false);
         _suspectCodeName.text = "";
         _suspectBio.text = "";
-        //displaying = false;
         mode = YarnBoardMode.None;
     }
 }
