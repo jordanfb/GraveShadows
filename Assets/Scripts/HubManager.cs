@@ -46,6 +46,8 @@ public class HubManager : MonoBehaviour
     public BoxCollider enterYarnCollider;
     public YarnBoard yarnBoard;
 
+    public bool isDemoHubworld = false;
+
 
     private Transform otherCameraTransformPosition;
 
