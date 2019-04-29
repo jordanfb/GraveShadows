@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Virus : MonoBehaviour
@@ -14,6 +15,10 @@ public class Virus : MonoBehaviour
 
     string personName = "buddy";
     float timer = 0;
+    private bool addRBs = false;
+
+
+    MeshRenderer[] meshRenderers = new MeshRenderer[0];
 
     string[] choices = { "HELLO PERSON HOW ARE YOU DOING TODAY??????", "I LOVE YOU PERSON", "Did you miss me?", "YOU've been HAxED", "AAAAAAAAAAAHHHH", "Peaches are for keepers", "Let's do this!", "YOU CAN WIN THIS I BELIEVE IN YOU",
     "PERSON what are you doing with your life?", "PERSON, why are you doing that?", "PERSON", "PERSON", "PERSON LOVES YOU", "I TOLD YOU I'D BE A GOOD WRITER", "HIRE ME GOOGLE", "HIRE ME ANYBODY", "WHAT's Up???", "I'm so random! *holds up spork*",
@@ -27,6 +32,7 @@ public class Virus : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             active = true;
+            SceneManager.sceneLoaded += OnSceneLoad;
         } else
         {
             Destroy(gameObject);
@@ -76,6 +82,34 @@ public class Virus : MonoBehaviour
         }
     }
 
+    public void OnSceneLoad(Scene s, LoadSceneMode mode)
+    {
+        // get all the mesh renderers
+        meshRenderers = GameObject.FindObjectsOfType<MeshRenderer>();
+        GameObject ceilings = GameObject.Find("Ceilings");
+        if (ceilings == null)
+        {
+            // try random names of ceiling objects...
+            ceilings = GameObject.Find("Ceiling_GRp");
+        }
+        if (ceilings == null)
+        {
+            ceilings = GameObject.Find("Ceiling");
+            if (ceilings != null)
+            {
+                ceilings.AddComponent<MeshCollider>().convex = true;
+            }
+        } else
+        {
+            // add mesh colliders to all the children
+            for (int i =0; i < ceilings.transform.childCount; i++)
+            {
+                ceilings.transform.GetChild(i).gameObject.AddComponent<MeshCollider>().convex = true;
+            }
+        }
+
+    }
+
     private string GetRandomStrnig()
     {
         string choice = choices[Random.Range(0, choices.Length)];
@@ -92,6 +126,45 @@ public class Virus : MonoBehaviour
             // if we're active, then start changing things!
             if (active)
             {
+                // also give a rigidbody to something if it has a meshrenderer and isn't a wall or a floor
+                if (meshRenderers.Length > 0)
+                {
+                    // chose a random one to give a rigidbody to
+                    int randomIndex = Random.Range(0, meshRenderers.Length);
+                    if (meshRenderers[randomIndex].gameObject.name.ToLower().Contains("wall") || meshRenderers[randomIndex].gameObject.name.ToLower().Contains("floor") || meshRenderers[randomIndex].gameObject.name.ToLower().Contains("shadow") || meshRenderers[randomIndex].gameObject.name.ToLower().Contains("ceiling"))
+                    {
+                        // skip it since it's probably important?
+                    }
+                    else if (!meshRenderers[randomIndex].GetComponent<Rigidbody>())
+                    {
+                        // add one!
+                        //Debug.Log("RB'd " + meshRenderers[randomIndex].gameObject.name);
+                        if (!meshRenderers[randomIndex].GetComponent<Collider>() && !meshRenderers[randomIndex].GetComponent<BoxCollider>() && !meshRenderers[randomIndex].GetComponent<MeshCollider>())
+                        {
+                            // add a collider to it in the hopes that it'll become interactive I guess?
+                            Bounds b = meshRenderers[randomIndex].gameObject.GetComponent<MeshFilter>().mesh.bounds;
+                            BoxCollider bc = meshRenderers[randomIndex].gameObject.AddComponent<BoxCollider>();
+                            bc.center = b.center;
+                            bc.size = b.size;
+                        } else if (meshRenderers[randomIndex].GetComponent<MeshCollider>())
+                        {
+                            // then set the collider to convex so that it works with the rigidbody
+                            meshRenderers[randomIndex].GetComponent<MeshCollider>().convex = true;
+                        }
+
+                        Rigidbody rb = meshRenderers[randomIndex].gameObject.AddComponent<Rigidbody>();
+                        bool useGravity = Random.Range(0, 2) == 1;
+                        rb.useGravity = useGravity; // randomly use gravity or not
+                        if (!useGravity)
+                        {
+                            // give it a random velocity!
+                            rb.velocity = Random.insideUnitSphere;
+                        }
+                    }
+                }
+
+
+
                 timer -= Time.deltaTime;
                 if (timer > 0)
                 {
@@ -123,6 +196,10 @@ public class Virus : MonoBehaviour
             if (wasdebugMode)
             {
                 // start the virus
+                if (Input.GetKey(KeyCode.G))
+                {
+                    addRBs = true;
+                }
                 SaveYourself();
             }
             wasdebugMode = false;
