@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelOneEvidenceManager : MonoBehaviour
 {
@@ -26,9 +27,17 @@ public class LevelOneEvidenceManager : MonoBehaviour
         instance = this;
         keySE = EvidenceManager.instance.apartmentEV[1];
         receiptSE = EvidenceManager.instance.apartmentEV[0];
+        SceneManager.sceneLoaded += OnLevelLoad; // add a listener to the level being loaded
     }
 
-    private void OnLevelWasLoaded(int level)
+
+    ~LevelOneEvidenceManager()
+    {
+        // stop listening to levels being loaded
+        SceneManager.sceneLoaded -= OnLevelLoad;
+    }
+
+    private void OnLevelLoad(Scene s, LoadSceneMode m)
     {
         // this is so that the don't destroy on load item which is keeping track of what we've found can destroy things
         FindObjects();
