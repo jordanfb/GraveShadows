@@ -58,14 +58,6 @@ public class HubManager : MonoBehaviour
         // it gets the info from the static gameplaymanager
         LoadDesk();
         otherCameraTransformPosition = DeskCameraLocation;
-
-        // destroy the level 1 custom logic
-        LevelOneEvidenceManager level1CustomLogic = FindObjectOfType<LevelOneEvidenceManager>();
-        if (level1CustomLogic != null)
-        {
-            Destroy(level1CustomLogic.gameObject);
-            LevelOneEvidenceManager.instance = null;
-        }
     }
 
     public void ExitDesk()

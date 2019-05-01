@@ -1888,6 +1888,11 @@ PrefabInstance:
       propertyPath: copContainer
       value: 
       objectReference: {fileID: 1526454974}
+    - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: monologueMember
+      value: 
+      objectReference: {fileID: 516852918}
     - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: mainCam
@@ -11760,8 +11765,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.009477463, y: 0.0171691, z: 0.0056499164}
-  m_Center: {x: -0.0000000011920929, y: 0.00858455, z: -0.0019137606}
+  m_Size: {x: 0.009477463, y: 0.0171691, z: 0.0047326176}
+  m_Center: {x: -0.0000000011920929, y: 0.00858455, z: -0.0001991418}
 --- !u!64 &1175061034
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12983,6 +12988,11 @@ PrefabInstance:
       propertyPath: skinnedMaterials.Array.data[8]
       value: 
       objectReference: {fileID: 2100000, guid: 2e004d95a83ceb64da758af9bf253159, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: isCrimeScene
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 12188629915876985, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
         type: 3}
       propertyPath: m_StaticEditorFlags

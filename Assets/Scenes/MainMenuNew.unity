@@ -167,7 +167,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -170.20032, y: 151}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 173.1, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &187346237
 MonoBehaviour:
@@ -300,7 +300,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -170.20001, y: 61}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 77.3, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &230905739
 MonoBehaviour:
@@ -470,6 +470,7 @@ GameObject:
   - component: {fileID: 319980974}
   - component: {fileID: 319980973}
   - component: {fileID: 319980976}
+  - component: {fileID: 319980977}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -656,6 +657,18 @@ MonoBehaviour:
   lockMouse: 0
   lockMouseOnStart: 0
   unlockOnEscape: 1
+--- !u!114 &319980977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319980969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15bdeda78d90fc24c9a2a583f7b69726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &351615370
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +705,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -170.2, y: 107}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 126.8, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &351615372
 MonoBehaviour:
@@ -13912,7 +13925,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -170.19995, y: 235}
-  m_SizeDelta: {x: 180, y: 31}
+  m_SizeDelta: {x: 164.4, y: 31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1705794571
 MonoBehaviour:
@@ -13944,7 +13957,7 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Play
@@ -14317,7 +14330,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -170.20013, y: 194}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 142.5, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2120405838
 MonoBehaviour:
