@@ -35,6 +35,7 @@ public class LevelOneEvidenceManager : MonoBehaviour
     {
         // stop listening to levels being loaded
         SceneManager.sceneLoaded -= OnLevelLoad;
+        instance = null;
     }
 
     private void OnLevelLoad(Scene s, LoadSceneMode m)
@@ -43,11 +44,13 @@ public class LevelOneEvidenceManager : MonoBehaviour
         FindObjects();
         if (keyFound && keyObject != null)
         {
+            Debug.Log("Destroyed receipt");
             Destroy(keyObject);
             keyObject = null;
         }
         if (receiptFound && receiptObject != null)
         {
+            Debug.Log("Destroyed receipt");
             Destroy(receiptObject);
             receiptObject = null;
         }

@@ -52,7 +52,7 @@ public class ConversationMember : MonoBehaviour
             }
             if (runningManagersWhenInterupted.Count > 1)
             {
-                Debug.LogError("ERROR: Multiple conversations running somehow");
+                //Debug.LogError("ERROR: Multiple conversations running somehow");
             }
         }
         SayLine(new ScriptLine(characterName, newLine, speed));
