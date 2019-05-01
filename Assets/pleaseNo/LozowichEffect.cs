@@ -8,6 +8,7 @@ public class LozowichEffect : MonoBehaviour {
     public float tileAmount = 1f;
     public float mitigationAmount = 50f;
     public int animateTexture = 0;
+    public float FPS = 24;
     private Material material;
     public Texture2DArray TAM1;
     public Texture2DArray TAM2;
@@ -42,6 +43,7 @@ public class LozowichEffect : MonoBehaviour {
 
         material.SetInt("_animateTexture", animateTexture);
         material.SetFloat("_bwBlend", Mathf.Clamp(intensity,0f, 1f)); 
+        material.SetFloat("_FPS", FPS); 
         material.SetFloat("_tile", Mathf.Clamp(tileAmount, 0f, 10f));
         material.SetFloat("_mitigationAmount", Mathf.Clamp(mitigationAmount, 0f, 100f));
         Graphics.Blit (source, destination, material);
