@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EndScreenFuckBOI : MonoBehaviour
+public class WinScreenRedux : MonoBehaviour
 {
     public Text Head1;
     public Text Subhead1;
@@ -19,37 +19,37 @@ public class EndScreenFuckBOI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Head2.text = "Detective Found Dead";
-        Subhead2.text = "Colton Graves, Thought Dead After Accident, Found Riddled with Bullets";
+        Head2.text = "FBI Raid Crime Syndicate";
+        Subhead2.text = "FBI Cracks Down on Traitorous Weapons Dealers";
         string bBN = EvidenceManager.instance.culprit.Name;
-        print(bBN);
         if (bBN == "Robert Brackenridge")
         {
-            Head1.text = "Mogul Invests in Uranium Mine";
-            Subhead1.text = "Robert Brackenridge Expands Interests into Mining, Reason Unknown";
+            Head1.text = "Late Mogul Had Crime Connections";
+            Subhead1.text = "Brackenridge Found to be Leader of Crime Syndicate";
             bigBad.sprite = mogul;
-        }else if(bBN == "Patricia Engle")
+        }
+        else if (bBN == "Patricia Engle")
         {
-            Head1.text = "New CEO Funds Weapons Research";
-            Subhead1.text = "Patricia Engle Pushes Grant Enterprises into Weapons Research";
+            Head1.text = "Crime Leader Killed, Identity Exposed";
+            Subhead1.text = "Unsuspecting Engle Gunned Down in Connection with the Family";
             bigBad.sprite = vault;
         }
         else if (bBN == "Tulley Kee")
         {
-            Head1.text = "Kee Shells Out, Navajo Nation Grows";
-            Subhead1.text = "Prominent Foreman Funds Navajo Rejuvenation Projects";
+            Head1.text = "Prominent Navajo Head Found Dead";
+            Subhead1.text = "Deep Connections to Underworld Discovered";
             bigBad.sprite = foreman;
         }
         else if (bBN == "Thomas Carter")
         {
-            Head1.text = "New Inspector Appointed Head of BIR";
-            Subhead1.text = "Regulations Change under new Head, Thomas Carter";
+            Head1.text = "Inspector Shot Dead, Crime Syndicate Falls";
+            Subhead1.text = "Evidence Arises Implicating Thomas Carter";
             bigBad.sprite = inspector;
         }
         else if (bBN == "Meredith Earls")
         {
-            Head1.text = "Car Show on Earls Ranch";
-            Subhead1.text = "Car Show hosted by Meredith Earls, Come on Down";
+            Head1.text = "Earls' Ranch Seized";
+            Subhead1.text = "Merdith Earls Revealed as Family Head, Assets Seized";
             bigBad.sprite = mustang;
         }
     }
@@ -57,6 +57,6 @@ public class EndScreenFuckBOI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

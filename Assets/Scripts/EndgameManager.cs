@@ -93,12 +93,12 @@ public class EndgameManager : MonoBehaviour
         {
             //Debug.Log("YOU WIN");
             EvidenceManager.instance.Generated = false;
-            GameplayManager.instance.FadeOut(() => { SceneManager.LoadScene("WinScene"); });
+            GameplayManager.instance.FadeOut(() => { SceneManager.LoadScene("winScene2"); });
         } else
         {
             //Debug.Log("UGGGGH You lose");
             EvidenceManager.instance.Generated = false;
-            GameplayManager.instance.FadeOut(() => { SceneManager.LoadScene("LoseScene"); });
+            GameplayManager.instance.FadeOut(() => { SceneManager.LoadScene("loseScene2"); });
         }
     }
 

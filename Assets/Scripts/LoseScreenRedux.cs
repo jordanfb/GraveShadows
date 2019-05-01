@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EndScreenFuckBOI : MonoBehaviour
+public class LoseScreenRedux : MonoBehaviour
 {
     public Text Head1;
     public Text Subhead1;
@@ -22,13 +22,13 @@ public class EndScreenFuckBOI : MonoBehaviour
         Head2.text = "Detective Found Dead";
         Subhead2.text = "Colton Graves, Thought Dead After Accident, Found Riddled with Bullets";
         string bBN = EvidenceManager.instance.culprit.Name;
-        print(bBN);
         if (bBN == "Robert Brackenridge")
         {
             Head1.text = "Mogul Invests in Uranium Mine";
             Subhead1.text = "Robert Brackenridge Expands Interests into Mining, Reason Unknown";
             bigBad.sprite = mogul;
-        }else if(bBN == "Patricia Engle")
+        }
+        else if (bBN == "Patricia Engle")
         {
             Head1.text = "New CEO Funds Weapons Research";
             Subhead1.text = "Patricia Engle Pushes Grant Enterprises into Weapons Research";
@@ -48,7 +48,7 @@ public class EndScreenFuckBOI : MonoBehaviour
         }
         else if (bBN == "Meredith Earls")
         {
-            Head1.text = "Car Show on Earls Ranch";
+            Head1.text = "New Annual Car Show at Earls' Ranch";
             Subhead1.text = "Car Show hosted by Meredith Earls, Come on Down";
             bigBad.sprite = mustang;
         }
@@ -57,6 +57,6 @@ public class EndScreenFuckBOI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
