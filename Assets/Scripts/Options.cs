@@ -6,6 +6,8 @@ public class Options : MonoBehaviour
 {
     public static Options instance;
 
+    public bool demoModeByDefault = false;
+
     public bool InvertY = false;
     public bool playMusic = true;
     public bool invertYarnboardPanning = false;
@@ -54,6 +56,12 @@ public class Options : MonoBehaviour
         }
     }
 
+    [ContextMenu("Clear Saved Settings")]
+    public void ClearPlayerprefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     public void LoadPlayerPrefs()
     {
         if (PlayerPrefs.HasKey("OptionsPlayMusic"))
@@ -86,7 +94,7 @@ public class Options : MonoBehaviour
         }
         else
         {
-            demoMode = false; // default to normal game
+            demoMode = demoModeByDefault; // default to whatever the setting is game
         }
         if (PlayerPrefs.HasKey("OptionsDemoModeTutorial"))
         {
@@ -94,7 +102,7 @@ public class Options : MonoBehaviour
         }
         else
         {
-            demoModeEnableTutorial = false; // default to normal game
+            demoModeEnableTutorial = true; // default to normal game
         }
 
         EnableOrDisableMusic();
