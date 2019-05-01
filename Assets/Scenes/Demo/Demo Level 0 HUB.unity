@@ -483,6 +483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 86537756}
   - component: {fileID: 86537755}
+  - component: {fileID: 86537757}
   m_Layer: 0
   m_Name: Vault_Final Profile (1)
   m_TagString: Untagged
@@ -552,6 +553,19 @@ Transform:
   m_Father: {fileID: 745443493}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
+--- !u!65 &86537757
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86537754}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.6899998, y: 4.453334, z: 0.20000003}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &104414921
 GameObject:
   m_ObjectHideFlags: 0
@@ -5814,6 +5828,8 @@ GameObject:
   m_Component:
   - component: {fileID: 877911374}
   - component: {fileID: 877911373}
+  - component: {fileID: 877911376}
+  - component: {fileID: 877911375}
   m_Layer: 0
   m_Name: Mustang Final Profile (1)
   m_TagString: Untagged
@@ -5883,6 +5899,47 @@ Transform:
   m_Father: {fileID: 745443493}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 10.605988}
+--- !u!114 &877911375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877911372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8070154a4c06d7468079e0a47ed4943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 824428057}
+        m_MethodName: ClickOnGun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!65 &877911376
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877911372}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.6900003, y: 4.453334, z: 0.20000003}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &895479988
 GameObject:
   m_ObjectHideFlags: 0
@@ -8191,6 +8248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1216085271}
   - component: {fileID: 1216085270}
+  - component: {fileID: 1216085272}
   m_Layer: 0
   m_Name: Foreman Final Profile (1)
   m_TagString: Untagged
@@ -8260,6 +8318,19 @@ Transform:
   m_Father: {fileID: 745443493}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: -29.00299}
+--- !u!65 &1216085272
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216085269}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.69, y: 4.4533343, z: 0.20000003}
+  m_Center: {x: 0, y: -0.0000019073486, z: 0}
 --- !u!1 &1251527198
 GameObject:
   m_ObjectHideFlags: 0
@@ -9636,20 +9707,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 578319797}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1477955334
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1477955332}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300122, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
 --- !u!114 &1477955335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11017,6 +11074,50 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300112, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
+--- !u!1 &1596993834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1596993835}
+  - component: {fileID: 1596993836}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1596993835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596993834}
+  m_LocalRotation: {x: 0, y: -0.4284778, z: 0, w: 0.90355235}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1477955333}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -50.742, z: 0}
+--- !u!65 &1596993836
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596993834}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2620269, y: 0.099603534, z: 0.98376405}
+  m_Center: {x: 0.059038382, y: 0.0145666, z: -0.2568398}
 --- !u!1 &1605844925
 GameObject:
   m_ObjectHideFlags: 0
@@ -12438,6 +12539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1806904890}
   - component: {fileID: 1806904889}
+  - component: {fileID: 1806904891}
   m_Layer: 0
   m_Name: Mogul Final Profile (1)
   m_TagString: Untagged
@@ -12507,6 +12609,19 @@ Transform:
   m_Father: {fileID: 745443493}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 29.00299}
+--- !u!65 &1806904891
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806904888}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.6900003, y: 4.4533334, z: 0.20000003}
+  m_Center: {x: 0, y: -0.0000019073486, z: 0}
 --- !u!1 &1814978460
 GameObject:
   m_ObjectHideFlags: 0
@@ -13490,6 +13605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2036638839}
   - component: {fileID: 2036638838}
+  - component: {fileID: 2036638840}
   m_Layer: 0
   m_Name: Inspector_FinalProfile (1)
   m_TagString: Untagged
@@ -13559,6 +13675,19 @@ Transform:
   m_Father: {fileID: 745443493}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: -10.60599}
+--- !u!65 &2036638840
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036638837}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.69, y: 4.453334, z: 0.20000003}
+  m_Center: {x: 0.0000009536743, y: -0.0000019073486, z: 0}
 --- !u!1 &2037993668
 GameObject:
   m_ObjectHideFlags: 0
