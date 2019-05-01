@@ -75,4 +75,9 @@ public class MainMenu : MonoBehaviour
     {
         GameplayManager.instance.VisitCreditsScene();
     }
+
+    public void ControlsMenu()
+    {
+        GameplayManager.instance.VisitControls();
+    }
 }

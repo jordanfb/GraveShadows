@@ -159,6 +159,11 @@ public class GameplayManager : MonoBehaviour
         SceneManager.LoadScene("Level 1");
     }
 
+    private void StartControls()
+    {
+        SceneManager.LoadScene("Controls");
+    }
+
     public string GenerateTodaysRecipt(Level visitedLocation, List<Evidence> evidenceFound, bool wasSpotted, bool foundAll)
     {
         string visitedLocationString = "";
@@ -350,6 +355,19 @@ public class GameplayManager : MonoBehaviour
         else
         {
             f.FadeOut(StartCredits);
+        }
+    }
+    public void VisitControls()
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            StartControls();
+        }
+        else
+        {
+            f.FadeOut(StartControls);
         }
     }
 
