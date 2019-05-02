@@ -22,6 +22,12 @@ public class simplePlayerMovement : MonoBehaviour
     public float SHADOW_SPEED;
     bool canExit = true; // to stop it from leaving twice
 
+    [Space]
+    public bool startMonologueOnEvidenceFound = true;
+    public TextAsset evidenceFoundBarksTextAsset;
+    public string[] evidenceFoundBarks = new string[0];
+    public ConversationMember monologueMember;
+
     public Animator anim;
 
     public bool isAllowedToWalk = true;
@@ -38,6 +44,10 @@ public class simplePlayerMovement : MonoBehaviour
         mainCam = Camera.main;
         rb = GetComponent<Rigidbody>();
         anim = playerMesh.GetComponent<Animator>();
+
+
+        // load evidence barks:
+        evidenceFoundBarks = evidenceFoundBarksTextAsset.text.Split('\n');
     }
 
     // Update is called once per frame
@@ -249,8 +259,33 @@ public class simplePlayerMovement : MonoBehaviour
     {
         if(other.gameObject.tag == "Evidence" && Input.GetKeyDown(KeyCode.E))
         {
+            // start the monologue about collecting evidence! This is here so that any conversations started by the evidence will override this one
+            if (startMonologueOnEvidenceFound) {
+                // find a random one
+                if (evidenceFoundBarks.Length > 0)
+                {
+                    // pick a random 
+                    string bark = "";
+                    int trynum = 0;
+                    while (trynum < 10 && bark.Length < 2)
+                    {
+                        // choose another one
+                        int choice = Random.Range(0, evidenceFoundBarks.Length);
+                        bark = evidenceFoundBarks[choice];
+                    }
+                    // start that sentence thing
+                    if (bark.Length >= 2)
+                    {
+                        monologueMember.InterruptConversation(bark, 0.05f, true, true); // resume it!
+                    }
+                }
+            }
+
+
             EvidenceMono emono = other.transform.parent.gameObject.GetComponentInChildren<EvidenceMono>();
             emono.CollectThisEvidence();
+
+
             //Evidence e = emono.EvidenceInfo;
             //PlayerManager.instance.CollectEvidence(e);
             Destroy(other.gameObject.GetComponent<Interactable>().interactTextInGame);

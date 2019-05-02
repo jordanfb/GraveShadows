@@ -6,8 +6,9 @@
         _TonalArtMap1("Tonal art map", 2DArray) = "white" {}
         _TonalArtMap2("Tonal art map", 2DArray) = "white" {}
         _TonalArtMap3("Tonal art map", 2DArray) = "white" {}
-        _animateTexture("Animate Tex", int) = 0
-        _mitigationAmount("mitigation", Range (0, 100)) = 50
+		_animateTexture("Animate Tex", int) = 0
+		_mitigationAmount("mitigation", Range(0, 100)) = 50
+		_FPS("FPS", float) = 24
         
     }
     SubShader {
@@ -26,6 +27,7 @@
             uniform float _tile;
             uniform float _mitigationAmount;
             uniform int _animateTexture;
+			uniform float _FPS;
             int current = 0;
             UNITY_DECLARE_TEX2DARRAY(_TonalArtMap1);
             UNITY_DECLARE_TEX2DARRAY(_TonalArtMap2);
@@ -66,7 +68,7 @@
                 float3 normalValues;
                 DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.uv), depthValue, normalValues);
                 //_mitigationAmount* clamp((depthValue * _ProjectionParams.z)/5, 0, 1.0)
-                float frame = fmod(_Time.y / 0.1, 3.0);
+				float frame = fmod(_Time.y * _FPS, 3.0);
                 
                 
                 if(_animateTexture == 1){

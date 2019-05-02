@@ -125,7 +125,7 @@ public class Interactable : MonoBehaviour
             interactTextInGame.SetActive(false);
         } else
         {
-            Debug.LogWarning("Error no interact text on this for some reason somehow. gameobject name: " + gameObject.name);
+            Debug.LogWarning("Error no interact text on this for some reason somehow. gameobject name: " + gameObject.name); // this gets called in the tutorial FIX
         }
     }
     public void enableText() {

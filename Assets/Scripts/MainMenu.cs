@@ -18,20 +18,6 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void Start()
-    {
-        // search for and destroy the custom level one stuff if they exist
-        foreach (CustomLevel1Logic logic in GameObject.FindObjectsOfType<CustomLevel1Logic>())
-        {
-            Destroy(logic.gameObject);
-        }
-        foreach (LevelOneEvidenceManager evidenceManager in GameObject.FindObjectsOfType<LevelOneEvidenceManager>())
-        {
-            Destroy(evidenceManager.gameObject);
-        }
-    }
-
-
     public void NewGame()
     {
         if (Options.instance.demoMode)
@@ -74,5 +60,10 @@ public class MainMenu : MonoBehaviour
     public void CreditsMenu()
     {
         GameplayManager.instance.VisitCreditsScene();
+    }
+
+    public void ControlsMenu()
+    {
+        GameplayManager.instance.VisitControls();
     }
 }

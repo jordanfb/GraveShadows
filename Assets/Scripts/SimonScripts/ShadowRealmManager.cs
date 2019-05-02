@@ -43,7 +43,10 @@ public class ShadowRealmManager : MonoBehaviour
     public GameObject copContainer;
     public float shadowAppearSpeed = 0.5f;
     public GameObject choosingUIPrefab;
+    public GameObject notChoosingUIPrefab;
     private GameObject choosingUI;
+    private GameObject notChoosingUI;
+
     private void Awake()
     {
 
@@ -72,6 +75,8 @@ public class ShadowRealmManager : MonoBehaviour
         }
         choosingUI = Instantiate(choosingUIPrefab);
         choosingUI.SetActive(false);
+        notChoosingUI = Instantiate(notChoosingUIPrefab);
+        notChoosingUI.SetActive(false);
 
     }
     private void Update()
@@ -82,9 +87,16 @@ public class ShadowRealmManager : MonoBehaviour
 
         if (isChoosingWall && checkForShadows().Count>1) {
             choosingUI.SetActive(true);
+            notChoosingUI.SetActive(false);
+        }
+        else  if (isChoosingWall && checkForShadows().Count == 1)
+        {
+            choosingUI.SetActive(false);
+            notChoosingUI.SetActive(true);
         }
         else {
             choosingUI.SetActive(false);
+            notChoosingUI.SetActive(false);
         }
 
         Debug.DrawRay(checkIfFreeCollider.transform.position, -transform.up + -transform.up*0.1f);

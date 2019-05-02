@@ -27,9 +27,11 @@ public class ConversationMember : MonoBehaviour
 
     private ScriptLine interuptedLine;
     private List<ConversationManager> runningManagersWhenInterupted = new List<ConversationManager>();
+    bool resumeAfterFinished = false;
 
-    public bool InterruptConversation(string newLine, float speed = .05f, bool keepTrackOfInteruppted = true)
+    public bool InterruptConversation(string newLine, float speed = .05f, bool keepTrackOfInteruppted = true, bool resumeAfterFinished = false)
     {
+        this.resumeAfterFinished = resumeAfterFinished;
         if (keepTrackOfInteruppted)
         {
             runningManagersWhenInterupted.Clear();
@@ -50,7 +52,7 @@ public class ConversationMember : MonoBehaviour
             }
             if (runningManagersWhenInterupted.Count > 1)
             {
-                Debug.LogError("ERROR: Multiple conversations running somehow");
+                //Debug.LogError("ERROR: Multiple conversations running somehow");
             }
         }
         SayLine(new ScriptLine(characterName, newLine, speed));
@@ -150,6 +152,12 @@ public class ConversationMember : MonoBehaviour
                     // empty the text and set it not active
                     text.text = "";
                     enableDisableUponSpeaking.SetActive(false); // disable it
+                }
+                if (resumeAfterFinished)
+                {
+                    // then resume!
+                    ResumeConversation();
+                    resumeAfterFinished = false;
                 }
             }
         }

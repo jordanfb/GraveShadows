@@ -80,7 +80,7 @@ public class FadeToBlack : MonoBehaviour
         }
         if (keepListeningTo != null && waitForConversation)
         {
-            while (keepListeningTo.IsStillTalking())
+            while (keepListeningTo.IsStillTalking() && !Input.GetMouseButtonDown(0))
             {
                 yield return null; // wait until they're done
             }
