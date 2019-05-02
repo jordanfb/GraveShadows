@@ -22,8 +22,11 @@ public class doorOpenScript : MonoBehaviour
     {
         spm = GameObject.Find("Player").GetComponent<simplePlayerMovement>();
     }
-    IEnumerator OpenDoorAnim(float dir) {
 
+
+
+
+    IEnumerator OpenDoorAnim(float dir) {
 
         while (Mathf.Abs(degrees) < 90) {
             isMoving = true;
@@ -34,12 +37,12 @@ public class doorOpenScript : MonoBehaviour
             assocDoor.transform.Rotate(Vector3.up, degreesChange);
             degrees += degreesChange;
         }
-        
+
+        assocDoor.transform.Rotate(Vector3.up, (Mathf.Abs(degrees)-90f) * dir);
         elapsedTime = 0;
         isMoving = false;
         isOpen = true;
         GameObject.Find("Player").GetComponent<simplePlayerMovement>().isAllowedToWalk = true;
-
     }
 
     IEnumerator CloseDoorAnim(float dir)
@@ -55,7 +58,10 @@ public class doorOpenScript : MonoBehaviour
             assocDoor.transform.Rotate(Vector3.up, degreesChange);
             degrees += degreesChange;
         }
-
+        Debug.Log(degrees);
+        Debug.Log(90 - Mathf.Abs(degrees));
+        assocDoor.transform.Rotate(Vector3.up, Mathf.Abs(degrees));
+        Debug.Log(assocDoor.transform.rotation.eulerAngles);
         elapsedTime = 0;
         isMoving = false;
         isOpen = false;
