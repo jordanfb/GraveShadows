@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11084,6 +11084,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1596993835}
   - component: {fileID: 1596993836}
+  - component: {fileID: 1596993837}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -11118,6 +11119,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2620269, y: 0.099603534, z: 0.98376405}
   m_Center: {x: 0.059038382, y: 0.0145666, z: -0.2568398}
+--- !u!114 &1596993837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596993834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8070154a4c06d7468079e0a47ed4943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 824428057}
+        m_MethodName: ClickOnGun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1605844925
 GameObject:
   m_ObjectHideFlags: 0
@@ -11204,51 +11233,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
-      propertyPath: choosingRedicle
+      propertyPath: mainCam
       value: 
-      objectReference: {fileID: 1022197697}
-    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+      objectReference: {fileID: 1418463136}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
-      propertyPath: shadowPlane
+      propertyPath: mainCam
       value: 
-      objectReference: {fileID: 1472679718}
-    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+      objectReference: {fileID: 1418463136}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
-      propertyPath: shadowRealmTransform
+      propertyPath: mainCam
       value: 
-      objectReference: {fileID: 1316298859}
-    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+      objectReference: {fileID: 1418463136}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
-      propertyPath: checkIfFreeCollider
+      propertyPath: mainCam
       value: 
-      objectReference: {fileID: 1731666907}
+      objectReference: {fileID: 1418463136}
     - target: {fileID: 2701277236420419684, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: monologueMember
       value: 
       objectReference: {fileID: 1013070726}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 1418463136}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 1418463136}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 1418463136}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: mainCam
-      value: 
-      objectReference: {fileID: 1418463136}
     - target: {fileID: 2701277236420419687, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11304,6 +11313,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: choosingRedicle
+      value: 
+      objectReference: {fileID: 1022197697}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: shadowPlane
+      value: 
+      objectReference: {fileID: 1472679718}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: shadowRealmTransform
+      value: 
+      objectReference: {fileID: 1316298859}
+    - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: checkIfFreeCollider
+      value: 
+      objectReference: {fileID: 1731666907}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.size
       value: 2
