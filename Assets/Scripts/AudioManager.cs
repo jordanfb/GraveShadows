@@ -20,14 +20,25 @@ public class AudioManager : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
 
+    private bool IsSprinting()
+    {
+        return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+    }
+
     // Update is called once per frame
     private void Update()
     {
         currentlyInShadowRealm = _srManager.isInShadowRealm;
-        if((Input.GetAxis("Horizontal") != 0.0f || Input.GetAxis("Vertical") > 0.0f) &&
+        if((Input.GetAxis("Horizontal") != 0.0f || Input.GetAxis("Vertical") != 0.0f) &&
             !_audioSource.isPlaying && !_srManager.isInShadowRealm)
         {
             _audioSource.clip = _clips[0];
+            //if (IsSprinting())
+            //{
+            //    // chose a different clip here
+            //    _audioSource.clip = _clips[2];
+            //}
+            _audioSource.volume = 1f;
             _audioSource.Play();
         }
 

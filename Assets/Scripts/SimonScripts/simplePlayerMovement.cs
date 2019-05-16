@@ -17,9 +17,16 @@ public class simplePlayerMovement : MonoBehaviour
     private Rigidbody rb;
     [SerializeField]
     public float PLAYER_SPEED_FORWARD;
+    public float PLAYER_SPRINT_SPEED_FORWARD;
     public float PLAYER_SPEED_STRAFE;
     public float SHADOW_SPEED;
     bool canExit = true; // to stop it from leaving twice
+
+    [Space]
+    public bool startMonologueOnEvidenceFound = true;
+    public TextAsset evidenceFoundBarksTextAsset;
+    public string[] evidenceFoundBarks = new string[0];
+    public ConversationMember monologueMember;
 
     public Animator anim;
 
@@ -37,9 +44,14 @@ public class simplePlayerMovement : MonoBehaviour
         mainCam = Camera.main;
         rb = GetComponent<Rigidbody>();
         anim = playerMesh.GetComponent<Animator>();
+
+
+        // load evidence barks:
+        evidenceFoundBarks = evidenceFoundBarksTextAsset.text.Split('\n');
     }
 
     // Update is called once per frame
+    Vector3 camForwardOnEnteranceToShadowRealm;
     void Update()
     {
         anim.SetBool("isInShadowRealm", SRmanager.isInShadowRealm);
@@ -48,6 +60,20 @@ public class simplePlayerMovement : MonoBehaviour
             anim.SetFloat("xVelocity", 0f);
 
             return;
+        } else
+        {
+            // set the velocity here for the animation so that if it's not moving it won't animate
+            anim.SetFloat("yVelocity", transform.InverseTransformDirection(rb.velocity).z);
+            anim.SetFloat("xVelocity", transform.InverseTransformDirection(rb.velocity).x);
+
+            if (rb.velocity.sqrMagnitude < .01f)
+            {
+                Camera.main.GetComponent<LozowichEffect>().animateTexture = 0;
+            }
+            else
+            {
+                Camera.main.GetComponent<LozowichEffect>().animateTexture = 1;
+            }
         }
 
         if (isAllowedToWalk)
@@ -61,14 +87,16 @@ public class simplePlayerMovement : MonoBehaviour
             }
             else
             {
-                wallMovement(moveDirX, moveDirY, currentWallCollider);
+                if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D)) {
+                    camForwardOnEnteranceToShadowRealm = mainCam.transform.forward;
+                }
+                wallMovement(moveDirX, moveDirY, currentWallCollider, camForwardOnEnteranceToShadowRealm);
             }
         }
     }
 
     public Animator getAnim()
     {
-
         return anim;
     }
 
@@ -90,11 +118,17 @@ public class simplePlayerMovement : MonoBehaviour
 
         }
 
-
-        anim.SetFloat("yVelocity", transform.InverseTransformDirection(rb.velocity).z);
-        anim.SetFloat("xVelocity", transform.InverseTransformDirection(rb.velocity).x);
-        rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0f, mainCam.transform.forward.z).normalized * _moveDirY * PLAYER_SPEED_FORWARD) 
-                                    + (mainCam.transform.right.normalized * _moveDirX)* PLAYER_SPEED_STRAFE);
+        float forwardsSpeed = PLAYER_SPEED_FORWARD;
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            forwardsSpeed = PLAYER_SPRINT_SPEED_FORWARD;
+            anim.speed = PLAYER_SPRINT_SPEED_FORWARD / PLAYER_SPEED_FORWARD; // scale it up
+        } else
+        {
+            anim.speed = 1;
+        }
+        rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z).normalized * _moveDirY * forwardsSpeed)
+                                    + (mainCam.transform.right.normalized * _moveDirX) * PLAYER_SPEED_STRAFE) + rb.velocity.y * transform.up;
 
 
 
@@ -105,18 +139,23 @@ public class simplePlayerMovement : MonoBehaviour
 
     bool touchingWall = true;
     Quaternion targetWallRot = Quaternion.AngleAxis(90f, Vector3.up);
-    void wallMovement(float _moveDirX, float _moveDirY, Collider _currentWallCollider) {
+    void wallMovement(float _moveDirX, float _moveDirY, Collider _currentWallCollider, Vector3 cameraForwardOnEnterance) {
 
         if (_currentWallCollider == null) {
-            Debug.Log("ERROR: current wall is null");
+            //Debug.Log("ERROR: current wall is null");
             return;
 
         }
         LayerMask mask = LayerMask.GetMask("WallLayer");
         RaycastHit hitWall;
         touchingWall = false;
+
+
+
+
         Vector3 nextPos;
-        if (Vector3.Dot(SRmanager.shadowPlane.transform.right, mainCam.transform.forward) < -0.2f) {
+        float turnOnLessThan = -0.1f;
+        if (Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < turnOnLessThan) {
             nextPos = SRmanager.shadowPlane.transform.position + SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime
                             + (Mathf.Sign(_moveDirX) * SRmanager.shadowPlane.transform.forward * PLAYER_WIDTH);
         }
@@ -139,7 +178,7 @@ public class simplePlayerMovement : MonoBehaviour
         if (touchingWall)
         {
 
-            if(Vector3.Dot(SRmanager.shadowPlane.transform.right, mainCam.transform.forward) < -0.2f)
+            if(Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < turnOnLessThan)
             {
                 SRmanager.shadowPlane.transform.position -= SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime;
             }
@@ -149,14 +188,18 @@ public class simplePlayerMovement : MonoBehaviour
 
             anim.SetFloat("xVelocityShadow", Mathf.Abs(-_moveDirX * SHADOW_SPEED) * Time.deltaTime);
 
-            if (_moveDirX>0) {
+            if (_moveDirX * Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) > 0)
+            {
                 targetWallRot = Quaternion.AngleAxis(90f, Vector3.up);
 
             }
-            else if (_moveDirX < 0)
+            else if (_moveDirX * Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < 0)
             {
                 targetWallRot = Quaternion.AngleAxis(-90f, Vector3.up);
 
+            }
+            else {
+                targetWallRot = Quaternion.AngleAxis(0f, Vector3.up);
             }
 
             float turnSpeed = 0.1f;
@@ -166,6 +209,10 @@ public class simplePlayerMovement : MonoBehaviour
         else {
 
             anim.SetFloat("xVelocityShadow", 0f);
+            targetWallRot = Quaternion.AngleAxis(0f, Vector3.up);
+            float turnSpeed = 0.1f;
+            gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, targetWallRot, turnSpeed);
+
         }
 
 
@@ -182,7 +229,22 @@ public class simplePlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Exit" && canExit)
         {
             canExit = false;
-            GameplayManager.instance.ExitBackToHubNextDay();
+            if (Options.instance.demoMode && Options.instance.demoModeEnableTutorial)
+            {
+                // if we're in level 1 then go to Demo Level 2, else go to the hub
+                if (GetComponent<CustomLevel1Logic>() != null)
+                {
+                    // it's level 1
+                    GameplayManager.instance.VisitDemoOffice(); // straight into the office!
+                } else
+                {
+                    // otherwise go to the next day which will take you to the hub correctly
+                    GameplayManager.instance.ExitBackToHubNextDay();
+                }
+            } else
+            {
+                GameplayManager.instance.ExitBackToHubNextDay();
+            }
         }
     }
 
@@ -197,11 +259,38 @@ public class simplePlayerMovement : MonoBehaviour
     {
         if(other.gameObject.tag == "Evidence" && Input.GetKeyDown(KeyCode.E))
         {
-            EvidenceMono emono = other.gameObject.GetComponent<EvidenceMono>();
+            // start the monologue about collecting evidence! This is here so that any conversations started by the evidence will override this one
+            if (startMonologueOnEvidenceFound) {
+                // find a random one
+                if (evidenceFoundBarks.Length > 0)
+                {
+                    // pick a random 
+                    string bark = "";
+                    int trynum = 0;
+                    while (trynum < 10 && bark.Length < 2)
+                    {
+                        // choose another one
+                        int choice = Random.Range(0, evidenceFoundBarks.Length);
+                        bark = evidenceFoundBarks[choice];
+                    }
+                    // start that sentence thing
+                    if (bark.Length >= 2)
+                    {
+                        monologueMember.InterruptConversation(bark, 0.05f, true, true); // resume it!
+                    }
+                }
+            }
+
+
+            EvidenceMono emono = other.transform.parent.gameObject.GetComponentInChildren<EvidenceMono>();
             emono.CollectThisEvidence();
+
+
             //Evidence e = emono.EvidenceInfo;
             //PlayerManager.instance.CollectEvidence(e);
-            StartCoroutine(DestroyAfterTime(1f, other.gameObject));
+            Destroy(other.gameObject.GetComponent<Interactable>().interactTextInGame);
+            StartCoroutine(DestroyAfterTime(1f, other.transform.parent.gameObject));
+
             if (emono.isWaistLevel) {
                 anim.SetTrigger("reachOver");
             }
@@ -215,8 +304,9 @@ public class simplePlayerMovement : MonoBehaviour
 
     IEnumerator DestroyAfterTime(float time, GameObject gameObjectToDestroy)
     {
+        isAllowedToWalk = false;
         yield return new WaitForSeconds(time);
-
+        isAllowedToWalk = true;
         Destroy(gameObjectToDestroy);
     }
 

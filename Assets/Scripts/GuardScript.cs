@@ -102,11 +102,13 @@ public class GuardScript : MonoBehaviour
     private Vector3 investigatePosition;
     public bool isInvestigating = false;
     private bool isWalkingOverToInvestigate = false;
+    private bool shouldResumeConversation = false;
     private int dayNum; // the current daynum
 
 
     private int pathingTargetNumber;
     private NavMeshAgent agent;
+
 
     // Start is called before the first frame update
     void Start()
@@ -139,6 +141,13 @@ public class GuardScript : MonoBehaviour
             // then find them!
             FindSkinnedMaterials();
             Debug.LogError("Cop without skinned mesh materials found!");
+        }
+
+        if (animator)
+        {
+            // start the guard idle animation on a random frame
+            AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+            animator.Play(state.fullPathHash, -1, Random.Range(0f, 100f)); // should randomize the time
         }
     }
 
@@ -218,7 +227,7 @@ public class GuardScript : MonoBehaviour
         else if (positions.Count == 1)
         {
             // then return to the original position and look whatever way you're looking
-            if (Vector3.Distance(positions[0], transform.position) > .2f)
+            if (Vector3.Distance(positions[0], transform.position) > .5f)
             {
                 agent.SetDestination(positions[0]);
             } else if (Quaternion.Angle(transform.rotation, startingDirection) > 5)
@@ -226,6 +235,7 @@ public class GuardScript : MonoBehaviour
                 // rotate towards the original starting direction
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, startingDirection, 90 * Time.deltaTime);
             }
+
             // otherwise just sit content and look pretty.
             // try uninterupting the conversation if you were having one!
         }
@@ -247,9 +257,9 @@ public class GuardScript : MonoBehaviour
             }
         } else
         {
-            // walk back to your original location
-            // FIX
-            Debug.Log("here");
+            // this shouldn't happen
+            //Debug.LogError("ERROR: There are zero positions how did this happen?");
+            // this can happen after the guard catches you to prevent any movement so I'm disabling that error log
         }
 
         // spot the character
@@ -283,7 +293,7 @@ public class GuardScript : MonoBehaviour
     public void DebugLogString(string s)
     {
         // this is used as a simple testing function for the guard suspicion levels
-        Debug.Log(s);
+        //Debug.Log(s);
     }
 
     public void SpeakThenRestartLevel()
@@ -295,7 +305,7 @@ public class GuardScript : MonoBehaviour
 
     public void ResetLevel()
     {
-        Debug.Log("Reset the level");
+        //Debug.Log("Reset the level");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -423,7 +433,7 @@ public class GuardScript : MonoBehaviour
             {
                 // say a random quip
                 string line = spottedSomethingQuips[Random.Range(0, spottedSomethingQuips.Length)];
-                Debug.Log("Delivered line when start suspicious: " + line);
+                //Debug.Log("Delivered line when start suspicious: " + line);
                 conversationMember.InterruptConversation(line);
             }
         }
@@ -436,7 +446,7 @@ public class GuardScript : MonoBehaviour
             {
                 // say a random quip
                 string line = sightedPlayerQuips[Random.Range(0, sightedPlayerQuips.Length)];
-                Debug.Log("Delivered line when fully suspicious: " + line);
+                //Debug.Log("Delivered line when fully suspicious: " + line);
                 conversationMember.InterruptConversation(line);
             }
             onSightingEvent.Invoke();
@@ -450,13 +460,27 @@ public class GuardScript : MonoBehaviour
                     GameLevelManager gameLevel = FindObjectOfType<GameLevelManager>();
                     Debug.Assert(gameLevel != null); // duh it can't be null we need it in all our levels
                     GameplayManager.instance.SkipDay(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, true, gameLevel.HasFoundEverything()));
-                    if (conversationMember != null && sightedPlayerQuips.Length > 0)
+                    if (Options.instance.demoMode)
                     {
-                        RunFunctionAfterFinishedSpeaking(GameplayManager.instance.VisitHubScene, 1);
+                        if (conversationMember != null && sightedPlayerQuips.Length > 0)
+                        {
+                            RunFunctionAfterFinishedSpeaking(GameplayManager.instance.VisitDemoHub, 1);
+                        }
+                        else
+                        {
+                            RunFunctionAfterTime(GameplayManager.instance.VisitDemoHub, 1);
+                        }
                     }
                     else
                     {
-                        RunFunctionAfterTime(GameplayManager.instance.VisitHubScene, 1);
+                        if (conversationMember != null && sightedPlayerQuips.Length > 0)
+                        {
+                            RunFunctionAfterFinishedSpeaking(GameplayManager.instance.VisitHubScene, 1);
+                        }
+                        else
+                        {
+                            RunFunctionAfterTime(GameplayManager.instance.VisitHubScene, 1);
+                        }
                     }
                 }
             }
@@ -504,13 +528,30 @@ public class GuardScript : MonoBehaviour
             {
                 // say a random quip
                 string line = lostSightQuips[Random.Range(0, lostSightQuips.Length)];
-                Debug.Log("Delivered line when lost sight: " + line);
-                conversationMember.InterruptConversation(line);
+                //Debug.Log("Delivered line when lost sight: " + line);
+                bool stoppedConversation = conversationMember.InterruptConversation(line, .05f, false);
+                // now wait until you finished speaking
+                if (stoppedConversation)
+                {
+                    //Debug.Log("Started coroutine chain");
+                    StartCoroutine(WaitUntilFinishedSpeaking(() =>
+                    {
+                        // now resume your conversation if you had one
+                        string resumeLine = returnToConversationQuips[Random.Range(0, returnToConversationQuips.Length)];
+                        //Debug.Log("Delivered line when resuming conversation: " + resumeLine);
+                        conversationMember.InterruptConversation(resumeLine, .05f, false); // don't keep track of the non-existent conversations we didn't interrupt
+                        // then wait again
+                        StartCoroutine(WaitUntilFinishedSpeaking(() =>
+                        {
+                            //Debug.Log("Resumed conversation in conversation member");
+                            // after you finished speaking this time, resume the conversation
+                            conversationMember.ResumeConversation();
+                        }, 3));
+                    }, 3));
+                }
             }
             // we also fire the event which happens when they stop seeing them
             onLoseSuspicionEvent.Invoke();
-
-            // here we should go back to our conversation after a segue. FIX
         }
     }
 
@@ -568,6 +609,6 @@ public class GuardScript : MonoBehaviour
         {
             skinnedMaterials[i] = skinnedMeshRenderers[i].sharedMaterial;
         }
-        Debug.Log("Found " + skinnedMeshRenderers.Length + " mesh renderers and materials");
+        //Debug.Log("Found " + skinnedMeshRenderers.Length + " mesh renderers and materials");
     }
 }

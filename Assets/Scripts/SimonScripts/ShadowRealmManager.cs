@@ -42,6 +42,11 @@ public class ShadowRealmManager : MonoBehaviour
     public GameObject particleSystemGO;
     public GameObject copContainer;
     public float shadowAppearSpeed = 0.5f;
+    public GameObject choosingUIPrefab;
+    public GameObject notChoosingUIPrefab;
+    private GameObject choosingUI;
+    private GameObject notChoosingUI;
+
     private void Awake()
     {
 
@@ -62,12 +67,17 @@ public class ShadowRealmManager : MonoBehaviour
         tpc = GetComponent<ThirdPersonCamera>();
         SHADOWPLANE_HEIGHT = shadowPlane.transform.GetChild(0).GetComponent<Renderer>().bounds.size.y/2f;
         lightContainer = GameObject.Find("lightContainer");
-        if(lightContainer == null) {
-            print("ERROR: light container not found");
-        }
+        //if(lightContainer == null) {
+        //    print("ERROR: light container not found");
+        //}
         for(int i = 0; i< lightContainer.transform.childCount; i++) {
             lightsInScene.Add(lightContainer.transform.GetChild(i).gameObject);
         }
+        choosingUI = Instantiate(choosingUIPrefab);
+        choosingUI.SetActive(false);
+        notChoosingUI = Instantiate(notChoosingUIPrefab);
+        notChoosingUI.SetActive(false);
+
     }
     private void Update()
     {
@@ -75,31 +85,40 @@ public class ShadowRealmManager : MonoBehaviour
         //    checkForShadows();
         //}
 
-        //if (isChoosingWall) {
-        //    choosingRedicle.SetActive(true);
-        //}
-        //else {
-        //    choosingRedicle.SetActive(false);
-        //}
+        if (isChoosingWall && checkForShadows().Count>1) {
+            choosingUI.SetActive(true);
+            notChoosingUI.SetActive(false);
+        }
+        else  if (isChoosingWall && checkForShadows().Count == 1)
+        {
+            choosingUI.SetActive(false);
+            notChoosingUI.SetActive(true);
+        }
+        else {
+            choosingUI.SetActive(false);
+            notChoosingUI.SetActive(false);
+        }
 
         Debug.DrawRay(checkIfFreeCollider.transform.position, -transform.up + -transform.up*0.1f);
         if (Input.GetKey(KeyCode.Space))
         {
+
             if (abortIsChoosingWall) {
                 return;
             }
-            if (Input.GetKeyDown(KeyCode.S)){
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.Escape))
+            {
                 tpc.resetCurrentWallToChooseFrom();
                 foreach (KeyValuePair<Collider, List<Vector3>> entry in checkForShadows())
                 {
                     if (entry.Key == null)
                     {
-                        Debug.Log("ENTRY IS NULL");
+                        //Debug.Log("ENTRY IS NULL");
                         continue;
                     }
                     if (entry.Key.gameObject.transform.parent == null)
                     {
-                        Debug.Log("ENTRY PARENT IS NULL");
+                        //Debug.Log("ENTRY PARENT IS NULL");
                         continue;
                     }
 
@@ -114,16 +133,20 @@ public class ShadowRealmManager : MonoBehaviour
 
                 return;
             }
+            if (checkForShadows().Keys.Count == 0)
+            {
+                return;
+            }
             isChoosingWall = true;
             foreach (KeyValuePair<Collider, List<Vector3>> entry in checkForShadows())
             {
                 if(entry.Key == null) {
-                    Debug.Log("ENTRY IS NULL");
+                    //Debug.Log("ENTRY IS NULL");
                     continue;
                 }
                 if (entry.Key.gameObject.transform.parent == null)
                 {
-                    Debug.Log("ENTRY PARENT IS NULL");
+                    //Debug.Log("ENTRY PARENT IS NULL");
                     continue;
                 }
 
@@ -178,7 +201,7 @@ public class ShadowRealmManager : MonoBehaviour
                 {
                     if (entry.Key == null)
                     {
-                        Debug.Log("ENTRY IS NULL");
+                        //Debug.Log("ENTRY IS NULL");
                         continue;
                     }
 
@@ -189,7 +212,7 @@ public class ShadowRealmManager : MonoBehaviour
                 }
                 if (wallToTeleportTo == null)
                 {
-                    Debug.Log("ERROR, no wall selected, teleport to no walls");
+                    //Debug.Log("ERROR, no wall selected, teleport to no walls");
                     return;
                 }
 
@@ -278,12 +301,19 @@ public class ShadowRealmManager : MonoBehaviour
     void teleportFromShadowRealm()
     {
         if (checkIfFreeCollider.GetComponent<checkIfFreeColliderScript>().isColliding) {
-            Debug.Log("ERROR, player trying to enter real world but would be colliding with something");
+        Debug.Log("ERROR, player trying to enter real world but would be colliding with something");
             return;
+        }
+        foreach (GameObject ev in GameObject.FindGameObjectsWithTag("Evidence"))
+        {
+            if(ev.GetComponent<EvidenceMono>() == null) {
+                continue;
+            }
+            ev.GetComponent<EvidenceMono>().setMatsToReg();
         }
 
 
-        for(int i = 0; i< copContainer.transform.childCount; i++) {
+        for (int i = 0; i< copContainer.transform.childCount; i++) {
             copContainer.transform.GetChild(i).gameObject.GetComponent<GuardScript>().ResetMaterials();
         }
         StartCoroutine(spawnParticleSystem(shadowPlane.transform.position, checkIfFreeCollider.transform.position, shadowPlane.transform.position - checkIfFreeCollider.transform.position));
@@ -296,7 +326,12 @@ public class ShadowRealmManager : MonoBehaviour
 
     void teleportToWall(Collider targetWall, List<Vector3> pointList) {
 
-
+        foreach(GameObject ev in GameObject.FindGameObjectsWithTag("Evidence")) {
+            if(ev.GetComponent<EvidenceMono>() == null) {
+                continue;
+            }
+            ev.GetComponent<EvidenceMono>().setMatsToOutline();
+        }
         Debug.DrawLine(transform.position, findMiddlePos(pointList), Color.magenta);
 
         Vector3 midPoint = findMiddlePos(pointList);
@@ -344,7 +379,7 @@ public class ShadowRealmManager : MonoBehaviour
     Vector3 findMiddlePos(List<Vector3> pointList) {
         if (pointList.Count == 0)
         {
-            Debug.Log("ERROR: Length of list is 0");
+            //Debug.Log("ERROR: Length of list is 0");
             return Vector3.negativeInfinity;
         }
         Vector3 average = Vector3.zero;

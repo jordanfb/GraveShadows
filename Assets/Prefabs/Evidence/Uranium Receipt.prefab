@@ -1,5 +1,69 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2029010668904671871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7877194418504313184}
+  - component: {fileID: 3327664842005776331}
+  - component: {fileID: 6185460259520738483}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Evidence
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7877194418504313184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029010668904671871}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.04, z: -0.05}
+  m_LocalScale: {x: 1.7611917, y: 118.98147, z: 2.464787}
+  m_Children: []
+  m_Father: {fileID: 6625411310927028412}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3327664842005776331
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029010668904671871}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6185460259520738483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029010668904671871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77001834fa0e8465a854bbd0d7dff923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextInGame: {fileID: 0}
+  interactTextPrefab: {fileID: 1704617898835638000, guid: 12f9ec766228d4c0c8562e1d2693257e,
+    type: 3}
+  baseText: Press "e" to pick up
+  onActivateText: 
+  Player: {fileID: 0}
+  hubFocus: 0
 --- !u!1 &6081900468483867715
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,11 +75,10 @@ GameObject:
   - component: {fileID: 6625411310927028412}
   - component: {fileID: 1162520695275398514}
   - component: {fileID: 8634996273265433050}
-  - component: {fileID: 4629545353789966904}
   - component: {fileID: 6261093827689696422}
   m_Layer: 0
   m_Name: Uranium Receipt
-  m_TagString: Untagged
+  m_TagString: Evidence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,9 +91,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6081900468483867715}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -22.270824, y: -2.536478, z: -8.023502}
-  m_LocalScale: {x: 0.018275, y: 1.2346109, z: 0.88218}
-  m_Children: []
+  m_LocalPosition: {x: -21.9374, y: -2.536478, z: -7.7853}
+  m_LocalScale: {x: 0.008404672, y: 0.56779754, z: 0.40571457}
+  m_Children:
+  - {fileID: 7877194418504313184}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -79,19 +143,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4629545353789966904
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6081900468483867715}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 146.59933, y: 9.5, z: 9.5}
-  m_Center: {x: 68.54965, y: 6.2921876e-15, z: 0}
 --- !u!114 &6261093827689696422
 MonoBehaviour:
   m_ObjectHideFlags: 0

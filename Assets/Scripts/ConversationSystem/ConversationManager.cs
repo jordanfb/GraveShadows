@@ -279,6 +279,17 @@ public class ConversationManager : MonoBehaviour
         running = false;
     }
 
+    public void ContinueScript()
+    {
+        running = true;
+        conversationTimer = 0;
+        conversationLineNumber = Mathf.Max(conversationLineNumber - 1, 0); // maxium get back to the original line not before that
+
+        // start running line again // no the update function will handle this
+        //scriptLines[conversationLineNumber].actor.SayLine(scriptLines[conversationLineNumber]);
+        //Debug.Log("Continued the script");
+    }
+
     private bool ParseScript()
     {
         scriptLines = new List<ScriptLine>();

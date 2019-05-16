@@ -7,7 +7,10 @@ public class EvidenceManager : MonoBehaviour
     public static EvidenceManager instance; // monobehavior
     public int maxEvidence = 30;
     public int otherSuspectMax = 3;
+    public int officeEvidenceCount;
+    public int factoryEvidenceCount;
     public List<YarnBoardEntity> allEvidenceEntities;
+    public List<GameObject> allEvidencePrefabs;
     public Suspect culprit;
     private List<SerializedEvidence> allSerializedEvidence = new List<SerializedEvidence>(); // this is private so that it doesn't get saved. It's initialized either from save data or by code
     private List<Suspect> suspects = new List<Suspect>();
@@ -20,6 +23,10 @@ public class EvidenceManager : MonoBehaviour
     private int[] suspectTotals = new int[5];
     private bool generated = false;
 
+    public static List<GameObject> AllEvidencePrefabs
+    {
+        get { return instance.allEvidencePrefabs; }
+    }
 
     public static List<SerializedEvidence> AllEvidence
     {
@@ -44,6 +51,15 @@ public class EvidenceManager : MonoBehaviour
         {
             instance.allEvidenceEntities = value;
         }
+    }
+
+    public GameObject GetAssociatedPrefab(Evidence e)
+    {
+        int index = allEvidenceEntities.IndexOf(e) - 5;
+        if (index < 0 || index >= allEvidencePrefabs.Count)
+            return null;
+        // Have to account for suspects existing as yarn board entities
+        return allEvidencePrefabs[index];
     }
 
     public bool Generated
@@ -108,10 +124,10 @@ public class EvidenceManager : MonoBehaviour
         {
             // then we're set!
             //Debug.Assert(se.evidenceState == SerializedEvidence.EvidenceState.NotFound); // shouldn't have found something not in the game
-            Debug.Log("Evidence state: " + se.evidenceState);
+            //Debug.Log("Evidence state: " + se.evidenceState);
             if (se.evidenceState != SerializedEvidence.EvidenceState.OnYarnBoard)
             {
-                // this fixes the assert I guess but we should actually fix it
+                // this fixes the assert I guess but we should actually fix it. THings aren't set correctly unfortunately... Whatever.
                 se.evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
             }
         }
@@ -138,6 +154,7 @@ public class EvidenceManager : MonoBehaviour
         for (int i = 0; i < allEvidenceEntities.Count; i++)
         {
             SerializedEvidence e = new SerializedEvidence(i);
+            e.evidenceState = SerializedEvidence.EvidenceState.NotInGame; // make sure it's all not found so that it doesn't mess your second game up
             AllEvidence.Add(e);
         }
         // this is called and then later you'd initialize whether the evidence is in the game or not and store that in this info
@@ -242,13 +259,13 @@ public class EvidenceManager : MonoBehaviour
                     se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
                     if (ev.GetLevel == Level.Office)
                     {
-                        office++;
-                        officeEv.Add(se);
+                        if(ev.GetEvidenceType != EvidenceType.Conversation)
+                            officeEv.Add(se);
                     }
                     else if (ev.GetLevel == Level.Factory)
                     {
-                        factory++;
-                        factoryEv.Add(se);
+                        if (ev.GetEvidenceType != EvidenceType.Conversation)
+                            factoryEv.Add(se);
                     } else if (ev.GetLevel == Level.Apartment)
                     {
                         apartmentEV.Add(se);
@@ -260,20 +277,13 @@ public class EvidenceManager : MonoBehaviour
                 }                       
                 else if(ev.GetEvidenceType == EvidenceType.Conversation)
                 {
-                    se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
-                    if (ev.GetLevel == Level.Office)
-                    {
-                        office++;
-                        officeEv.Add(se);
-                    }
-                    else
-                    {
-                        factory++;
-                        factoryEv.Add(se);
-                    }
-
                     foreach (Suspect s in ev.AssociatedSuspects)
                         suspectTotals[suspects.IndexOf(s)]++;
+                }
+                else if(ev.GetLevel == Level.Apartment)
+                {
+                    apartmentEV.Add(se);
+                    se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
                 }
                 continue;
             }
@@ -287,8 +297,9 @@ public class EvidenceManager : MonoBehaviour
             }
             
         }
-                
-        while(office < 15 || factory < 15)
+
+        /*
+        while(office < officeEvidenceCount || factory < factoryEvidenceCount)
         {
             if (remainingEvidence.Count == 0)
                 break;
@@ -310,7 +321,7 @@ public class EvidenceManager : MonoBehaviour
             switch(ev.GetLevel)
             {
                 case Level.Office:
-                    if(office < maxEvidence / 2)
+                    if(office < officeEvidenceCount)
                     {
                         // Add it to the game!
                         se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
@@ -319,7 +330,7 @@ public class EvidenceManager : MonoBehaviour
                     }
                     break;
                 case Level.Factory:
-                    if(factory < maxEvidence / 2)
+                    if(factory < factoryEvidenceCount)
                     {
                         // Add it to the game!
                         se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
@@ -341,8 +352,86 @@ public class EvidenceManager : MonoBehaviour
             if (se.evidenceState == SerializedEvidence.EvidenceState.NotFound)
                 count++;
         }
-        Debug.Log(culprit.CodeName);
-        Debug.Log(count);
+        */
+
+        while(officeEv.Count < officeEvidenceCount)
+        {
+            if (remainingEvidence.Count == 0)
+                break;
+
+            // Generate the next piece of evidence and check if it can be added.
+            int next = Random.Range(0, remainingEvidence.Count - 1);
+            SerializedEvidence se = remainingEvidence[next];
+            Evidence ev = ReferencedEntity(se) as Evidence;
+            
+            if(ev == null || !CheckIfPlaceable(ev))
+            {
+                remainingEvidence.Remove(se);
+                continue;
+            }
+
+            if(ev.GetLevel == Level.Office && !officeEv.Contains(se))
+            {
+                se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
+                officeEv.Add(se);
+            }
+
+            // Update suspect totals
+            foreach (Suspect s in ev.AssociatedSuspects)
+                suspectTotals[suspects.IndexOf(s)]++;
+            remainingEvidence.Remove(se);
+        }
+
+        remainingEvidence = new List<SerializedEvidence>(allSerializedEvidence);
+
+        while (factoryEv.Count < factoryEvidenceCount)
+        {
+            if (remainingEvidence.Count == 0)
+                break;
+
+            // Generate the next piece of evidence and check if it can be added.
+            int next = Random.Range(0, remainingEvidence.Count - 1);
+            SerializedEvidence se = remainingEvidence[next];
+            Evidence ev = ReferencedEntity(se) as Evidence;
+
+            if (ev == null || !CheckIfPlaceable(ev))
+            {
+                remainingEvidence.Remove(se);
+                continue;
+            }
+
+            if (ev.GetLevel == Level.Factory && !factoryEv.Contains(se))
+            {
+                se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
+                factoryEv.Add(se);
+            }
+
+            // Update suspect totals
+            foreach (Suspect s in ev.AssociatedSuspects)
+                suspectTotals[suspects.IndexOf(s)]++;
+            remainingEvidence.Remove(se);
+        }
+
+        //ClampEvidenceLists();
+    }
+
+    private void ClampEvidenceLists()
+    {
+        while(officeEv.Count > officeEvidenceCount)
+        {
+            int index = Random.Range(0, officeEv.Count - 1);
+            SerializedEvidence se = officeEv[index];
+            se.evidenceState = SerializedEvidence.EvidenceState.NotInGame;
+            officeEv.Remove(se);
+        }
+
+        while(factoryEv.Count > factoryEvidenceCount)
+        {
+            int index = Random.Range(0, factoryEv.Count - 1);
+            SerializedEvidence se = factoryEv[index];
+            se.evidenceState = SerializedEvidence.EvidenceState.NotInGame;
+            factoryEv.Remove(se);
+        }
     }
 
     private bool CheckIfPlaceable(Evidence ev)

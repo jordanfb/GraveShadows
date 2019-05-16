@@ -104,7 +104,11 @@ public class DeskDayDescriptionItem : MonoBehaviour, IPointerDownHandler
         {
             StopCoroutine(lerpingCoroutine);
         }
-        lerpingCoroutine = StartCoroutine(LerpToDesk());
+        if (gameObject.activeInHierarchy)
+        {
+            // they're disabled in the demo so this check is necessary
+            lerpingCoroutine = StartCoroutine(LerpToDesk());
+        }
     }
 
     private IEnumerator LerpToDesk()

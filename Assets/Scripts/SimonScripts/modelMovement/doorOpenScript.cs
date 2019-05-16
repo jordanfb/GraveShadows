@@ -22,22 +22,27 @@ public class doorOpenScript : MonoBehaviour
     {
         spm = GameObject.Find("Player").GetComponent<simplePlayerMovement>();
     }
-    IEnumerator OpenDoorAnim(float dir) {
 
+
+
+
+    IEnumerator OpenDoorAnim(float dir) {
 
         while (Mathf.Abs(degrees) < 90) {
             isMoving = true;
+            GameObject.Find("Player").GetComponent<simplePlayerMovement>().isAllowedToWalk = false;
             yield return new WaitForSeconds(timeStep);
             elapsedTime += timeStep;
             float degreesChange = openSpeed * Mathf.Sqrt(elapsedTime*20) * Time.deltaTime * dir;
             assocDoor.transform.Rotate(Vector3.up, degreesChange);
             degrees += degreesChange;
         }
-        
+
+        assocDoor.transform.Rotate(Vector3.up, (Mathf.Abs(degrees)-90f) * dir);
         elapsedTime = 0;
         isMoving = false;
         isOpen = true;
-
+        GameObject.Find("Player").GetComponent<simplePlayerMovement>().isAllowedToWalk = true;
     }
 
     IEnumerator CloseDoorAnim(float dir)
@@ -53,7 +58,10 @@ public class doorOpenScript : MonoBehaviour
             assocDoor.transform.Rotate(Vector3.up, degreesChange);
             degrees += degreesChange;
         }
-
+        Debug.Log(degrees);
+        Debug.Log(90 - Mathf.Abs(degrees));
+        assocDoor.transform.Rotate(Vector3.up, Mathf.Abs(degrees));
+        Debug.Log(assocDoor.transform.rotation.eulerAngles);
         elapsedTime = 0;
         isMoving = false;
         isOpen = false;
@@ -63,12 +71,15 @@ public class doorOpenScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (isMoving)
-        {
-            return;
+        if(other.gameObject.tag == "Player") {
+            if (isMoving)
+            {
+                return;
+            }
+            Vector3 dirToPlayer = transform.position - other.transform.position;
+            lastOpenDir = -Mathf.Sign(Vector3.Dot(dirToPlayer, transform.right));
         }
-        Vector3 dirToPlayer = transform.position - other.transform.position;
-        lastOpenDir = -Mathf.Sign(Vector3.Dot(dirToPlayer, transform.right));
+
     }
 
 

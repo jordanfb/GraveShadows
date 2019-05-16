@@ -6,10 +6,9 @@
         _TonalArtMap1("Tonal art map", 2DArray) = "white" {}
         _TonalArtMap2("Tonal art map", 2DArray) = "white" {}
         _TonalArtMap3("Tonal art map", 2DArray) = "white" {}
-        _blurTex1("blurTexture", 2D) = "white" {}
-        _blurTex2("blurTexture", 2D) = "white" {}
-        _blurTex3("blurTexture", 2D) = "white" {}
-        _mitigationAmount("mitigation", Range (0, 100)) = 50
+		_animateTexture("Animate Tex", int) = 0
+		_mitigationAmount("mitigation", Range(0, 100)) = 50
+		_FPS("FPS", float) = 24
         
     }
     SubShader {
@@ -24,12 +23,12 @@
             uniform sampler2D _testTex;
             uniform sampler2D _CameraDepthTexture;
             uniform sampler2D _CameraDepthNormalsTexture;
-            uniform sampler2D _blurTex1;
-            uniform sampler2D _blurTex2;
-            uniform sampler2D _blurTex3;
             uniform float _bwBlend;
             uniform float _tile;
             uniform float _mitigationAmount;
+            uniform int _animateTexture;
+			uniform float _FPS;
+            int current = 0;
             UNITY_DECLARE_TEX2DARRAY(_TonalArtMap1);
             UNITY_DECLARE_TEX2DARRAY(_TonalArtMap2);
             UNITY_DECLARE_TEX2DARRAY(_TonalArtMap3);
@@ -61,9 +60,7 @@
                 
                 
                 float2 rotUV = rotateUV(i.uv, 1.0);
-                float4 blurTex1 = tex2D(_blurTex1, i.uv);
-                float4 blurTex2 = tex2D(_blurTex2, i.uv);
-                float4 blurTex3 = tex2D(_blurTex3, i.uv);
+
                 
                 float2 mainUV = i.uv;
                 float4 color;
@@ -71,23 +68,14 @@
                 float3 normalValues;
                 DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.uv), depthValue, normalValues);
                 //_mitigationAmount* clamp((depthValue * _ProjectionParams.z)/5, 0, 1.0)
-                float frame = fmod(_Time.y / 0.1, 3.0);
-                int current = floor(frame);
+				float frame = fmod(_Time.y * _FPS, 3.0);
                 
-                //if(current == 0){
-                //    mainUV.x += (blurTex1.x/_mitigationAmount)%1.0;
-                //}
-                //else if(current == 1){
-                //    mainUV.x += (blurTex2.x/_mitigationAmount)%1.0;
-                //}
-                //else if(current == 2){
-                //    mainUV.x += (blurTex3.x/_mitigationAmount)%1.0;
-                //}
                 
-              
-            
-            
+                if(_animateTexture == 1){
+                    current = floor(frame);
+                }
                 
+
                 color = tex2D(_MainTex, mainUV);
                 
                 
@@ -111,7 +99,7 @@
                 
                 
                
-                TAMuv = rotateUV(mainUV, rand(normalValues)*10); 
+                //TAMuv = rotateUV(mainUV, rand(normalValues)*10); 
                 float4 col1 = float4(1.0,0,0,1.0);
                 float4 col2 = float4(1.0,0,0,1.0);
                 if(current == 0){
@@ -141,7 +129,6 @@
                 
 
                 float4 n = float4(normalValues, 1.0);
-                //return depthValue * _ProjectionParams.z;
                 return result;
                 
                 

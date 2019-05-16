@@ -35,8 +35,8 @@ public class RandomEvidenceGen : MonoBehaviour
         GatherCulpritAndConversationEvidence(culpritIndex);
         GatherRandomEvidence();
 
-        Debug.Log("Office: " + _officeGenQueue.Count);
-        Debug.Log("Factory: " + _factoryGenQueue.Count);
+        //Debug.Log("Office: " + _officeGenQueue.Count);
+        //Debug.Log("Factory: " + _factoryGenQueue.Count);
     }
 
     // Update is called once per frame

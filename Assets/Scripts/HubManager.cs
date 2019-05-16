@@ -20,7 +20,7 @@ public class HubManager : MonoBehaviour
     public ThirdPersonCamera characterCamera;
     public Transform DeskCameraLocation;
     public Transform YarnBoardCameraLocation;
-    private float cameraLerpPos = 0; // 0 is the player
+    private float cameraLerpPos = .01f; // 0 is the player
     public CameraMode cameraMode = CameraMode.FollowPlayer; // looking at desk, player, or yarnboard
 
     [Header("Player")]
@@ -46,6 +46,8 @@ public class HubManager : MonoBehaviour
     public BoxCollider enterYarnCollider;
     public YarnBoard yarnBoard;
 
+    public bool isDemoHubworld = false;
+
 
     private Transform otherCameraTransformPosition;
 
@@ -60,6 +62,8 @@ public class HubManager : MonoBehaviour
 
     public void ExitDesk()
     {
+        enterDeskCollider.gameObject.GetComponent<Interactable>().hubFocus = false;
+
         // this is called when the collider is clicked probably
         cameraMode = CameraMode.FollowPlayer; // go back to following the player
         for (int i = 0; i < deskItems.Count; i++)
@@ -68,12 +72,16 @@ public class HubManager : MonoBehaviour
         }
 
         LockMouse.LockTheMouse();
-        endgameManager.gameObject.SetActive(false);
+        //endgameManager.gameObject.SetActive(false);
+        endgameManager.SetOpen(false);
         deskCollider.SetActive(false);
+        player.isAllowedToWalk = true;
     }
 
     public void EnterDesk()
     {
+        enterDeskCollider.gameObject.GetComponent<Interactable>().hubFocus = true;
+        player.isAllowedToWalk = false;
         cameraMode = CameraMode.LookAtDesk;
         deskCollider.SetActive(true);
         LockMouse.UnlockTheMouse();
@@ -82,6 +90,8 @@ public class HubManager : MonoBehaviour
 
     public void EnterYarnBoard()
     {
+        enterYarnCollider.gameObject.GetComponent<Interactable>().hubFocus = true;
+        player.isAllowedToWalk = false;
         cameraMode = CameraMode.LookAtYarnBoard;
         yarnBoardExitCollider.SetActive(false);
         LockMouse.UnlockTheMouse();
@@ -90,8 +100,10 @@ public class HubManager : MonoBehaviour
     
     public void ExitYarnBoard()
     {
+        //print("exit yarn board");
+        enterYarnCollider.gameObject.GetComponent<Interactable>().hubFocus = false;
         // this is called when the collider is clicked probably
-
+        player.isAllowedToWalk = true;
         // Remove YarnBoard UI from screen so we can do things!
         if (yarnBoard._suspectInfoPanel.activeInHierarchy)
             yarnBoard.DeactivateSuspectPanel();
@@ -108,13 +120,13 @@ public class HubManager : MonoBehaviour
     void Update()
     {
         // only have these cheat keys if we're in the editor, not a build FIX
-        if (Input.GetKeyDown(KeyCode.M))
+        if (GameplayManager.instance.debugMode && Input.GetKeyDown(KeyCode.M))
         {
             // skip a day
             GameplayManager.instance.SkipDay("Visited stuff saw death la-di-da\n\nOh yeah and I was caught");
             LoadDesk();
         }
-        if (Input.GetKeyDown(KeyCode.N))
+        if (GameplayManager.instance.debugMode && Input.GetKeyDown(KeyCode.N))
         {
             // skip a day
             GameplayManager.instance.NextDay("Visited stuff found stuff whoop-di-do");
@@ -180,20 +192,24 @@ public class HubManager : MonoBehaviour
 
     private void UpdateCamera()
     {
-
+        bool updatePos = false;
         if (cameraMode == CameraMode.FollowPlayer && cameraLerpPos > 0)
         {
+            updatePos = true;
             cameraLerpPos -= Time.deltaTime;
-            if (cameraLerpPos < 0)
+            if (cameraLerpPos <= 0)
             {
                 cameraLerpPos = 0;
+                cameraGameObject.transform.SetParent(characterCamera.mainCam.transform);
             }
         }
         else if (cameraLerpPos < 1)
         {
+            updatePos = true;
             cameraLerpPos += Time.deltaTime;
-            if (cameraLerpPos > 1)
+            if (cameraLerpPos >= 1)
             {
+                cameraGameObject.transform.SetParent(otherCameraTransformPosition);
                 cameraLerpPos = 1;
             }
         }
@@ -201,19 +217,23 @@ public class HubManager : MonoBehaviour
 
         // now lerp the camera using smootherstep
         // now lerp between them
-        float t = DeskDayDescriptionItem.Smootherstep(cameraLerpPos);
-        cameraGameObject.transform.position = Vector3.Lerp(characterCamera.mainCam.transform.position, otherCameraTransformPosition.position, t);
-        cameraGameObject.transform.rotation = Quaternion.Lerp(characterCamera.mainCam.transform.rotation, otherCameraTransformPosition.rotation, t);
+        if (updatePos)
+        {
+            // only update the pos if the camera lerp has moved
+            float t = DeskDayDescriptionItem.Smootherstep(cameraLerpPos);
+            cameraGameObject.transform.position = Vector3.Lerp(characterCamera.mainCam.transform.position, otherCameraTransformPosition.position, t);
+            cameraGameObject.transform.rotation = Quaternion.Lerp(characterCamera.mainCam.transform.rotation, otherCameraTransformPosition.rotation, t);
+        }
     }
 
     public void ClickOnGun()
     {
-        if (GameplayManager.instance.IsChoosingDay() && cameraMode == CameraMode.LookAtDesk)
+        if ((Options.instance.demoMode || GameplayManager.instance.IsChoosingDay()) && cameraMode == CameraMode.LookAtDesk)
         {
             // only do anything if you click on it at the right time
-            Debug.Log("Clicked on the gun");
-            // FIX
-            endgameManager.gameObject.SetActive(true);
+            //Debug.Log("Clicked on the gun");
+            //endgameManager.gameObject.SetActive(true);
+            endgameManager.SetOpen(true);
         }
     }
 
@@ -221,30 +241,34 @@ public class HubManager : MonoBehaviour
     {
         // load the desk UI stuff here
         // setting the text and whatever
-        string[] dayNames = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday\nLast Day" };
-        for (int i = 0; i < deskItems.Count; i++)
+        if (!Options.instance.demoMode)
         {
-            string content = "<size=.05><u>" + dayNames[i] + "</u></size>\n";
-            if (GameplayManager.instance.dayData.Count > i)
+            string[] dayNames = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday\nLast Day" };
+            for (int i = 0; i < deskItems.Count; i++)
             {
-                content += GameplayManager.instance.dayData[i].dayContent;
+                string content = "<size=.05><u>" + dayNames[i] + "</u></size>\n";
+                if (GameplayManager.instance.dayData.Count > i)
+                {
+                    content += GameplayManager.instance.dayData[i].dayContent;
+                }
+                if (i == GameplayManager.instance.dayNum)
+                {
+                    // activate that day's buttons
+                    deskItems[i].EnableButtons();
+                    content += "<size=.03>Where should I look for evidence?</size>";
+                }
+                else
+                {
+                    // deactivate them
+                    deskItems[i].DisableButtons();
+                }
+                deskItems[i].SetContents(content);
             }
-            if (i == GameplayManager.instance.dayNum)
-            {
-                // activate that day's buttons
-                deskItems[i].EnableButtons();
-                content += "<size=.03>Where should I look for evidence?</size>";
-            } else
-            {
-                // deactivate them
-                deskItems[i].DisableButtons();
-            }
-            deskItems[i].SetContents(content);
         }
 
         // if it's the last day then move the desk item parent up,
         // move the gun down, and enable the gun and stuff like that
-        if (GameplayManager.instance.IsChoosingDay())
+        if (GameplayManager.instance.IsChoosingDay() || Options.instance.demoMode)
         {
             // then move everything
             deskItemParent.position += deskItemFinalOffset;
@@ -264,6 +288,7 @@ public class HubManager : MonoBehaviour
     [ContextMenu("To Desk Camera")]
     public void ToDeskLocation()
     {
+
         Camera.main.transform.position = DeskCameraLocation.position;
         Camera.main.transform.rotation = DeskCameraLocation.rotation;
     }

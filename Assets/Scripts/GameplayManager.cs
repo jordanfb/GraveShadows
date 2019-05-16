@@ -25,11 +25,20 @@ public class GameplayManager : MonoBehaviour
     public int dayNum = 0; // 0-4 are days when you can do stuff
     // day 5 is when you have to choose the evidence
 
+    public bool debugMode = false;
+
     [Tooltip("this gets set by the script don't edit it in the editor")]
     public List<DayData> dayData;
 
+    private string debugModeString = "zasegj";
+    private bool[] debugModeKeysPressed = new bool[6];
+
     private void Awake()
     {
+#if UNITY_EDITOR
+        // make it debug mode
+        debugMode = true;
+#endif
         if (instance == null)
         {
             instance = this;
@@ -49,7 +58,45 @@ public class GameplayManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            debugModeKeysPressed[0] = true;
+            CheckToggleDebug();
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            debugModeKeysPressed[1] = true;
+            CheckToggleDebug();
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            debugModeKeysPressed[2] = true;
+            CheckToggleDebug();
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            debugModeKeysPressed[3] = true;
+            CheckToggleDebug();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            debugModeKeysPressed[4] = true;
+            CheckToggleDebug();
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            debugModeKeysPressed[5] = true;
+            CheckToggleDebug();
+        }
+    }
+
+    private void CheckToggleDebug()
+    {
+        if (debugModeKeysPressed[0] && debugModeKeysPressed[1] && debugModeKeysPressed[2] && debugModeKeysPressed[3] && debugModeKeysPressed[4] && debugModeKeysPressed[5])
+        {
+            debugMode = !debugMode;
+            debugModeKeysPressed = new bool[6];
+        }
     }
 
     public void ExitBackToHubNextDay()
@@ -57,7 +104,14 @@ public class GameplayManager : MonoBehaviour
         GameLevelManager gameLevel = FindObjectOfType<GameLevelManager>();
         Debug.Assert(gameLevel != null); // duh it can't be null we need it in all our levels
         GameplayManager.instance.NextDay(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, false, gameLevel.HasFoundEverything()));
-        VisitHubScene();
+        if (Options.instance.demoMode)
+        {
+            VisitDemoHub(); // in demo mode just head straight back to kill someone (preferably first checking the evidence out...)
+        }
+        else
+        {
+            VisitHubScene();
+        }
     }
 
     private void StartFactoryScene()
@@ -70,19 +124,44 @@ public class GameplayManager : MonoBehaviour
         SceneManager.LoadScene("Level 0 HUB");
     }
 
+    private void StartOptions()
+    {
+        SceneManager.LoadScene("Options");
+    }
+
+    private void StartCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
     private void StartOfficeScene()
     {
         SceneManager.LoadScene("Level 2");
     }
 
+    private void StartDemoOffice()
+    {
+        SceneManager.LoadScene("Demo Level 2");
+    }
+
+    private void StartDemoHub()
+    {
+        SceneManager.LoadScene("Demo Level 0 HUB");
+    }
+
     private void StartMainMenuScene()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenuNew");
     }
 
     private void StartCrimeScene()
     {
         SceneManager.LoadScene("Level 1");
+    }
+
+    private void StartControls()
+    {
+        SceneManager.LoadScene("Controls");
     }
 
     public string GenerateTodaysRecipt(Level visitedLocation, List<Evidence> evidenceFound, bool wasSpotted, bool foundAll)
@@ -182,6 +261,34 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    public void VisitDemoOffice()
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            StartDemoOffice();
+        }
+        else
+        {
+            f.FadeOut(StartDemoOffice);
+        }
+    }
+
+    public void VisitDemoHub()
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            StartDemoHub();
+        }
+        else
+        {
+            f.FadeOut(StartDemoHub);
+        }
+    }
+
     public void VisitScene(string sceneName)
     {
         FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
@@ -220,7 +327,47 @@ public class GameplayManager : MonoBehaviour
         }
         else
         {
-            f.FadeOut(StartMainMenuScene);
+            f.FadeOut(StartMainMenuScene, false);
+        }
+    }
+
+    public void VisitOptions()
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            StartOptions();
+        }
+        else
+        {
+            f.FadeOut(StartOptions);
+        }
+    }
+    public void VisitCreditsScene()
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            StartCredits();
+        }
+        else
+        {
+            f.FadeOut(StartCredits);
+        }
+    }
+    public void VisitControls()
+    {
+        FadeToBlack f = GameObject.FindObjectOfType<FadeToBlack>();
+        if (f == null)
+        {
+            Debug.LogError("NO FADE TO BLACK IN THIS SCENE I REALLY WANT ONE");
+            StartControls();
+        }
+        else
+        {
+            f.FadeOut(StartControls);
         }
     }
 
@@ -267,6 +414,25 @@ public class GameplayManager : MonoBehaviour
         // chooses the evidence and whatever
         EvidenceManager.NewSaveGame();
         UndoRedoStack.Reset(); // make sure to reset the undo redo stack otherwise weird bugs
+        PlayerManager.instance.NewGame(); // reset the found evidence
+        // then load the game data here:
+        dayNum = 0; // first day
+        dayData = new List<DayData>();
+        for (int i = 0; i < numExploringDays; i++)
+        {
+            dayData.Add(new DayData());
+        }
+    }
+
+    public void NewDemoGame()
+    {
+        // starts a new game!
+        // chooses the evidence and whatever
+        EvidenceManager.NewSaveGame();
+        UndoRedoStack.Reset(); // make sure to reset the undo redo stack otherwise weird bugs
+        PlayerManager.instance.NewGame(); // reset the found evidence
+
+        // for the demo we don't really need a day summary since it's just the one day
 
         // then load the game data here:
         dayNum = 0; // first day

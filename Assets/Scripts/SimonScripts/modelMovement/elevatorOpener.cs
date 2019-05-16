@@ -6,110 +6,48 @@ public class elevatorOpener : MonoBehaviour
 {
     public float ammoutToOpen;
     public float openSpeed = 50f;
-    private float elapsedTime = 0;
-    public float timeStep = 0.01f;
-    public bool isMoving = false;
-    public bool isOpen = false;
     public GameObject assocLeftDoor;
     public GameObject assocRightDoor;
-    float lastOpenDir;
-    void Start()
-    {
 
+    public Vector3 leftStartingPos;
+    public Vector3 rightStartingPos;
+
+    public bool isOpening = false;
+    float t = 0; // start closed
+
+
+    public void Start()
+    {
+        leftStartingPos = assocLeftDoor.transform.position;
+        rightStartingPos = assocRightDoor.transform.position;
     }
 
-    // Update is called once per frame
+    private void UpdateDoorPos(float x)
+    {
+        assocLeftDoor.transform.position = Vector3.Lerp(leftStartingPos, leftStartingPos - assocLeftDoor.transform.right * ammoutToOpen, x);
+        assocRightDoor.transform.position = Vector3.Lerp(rightStartingPos, rightStartingPos + assocLeftDoor.transform.right * ammoutToOpen, x);
+    }
+
     void Update()
     {
-
-
-
+        t += (isOpening ? 1 : -1) * Time.deltaTime * openSpeed;
+        t = Mathf.Clamp01(t);
+        UpdateDoorPos(DeskDayDescriptionItem.Smootherstep(t));
     }
-
-    //dir 
-    IEnumerator OpenDoorAnim(float dir)
-    {
-        float movedSoFar = 0;
-        print(movedSoFar);
-        while (movedSoFar < ammoutToOpen)
-        {
-
-            isMoving = true;
-            yield return new WaitForSeconds(timeStep);
-            elapsedTime += timeStep;
-            float change = openSpeed * Time.deltaTime;
-            movedSoFar += change;
-            assocLeftDoor.transform.position -= assocLeftDoor.transform.right* change;
-            assocRightDoor.transform.position += assocLeftDoor.transform.right * change;
-
-        }
-
-        elapsedTime = 0;
-        isMoving = false;
-        isOpen = true;
-
-    }
-
-    IEnumerator CloseDoorAnim(float dir)
-    {
-
-        float movedSoFar = 0;
-        while (movedSoFar < ammoutToOpen)
-        {
-            isMoving = true;
-            yield return new WaitForSeconds(timeStep);
-            elapsedTime += timeStep;
-            float change = openSpeed * Time.deltaTime;
-            movedSoFar += change;
-            assocLeftDoor.transform.position += assocLeftDoor.transform.right * change;
-            assocRightDoor.transform.position -= assocLeftDoor.transform.right * change;
-
-        }
-
-        elapsedTime = 0;
-        isMoving = false;
-        isOpen = false;
-
-    }
-
-   
-
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isMoving)
-        {
-            return;
-        }
-        if (isOpen) {
-            return;
-        }
         if (other.gameObject.tag == "Player")
         {
-
-
-
-            IEnumerator coroutine = OpenDoorAnim(lastOpenDir);
-            StartCoroutine(coroutine);
-
-
+            isOpening = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (isMoving)
-        {
-            return;
-        }
         if (other.gameObject.tag == "Player")
         {
-            if (isOpen)
-            {
-                IEnumerator coroutine = CloseDoorAnim(-lastOpenDir);
-                StartCoroutine(coroutine);
-            }
-
+            isOpening = false;
         }
     }
 }

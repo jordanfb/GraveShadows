@@ -19,6 +19,7 @@ public class YarnBoard : MonoBehaviour
     [SerializeField]
     private Text _flavorTextAsset;
     public GameObject _suspectInfoPanel;
+    public GameObject _closeEvidenceButton;
     [SerializeField]
     private Text _suspectCodeName;
     [SerializeField]
@@ -46,6 +47,8 @@ public class YarnBoard : MonoBehaviour
     private float _pinScale;
     [SerializeField]
     private float _pinOffset;
+    [SerializeField]
+    public Vector3 evidenceOffsetFromYarnboardHit = new Vector3(0, 0, .05f);
 
     [Space]
     [SerializeField]
@@ -84,6 +87,9 @@ public class YarnBoard : MonoBehaviour
         }
         createdEvidenceOnBoard.Clear();
         lineDraw.DestroyAll();
+        mode = YarnBoardMode.None;
+        movingYarnboardItem = null;
+        movingYarnboardEvidence = null;
         yarnboardConnectionEvidenceLocation.Clear();
 
         // then make the new ones!
@@ -177,16 +183,14 @@ public class YarnBoard : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_EDITOR
-        if(Input.GetKeyDown(KeyCode.T))
+        if(GameplayManager.instance.debugMode && Input.GetKeyDown(KeyCode.T))
         {
             int next = Random.Range(0, EvidenceManager.AllEvidence.Count - 1);
             EvidenceManager.AllEvidence[next].evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
             GenerateContent();
         }
 
-#endif
-        if (Input.GetMouseButtonDown(0) && mode == YarnBoardMode.None)
+        if (Input.GetMouseButtonDown(1) && mode == YarnBoardMode.None)
         {
             //Raycast to screen
             RaycastHit hit;
@@ -202,38 +206,43 @@ public class YarnBoard : MonoBehaviour
                     EvidenceMono em = evidence.GetComponent<EvidenceMono>();
                     SuspectMono sm = evidence.GetComponent<SuspectMono>();
                     mode = YarnBoardMode.Displaying;
+                    _closeEvidenceButton.SetActive(true);
                     if (em != null)
                     {
-                        // choose how to display it
-                        if (em.EvidenceInfo.UseScrollableTextDisplay)
+                        // display it on the suspect board
+                        _suspectCodeName.text = em.EvidenceInfo.Name;
+                        _suspectBio.text = em.EvidenceInfo.FlavorText + "\n";
+                        _suspectInfoPanel.SetActive(true);
+                        if (_suspectInfoPanel.GetComponentInChildren<Scrollbar>() != null)
                         {
-                            _suspectCodeName.text = em.EvidenceInfo.Name;
-                            _suspectBio.text = em.EvidenceInfo.FlavorText;
-                            _suspectInfoPanel.SetActive(true);
+                            // this can be null if there's not enough to scroll
+                            _suspectInfoPanel.GetComponentInChildren<Scrollbar>().size = 0;
+                            _suspectInfoPanel.GetComponentInChildren<Scrollbar>().value = 1;
                         }
-                        else
-                        {
-                            _flavorTextAsset.text = em.EvidenceInfo.FlavorText;
-                            _evidenceTitle.text = em.EvidenceInfo.Name;
-                            _flavorTextPanel.SetActive(true);
-                        }
+                        _closeEvidenceButton.SetActive(true);
                     }
                     else if (sm != null)
                     {
                         _suspectCodeName.text = sm.SuspectInfo.CodeName + "\n(" + sm.SuspectInfo.Name + ")";
-                        _suspectBio.text = sm.SuspectInfo.Bio;
+                        _suspectBio.text = sm.SuspectInfo.Bio + "\n";
                         _suspectInfoPanel.SetActive(true);
+                        if (_suspectInfoPanel.GetComponentInChildren<Scrollbar>() != null)
+                        {
+                            _suspectInfoPanel.GetComponentInChildren<Scrollbar>().size = 0;
+                            _suspectInfoPanel.GetComponentInChildren<Scrollbar>().value = 1;
+                        }
+                        _closeEvidenceButton.SetActive(true);
                     }
                     else
                     {
                         // some weird error occured so just don't go anywhere
                         Debug.LogWarning("Couldn't find suspect or evidence monobehavior");
                         mode = YarnBoardMode.None;
-                    }    
+                    }
                 }
             }
         }
-        else if (Input.GetMouseButtonDown(1) && mode == YarnBoardMode.None)
+        else if (Input.GetMouseButtonDown(0) && mode == YarnBoardMode.None)
         {
             // move the item you clicked on
             //Debug.Log("Mtrying to oving now");
@@ -250,14 +259,16 @@ public class YarnBoard : MonoBehaviour
                     //Debug.Log("Moving now");
                     // get the correct object to move
                     movingYarnboardItem = hit.collider.transform.parent.gameObject;
-                    movingStartPos = evidence.transform.position;
+                    movingStartPos = evidence.transform.position + evidenceOffsetFromYarnboardHit;
                     if (movingYarnboardItem.GetComponentInChildren<EvidenceMono>() != null)
                     {
                         movingYarnboardEvidence = EvidenceManager.instance.FindSerializedEvidence(movingYarnboardItem.GetComponentInChildren<EvidenceMono>().EvidenceInfo);
-                    } else if (movingYarnboardItem.GetComponentInChildren<SuspectMono>() != null)
+                    }
+                    else if (movingYarnboardItem.GetComponentInChildren<SuspectMono>() != null)
                     {
                         movingYarnboardEvidence = EvidenceManager.instance.FindSerializedEvidence(movingYarnboardItem.GetComponentInChildren<SuspectMono>().SuspectInfo);
-                    } else
+                    }
+                    else
                     {
                         movingYarnboardEvidence = null;
                         Debug.LogError("ERROR: UNABLE TO GET EVIDENCE FOR MOVING IT");
@@ -266,7 +277,7 @@ public class YarnBoard : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetMouseButton(1) && mode == YarnBoardMode.Moving)
+        else if (Input.GetMouseButton(0) && mode == YarnBoardMode.Moving)
         {
             //Debug.Log("clicking annd holding");
 
@@ -279,7 +290,7 @@ public class YarnBoard : MonoBehaviour
             // On hit, check if it's a piece of evidence
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
             {
-                movingYarnboardItem.transform.position = hit.point;
+                movingYarnboardItem.transform.position = hit.point + evidenceOffsetFromYarnboardHit;
                 removeFromYarnboardText.SetActive(false);
             } else
             {
@@ -287,7 +298,7 @@ public class YarnBoard : MonoBehaviour
                 removeFromYarnboardText.SetActive(true);
             }
         }
-        else if (Input.GetMouseButtonUp(1) && mode == YarnBoardMode.Moving)
+        else if (Input.GetMouseButtonUp(0) && mode == YarnBoardMode.Moving)
         {
             // move the item you clicked on
             //Debug.Log("nolonger clicking");
@@ -299,15 +310,17 @@ public class YarnBoard : MonoBehaviour
             // On hit, check if it's a piece of evidence
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("YarnBoard")))
             {
-                movingYarnboardItem.transform.position = hit.point;
+                Vector3 newPos = hit.point + evidenceOffsetFromYarnboardHit;
+                movingYarnboardItem.transform.position = newPos;
                 // then create a movement event!
                 if (movingYarnboardEvidence != null)
                 {
-                    YarnBoardMoveEvidenceEvent moveEvent = new YarnBoardMoveEvidenceEvent(movingYarnboardEvidence.evidenceindex, movingYarnboardEvidence, movingStartPos, hit.point);
+                    YarnBoardMoveEvidenceEvent moveEvent = new YarnBoardMoveEvidenceEvent(movingYarnboardEvidence.evidenceindex, movingYarnboardEvidence, movingStartPos, newPos);
                     moveEvent.Redo(); // set it in the location as well!
                     UndoRedoStack.AddEvent(moveEvent);
                 }
-            } else
+            }
+            else
             {
                 // remove it from the yarnboard!
                 YarnBoardAddToYarnBoardEvent undoredoevent = new YarnBoardAddToYarnBoardEvent(movingYarnboardEvidence.evidenceindex, movingYarnboardEvidence, true);
@@ -353,18 +366,18 @@ public class YarnBoard : MonoBehaviour
 
     public void DeactivateFlavorText()
     {
+        _closeEvidenceButton.SetActive(false);
         _flavorTextPanel.SetActive(false);
         _flavorTextAsset.text = "";
-        //displaying = false;
         mode = YarnBoardMode.None;
     }
 
     public void DeactivateSuspectPanel()
     {
+        _closeEvidenceButton.SetActive(false);
         _suspectInfoPanel.SetActive(false);
         _suspectCodeName.text = "";
         _suspectBio.text = "";
-        //displaying = false;
         mode = YarnBoardMode.None;
     }
 }
