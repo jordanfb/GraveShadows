@@ -71,12 +71,15 @@ public class doorOpenScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (isMoving)
-        {
-            return;
+        if(other.gameObject.tag == "Player") {
+            if (isMoving)
+            {
+                return;
+            }
+            Vector3 dirToPlayer = transform.position - other.transform.position;
+            lastOpenDir = -Mathf.Sign(Vector3.Dot(dirToPlayer, transform.right));
         }
-        Vector3 dirToPlayer = transform.position - other.transform.position;
-        lastOpenDir = -Mathf.Sign(Vector3.Dot(dirToPlayer, transform.right));
+
     }
 
 
