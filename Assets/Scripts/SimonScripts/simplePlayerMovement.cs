@@ -177,8 +177,8 @@ public class simplePlayerMovement : MonoBehaviour
 
         if (touchingWall)
         {
-
-            if(Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < turnOnLessThan)
+            float dotProdOfLookDir = Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance);
+            if (dotProdOfLookDir < turnOnLessThan)
             {
                 SRmanager.shadowPlane.transform.position -= SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime;
             }
@@ -188,12 +188,13 @@ public class simplePlayerMovement : MonoBehaviour
 
             anim.SetFloat("xVelocityShadow", Mathf.Abs(-_moveDirX * SHADOW_SPEED) * Time.deltaTime);
 
-            if (_moveDirX * Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) > 0)
+            //movement
+            if (_moveDirX * (dotProdOfLookDir - turnOnLessThan) > 0)
             {
                 targetWallRot = Quaternion.AngleAxis(90f, Vector3.up);
 
             }
-            else if (_moveDirX * Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < 0)
+            else if (_moveDirX * (dotProdOfLookDir - turnOnLessThan) < 0)
             {
                 targetWallRot = Quaternion.AngleAxis(-90f, Vector3.up);
 
