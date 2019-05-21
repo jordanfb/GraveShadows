@@ -7,10 +7,12 @@ public class breakerBoxScript : MonoBehaviour
 
     public List<GameObject> affiliatedLights;
     public bool isElevator;
+    private bool hasBeenActivated;
 
     // Start is called before the first frame update
     void Start()
     {
+        hasBeenActivated = false;
         if (isElevator == false)
         {
             foreach (GameObject l in affiliatedLights)
@@ -27,11 +29,14 @@ public class breakerBoxScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-
+        if (hasBeenActivated) {
+            return;
+        }
         if (other.gameObject.tag == "Player")
         {
 
             if (Input.GetKeyDown(KeyCode.E)) {
+
                 other.GetComponent<simplePlayerMovement>().getAnim().SetTrigger("reachOver");
                 if (isElevator == false)
                 {
@@ -55,7 +60,7 @@ public class breakerBoxScript : MonoBehaviour
                     }
                 }
 
-
+                hasBeenActivated = true;
             }
 
         }

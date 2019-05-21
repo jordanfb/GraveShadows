@@ -177,8 +177,8 @@ public class simplePlayerMovement : MonoBehaviour
 
         if (touchingWall)
         {
-
-            if(Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < turnOnLessThan)
+            float dotProdOfLookDir = Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance);
+            if (dotProdOfLookDir < turnOnLessThan)
             {
                 SRmanager.shadowPlane.transform.position -= SRmanager.shadowPlane.transform.forward * -_moveDirX * SHADOW_SPEED * Time.deltaTime;
             }
@@ -188,12 +188,13 @@ public class simplePlayerMovement : MonoBehaviour
 
             anim.SetFloat("xVelocityShadow", Mathf.Abs(-_moveDirX * SHADOW_SPEED) * Time.deltaTime);
 
-            if (_moveDirX * Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) > 0)
+            //movement
+            if (_moveDirX * (dotProdOfLookDir - turnOnLessThan) > 0)
             {
                 targetWallRot = Quaternion.AngleAxis(90f, Vector3.up);
 
             }
-            else if (_moveDirX * Vector3.Dot(SRmanager.shadowPlane.transform.right, cameraForwardOnEnterance) < 0)
+            else if (_moveDirX * (dotProdOfLookDir - turnOnLessThan) < 0)
             {
                 targetWallRot = Quaternion.AngleAxis(-90f, Vector3.up);
 
@@ -291,10 +292,19 @@ public class simplePlayerMovement : MonoBehaviour
             Destroy(other.gameObject.GetComponent<Interactable>().interactTextInGame);
             StartCoroutine(DestroyAfterTime(1f, other.transform.parent.gameObject));
 
+            Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("reachOver"));
             if (emono.isWaistLevel) {
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("Reach Over")) {
+                    return;
+                }
                 anim.SetTrigger("reachOver");
+
             }
             else {
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("Bend Down"))
+                {
+                    return;
+                }
                 anim.SetTrigger("pickUp");
             }
 
