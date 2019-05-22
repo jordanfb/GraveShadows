@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1125,13 +1125,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227068013}
-  m_LocalRotation: {x: -0, y: 0.82015103, z: -0, w: 0.5721471}
-  m_LocalPosition: {x: 0, y: 0.579, z: 0}
+  m_LocalRotation: {x: -0, y: 0.84777534, z: -0, w: 0.5303555}
+  m_LocalPosition: {x: 0, y: 0.497, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1420515580}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 110.200005, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 115.941, z: 0}
 --- !u!108 &227068015
 Light:
   m_ObjectHideFlags: 0
@@ -1142,8 +1142,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_Intensity: 3.58
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 2.74
   m_Range: 2.6
   m_SpotAngle: 104
   m_CookieSize: 10
@@ -9890,6 +9890,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ceiling Light Ambient
       objectReference: {fileID: 0}
+    - target: {fileID: 3120359515676486164, guid: ddb60543541e4214a8d90418009a5821,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3120359515676486165, guid: ddb60543541e4214a8d90418009a5821,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13336,7 +13341,7 @@ Light:
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
+  m_Intensity: 4.39
   m_Range: 67.93
   m_SpotAngle: 57
   m_CookieSize: 10
