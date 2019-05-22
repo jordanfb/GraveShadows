@@ -9,6 +9,9 @@ public class Evidence : YarnBoardEntity
     [SerializeField]
     [TextArea]
     private string _flavorText;
+    [SerializeField]
+    [TextArea]
+    private string _pickupText;
     //All evidence MUST have a type
     [SerializeField]
     [Tooltip("If true use the full screen evidence display rather than just the bottom screen thing")]
@@ -25,6 +28,11 @@ public class Evidence : YarnBoardEntity
     public string FlavorText
     {
         get { return _flavorText; }
+    }
+
+    public string PickupText
+    {
+        get { return _pickupText;  }
     }
 
     public EvidenceType GetEvidenceType
