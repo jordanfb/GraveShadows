@@ -7,6 +7,7 @@ public class breakerBoxScript : MonoBehaviour
 
     public List<GameObject> affiliatedLights;
     public bool isElevator;
+    public List<GameObject> affiliatedSounds;
     private bool hasBeenActivated;
 
     // Start is called before the first frame update
@@ -18,6 +19,10 @@ public class breakerBoxScript : MonoBehaviour
             foreach (GameObject l in affiliatedLights)
             {
                 l.SetActive(false);
+            }
+            foreach (GameObject g in affiliatedSounds)
+            {
+                g.SetActive(false);
             }
         }
  
@@ -50,6 +55,10 @@ public class breakerBoxScript : MonoBehaviour
                         GetComponent<Interactable>().setActivatedText();
                         counter += 0.3f;
 
+                    }
+                    foreach (GameObject g in affiliatedSounds)
+                    {
+                        g.SetActive(true);
                     }
                 }
                 else if (isElevator == true)
