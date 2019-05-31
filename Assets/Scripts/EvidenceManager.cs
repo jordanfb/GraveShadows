@@ -257,7 +257,7 @@ public class EvidenceManager : MonoBehaviour
             if (ev != null)
             {
                 //Find the culprit
-                if (ev.AssociatedSuspects.Contains(culprit) && ev.GetEvidenceType != EvidenceType.Conversation)
+                if ((ev.AssociatedSuspects.Contains(culprit) && ev.GetEvidenceType != EvidenceType.Conversation) || ev.GetLevel == Level.Apartment)
                 {
                     //Put it in the game as evidence!
                     se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
@@ -276,17 +276,14 @@ public class EvidenceManager : MonoBehaviour
                             Debug.LogWarning("FOund evidencec with unknown level: " + ev.GetLevel);
                             break;
                     }
-                    suspectTotals[suspects.IndexOf(culprit)]++;
+
+                    if(ev.GetLevel != Level.Apartment)
+                        suspectTotals[suspects.IndexOf(culprit)]++;
                 }
                 else if (ev.GetEvidenceType == EvidenceType.Conversation)
                 {
                     foreach (Suspect s in ev.AssociatedSuspects)
                         suspectTotals[suspects.IndexOf(s)]++;
-                }
-                else if (ev.GetLevel == Level.Apartment)
-                {
-                    apartmentEV.Add(se);
-                    se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
                 }
             }
             
