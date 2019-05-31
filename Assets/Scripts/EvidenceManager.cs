@@ -111,7 +111,8 @@ public class EvidenceManager : MonoBehaviour
         if (!LoadEvidenceFromPlayerPrefs())
         {
             // if you weren't able to load a save, initialize everything for a new game.
-            InitializeSerializedEvidence();
+            //InitializeSerializedEvidence();
+            //generated = true;
         }
         // we can also just load a new game with pressing a button and calling NewSaveData()
     }
@@ -240,9 +241,12 @@ public class EvidenceManager : MonoBehaviour
         MarkRandomCulprit();
 
         List<SerializedEvidence> remainingEvidence = new List<SerializedEvidence>(allSerializedEvidence);
-        //These are the amount of evidence currently allocated to the levels
-        int office, factory;
-        office = factory = 0;
+        
+        // Popping the front of the list 5 times, to remove all suspects from the algorithm.
+        for(int i = 0; i < 5; i++)
+        {
+            remainingEvidence.RemoveAt(0);
+        }
 
         // Add all the evidence that corresponds to the culprit.
         foreach (SerializedEvidence se in remainingEvidence)
@@ -251,108 +255,48 @@ public class EvidenceManager : MonoBehaviour
             Evidence ev = ReferencedEntity(se) as Evidence;
 
             //If we can cast the YBE to Evidence, then it's a piece of Evidence!
-            if(ev != null)
+            if (ev != null)
             {
                 //Find the culprit
-                if(ev.AssociatedSuspects.Contains(culprit))
+                if ((ev.AssociatedSuspects.Contains(culprit) && ev.GetEvidenceType != EvidenceType.Conversation) || ev.GetLevel == Level.Apartment)
                 {
+                    //Put it in the game as evidence!
                     se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
-                    if (ev.GetLevel == Level.Office)
+                    switch(ev.GetLevel)
                     {
-                        if(ev.GetEvidenceType != EvidenceType.Conversation)
+                        case Level.Apartment:
+                            apartmentEV.Add(se);
+                            break;
+                        case Level.Office:
                             officeEv.Add(se);
-                    }
-                    else if (ev.GetLevel == Level.Factory)
-                    {
-                        if (ev.GetEvidenceType != EvidenceType.Conversation)
+                            break;
+                        case Level.Factory:
                             factoryEv.Add(se);
-                    } else if (ev.GetLevel == Level.Apartment)
-                    {
-                        apartmentEV.Add(se);
-                    } else
-                    {
-                        Debug.LogWarning("FOund evidencec with unknown level: " + ev.GetLevel);
+                            break;
+                        default:
+                            Debug.LogWarning("FOund evidence with unknown level: " + ev.GetLevel);
+                            break;
                     }
-                    suspectTotals[suspects.IndexOf(culprit)]++;
-                }                       
-                else if(ev.GetEvidenceType == EvidenceType.Conversation)
+
+                    if(ev.GetLevel != Level.Apartment)
+                    {
+                        foreach(Suspect s in ev.AssociatedSuspects)
+                        {
+                            suspectTotals[suspects.IndexOf(s)]++;
+                        }
+                    }
+                }
+                /*
+                else if (ev.GetEvidenceType == EvidenceType.Conversation)
                 {
                     foreach (Suspect s in ev.AssociatedSuspects)
                         suspectTotals[suspects.IndexOf(s)]++;
                 }
-                else if(ev.GetLevel == Level.Apartment)
-                {
-                    apartmentEV.Add(se);
-                    se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
-                }
-                continue;
-            }
-
-            Suspect sus = ReferencedEntity(se) as Suspect;
-            if(sus != null)
-            {
-                // Make sure evidence state is set to OffYarnBoard, since we always have the suspect profiles.
-                // Remove suspects from the list. We don't want them fucking with the algorithm.
-                se.evidenceState = SerializedEvidence.EvidenceState.OffYarnBoard;
+                */
             }
             
         }
 
-        /*
-        while(office < officeEvidenceCount || factory < factoryEvidenceCount)
-        {
-            if (remainingEvidence.Count == 0)
-                break;
-
-            // Generate the next piece of evidence and check if it can be added.
-            int next = Random.Range(0, remainingEvidence.Count - 1);
-            SerializedEvidence se = remainingEvidence[next];
-            Evidence ev = ReferencedEntity(se) as Evidence;
-            if(ev == null)
-            {
-                remainingEvidence.Remove(se);
-                continue;
-            }
-
-            if (!CheckIfPlaceable(ev))
-                continue;
-
-            //Check levels and add to corresponding level.
-            switch(ev.GetLevel)
-            {
-                case Level.Office:
-                    if(office < officeEvidenceCount)
-                    {
-                        // Add it to the game!
-                        se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
-                        office++;
-                        officeEv.Add(se);
-                    }
-                    break;
-                case Level.Factory:
-                    if(factory < factoryEvidenceCount)
-                    {
-                        // Add it to the game!
-                        se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
-                        factory++;
-                        factoryEv.Add(se);
-                    }
-                    break;
-            }
-
-            // Update suspect totals
-            foreach (Suspect s in ev.AssociatedSuspects)
-                suspectTotals[suspects.IndexOf(s)]++;
-            remainingEvidence.Remove(se);
-        }
-
-        int count = 0;
-        foreach(SerializedEvidence se in allSerializedEvidence)
-        {
-            if (se.evidenceState == SerializedEvidence.EvidenceState.NotFound)
-                count++;
-        }
-        */
 
         while(officeEv.Count < officeEvidenceCount)
         {
@@ -364,7 +308,7 @@ public class EvidenceManager : MonoBehaviour
             SerializedEvidence se = remainingEvidence[next];
             Evidence ev = ReferencedEntity(se) as Evidence;
             
-            if(ev == null || !CheckIfPlaceable(ev))
+            if(ev == null)
             {
                 remainingEvidence.Remove(se);
                 continue;
@@ -383,6 +327,10 @@ public class EvidenceManager : MonoBehaviour
         }
 
         remainingEvidence = new List<SerializedEvidence>(allSerializedEvidence);
+        for(int i = 0; i < 5; i++)
+        {
+            remainingEvidence.RemoveAt(0);
+        }
 
         while (factoryEv.Count < factoryEvidenceCount)
         {
@@ -394,7 +342,7 @@ public class EvidenceManager : MonoBehaviour
             SerializedEvidence se = remainingEvidence[next];
             Evidence ev = ReferencedEntity(se) as Evidence;
 
-            if (ev == null || !CheckIfPlaceable(ev))
+            if (ev == null)
             {
                 remainingEvidence.Remove(se);
                 continue;
@@ -412,6 +360,35 @@ public class EvidenceManager : MonoBehaviour
             remainingEvidence.Remove(se);
         }
 
+        Debug.Log("Office: " + officeEv.Count);
+        Debug.Log("Factory: " + factoryEv.Count);
+        Debug.Log(culprit.CodeName);
+        Debug.Log("OFFICE EVIDENCE BELOW!");
+        string sus = "";
+        foreach(SerializedEvidence se in officeEv)
+        {          
+            Evidence e = ReferencedEntity(se) as Evidence;
+            Debug.Log(e.Name);
+            foreach(Suspect s in e.AssociatedSuspects)
+            {
+                sus += suspects.IndexOf(s).ToString() + " / ";
+            }
+            Debug.Log(sus);
+            sus = "";
+        }
+
+        Debug.Log("FACTORY EVIDENCE BELOW!");
+        foreach(SerializedEvidence se in factoryEv)
+        {
+            Evidence e = ReferencedEntity(se) as Evidence;
+            Debug.Log(e.Name);
+            foreach (Suspect s in e.AssociatedSuspects)
+            {
+                sus += suspects.IndexOf(s).ToString() + " / ";
+            }
+            Debug.Log(sus);
+            sus = "";
+        }
         //ClampEvidenceLists();
     }
 
