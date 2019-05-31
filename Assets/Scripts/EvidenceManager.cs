@@ -240,6 +240,12 @@ public class EvidenceManager : MonoBehaviour
         MarkRandomCulprit();
 
         List<SerializedEvidence> remainingEvidence = new List<SerializedEvidence>(allSerializedEvidence);
+        
+        // Popping the front of the list 5 times, to remove all suspects from the algorithm.
+        for(int i = 0; i < 5; i++)
+        {
+            remainingEvidence.RemoveAt(0);
+        }
 
         // Add all the evidence that corresponds to the culprit.
         foreach (SerializedEvidence se in remainingEvidence)
@@ -251,26 +257,24 @@ public class EvidenceManager : MonoBehaviour
             if (ev != null)
             {
                 //Find the culprit
-                if (ev.AssociatedSuspects.Contains(culprit))
+                if (ev.AssociatedSuspects.Contains(culprit) && ev.GetEvidenceType != EvidenceType.Conversation)
                 {
+                    //Put it in the game as evidence!
                     se.evidenceState = SerializedEvidence.EvidenceState.NotFound;
-                    if (ev.GetLevel == Level.Office)
+                    switch(ev.GetLevel)
                     {
-                        if (ev.GetEvidenceType != EvidenceType.Conversation)
+                        case Level.Apartment:
+                            apartmentEV.Add(se);
+                            break;
+                        case Level.Office:
                             officeEv.Add(se);
-                    }
-                    else if (ev.GetLevel == Level.Factory)
-                    {
-                        if (ev.GetEvidenceType != EvidenceType.Conversation)
+                            break;
+                        case Level.Factory:
                             factoryEv.Add(se);
-                    }
-                    else if (ev.GetLevel == Level.Apartment)
-                    {
-                        apartmentEV.Add(se);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("FOund evidencec with unknown level: " + ev.GetLevel);
+                            break;
+                        default:
+                            Debug.LogWarning("FOund evidencec with unknown level: " + ev.GetLevel);
+                            break;
                     }
                     suspectTotals[suspects.IndexOf(culprit)]++;
                 }
