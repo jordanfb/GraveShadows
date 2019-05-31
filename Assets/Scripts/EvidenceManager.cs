@@ -111,7 +111,8 @@ public class EvidenceManager : MonoBehaviour
         if (!LoadEvidenceFromPlayerPrefs())
         {
             // if you weren't able to load a save, initialize everything for a new game.
-            InitializeSerializedEvidence();
+            //InitializeSerializedEvidence();
+            //generated = true;
         }
         // we can also just load a new game with pressing a button and calling NewSaveData()
     }
@@ -273,18 +274,25 @@ public class EvidenceManager : MonoBehaviour
                             factoryEv.Add(se);
                             break;
                         default:
-                            Debug.LogWarning("FOund evidencec with unknown level: " + ev.GetLevel);
+                            Debug.LogWarning("FOund evidence with unknown level: " + ev.GetLevel);
                             break;
                     }
 
                     if(ev.GetLevel != Level.Apartment)
-                        suspectTotals[suspects.IndexOf(culprit)]++;
+                    {
+                        foreach(Suspect s in ev.AssociatedSuspects)
+                        {
+                            suspectTotals[suspects.IndexOf(s)]++;
+                        }
+                    }
                 }
+                /*
                 else if (ev.GetEvidenceType == EvidenceType.Conversation)
                 {
                     foreach (Suspect s in ev.AssociatedSuspects)
                         suspectTotals[suspects.IndexOf(s)]++;
                 }
+                */
             }
             
         }
@@ -300,7 +308,7 @@ public class EvidenceManager : MonoBehaviour
             SerializedEvidence se = remainingEvidence[next];
             Evidence ev = ReferencedEntity(se) as Evidence;
             
-            if(ev == null || !CheckIfPlaceable(ev))
+            if(ev == null)
             {
                 remainingEvidence.Remove(se);
                 continue;
@@ -319,6 +327,10 @@ public class EvidenceManager : MonoBehaviour
         }
 
         remainingEvidence = new List<SerializedEvidence>(allSerializedEvidence);
+        for(int i = 0; i < 5; i++)
+        {
+            remainingEvidence.RemoveAt(0);
+        }
 
         while (factoryEv.Count < factoryEvidenceCount)
         {
@@ -330,7 +342,7 @@ public class EvidenceManager : MonoBehaviour
             SerializedEvidence se = remainingEvidence[next];
             Evidence ev = ReferencedEntity(se) as Evidence;
 
-            if (ev == null || !CheckIfPlaceable(ev))
+            if (ev == null)
             {
                 remainingEvidence.Remove(se);
                 continue;
@@ -348,6 +360,35 @@ public class EvidenceManager : MonoBehaviour
             remainingEvidence.Remove(se);
         }
 
+        Debug.Log("Office: " + officeEv.Count);
+        Debug.Log("Factory: " + factoryEv.Count);
+        Debug.Log(culprit.CodeName);
+        Debug.Log("OFFICE EVIDENCE BELOW!");
+        string sus = "";
+        foreach(SerializedEvidence se in officeEv)
+        {          
+            Evidence e = ReferencedEntity(se) as Evidence;
+            Debug.Log(e.Name);
+            foreach(Suspect s in e.AssociatedSuspects)
+            {
+                sus += suspects.IndexOf(s).ToString() + " / ";
+            }
+            Debug.Log(sus);
+            sus = "";
+        }
+
+        Debug.Log("FACTORY EVIDENCE BELOW!");
+        foreach(SerializedEvidence se in factoryEv)
+        {
+            Evidence e = ReferencedEntity(se) as Evidence;
+            Debug.Log(e.Name);
+            foreach (Suspect s in e.AssociatedSuspects)
+            {
+                sus += suspects.IndexOf(s).ToString() + " / ";
+            }
+            Debug.Log(sus);
+            sus = "";
+        }
         //ClampEvidenceLists();
     }
 
