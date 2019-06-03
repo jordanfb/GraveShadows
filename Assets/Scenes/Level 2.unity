@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -633,6 +633,31 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 12188629915876987, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: masters.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 12188629915876987, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: characterName
+      value: PatrollingGuard
+      objectReference: {fileID: 0}
+    - target: {fileID: 12188629915876987, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: masters.Array.data[1]
+      value: 
+      objectReference: {fileID: 256279415}
     - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
         type: 3}
       propertyPath: skinnedMeshRenderers.Array.size
@@ -803,31 +828,6 @@ PrefabInstance:
       propertyPath: suspicionMultiplier
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 12188629915876987, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: masters.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 12188629915876987, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: characterName
-      value: PatrollingGuard
-      objectReference: {fileID: 0}
-    - target: {fileID: 12188629915876987, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: masters.Array.data[1]
-      value: 
-      objectReference: {fileID: 256279415}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fd5d203a5d61bf4da34c53bbebadd30, type: 3}
 --- !u!4 &101994977 stripped
@@ -1312,6 +1312,7 @@ GameObject:
   - component: {fileID: 120400222}
   - component: {fileID: 120400223}
   - component: {fileID: 120400224}
+  - component: {fileID: 120400225}
   m_Layer: 0
   m_Name: S2_FL_3rdColumn
   m_TagString: Untagged
@@ -1383,6 +1384,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 1
+--- !u!114 &120400225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120400221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &133461583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1661,6 +1688,7 @@ GameObject:
   - component: {fileID: 166127869}
   - component: {fileID: 166127870}
   - component: {fileID: 166127871}
+  - component: {fileID: 166127872}
   m_Layer: 0
   m_Name: S1_FL_Hallway
   m_TagString: Untagged
@@ -1732,6 +1760,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 0.79
+--- !u!114 &166127872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166127868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &176264259
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2602,6 +2656,7 @@ GameObject:
   - component: {fileID: 225979698}
   - component: {fileID: 225979697}
   - component: {fileID: 225979696}
+  - component: {fileID: 225979700}
   m_Layer: 0
   m_Name: S2_BL_Left Desk 3
   m_TagString: Untagged
@@ -2718,6 +2773,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &225979700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225979694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &226179510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2814,6 +2895,7 @@ GameObject:
   - component: {fileID: 229627485}
   - component: {fileID: 229627487}
   - component: {fileID: 229627486}
+  - component: {fileID: 229627488}
   m_Layer: 0
   m_Name: S2_FL_BreakRoom
   m_TagString: Untagged
@@ -2885,6 +2967,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &229627488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229627484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &230880888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3801,6 +3909,7 @@ GameObject:
   - component: {fileID: 300867274}
   - component: {fileID: 300867273}
   - component: {fileID: 300867272}
+  - component: {fileID: 300867276}
   m_Layer: 0
   m_Name: S2_BL_Right Desk 4
   m_TagString: Untagged
@@ -3917,6 +4026,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &300867276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300867270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1 &308556456
 GameObject:
   m_ObjectHideFlags: 0
@@ -4118,6 +4253,7 @@ GameObject:
   - component: {fileID: 319980975}
   - component: {fileID: 319980974}
   - component: {fileID: 319980973}
+  - component: {fileID: 319980976}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4289,6 +4425,20 @@ MonoBehaviour:
   m_AfterStackBundles:
   - assemblyQualifiedName: NoirEffect, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &319980976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319980969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eed1d9cbe64423499f1fefc0ce50417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Resolution: 0
+  DefaultSpotCookie: {fileID: 2800000, guid: 5157bf6d690b6df458f6c0ce0c06d329, type: 3}
 --- !u!1 &324809412
 GameObject:
   m_ObjectHideFlags: 0
@@ -6063,6 +6213,7 @@ GameObject:
   - component: {fileID: 443523780}
   - component: {fileID: 443523781}
   - component: {fileID: 443523782}
+  - component: {fileID: 443523783}
   m_Layer: 0
   m_Name: S2_IL_BreakerRoom
   m_TagString: Untagged
@@ -6134,6 +6285,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 1
+--- !u!114 &443523783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443523779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1 &443814632
 GameObject:
   m_ObjectHideFlags: 0
@@ -6502,106 +6679,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[0]
-      value: 
-      objectReference: {fileID: 467212464}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[1]
-      value: 
-      objectReference: {fileID: 467212463}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[2]
-      value: 
-      objectReference: {fileID: 467212462}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[3]
-      value: 
-      objectReference: {fileID: 467212461}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[4]
-      value: 
-      objectReference: {fileID: 467212460}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[5]
-      value: 
-      objectReference: {fileID: 467212459}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[6]
-      value: 
-      objectReference: {fileID: 467212458}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[7]
-      value: 
-      objectReference: {fileID: 467212457}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[8]
-      value: 
-      objectReference: {fileID: 467212456}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: e75b6a8909e732848b948a046b27f148, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 4d91f264dee4b9449abf05c642bc1ee8, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[2]
-      value: 
-      objectReference: {fileID: 2100000, guid: 18d6f71728b01a746b165c14ea81a171, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[3]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9bc2fc5c9ec8f32428cfdd48c869abae, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[4]
-      value: 
-      objectReference: {fileID: 2100000, guid: e75b6a8909e732848b948a046b27f148, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[5]
-      value: 
-      objectReference: {fileID: 2100000, guid: a917e8b480566dc4287ad5b90bff5d37, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[6]
-      value: 
-      objectReference: {fileID: 2100000, guid: 121662634aee2854194fbb768fa7b3f7, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[7]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7ca5a4b1cebe6104caa082821397e3d1, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[8]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2e004d95a83ceb64da758af9bf253159, type: 2}
     - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -7757,6 +7834,106 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 467212464}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[1]
+      value: 
+      objectReference: {fileID: 467212463}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[2]
+      value: 
+      objectReference: {fileID: 467212462}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[3]
+      value: 
+      objectReference: {fileID: 467212461}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[4]
+      value: 
+      objectReference: {fileID: 467212460}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[5]
+      value: 
+      objectReference: {fileID: 467212459}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[6]
+      value: 
+      objectReference: {fileID: 467212458}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[7]
+      value: 
+      objectReference: {fileID: 467212457}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[8]
+      value: 
+      objectReference: {fileID: 467212456}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e75b6a8909e732848b948a046b27f148, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d91f264dee4b9449abf05c642bc1ee8, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18d6f71728b01a746b165c14ea81a171, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9bc2fc5c9ec8f32428cfdd48c869abae, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: e75b6a8909e732848b948a046b27f148, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: a917e8b480566dc4287ad5b90bff5d37, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[6]
+      value: 
+      objectReference: {fileID: 2100000, guid: 121662634aee2854194fbb768fa7b3f7, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[7]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ca5a4b1cebe6104caa082821397e3d1, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[8]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e004d95a83ceb64da758af9bf253159, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fd5d203a5d61bf4da34c53bbebadd30, type: 3}
 --- !u!4 &467212455 stripped
@@ -8893,6 +9070,7 @@ GameObject:
   - component: {fileID: 536331035}
   - component: {fileID: 536331036}
   - component: {fileID: 536331037}
+  - component: {fileID: 536331038}
   m_Layer: 0
   m_Name: S1_HL_Hallway
   m_TagString: Untagged
@@ -8964,6 +9142,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: -0.7
+--- !u!114 &536331038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536331034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1 &541669530 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100034, guid: 190bc3b6499b7f2418214b2c33d58b69,
@@ -8994,6 +9198,7 @@ GameObject:
   - component: {fileID: 547870678}
   - component: {fileID: 547870679}
   - component: {fileID: 547870680}
+  - component: {fileID: 547870681}
   m_Layer: 0
   m_Name: S3_BL_Left3rd
   m_TagString: Untagged
@@ -9065,6 +9270,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 0.5
+--- !u!114 &547870681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547870677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &580738020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9439,6 +9670,7 @@ GameObject:
   - component: {fileID: 625980981}
   - component: {fileID: 625980980}
   - component: {fileID: 625980979}
+  - component: {fileID: 625980983}
   m_Layer: 0
   m_Name: 'S2_BL_Left Desk 1 '
   m_TagString: Untagged
@@ -9555,6 +9787,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &625980983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625980977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &629392260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12377,6 +12635,7 @@ GameObject:
   - component: {fileID: 835791786}
   - component: {fileID: 835791785}
   - component: {fileID: 835791784}
+  - component: {fileID: 835791788}
   m_Layer: 0
   m_Name: 'S2_BL_Left Desk 7 '
   m_TagString: Untagged
@@ -12493,6 +12752,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &835791788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835791782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &836498708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12599,6 +12884,7 @@ GameObject:
   - component: {fileID: 845633789}
   - component: {fileID: 845633790}
   - component: {fileID: 845633791}
+  - component: {fileID: 845633792}
   m_Layer: 0
   m_Name: S3_FL_Before Bars
   m_TagString: Untagged
@@ -12670,6 +12956,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 1
+--- !u!114 &845633792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845633788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &858906712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13303,6 +13615,7 @@ GameObject:
   - component: {fileID: 889855548}
   - component: {fileID: 889855547}
   - component: {fileID: 889855546}
+  - component: {fileID: 889855550}
   m_Layer: 0
   m_Name: S2_BL_Left Desk 4
   m_TagString: Untagged
@@ -13419,6 +13732,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &889855550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889855544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1 &895046748
 GameObject:
   m_ObjectHideFlags: 0
@@ -14259,6 +14598,7 @@ GameObject:
   - component: {fileID: 992656280}
   - component: {fileID: 992656279}
   - component: {fileID: 992656278}
+  - component: {fileID: 992656282}
   m_Layer: 0
   m_Name: S2_BL_Right Desk 3
   m_TagString: Untagged
@@ -14375,6 +14715,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &992656282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992656276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &1000135836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16001,6 +16367,7 @@ GameObject:
   - component: {fileID: 1159443584}
   - component: {fileID: 1159443585}
   - component: {fileID: 1159443586}
+  - component: {fileID: 1159443587}
   m_Layer: 0
   m_Name: S1_FL_InsideBars
   m_TagString: Untagged
@@ -16072,6 +16439,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 1
+--- !u!114 &1159443587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159443583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1 &1170583636
 GameObject:
   m_ObjectHideFlags: 0
@@ -17576,6 +17969,7 @@ GameObject:
   - component: {fileID: 1273082271}
   - component: {fileID: 1273082270}
   - component: {fileID: 1273082269}
+  - component: {fileID: 1273082273}
   m_Layer: 0
   m_Name: S2_BL_Records 3
   m_TagString: Untagged
@@ -17692,6 +18086,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1273082273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273082267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &1275439218
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18871,6 +19291,7 @@ GameObject:
   - component: {fileID: 1361351781}
   - component: {fileID: 1361351782}
   - component: {fileID: 1361351783}
+  - component: {fileID: 1361351784}
   m_Layer: 0
   m_Name: S3_SL_Left2nd
   m_TagString: Untagged
@@ -18942,6 +19363,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 0.5
+--- !u!114 &1361351784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361351780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &1364842799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19140,6 +19587,7 @@ GameObject:
   - component: {fileID: 1390303174}
   - component: {fileID: 1390303175}
   - component: {fileID: 1390303176}
+  - component: {fileID: 1390303177}
   m_Layer: 0
   m_Name: S3_BL_Left1st
   m_TagString: Untagged
@@ -19211,6 +19659,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 0.5
+--- !u!114 &1390303177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390303173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &1397151636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19573,6 +20047,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 12188629915876987, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: characterName
+      value: BreakGuard1
+      objectReference: {fileID: 0}
     - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
         type: 3}
       propertyPath: skinnedMeshRenderers.Array.size
@@ -19673,11 +20152,6 @@ PrefabInstance:
       propertyPath: skinnedMaterials.Array.data[8]
       value: 
       objectReference: {fileID: 2100000, guid: 2e004d95a83ceb64da758af9bf253159, type: 2}
-    - target: {fileID: 12188629915876987, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: characterName
-      value: BreakGuard1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fd5d203a5d61bf4da34c53bbebadd30, type: 3}
 --- !u!4 &1428291327 stripped
@@ -19788,6 +20262,7 @@ GameObject:
   - component: {fileID: 1441983097}
   - component: {fileID: 1441983098}
   - component: {fileID: 1441983099}
+  - component: {fileID: 1441983100}
   m_Layer: 0
   m_Name: S3_BL_Right2nd
   m_TagString: Untagged
@@ -19859,6 +20334,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 0.5
+--- !u!114 &1441983100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441983096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1 &1443536690 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100012, guid: 190bc3b6499b7f2418214b2c33d58b69,
@@ -20285,6 +20786,7 @@ GameObject:
   - component: {fileID: 1490672209}
   - component: {fileID: 1490672208}
   - component: {fileID: 1490672207}
+  - component: {fileID: 1490672210}
   m_Layer: 0
   m_Name: S1_BL_Reception
   m_TagString: Untagged
@@ -20401,6 +20903,32 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490672204}
   m_Mesh: {fileID: 0}
+--- !u!114 &1490672210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490672204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &1494014988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20503,6 +21031,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.07536125
       objectReference: {fileID: 0}
+    - target: {fileID: 829738813, guid: 790f465fa18b24d80b5b0055e7f1dc8d, type: 3}
+      propertyPath: onActivateText
+      value: Activated
+      objectReference: {fileID: 0}
     - target: {fileID: 82477812, guid: 790f465fa18b24d80b5b0055e7f1dc8d, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -20562,10 +21094,6 @@ PrefabInstance:
     - target: {fileID: 82477809, guid: 790f465fa18b24d80b5b0055e7f1dc8d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.99
-      objectReference: {fileID: 0}
-    - target: {fileID: 829738813, guid: 790f465fa18b24d80b5b0055e7f1dc8d, type: 3}
-      propertyPath: onActivateText
-      value: Activated
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 790f465fa18b24d80b5b0055e7f1dc8d, type: 3}
@@ -20825,6 +21353,7 @@ GameObject:
   - component: {fileID: 1503030170}
   - component: {fileID: 1503030171}
   - component: {fileID: 1503030172}
+  - component: {fileID: 1503030173}
   m_Layer: 0
   m_Name: S2_FL_2ndColumn
   m_TagString: Untagged
@@ -20896,6 +21425,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 1
+--- !u!114 &1503030173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503030169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1 &1507360319
 GameObject:
   m_ObjectHideFlags: 0
@@ -20909,6 +21464,7 @@ GameObject:
   - component: {fileID: 1507360323}
   - component: {fileID: 1507360322}
   - component: {fileID: 1507360321}
+  - component: {fileID: 1507360325}
   m_Layer: 0
   m_Name: S2_BL_Exec Office
   m_TagString: Untagged
@@ -21025,6 +21581,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1507360325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507360319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1 &1534484305
 GameObject:
   m_ObjectHideFlags: 0
@@ -21271,106 +21853,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[0]
-      value: 
-      objectReference: {fileID: 1538755747}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[1]
-      value: 
-      objectReference: {fileID: 1538755746}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[2]
-      value: 
-      objectReference: {fileID: 1538755745}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[3]
-      value: 
-      objectReference: {fileID: 1538755744}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[4]
-      value: 
-      objectReference: {fileID: 1538755743}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[5]
-      value: 
-      objectReference: {fileID: 1538755742}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[6]
-      value: 
-      objectReference: {fileID: 1538755741}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[7]
-      value: 
-      objectReference: {fileID: 1538755740}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMeshRenderers.Array.data[8]
-      value: 
-      objectReference: {fileID: 1538755739}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: e75b6a8909e732848b948a046b27f148, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 4d91f264dee4b9449abf05c642bc1ee8, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[2]
-      value: 
-      objectReference: {fileID: 2100000, guid: 18d6f71728b01a746b165c14ea81a171, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[3]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9bc2fc5c9ec8f32428cfdd48c869abae, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[4]
-      value: 
-      objectReference: {fileID: 2100000, guid: e75b6a8909e732848b948a046b27f148, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[5]
-      value: 
-      objectReference: {fileID: 2100000, guid: a917e8b480566dc4287ad5b90bff5d37, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[6]
-      value: 
-      objectReference: {fileID: 2100000, guid: 121662634aee2854194fbb768fa7b3f7, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[7]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7ca5a4b1cebe6104caa082821397e3d1, type: 2}
-    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: skinnedMaterials.Array.data[8]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2e004d95a83ceb64da758af9bf253159, type: 2}
     - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -22526,6 +23008,106 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 1538755747}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[1]
+      value: 
+      objectReference: {fileID: 1538755746}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[2]
+      value: 
+      objectReference: {fileID: 1538755745}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[3]
+      value: 
+      objectReference: {fileID: 1538755744}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[4]
+      value: 
+      objectReference: {fileID: 1538755743}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[5]
+      value: 
+      objectReference: {fileID: 1538755742}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[6]
+      value: 
+      objectReference: {fileID: 1538755741}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[7]
+      value: 
+      objectReference: {fileID: 1538755740}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMeshRenderers.Array.data[8]
+      value: 
+      objectReference: {fileID: 1538755739}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e75b6a8909e732848b948a046b27f148, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d91f264dee4b9449abf05c642bc1ee8, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18d6f71728b01a746b165c14ea81a171, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9bc2fc5c9ec8f32428cfdd48c869abae, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: e75b6a8909e732848b948a046b27f148, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: a917e8b480566dc4287ad5b90bff5d37, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[6]
+      value: 
+      objectReference: {fileID: 2100000, guid: 121662634aee2854194fbb768fa7b3f7, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[7]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ca5a4b1cebe6104caa082821397e3d1, type: 2}
+    - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: skinnedMaterials.Array.data[8]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e004d95a83ceb64da758af9bf253159, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fd5d203a5d61bf4da34c53bbebadd30, type: 3}
 --- !u!4 &1538755738 stripped
@@ -23175,6 +23757,7 @@ GameObject:
   - component: {fileID: 1578947786}
   - component: {fileID: 1578947785}
   - component: {fileID: 1578947784}
+  - component: {fileID: 1578947788}
   m_Layer: 0
   m_Name: S2_BL_Center 2
   m_TagString: Untagged
@@ -23291,6 +23874,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1578947788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578947782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1 &1581195205
 GameObject:
   m_ObjectHideFlags: 0
@@ -24924,6 +25533,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
         type: 3}
       propertyPath: positions.Array.size
@@ -25003,11 +25617,6 @@ PrefabInstance:
         type: 3}
       propertyPath: positions.Array.data[5].z
       value: 39.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fd5d203a5d61bf4da34c53bbebadd30, type: 3}
@@ -26055,6 +26664,7 @@ GameObject:
   - component: {fileID: 1789898196}
   - component: {fileID: 1789898197}
   - component: {fileID: 1789898198}
+  - component: {fileID: 1789898199}
   m_Layer: 0
   m_Name: S2_FL_1stColumn
   m_TagString: Untagged
@@ -26126,6 +26736,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 1.02
+--- !u!114 &1789898199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789898195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1 &1822726667
 GameObject:
   m_ObjectHideFlags: 0
@@ -26686,6 +27322,7 @@ GameObject:
   - component: {fileID: 1855885337}
   - component: {fileID: 1855885338}
   - component: {fileID: 1855885339}
+  - component: {fileID: 1855885340}
   m_Layer: 0
   m_Name: CinematicHallway
   m_TagString: Untagged
@@ -26757,6 +27394,32 @@ Halo:
     serializedVersion: 2
     rgba: 4289111718
   m_Size: 4.6
+--- !u!114 &1855885340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855885336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &1855894351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27190,6 +27853,7 @@ GameObject:
   - component: {fileID: 1864949214}
   - component: {fileID: 1864949215}
   - component: {fileID: 1864949216}
+  - component: {fileID: 1864949217}
   m_Layer: 0
   m_Name: S3_BL_Right1st
   m_TagString: Untagged
@@ -27277,6 +27941,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 0.5
+--- !u!114 &1864949217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864949212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1 &1869566463
 GameObject:
   m_ObjectHideFlags: 0
@@ -27577,6 +28267,7 @@ GameObject:
   - component: {fileID: 1893292312}
   - component: {fileID: 1893292313}
   - component: {fileID: 1893292314}
+  - component: {fileID: 1893292315}
   m_Layer: 0
   m_Name: S3_Fl_AfterBars
   m_TagString: Untagged
@@ -27648,6 +28339,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 1
+--- !u!114 &1893292315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893292311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1 &1905141296
 GameObject:
   m_ObjectHideFlags: 0
@@ -28008,6 +28725,7 @@ GameObject:
   - component: {fileID: 1910936762}
   - component: {fileID: 1910936764}
   - component: {fileID: 1910936763}
+  - component: {fileID: 1910936765}
   m_Layer: 0
   m_Name: S1_HL_Little Hall
   m_TagString: Untagged
@@ -28079,6 +28797,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1910936765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910936761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &1918673927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28699,6 +29443,7 @@ GameObject:
   - component: {fileID: 1935739604}
   - component: {fileID: 1935739603}
   - component: {fileID: 1935739602}
+  - component: {fileID: 1935739607}
   m_Layer: 0
   m_Name: S2_BL_Exec Office (1)
   m_TagString: Untagged
@@ -28815,6 +29560,32 @@ Transform:
   m_Father: {fileID: 1656652383}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 234.50299, z: 0}
+--- !u!114 &1935739607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935739601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &1948757512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29097,6 +29868,7 @@ GameObject:
   - component: {fileID: 1956583155}
   - component: {fileID: 1956583156}
   - component: {fileID: 1956583157}
+  - component: {fileID: 1956583158}
   m_Layer: 0
   m_Name: S3_BL_Left4th
   m_TagString: Untagged
@@ -29168,6 +29940,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 0.5
+--- !u!114 &1956583158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956583154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &1957650765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31199,6 +31997,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 12188629915876987, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
+        type: 3}
+      propertyPath: characterName
+      value: BreakGuard2
+      objectReference: {fileID: 0}
     - target: {fileID: 895096678746022450, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
         type: 3}
       propertyPath: skinnedMeshRenderers.Array.size
@@ -31299,21 +32112,6 @@ PrefabInstance:
       propertyPath: skinnedMaterials.Array.data[8]
       value: 
       objectReference: {fileID: 2100000, guid: 2e004d95a83ceb64da758af9bf253159, type: 2}
-    - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 12188629854428239, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 12188629915876987, guid: 4fd5d203a5d61bf4da34c53bbebadd30,
-        type: 3}
-      propertyPath: characterName
-      value: BreakGuard2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fd5d203a5d61bf4da34c53bbebadd30, type: 3}
 --- !u!4 &2074664270 stripped
@@ -31494,6 +32292,7 @@ GameObject:
   - component: {fileID: 2110509509}
   - component: {fileID: 2110509510}
   - component: {fileID: 2110509511}
+  - component: {fileID: 2110509512}
   m_Layer: 0
   m_Name: S1_FL_OutsideBars
   m_TagString: Untagged
@@ -31565,6 +32364,32 @@ Halo:
     serializedVersion: 2
     rgba: 4281348144
   m_Size: 1
+--- !u!114 &2110509512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110509508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 12
+  ScatteringCoef: 0.6
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.1
+  HeightFog: 0
+  HeightScale: 0.1
+  GroundLevel: 0
+  Noise: 0
+  NoiseScale: 0.015
+  NoiseIntensity: 1
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 3, y: 3}
+  MaxRayLength: 400
 --- !u!1001 &2112016295
 PrefabInstance:
   m_ObjectHideFlags: 0
