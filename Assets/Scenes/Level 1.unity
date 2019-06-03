@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4605,7 +4605,7 @@ Light:
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3.98
+  m_Intensity: 2.5
   m_Range: 4.99
   m_SpotAngle: 98.5
   m_CookieSize: 10
@@ -4656,9 +4656,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SampleCount: 12
-  ScatteringCoef: 0.6
-  ExtinctionCoef: 0.01
+  SampleCount: 48
+  ScatteringCoef: 0.42
+  ExtinctionCoef: 0.1
   SkyboxExtinctionCoef: 0.9
   MieG: 0.1
   HeightFog: 0
@@ -5221,7 +5221,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454515822}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
   m_Name: 
@@ -5459,7 +5459,7 @@ PrefabInstance:
     - target: {fileID: 7576271182610077073, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7576271182610077073, guid: 684cb2b6b873f1141a18bc31e262ff4e,
         type: 3}
@@ -5629,7 +5629,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1.13
   m_Range: 10.74
-  m_SpotAngle: 65
+  m_SpotAngle: 56
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -9699,13 +9699,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993649575}
-  m_LocalRotation: {x: 0.28848237, y: -0.7127397, z: 0.5935647, w: 0.23761536}
+  m_LocalRotation: {x: 0.27355835, y: -0.67547363, z: 0.63565105, w: 0.25465462}
   m_LocalPosition: {x: 7.379, y: 2.41, z: 12.704}
   m_LocalScale: {x: 1.0000006, y: -1, z: 1.0000006}
   m_Children: []
   m_Father: {fileID: 582220785}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 79.486, y: -181.178, z: -45.051003}
+  m_LocalEulerAnglesHint: {x: 86.428, y: -183.45099, z: -47.337}
 --- !u!108 &993649577
 Light:
   m_ObjectHideFlags: 0
@@ -9717,7 +9717,7 @@ Light:
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.72
+  m_Intensity: 1.04
   m_Range: 8.4
   m_SpotAngle: 84.6
   m_CookieSize: 10
@@ -9751,7 +9751,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993649575}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
   m_Name: 
@@ -10757,9 +10757,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.43
-  m_Range: 29.8
+  m_Color: {r: 0.1882353, g: 0.1882353, b: 0.1882353, a: 1}
+  m_Intensity: 4.9
+  m_Range: 12.5
   m_SpotAngle: 43
   m_CookieSize: 10
   m_Shadows:
@@ -10793,7 +10793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120977996}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.092, y: 1.415, z: 11.46}
+  m_LocalPosition: {x: -0.114, y: 1.415, z: 11.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 582220785}
@@ -10824,8 +10824,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SampleCount: 12
-  ScatteringCoef: 0.6
-  ExtinctionCoef: 0.01
+  ScatteringCoef: 0.92
+  ExtinctionCoef: 0.04
   SkyboxExtinctionCoef: 0.9
   MieG: 0.1
   HeightFog: 0
@@ -16452,7 +16452,7 @@ PrefabInstance:
     - target: {fileID: 1542714840158248771, guid: 83613cd593df9bd4cae59564e402e0c5,
         type: 3}
       propertyPath: m_Intensity
-      value: 2.21
+      value: 1.55
       objectReference: {fileID: 0}
     - target: {fileID: 1542714840158248770, guid: 83613cd593df9bd4cae59564e402e0c5,
         type: 3}
