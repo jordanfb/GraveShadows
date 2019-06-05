@@ -292,7 +292,7 @@ public class simplePlayerMovement : MonoBehaviour
             Destroy(other.gameObject.GetComponent<Interactable>().interactTextInGame);
             StartCoroutine(DestroyAfterTime(1f, other.transform.parent.gameObject));
 
-            Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("reachOver"));
+            //Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("reachOver"));
             if (emono.isWaistLevel) {
                 if (anim.GetCurrentAnimatorStateInfo(0).IsName("Reach Over")) {
                     return;

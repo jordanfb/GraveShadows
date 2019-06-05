@@ -58,10 +58,7 @@ public class doorOpenScript : MonoBehaviour
             assocDoor.transform.Rotate(Vector3.up, degreesChange);
             degrees += degreesChange;
         }
-        Debug.Log(degrees);
-        Debug.Log(90 - Mathf.Abs(degrees));
         assocDoor.transform.Rotate(Vector3.up, Mathf.Abs(degrees));
-        Debug.Log(assocDoor.transform.rotation.eulerAngles);
         elapsedTime = 0;
         isMoving = false;
         isOpen = false;

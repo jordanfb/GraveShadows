@@ -82,7 +82,6 @@ public class EndgameManager : MonoBehaviour
             egc.nameText.text = suspects[i].CodeName;
 
             currentDegrees += degrees;
-            print("Creating suspect " + i);
         }
     }
 

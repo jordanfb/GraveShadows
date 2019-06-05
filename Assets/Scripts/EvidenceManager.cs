@@ -360,35 +360,37 @@ public class EvidenceManager : MonoBehaviour
             remainingEvidence.Remove(se);
         }
 
-        Debug.Log("Office: " + officeEv.Count);
-        Debug.Log("Factory: " + factoryEv.Count);
-        Debug.Log(culprit.CodeName);
-        Debug.Log("OFFICE EVIDENCE BELOW!");
-        string sus = "";
-        foreach(SerializedEvidence se in officeEv)
-        {          
-            Evidence e = ReferencedEntity(se) as Evidence;
-            Debug.Log(e.Name);
-            foreach(Suspect s in e.AssociatedSuspects)
-            {
-                sus += suspects.IndexOf(s).ToString() + " / ";
-            }
-            Debug.Log(sus);
-            sus = "";
-        }
+        //Debug.Log("Office: " + officeEv.Count);
+        //Debug.Log("Factory: " + factoryEv.Count);
+        //Debug.Log(culprit.CodeName);
+        //Debug.Log("OFFICE EVIDENCE BELOW!");
+        //string sus = "";
+        //foreach(SerializedEvidence se in officeEv)
+        //{          
+        //    Evidence e = ReferencedEntity(se) as Evidence;
+        //    Debug.Log(e.Name);
+        //    foreach(Suspect s in e.AssociatedSuspects)
+        //    {
+        //        sus += suspects.IndexOf(s).ToString() + " / ";
+        //    }
+        //    Debug.Log(sus);
+        //    sus = "";
+        //}
 
-        Debug.Log("FACTORY EVIDENCE BELOW!");
-        foreach(SerializedEvidence se in factoryEv)
-        {
-            Evidence e = ReferencedEntity(se) as Evidence;
-            Debug.Log(e.Name);
-            foreach (Suspect s in e.AssociatedSuspects)
-            {
-                sus += suspects.IndexOf(s).ToString() + " / ";
-            }
-            Debug.Log(sus);
-            sus = "";
-        }
+        //Debug.Log("FACTORY EVIDENCE BELOW!");
+        //foreach(SerializedEvidence se in factoryEv)
+        //{
+        //    Evidence e = ReferencedEntity(se) as Evidence;
+        //    Debug.Log(e.Name);
+        //    foreach (Suspect s in e.AssociatedSuspects)
+        //    {
+        //        sus += suspects.IndexOf(s).ToString() + " / ";
+        //    }
+        //    Debug.Log(sus);
+        //    sus = "";
+        //}
+
+
         //ClampEvidenceLists();
     }
 
