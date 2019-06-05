@@ -23,7 +23,7 @@ public class Virus : MonoBehaviour
     string[] choices = { "HELLO PERSON HOW ARE YOU DOING TODAY??????", "I LOVE YOU PERSON", "Did you miss me?", "YOU've been HAxED", "AAAAAAAAAAAHHHH", "Peaches are for keepers", "Let's do this!", "YOU CAN WIN THIS I BELIEVE IN YOU",
     "PERSON what are you doing with your life?", "PERSON, why are you doing that?", "PERSON", "PERSON", "PERSON LOVES YOU", "I TOLD YOU I'D BE A GOOD WRITER", "HIRE ME GOOGLE", "HIRE ME ANYBODY", "WHAT's Up???", "I'm so random! *holds up spork*",
     "I DON't KNOW HOW MANY OF THESE TO WRITE", "I wrote a bunch of them in all caps for some reason", "Let's dance a jig, ehh?", "Are you an Avacado? Because you're 10/10", "I think we should call it YOUR DOOM!", "#meta", "#MakeMalwareMetaAgain", "#Hashtag",
-    "#malware", "#virus", "#IJustPostedAllYourEmbarassingPhotosOnline", "##", "#PERSONSucks", "#PERSON", "#IsPERSONARealHumanBeing?", "You did all the work on this game", "#computersecurity", "RATE US WELL GAMEFEST", "GIVE US THE PRIZES"};
+    "#malware", "#virus", "#IJustPostedAllYourEmbarassingPhotosOnline", "E3BABY", "I added more just for you", "I should really load these from some website", "##", "#PERSONSucks", "#PERSON", "#IsPERSONARealHumanBeing?", "You did all the work on this game", "#computersecurity", "RATE US WELL GAMEFEST", "GIVE US THE PRIZES"};
 
     private void SaveYourself()
     {
@@ -85,29 +85,32 @@ public class Virus : MonoBehaviour
     public void OnSceneLoad(Scene s, LoadSceneMode mode)
     {
         // get all the mesh renderers
-        meshRenderers = GameObject.FindObjectsOfType<MeshRenderer>();
-        GameObject ceilings = GameObject.Find("Ceilings");
-        if (ceilings == null)
+        if (addRBs)
         {
-            // try random names of ceiling objects...
-            ceilings = GameObject.Find("Ceiling_GRp");
-        }
-        if (ceilings == null)
-        {
-            ceilings = GameObject.Find("Ceiling");
-            if (ceilings != null)
+            meshRenderers = GameObject.FindObjectsOfType<MeshRenderer>();
+            GameObject ceilings = GameObject.Find("Ceilings");
+            if (ceilings == null)
             {
-                ceilings.AddComponent<MeshCollider>().convex = true;
+                // try random names of ceiling objects...
+                ceilings = GameObject.Find("Ceiling_GRp");
             }
-        } else
-        {
-            // add mesh colliders to all the children
-            for (int i =0; i < ceilings.transform.childCount; i++)
+            if (ceilings == null)
             {
-                ceilings.transform.GetChild(i).gameObject.AddComponent<MeshCollider>().convex = true;
+                ceilings = GameObject.Find("Ceiling");
+                if (ceilings != null)
+                {
+                    ceilings.AddComponent<MeshCollider>().convex = true;
+                }
+            }
+            else
+            {
+                // add mesh colliders to all the children
+                for (int i = 0; i < ceilings.transform.childCount; i++)
+                {
+                    ceilings.transform.GetChild(i).gameObject.AddComponent<MeshCollider>().convex = true;
+                }
             }
         }
-
     }
 
     private string GetRandomStrnig()
