@@ -30,7 +30,6 @@ public class GameplayManager : MonoBehaviour
     [Tooltip("this gets set by the script don't edit it in the editor")]
     public List<DayData> dayData;
 
-    private string debugModeString = "zasegj";
     private bool[] debugModeKeysPressed = new bool[6];
 
     private void Awake()

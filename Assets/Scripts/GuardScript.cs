@@ -102,8 +102,7 @@ public class GuardScript : MonoBehaviour
     private Vector3 investigatePosition;
     public bool isInvestigating = false;
     private bool isWalkingOverToInvestigate = false;
-    private bool shouldResumeConversation = false;
-    private int dayNum; // the current daynum
+    private int dayNum = 0; // the current daynum
 
 
     private int pathingTargetNumber;
