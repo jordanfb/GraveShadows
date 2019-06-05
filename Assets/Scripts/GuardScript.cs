@@ -460,27 +460,13 @@ public class GuardScript : MonoBehaviour
                     GameLevelManager gameLevel = FindObjectOfType<GameLevelManager>();
                     Debug.Assert(gameLevel != null); // duh it can't be null we need it in all our levels
                     GameplayManager.instance.SkipDay(GameplayManager.instance.GenerateTodaysRecipt(gameLevel.level, gameLevel.evidenceFoundThisDay, true, gameLevel.HasFoundEverything()));
-                    if (Options.instance.demoMode)
+                    if (conversationMember != null && sightedPlayerQuips.Length > 0)
                     {
-                        if (conversationMember != null && sightedPlayerQuips.Length > 0)
-                        {
-                            RunFunctionAfterFinishedSpeaking(GameplayManager.instance.VisitDemoHub, 1);
-                        }
-                        else
-                        {
-                            RunFunctionAfterTime(GameplayManager.instance.VisitDemoHub, 1);
-                        }
+                        RunFunctionAfterFinishedSpeaking(GameplayManager.instance.VisitHubScene, 1);
                     }
                     else
                     {
-                        if (conversationMember != null && sightedPlayerQuips.Length > 0)
-                        {
-                            RunFunctionAfterFinishedSpeaking(GameplayManager.instance.VisitHubScene, 1);
-                        }
-                        else
-                        {
-                            RunFunctionAfterTime(GameplayManager.instance.VisitHubScene, 1);
-                        }
+                        RunFunctionAfterTime(GameplayManager.instance.VisitHubScene, 1);
                     }
                 }
             }

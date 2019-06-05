@@ -28,7 +28,7 @@ public class MainMenu : MonoBehaviour
             }
             else
             {
-                GameplayManager.instance.VisitDemoOffice();
+                GameplayManager.instance.VisitOffice();
             }
         }
         else

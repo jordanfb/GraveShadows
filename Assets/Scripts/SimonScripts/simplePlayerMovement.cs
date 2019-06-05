@@ -236,7 +236,7 @@ public class simplePlayerMovement : MonoBehaviour
                 if (GetComponent<CustomLevel1Logic>() != null)
                 {
                     // it's level 1
-                    GameplayManager.instance.VisitDemoOffice(); // straight into the office!
+                    GameplayManager.instance.VisitOffice(); // straight into the office!
                 } else
                 {
                     // otherwise go to the next day which will take you to the hub correctly
