@@ -13680,7 +13680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2147371903
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13719,7 +13719,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e1325613f29adba4ead3b9ed46dc5b4d, type: 2}
   - {fileID: 11400000, guid: d0b0fbb3ef5a3d747966b9c3384f0e29, type: 2}
   Prefab: {fileID: 7498267116105757650, guid: 38ee6897d9262834eb01eac6b6f0bb44, type: 3}
-  chooseLeaderText: {fileID: 0}
+  chooseLeaderText: {fileID: 2147371905}
   radius: 200
   speed: 1
   open: 0
@@ -13756,7 +13756,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pick the leader
+  m_Text: 
 --- !u!222 &2147371906
 CanvasRenderer:
   m_ObjectHideFlags: 0
