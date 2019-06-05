@@ -34,6 +34,7 @@ public class HubManager : MonoBehaviour
     public Vector3 deskItemCameraOffset = Vector3.down * .5f;
     public GameObject deskCollider;
     public BoxCollider enterDeskCollider;
+    public GameObject suspectHeadshotsForFinalDay;
 
     [Header("Gun variables")]
     public Transform gunTransform;
@@ -233,7 +234,7 @@ public class HubManager : MonoBehaviour
             // only do anything if you click on it at the right time
             //Debug.Log("Clicked on the gun");
             //endgameManager.gameObject.SetActive(true);
-            endgameManager.SetOpen(true);
+            endgameManager.SetOpen(!endgameManager.open); // toggle if it's open or closed
         }
     }
 
@@ -276,6 +277,8 @@ public class HubManager : MonoBehaviour
             {
                 deskItems[i].SetOriginalPositions(); // make sure it knows where to return to now
             }
+            deskItemParent.gameObject.SetActive(false); // actually we're like the demo now we're disabling this
+            suspectHeadshotsForFinalDay.SetActive(true);
             gunTransform.position = finalGunPosition.position;
             gunTransform.rotation = finalGunPosition.rotation;
             // also enable the gun clicking but that's the next problem
