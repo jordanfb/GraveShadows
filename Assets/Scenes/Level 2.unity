@@ -1527,6 +1527,22 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7803348791755957057, guid: b0633d828e7de5d4ca0a727458d05eb3,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 27acaf3778573224097569e5625c7f53,
+        type: 2}
+    - target: {fileID: 7803348791755957057, guid: b0633d828e7de5d4ca0a727458d05eb3,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803348791755957057, guid: b0633d828e7de5d4ca0a727458d05eb3,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0633d828e7de5d4ca0a727458d05eb3, type: 3}
 --- !u!114 &133461584 stripped
@@ -3340,6 +3356,8 @@ GameObject:
   - component: {fileID: 256279413}
   - component: {fileID: 256279412}
   - component: {fileID: 256279415}
+  - component: {fileID: 256279416}
+  - component: {fileID: 256279417}
   m_Layer: 11
   m_Name: ConversationManager
   m_TagString: Untagged
@@ -3439,6 +3457,49 @@ MonoBehaviour:
   defaultSpeed: 0.1
   defaultUsePostDelay: 1
   defaultDelay: 1
+--- !u!114 &256279416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256279411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eabefa2f0f04ee4f8cf80e7f8ecca6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 4900000, guid: d9807843d78d29e4081d10eed3dffd87, type: 3}
+  slaves:
+  - {fileID: 133461584}
+  associatedEvidence: {fileID: 0}
+  scriptName: "Collect All Evidence\r"
+  conversationDescription: "Tells the player to collect as much evidence as possible\r"
+  scriptHeader: "\r\n#scriptname Collect All Evidence\r\n#description Tells the player
+    to collect as much evidence as possible\r\n#character Graves\r\n#speed .05\r\n#delay
+    1\r\n"
+  scriptContent: "\r\n\r\n#Graves\r\nI need to collect as much evidence as possible
+    and avoid those guards.\r\n#"
+  characterNames:
+  - Graves
+  defaultSpeed: 0.05
+  defaultUsePostDelay: 1
+  defaultDelay: 1
+--- !u!114 &256279417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256279411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084667b9482a55d4b81ea49b720a7235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dayNum: 1
+  conversationName: Collect All Evidence
+  validModes: 2
 --- !u!1001 &260565753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4313,6 +4374,7 @@ GameObject:
   - component: {fileID: 319980974}
   - component: {fileID: 319980973}
   - component: {fileID: 319980976}
+  - component: {fileID: 319980977}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4498,6 +4560,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Resolution: 0
   DefaultSpotCookie: {fileID: 2800000, guid: 5157bf6d690b6df458f6c0ce0c06d329, type: 3}
+--- !u!114 &319980977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319980969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084667b9482a55d4b81ea49b720a7235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dayNum: 0
+  conversationName: Collect All Evidence
+  validModes: 1
 --- !u!1 &324809412
 GameObject:
   m_ObjectHideFlags: 0
@@ -15802,6 +15879,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[0].collider
       value: 
       objectReference: {fileID: 144661068}
@@ -15876,6 +15957,54 @@ PrefabInstance:
     - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: triggerEventPairs.Array.data[3].delayTime
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 319980977}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: TryStartConversation
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 256279417}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: TryStartConversation
+      objectReference: {fileID: 0}
+    - target: {fileID: 57381344, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+      propertyPath: triggerEventPairs.Array.data[0].events.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2006359354, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
