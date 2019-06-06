@@ -199,7 +199,6 @@ public class EvidenceManager : MonoBehaviour
         // then it also makes a new game
         Random.InitState(System.DateTime.Now.Millisecond);
         instance.InitializeSerializedEvidence();
-        UndoRedoStack.Reset(); // clears the stack for a new game
     }
 
     public void MarkRandomCulprit()
