@@ -4587,13 +4587,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 290916457}
-  m_LocalRotation: {x: 0.184936, y: 0.66638815, z: -0.14779419, w: 0.7070236}
+  m_LocalRotation: {x: 0.2859349, y: 0.62969464, z: -0.25553623, w: 0.675594}
   m_LocalPosition: {x: -1.0079999, y: 2.553, z: 3.289}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 582220785}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 27.289001, y: 87.198006, z: 2.4180002}
+  m_LocalEulerAnglesHint: {x: 45.086002, y: 86.47201, z: 1.2030001}
 --- !u!108 &290916459
 Light:
   m_ObjectHideFlags: 0
@@ -4607,7 +4607,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2.5
   m_Range: 4.99
-  m_SpotAngle: 98.5
+  m_SpotAngle: 96.06
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -4657,7 +4657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SampleCount: 48
-  ScatteringCoef: 0.42
+  ScatteringCoef: 0.13
   ExtinctionCoef: 0.1
   SkyboxExtinctionCoef: 0.9
   MieG: 0.1
@@ -5631,10 +5631,10 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.13
-  m_Range: 10.74
-  m_SpotAngle: 56
+  m_Color: {r: 0.32941177, g: 0.32941177, b: 0.32941177, a: 1}
+  m_Intensity: 8
+  m_Range: 8.24
+  m_SpotAngle: 50
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -5670,7 +5670,7 @@ Halo:
   m_Color:
     serializedVersion: 2
     rgba: 4281348144
-  m_Size: 0.32
+  m_Size: 0.22
 --- !u!114 &480250150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5684,16 +5684,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SampleCount: 12
-  ScatteringCoef: 0.6
-  ExtinctionCoef: 0.01
-  SkyboxExtinctionCoef: 0.9
-  MieG: 0.1
+  ScatteringCoef: 1
+  ExtinctionCoef: 0.033
+  SkyboxExtinctionCoef: 0.85
+  MieG: 0
   HeightFog: 0
   HeightScale: 0.1
   GroundLevel: 0
-  Noise: 0
-  NoiseScale: 0.015
-  NoiseIntensity: 1
+  Noise: 1
+  NoiseScale: -5
+  NoiseIntensity: 8.98
   NoiseIntensityOffset: 0.3
   NoiseVelocity: {x: 3, y: 3}
   MaxRayLength: 400
@@ -6285,8 +6285,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+  m_Intensity: 1.64
   m_Range: 10.74
   m_SpotAngle: 65
   m_CookieSize: 10
@@ -6326,16 +6326,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SampleCount: 12
-  ScatteringCoef: 0.6
+  ScatteringCoef: 0.98
   ExtinctionCoef: 0.01
-  SkyboxExtinctionCoef: 0.9
-  MieG: 0.1
+  SkyboxExtinctionCoef: 1
+  MieG: 0
   HeightFog: 0
   HeightScale: 0.1
   GroundLevel: 0
-  Noise: 0
-  NoiseScale: 0.015
-  NoiseIntensity: 1
+  Noise: 1
+  NoiseScale: -5
+  NoiseIntensity: 8.98
   NoiseIntensityOffset: 0.3
   NoiseVelocity: {x: 3, y: 3}
   MaxRayLength: 400
@@ -8828,7 +8828,7 @@ PrefabInstance:
     - target: {fileID: 7155437056641826363, guid: c10c20ec7fc595945a64d7f292dc347c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.104
+      value: 7.168
       objectReference: {fileID: 0}
     - target: {fileID: 7155437056641826363, guid: c10c20ec7fc595945a64d7f292dc347c,
         type: 3}
@@ -8838,7 +8838,7 @@ PrefabInstance:
     - target: {fileID: 7155437056641826363, guid: c10c20ec7fc595945a64d7f292dc347c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.818
+      value: 16.225
       objectReference: {fileID: 0}
     - target: {fileID: 7155437056641826363, guid: c10c20ec7fc595945a64d7f292dc347c,
         type: 3}
@@ -9724,7 +9724,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1.04
   m_Range: 8.4
-  m_SpotAngle: 84.6
+  m_SpotAngle: 77
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -10836,9 +10836,9 @@ MonoBehaviour:
   HeightFog: 0
   HeightScale: 0.1
   GroundLevel: 0
-  Noise: 0
-  NoiseScale: 0.015
-  NoiseIntensity: 1
+  Noise: 1
+  NoiseScale: -5
+  NoiseIntensity: 8.98
   NoiseIntensityOffset: 0.3
   NoiseVelocity: {x: 3, y: 3}
   MaxRayLength: 400
@@ -11035,12 +11035,17 @@ PrefabInstance:
     - target: {fileID: 1542714840158248771, guid: 83613cd593df9bd4cae59564e402e0c5,
         type: 3}
       propertyPath: m_Intensity
-      value: 2.62
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 1542714840158248771, guid: 83613cd593df9bd4cae59564e402e0c5,
         type: 3}
       propertyPath: m_SpotAngle
-      value: 82
+      value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542714840158248771, guid: 83613cd593df9bd4cae59564e402e0c5,
+        type: 3}
+      propertyPath: m_Shadows.m_Strength
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1542714840158248770, guid: 83613cd593df9bd4cae59564e402e0c5,
         type: 3}
@@ -12941,9 +12946,9 @@ MonoBehaviour:
   HeightFog: 0
   HeightScale: 0.1
   GroundLevel: 0
-  Noise: 0
-  NoiseScale: 0.015
-  NoiseIntensity: 1
+  Noise: 1
+  NoiseScale: -5
+  NoiseIntensity: 8.98
   NoiseIntensityOffset: 0.3
   NoiseVelocity: {x: 3, y: 3}
   MaxRayLength: 400
@@ -15629,7 +15634,12 @@ PrefabInstance:
     - target: {fileID: 1542714840158248771, guid: 83613cd593df9bd4cae59564e402e0c5,
         type: 3}
       propertyPath: m_SpotAngle
-      value: 82
+      value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542714840158248771, guid: 83613cd593df9bd4cae59564e402e0c5,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 1.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83613cd593df9bd4cae59564e402e0c5, type: 3}
