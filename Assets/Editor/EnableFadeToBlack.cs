@@ -73,7 +73,7 @@ public class EnableFadeToBlack : EditorWindow
                             bool found = RecursiveObjectSearch<FadeToBlack>(go, out f);
                             if (found)
                             {
-                                Debug.Log("found it using recursive search");
+                                // this is the one which does all the heavy lifting so IDK why I have the other ones but just in case...
                                 fade = f;
                                 break;
                             }
