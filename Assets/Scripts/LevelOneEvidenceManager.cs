@@ -9,6 +9,9 @@ public class LevelOneEvidenceManager : MonoBehaviour
     public bool receiptFound = false;
     public Evidence key;
     public Evidence receipt;
+
+    private bool allEvidenceFoundLatch = false;
+
     private GameObject keyObject;
     private GameObject receiptObject;
 
@@ -41,6 +44,7 @@ public class LevelOneEvidenceManager : MonoBehaviour
     private void OnLevelLoad(Scene s, LoadSceneMode m)
     {
         // this is so that the don't destroy on load item which is keeping track of what we've found can destroy things
+        allEvidenceFoundLatch = false; // able to run that again
         FindObjects();
         if (keyFound && keyObject != null)
         {
@@ -87,5 +91,19 @@ public class LevelOneEvidenceManager : MonoBehaviour
             keyFound = true;
         if (receiptSE.evidenceState != SerializedEvidence.EvidenceState.NotFound)
             receiptFound = true;
+        if (!allEvidenceFoundLatch && AllEvidenceFound())
+        {
+            allEvidenceFoundLatch = true;
+            // invoke the action
+            //OnAllEvidenceFound.Invoke();
+            LevelOneCustomHandler h = GameObject.FindObjectOfType<LevelOneCustomHandler>();
+            if (h != null)
+            {
+                h.onFoundAllEvidence.Invoke();
+            } else
+            {
+                Debug.LogError("ERROR: UNable to find level one custom handler this is probably game breaking since we can't leave the tutorial");
+            }
+        }
     }
 }

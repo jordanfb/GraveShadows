@@ -13,6 +13,7 @@ public class Options : MonoBehaviour
     public bool invertYarnboardPanning = false;
     public bool demoMode = false; // only allow the demo mode if so
     public bool demoModeEnableTutorial = false;
+    public bool useEvidenceFromAllLevels = true; // this is to try the new evidence approach which takes evidence from all levels.
 
     [Space]
     public AudioClip musicClipInBackgroundToPlayPause;

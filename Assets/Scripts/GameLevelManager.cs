@@ -108,17 +108,13 @@ public class GameLevelManager : MonoBehaviour
                 return false;
             }
         }
+        // I'm pretty sure that if they're disabled they won't get returned by the find object call, so the length would be zero.
+        // it may be interesting figuring that out
         return true;
     }
 
     public EvidenceMono[] GetEvidence()
     {
         return evidenceMonos;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
