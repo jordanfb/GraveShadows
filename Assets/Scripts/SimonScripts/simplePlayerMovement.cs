@@ -233,7 +233,7 @@ public class simplePlayerMovement : MonoBehaviour
             if (Options.instance.demoMode && Options.instance.demoModeEnableTutorial)
             {
                 // if we're in level 1 then go to Demo Level 2, else go to the hub
-                if (GetComponent<CustomLevel1Logic>() != null)
+                if (GameObject.FindObjectOfType<LevelOneEvidenceManager>() != null)
                 {
                     // it's level 1
                     GameplayManager.instance.VisitOffice(); // straight into the office!
