@@ -28,8 +28,10 @@ public class LevelOneEvidenceManager : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject); // this gets destroyed once you reach the hubworld
         instance = this;
-        keySE = EvidenceManager.instance.apartmentEV[1];
-        receiptSE = EvidenceManager.instance.apartmentEV[0];
+        // this is the correct way to do it: DON'T USE MAGIC NUMBERS THEY'RE STUPID AND BAD JESUS THAT WAS AN ANNOYING BUG
+        keySE = EvidenceManager.instance.FindSerializedEvidence(key);
+        receiptSE = EvidenceManager.instance.FindSerializedEvidence(receipt);
+
         SceneManager.sceneLoaded += OnLevelLoad; // add a listener to the level being loaded
     }
 
@@ -41,6 +43,12 @@ public class LevelOneEvidenceManager : MonoBehaviour
         instance = null;
     }
 
+    public void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnLevelLoad;
+        instance = null;
+    }
+
     private void OnLevelLoad(Scene s, LoadSceneMode m)
     {
         // this is so that the don't destroy on load item which is keeping track of what we've found can destroy things
@@ -48,7 +56,7 @@ public class LevelOneEvidenceManager : MonoBehaviour
         FindObjects();
         if (keyFound && keyObject != null)
         {
-            Debug.Log("Destroyed receipt");
+            Debug.Log("Destroyed key");
             Destroy(keyObject);
             keyObject = null;
         }
@@ -88,9 +96,15 @@ public class LevelOneEvidenceManager : MonoBehaviour
     void Update()
     {
         if (keySE.evidenceState != SerializedEvidence.EvidenceState.NotFound)
+        {
             keyFound = true;
+            print("Key found" + keySE.evidenceState);
+        }
         if (receiptSE.evidenceState != SerializedEvidence.EvidenceState.NotFound)
+        {
             receiptFound = true;
+            print("Recipt found" + receiptSE.evidenceState);
+        }
         if (!allEvidenceFoundLatch && AllEvidenceFound())
         {
             allEvidenceFoundLatch = true;
