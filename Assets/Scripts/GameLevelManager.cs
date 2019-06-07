@@ -70,6 +70,11 @@ public class GameLevelManager : MonoBehaviour
                 GameObject prefab = EvidenceManager.instance.GetAssociatedPrefab(e);
                 if(prefab != null)
                 {
+                    if (evidenceLocations.Count <= i)
+                    {
+                        //Debug.LogError("i outside of range " + i);
+                        continue;
+                    }
                     GameObject go = Instantiate(prefab);
                     go.transform.position = evidenceLocations[i].position;
                     EvidenceMono em = go.GetComponent<EvidenceMono>();
