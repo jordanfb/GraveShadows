@@ -27,6 +27,43 @@ public class EnableFadeToBlack : EditorWindow
         EnableOrDisableFadeToBlackObjects(false, false);
     }
 
+    // this doesn't seem to save them correctly which may be due to the custom editors? I'm not sure. But I changed the prefab instead
+    //[MenuItem("Utilites/Find Cop Skinned Renderers")]
+    //public static void FindCopSkins()
+    //{
+    //    int total_found = 0;
+    //    foreach (UnityEditor.EditorBuildSettingsScene editorBuildScene in EditorBuildSettings.scenes)
+    //    {
+    //        if (editorBuildScene.enabled)
+    //        {
+    //            UnityEngine.SceneManagement.Scene s = EditorSceneManager.OpenScene(editorBuildScene.path);
+    //            GuardScript[] guards = GameObject.FindObjectsOfType<GuardScript>();
+    //            int found = 0;
+    //            for (int i =0; i < guards.Length; i++)
+    //            {
+    //                if (guards[i].skinnedMaterials.Length == 0)
+    //                {
+    //                    guards[i].FindSkinnedMaterials();
+    //                    found++;
+    //                    total_found++;
+    //                }
+    //            }
+    //            if (found > 0)
+    //            {
+    //                Debug.Log("Found " + found + " unskinned guards in scene " + s.name);
+    //                EditorSceneManager.SaveScene(s, editorBuildScene.path); // save it only if it was changed
+    //            }
+    //        }
+    //    }
+    //    if (total_found <= 0)
+    //    {
+    //        Debug.Log("Found no unskinned guards! Yay!");
+    //    } else
+    //    {
+    //        Debug.Log("Found " + total_found + " unskinnned guards total");
+    //    }
+    //}
+
     public static bool RecursiveObjectSearch<T>(GameObject go, out T t)
     {
         t = go.GetComponent<T>();
