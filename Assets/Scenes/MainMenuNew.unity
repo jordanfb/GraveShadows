@@ -447,6 +447,7 @@ GameObject:
   - component: {fileID: 319980973}
   - component: {fileID: 319980976}
   - component: {fileID: 319980977}
+  - component: {fileID: 319980978}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -645,6 +646,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15bdeda78d90fc24c9a2a583f7b69726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &319980978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319980969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eed1d9cbe64423499f1fefc0ce50417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Resolution: 0
+  DefaultSpotCookie: {fileID: 2800000, guid: 5157bf6d690b6df458f6c0ce0c06d329, type: 3}
 --- !u!1 &351615370
 GameObject:
   m_ObjectHideFlags: 0
@@ -96342,6 +96357,7 @@ GameObject:
   - component: {fileID: 643503273}
   - component: {fileID: 643503275}
   - component: {fileID: 643503274}
+  - component: {fileID: 643503276}
   m_Layer: 0
   m_Name: S2_IL_Ceiling 12
   m_TagString: Untagged
@@ -96386,8 +96402,8 @@ Light:
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5.86
-  m_Range: 9.2
+  m_Intensity: 8.06
+  m_Range: 5.64
   m_SpotAngle: 68
   m_CookieSize: 10
   m_Shadows:
@@ -96413,6 +96429,32 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &643503276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643503272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafc90245bfe9e2408e358f71deace2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleCount: 17
+  ScatteringCoef: 1
+  ExtinctionCoef: 0.01
+  SkyboxExtinctionCoef: 0.9
+  MieG: 0.56
+  HeightFog: 1
+  HeightScale: 0.031
+  GroundLevel: -4.35
+  Noise: 1
+  NoiseScale: -2.6
+  NoiseIntensity: 20.04
+  NoiseIntensityOffset: 0.3
+  NoiseVelocity: {x: 0.25, y: 0}
+  MaxRayLength: 400
 --- !u!65 &660127108
 BoxCollider:
   m_ObjectHideFlags: 0
