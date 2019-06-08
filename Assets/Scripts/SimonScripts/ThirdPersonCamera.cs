@@ -131,7 +131,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
             rotateAround = gameObject.transform.position;
             wallRaycastVec = gameObject.transform.position;
-            //currentDistance = REGULAR_CAMERA_DISTANCE;
+            currentDistance = REGULAR_CAMERA_DISTANCE;
         }
 
 
