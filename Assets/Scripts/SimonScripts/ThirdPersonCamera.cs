@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
@@ -55,11 +56,15 @@ public class ThirdPersonCamera : MonoBehaviour
         }
         lookAtVec = gameObject.transform.position;
         currentDistance = REGULAR_CAMERA_DISTANCE;
-
-        if (Options.instance.InvertY)
-        {
-            scrollSpeedY = -scrollSpeedY; // invert the Y value! This is a terrible way to do it but it works
+        try {
+            if (Options.instance.InvertY)
+            {
+                scrollSpeedY = -scrollSpeedY; // invert the Y value! This is a terrible way to do it but it works
+            }
+        }catch(Exception e) {
+            Debug.Log("ERROR: Options is null");
         }
+
 
     }
 

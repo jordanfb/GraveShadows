@@ -36,7 +36,7 @@ public class simplePlayerMovement : MonoBehaviour
 
 
     public Collider currentWallCollider = null;
-
+    public bool isSprinting = false;
     void Start()
     {
         SRmanager = GetComponent<ShadowRealmManager>();
@@ -121,10 +121,12 @@ public class simplePlayerMovement : MonoBehaviour
         float forwardsSpeed = PLAYER_SPEED_FORWARD;
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
+            isSprinting = true;
             forwardsSpeed = PLAYER_SPRINT_SPEED_FORWARD;
             anim.speed = PLAYER_SPRINT_SPEED_FORWARD / PLAYER_SPEED_FORWARD; // scale it up
         } else
         {
+            isSprinting = false;
             anim.speed = 1;
         }
         rb.velocity = ((new Vector3(mainCam.transform.forward.x, 0, mainCam.transform.forward.z).normalized * _moveDirY * forwardsSpeed)
