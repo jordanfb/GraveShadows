@@ -307,7 +307,7 @@ public class EvidenceManager : MonoBehaviour
             SerializedEvidence se = remainingEvidence[next];
             Evidence ev = ReferencedEntity(se) as Evidence;
             
-            if(ev == null)
+            if(ev == null || ev.GetEvidenceType == EvidenceType.Conversation)
             {
                 remainingEvidence.Remove(se);
                 continue;
@@ -341,7 +341,7 @@ public class EvidenceManager : MonoBehaviour
             SerializedEvidence se = remainingEvidence[next];
             Evidence ev = ReferencedEntity(se) as Evidence;
 
-            if (ev == null)
+            if (ev == null || ev.GetEvidenceType == EvidenceType.Conversation)
             {
                 remainingEvidence.Remove(se);
                 continue;
@@ -359,8 +359,8 @@ public class EvidenceManager : MonoBehaviour
             remainingEvidence.Remove(se);
         }
 
-        //Debug.Log("Office: " + officeEv.Count);
-        //Debug.Log("Factory: " + factoryEv.Count);
+        Debug.Log("Office: " + officeEv.Count);
+        Debug.Log("Factory: " + factoryEv.Count);
         //Debug.Log(culprit.CodeName);
         //Debug.Log("OFFICE EVIDENCE BELOW!");
         //string sus = "";
