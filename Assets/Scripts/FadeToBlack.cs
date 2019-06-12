@@ -9,6 +9,7 @@ public class FadeToBlack : MonoBehaviour
     public RawImage image;
     public float startingAlpha = 1; // what alpha to start at
     public float speed = 1; // 1 second I guess
+    public float speedOut = -1; // if its negative it defaults to the same as speed
     public ConversationMember keepListeningTo; // this is the monologue, it won't fade to the next scene until this is done speaking
 
     private float alpha;
@@ -43,7 +44,8 @@ public class FadeToBlack : MonoBehaviour
         {
             StopCoroutine(runningCoroutine);
         }
-        runningCoroutine = StartCoroutine(Fade(speed, callback, waitForConversation));
+        float speedHere = speedOut < 0 ? speed : speedOut;
+        runningCoroutine = StartCoroutine(Fade(speedHere, callback, waitForConversation));
     }
 
     public float Smootherstep(float x)
