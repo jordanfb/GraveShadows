@@ -219,7 +219,7 @@ public class EvidenceManager : MonoBehaviour
             }
         }
 
-        int j = Random.Range(0, 4);
+        int j = Random.Range(0, 5);
         culprit = ReferencedEntity(allSerializedEvidence[j]) as Suspect;
         if(culprit == null)
         {
