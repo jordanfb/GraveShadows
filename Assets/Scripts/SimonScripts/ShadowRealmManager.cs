@@ -300,28 +300,31 @@ public class ShadowRealmManager : MonoBehaviour
 
     void teleportFromShadowRealm()
     {
-        if (checkIfFreeCollider.GetComponent<checkIfFreeColliderScript>().isColliding) {
-        //Debug.Log("ERROR, player trying to enter real world but would be colliding with something");
+        checkIfFreeColliderScript checkFreeScript = checkIfFreeCollider.GetComponent<checkIfFreeColliderScript>();
+        if (checkFreeScript.CheckExpandedCollisionsIsColliding())
+        {
+            //Debug.Log("ERROR, player trying to enter real world but would be colliding with something");
             return;
         }
         foreach (GameObject ev in GameObject.FindGameObjectsWithTag("Evidence"))
         {
-            if(ev.GetComponent<EvidenceMono>() == null) {
+            if (ev.GetComponent<EvidenceMono>() == null)
+            {
                 continue;
             }
             ev.GetComponent<EvidenceMono>().setMatsToReg();
         }
 
 
-        for (int i = 0; i< copContainer.transform.childCount; i++) {
+        for (int i = 0; i < copContainer.transform.childCount; i++)
+        {
             copContainer.transform.GetChild(i).gameObject.GetComponent<GuardScript>().ResetMaterials();
         }
         StartCoroutine(spawnParticleSystem(shadowPlane.transform.position, checkIfFreeCollider.transform.position, shadowPlane.transform.position - checkIfFreeCollider.transform.position));
-        gameObject.transform.position = checkIfFreeCollider.transform.position;
+        gameObject.transform.position = checkFreeScript.safeSpace;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         isInShadowRealm = !isInShadowRealm;
         shadowPlane.transform.position = shadowRealmTransform.position;
-
     }
 
     void teleportToWall(Collider targetWall, List<Vector3> pointList) {
