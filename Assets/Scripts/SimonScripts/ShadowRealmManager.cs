@@ -42,6 +42,7 @@ public class ShadowRealmManager : MonoBehaviour
     public GameObject particleSystemGO;
     public GameObject copContainer;
     public float shadowAppearSpeed = 0.5f;
+    public float cameraWarpTimeFraction = .5f; // half the time
     public GameObject choosingUIPrefab;
     public GameObject notChoosingUIPrefab;
     private GameObject choosingUI;
@@ -300,6 +301,8 @@ public class ShadowRealmManager : MonoBehaviour
 
     void teleportFromShadowRealm()
     {
+        StartCoroutine(MakeCameraWarp());
+
         checkIfFreeColliderScript checkFreeScript = checkIfFreeCollider.GetComponent<checkIfFreeColliderScript>();
         if (checkFreeScript.CheckExpandedCollisionsIsColliding())
         {
@@ -352,6 +355,7 @@ public class ShadowRealmManager : MonoBehaviour
         StartCoroutine(spawnParticleSystem(gameObject.transform.position, midPoint, partDir));
 
         gameObject.transform.position = shadowRealmTransform.position;
+        StartCoroutine(MakeCameraWarp());
         StartCoroutine(moveBodyToWall());
         //gameObject.GetComponent<Rigidbody>().useGravity = false;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -359,17 +363,25 @@ public class ShadowRealmManager : MonoBehaviour
         isInShadowRealm = !isInShadowRealm;
         GetComponent<simplePlayerMovement>().setCurrentWallCollider(targetWall);
 
+        // change over the cops to use a glow shader so they're visible through walls
         Shader outlineShader = Shader.Find("Outlined/Pure Glow");
         for (int i = 0; i < copContainer.transform.childCount; i++)
         {
             copContainer.transform.GetChild(i).gameObject.GetComponent<GuardScript>().setShader(outlineShader);
-
         }
+    }
 
+    IEnumerator MakeCameraWarp(float additionalFraction = 1)
+    {
+        tpc.isWarping = true;
+        if (shadowAppearSpeed > 0)
+        {
+            yield return new WaitForSeconds(1 / shadowAppearSpeed * cameraWarpTimeFraction * additionalFraction);
+        }
+        tpc.isWarping = false;
     }
 
     IEnumerator moveBodyToWall() {
-
         float alpha = 0.0f;
         while(alpha<1f) {
             alpha += shadowAppearSpeed * Time.deltaTime;
@@ -377,7 +389,6 @@ public class ShadowRealmManager : MonoBehaviour
             yield return null;
         }
         yield return 0;
-
     }
 
     Vector3 findMiddlePos(List<Vector3> pointList) {

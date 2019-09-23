@@ -78,10 +78,6 @@ ENDCG
             #pragma fragment frag
              
             half4 frag(v2f i) :COLOR {
-                
-                
-                
-                
                 return i.color;
             }
             ENDCG
