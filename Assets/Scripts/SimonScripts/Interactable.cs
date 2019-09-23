@@ -27,7 +27,7 @@ public class Interactable : MonoBehaviour
 
 
     ~Interactable() {
-
+        Destroy(interactTextInGame); // hopefully this will fix the press E to pick up bug?
         Destroy(gameObject);
     }
 
