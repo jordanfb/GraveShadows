@@ -24,11 +24,21 @@ public class Interactable : MonoBehaviour
 
     }
 
-
+    private void OnDestroy()
+    {
+        if (interactTextInGame != null)
+        {
+            Destroy(interactTextInGame); // hopefully this will fix the press E to pick up bug?
+            interactTextInGame = null;
+        }
+    }
 
     ~Interactable() {
-        Destroy(interactTextInGame); // hopefully this will fix the press E to pick up bug?
-        Destroy(gameObject);
+        if (interactTextInGame != null)
+        {
+            Destroy(interactTextInGame); // hopefully this will fix the press E to pick up bug?
+            interactTextInGame = null;
+        }
     }
 
     // Update is called once per frame
@@ -107,17 +117,16 @@ public class Interactable : MonoBehaviour
     {
         touchingCollider = false;
         Destroy(interactTextInGame);
+        interactTextInGame = null;
 
-        if (interactTextInGame == null)
-        {
-            return;
-        }
-        if (other.gameObject.tag == "Player")
-        {
-            interactTextInGame.SetActive(false);
-        }
-
-
+        //if (interactTextInGame == null)
+        //{
+        //    return;
+        //}
+        ////if (other.gameObject.tag == "Player")
+        ////{
+        ////    interactTextInGame.SetActive(false);
+        ////}
     }
 
     public void DisableText()
