@@ -46,7 +46,11 @@ public class Interactable : MonoBehaviour
                 Interactable sib = transform.parent.GetChild(i).GetComponent<Interactable>();
                 if (sib != null)
                 {
-                    sib.FindNearbyMeshRenderers();
+                    if (sib.associatedMeshs == null || sib.associatedMeshs.Length == 0)
+                    {
+                        // only replace them if they don't already have associated meshes
+                        sib.FindNearbyMeshRenderers();
+                    }
                 }
             }
         }
