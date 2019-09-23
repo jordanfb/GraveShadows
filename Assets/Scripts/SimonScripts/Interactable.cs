@@ -13,15 +13,63 @@ public class Interactable : MonoBehaviour
     public string baseText;
     public string onActivateText;
     public GameObject Player;
-    public bool hubFocus= false;
+    public bool hubFocus = false;
     private bool touchingCollider = false;
     private bool beenInteracted = false;
+
+    [Space]
+    public bool replaceMaterialOnInteract = false; // this is used for lamps and breakerboxes which stop highlighting when they're done
+    public MeshRenderer[] associatedMeshs;
+    public Material[] associatedReplacementMaterials;
 
     void Start()
     {
         Player = GameObject.Find("Player");
 
 
+    }
+
+    [ContextMenu("Force All Find Nearby Mesh Renderers")]
+    public void ForceAllFindNearbyMeshRenderers()
+    {
+        //Interactable[] i = GameObject.FindObjectsOfType<Interactable>();
+        //foreach (Interactable interactable in i)
+        //{
+        //    interactable.FindNearbyMeshRenderers();
+        //}
+        if (transform.parent != null)
+        {
+            // then find all the interactables in your siblings
+            int childCount = transform.parent.childCount;
+            for (int i = 0; i < childCount; i++)
+            {
+                Interactable sib = transform.parent.GetChild(i).GetComponent<Interactable>();
+                if (sib != null)
+                {
+                    sib.FindNearbyMeshRenderers();
+                }
+            }
+        }
+    }
+
+    [ContextMenu("Find Nearby Mesh Renderers")]
+    public void FindNearbyMeshRenderers()
+    {
+        MeshRenderer[] nearby = GameObject.FindObjectsOfType<MeshRenderer>();
+        // look through them to find the closest one
+        float distance = 0;
+        MeshRenderer closest = null;
+        foreach (MeshRenderer mr in nearby)
+        {
+            float thisDistance = Vector3.Distance(transform.position, mr.transform.position);
+            if (closest == null || thisDistance < distance)
+            {
+                closest = mr;
+                distance = thisDistance;
+            }
+        }
+        associatedMeshs = new MeshRenderer[1];
+        associatedMeshs[0] = closest;
     }
 
     private void OnDestroy()
@@ -33,7 +81,8 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    ~Interactable() {
+    ~Interactable()
+    {
         if (interactTextInGame != null)
         {
             Destroy(interactTextInGame); // hopefully this will fix the press E to pick up bug?
@@ -46,13 +95,15 @@ public class Interactable : MonoBehaviour
     void Update()
     {
 
-        if (interactTextInGame == null) {
+        if (interactTextInGame == null)
+        {
             return;
         }
 
 
 
-        if (!interactTextInGame.activeInHierarchy ) {
+        if (!interactTextInGame.activeInHierarchy)
+        {
             return;
         }
         interactTextInGame.transform.position = Vector3.SmoothDamp(interactTextInGame.transform.position,
@@ -62,10 +113,12 @@ public class Interactable : MonoBehaviour
 
 
     }
-    private void OnTriggerStay(Collider other) {
+    private void OnTriggerStay(Collider other)
+    {
         if (other.gameObject.tag == "Player")
         {
-            if(interactTextInGame == null) {
+            if (interactTextInGame == null)
+            {
                 return;
             }
 
@@ -134,12 +187,14 @@ public class Interactable : MonoBehaviour
         if (interactTextInGame != null)
         {
             interactTextInGame.SetActive(false);
-        } else
+        }
+        else
         {
             Debug.LogWarning("Error no interact text on this for some reason somehow. gameobject name: " + gameObject.name); // this gets called in the tutorial FIX
         }
     }
-    public void enableText() {
+    public void enableText()
+    {
         if (interactTextInGame != null)
         {
             interactTextInGame.SetActive(true);
@@ -150,13 +205,22 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public void setActivatedText() {
+    public void setActivatedText()
+    {
         if (interactTextInGame == null)
         {
             return;
         }
         beenInteracted = true;
         interactTextInGame.GetComponent<Text>().text = onActivateText;
+
+        if (replaceMaterialOnInteract && associatedMeshs != null && associatedReplacementMaterials != null)
+        {
+            for (int i = 0; i < associatedMeshs.Length; i++)
+            {
+                associatedMeshs[i].material = associatedReplacementMaterials[i]; // replace the material
+            }
+        }
     }
 
 
