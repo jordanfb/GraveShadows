@@ -213,7 +213,12 @@ public class Interactable : MonoBehaviour
         }
         beenInteracted = true;
         interactTextInGame.GetComponent<Text>().text = onActivateText;
+        StartCoroutine(ReplaceMaterialAfterTime());
+    }
 
+    private IEnumerator ReplaceMaterialAfterTime()
+    {
+        yield return new WaitForSeconds(.5f); // the lights turn on after .5 seconds so we're going to delay the highlight turning off too
         if (replaceMaterialOnInteract && associatedMeshs != null && associatedReplacementMaterials != null)
         {
             for (int i = 0; i < associatedMeshs.Length; i++)
@@ -222,9 +227,4 @@ public class Interactable : MonoBehaviour
             }
         }
     }
-
-
-
-
-
 }
