@@ -177,13 +177,15 @@ public class ConversationMember : MonoBehaviour
     private void UpdateTextToDisplay()
     {
         // display characterNumber characters
-        if (unformattedCharacterNumber < line.unformattedText.Length)
-        {
-            text.text = line.formattedText.Substring(0, characterNumber);// + line.unformattedText.Substring(unformattedCharacterNumber);
-        } else
-        {
-            text.text = line.formattedText.Substring(0, characterNumber);
-        }
+        text.text = line.formattedText;
+        text.maxVisibleCharacters = unformattedCharacterNumber;
+        //if (unformattedCharacterNumber < line.unformattedText.Length)
+        //{
+        //    text.text = line.formattedText.Substring(0, characterNumber);// + line.unformattedText.Substring(unformattedCharacterNumber);
+        //} else
+        //{
+        //    text.text = line.formattedText.Substring(0, characterNumber);
+        //}
         // this needs to be FIXed because it'll shimmy around when more text gets added. Gotta use the transparent color formatting
     }
 

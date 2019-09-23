@@ -42,8 +42,21 @@ public class ThirdPersonCamera : MonoBehaviour
     public GameObject materialedObjectsParent;
     public Transform headTransform;
 
+    [Tooltip("Is the camera warping to focus on a shadow on the wall?")]
+    public bool isWarping = false;
+
+    public float warpingLerpSpeed = .25f;
 
     public float mouseDeltaOnChange = 3f;
+
+
+    Vector3 newCamPos;
+    Vector3 lastLegalCamPos;
+    Vector3 shadowModVec = Vector3.zero;
+    Vector3 wallRaycastVec;
+    Vector3 velocity = Vector3.zero;
+
+    private Vector3 oldCameraRotateAround = Vector3.zero;
 
     void Start()
     {
@@ -71,35 +84,14 @@ public class ThirdPersonCamera : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-
-
-
         currentRotationX += Input.GetAxis("Mouse X") * scrollSpeedX;
         currentRotationY -= Input.GetAxis("Mouse Y") * scrollSpeedY;
         //distance += Input.GetAxis("Mouse ScrollWheel");
         currentRotationY = Mathf.Clamp(currentRotationY, min_y, max_y);
-        
-
-
-
-
-
     }
 
-    Vector3 debugPoint = Vector3.zero;
-    void OnDrawGizmos()
-    {
-        //Gizmos.DrawSphere(camPos - 3 * mainCam.transform.forward, 0.5f);
-    }
-
-    Vector3 newCamPos;
-    Vector3 lastLegalCamPos;
-    Vector3 shadowModVec = Vector3.zero;
-    Vector3 wallRaycastVec;
-    Vector3 velocity = Vector3.zero;
     void LateUpdate()
     {
-
         Vector3 rotateAround;
         if (SRmanager.isChoosingWall)
         {
@@ -114,22 +106,43 @@ public class ThirdPersonCamera : MonoBehaviour
 
             GameObject shadowPlaneChild = SRmanager.shadowPlane.transform.GetChild(0).gameObject;
 
-
-            //lookAtVec = shadowPlaneChild.transform.position + shadowPlaneChild.transform.up;
-            rotateAround = shadowPlaneChild.transform.position + shadowPlaneChild.transform.up;
+            if (isWarping)
+            {
+                rotateAround = Vector3.Lerp(oldCameraRotateAround, shadowPlaneChild.transform.position + shadowPlaneChild.transform.up, warpingLerpSpeed);
+                Vector3 dpos = rotateAround - oldCameraRotateAround;
+                if (dpos.sqrMagnitude > .1f)
+                {
+                    // then we can turn the camera to look that way
+                    Quaternion dLookPos = Quaternion.LookRotation(dpos, Vector3.up);
+                    Quaternion lerpLookDirection = Quaternion.Slerp(Quaternion.Euler(currentRotationY, currentRotationX, 0.0f), dLookPos, 1);
+                    Vector3 lerpLookAngles = dLookPos.eulerAngles;
+                    currentRotationX = lerpLookAngles.y; // for some reason these are swapped
+                    currentRotationY = lerpLookAngles.x;
+                }
+            }
+            else
+            {
+                rotateAround = shadowPlaneChild.transform.position + shadowPlaneChild.transform.up;
+            }
             wallRaycastVec = lookAtVec;
             currentDistance = SHADOW_CAMERA_DISTANCE;
 
         }
         else
         {
-
+            // focused on the player
 
             Vector3 dirFromCamToPlayer = mainCam.transform.position - gameObject.transform.position;
             Vector3 modVec = Vector3.Scale(dirFromCamToPlayer, new Vector3(1f, 0f, 1f));
 
-
-            rotateAround = gameObject.transform.position;
+            if (isWarping)
+            {
+                rotateAround = Vector3.Lerp(oldCameraRotateAround, gameObject.transform.position, warpingLerpSpeed);
+            }
+            else
+            {
+                rotateAround = gameObject.transform.position;
+            }
             wallRaycastVec = gameObject.transform.position;
             currentDistance = REGULAR_CAMERA_DISTANCE;
         }
@@ -137,6 +150,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         Quaternion rot = Quaternion.Euler(currentRotationY, currentRotationX, 0.0f);
 
+        oldCameraRotateAround = rotateAround;
 
         newCamPos = rotateAround + (rot * new Vector3(0f, 0f, -currentDistance));
         if (Physics.Linecast(wallRaycastVec, newCamPos, out wallHit, mask))
@@ -148,14 +162,13 @@ public class ThirdPersonCamera : MonoBehaviour
                 wallHitDistance = -currentDistance;
 
             }
-
-
             newCamPos = rotateAround + rot * new Vector3(0f, 0f, wallHitDistance);
-
         }
 
-
+        //float lerpTime = isWarping ? .5f : 0.001f; // if the camera is warping to a wall then slow down the lerp to let the player notice
+        //mainCam.transform.position = Vector3.SmoothDamp(mainCam.transform.position, newCamPos, ref velocity, lerpTime);
         mainCam.transform.position = Vector3.SmoothDamp(mainCam.transform.position, newCamPos, ref velocity, 0.001f);
+
 
         if (SRmanager.isInShadowRealm)
         {
@@ -336,6 +349,12 @@ public class ThirdPersonCamera : MonoBehaviour
         Quaternion lookAngle = Quaternion.LookRotation(dir, Vector3.up);
         Quaternion newCamLook = Quaternion.RotateTowards(mainCam.transform.rotation, lookAngle, cameraWhileChoosingLerpRotateSpeed * Time.deltaTime);
         mainCam.transform.rotation = newCamLook;
+
+
+        //// update the angle that the main camera is looking at so it's not jerky
+        //Vector3 angles = lookAngle.eulerAngles;
+        //currentRotationX = angles.x;
+        //currentRotationY = angles.y;
 
         //camera position
 

@@ -13,9 +13,14 @@ public class Interactable : MonoBehaviour
     public string baseText;
     public string onActivateText;
     public GameObject Player;
-    public bool hubFocus= false;
+    public bool hubFocus = false;
     private bool touchingCollider = false;
     private bool beenInteracted = false;
+
+    [Space]
+    public bool replaceMaterialOnInteract = false; // this is used for lamps and breakerboxes which stop highlighting when they're done
+    public MeshRenderer[] associatedMeshs;
+    public Material[] associatedReplacementMaterials;
 
     void Start()
     {
@@ -24,11 +29,69 @@ public class Interactable : MonoBehaviour
 
     }
 
+    [ContextMenu("Force All Find Nearby Mesh Renderers")]
+    public void ForceAllFindNearbyMeshRenderers()
+    {
+        //Interactable[] i = GameObject.FindObjectsOfType<Interactable>();
+        //foreach (Interactable interactable in i)
+        //{
+        //    interactable.FindNearbyMeshRenderers();
+        //}
+        if (transform.parent != null)
+        {
+            // then find all the interactables in your siblings
+            int childCount = transform.parent.childCount;
+            for (int i = 0; i < childCount; i++)
+            {
+                Interactable sib = transform.parent.GetChild(i).GetComponent<Interactable>();
+                if (sib != null)
+                {
+                    if (sib.associatedMeshs == null || sib.associatedMeshs.Length == 0)
+                    {
+                        // only replace them if they don't already have associated meshes
+                        sib.FindNearbyMeshRenderers();
+                    }
+                }
+            }
+        }
+    }
 
+    [ContextMenu("Find Nearby Mesh Renderers")]
+    public void FindNearbyMeshRenderers()
+    {
+        MeshRenderer[] nearby = GameObject.FindObjectsOfType<MeshRenderer>();
+        // look through them to find the closest one
+        float distance = 0;
+        MeshRenderer closest = null;
+        foreach (MeshRenderer mr in nearby)
+        {
+            float thisDistance = Vector3.Distance(transform.position, mr.transform.position);
+            if (closest == null || thisDistance < distance)
+            {
+                closest = mr;
+                distance = thisDistance;
+            }
+        }
+        associatedMeshs = new MeshRenderer[1];
+        associatedMeshs[0] = closest;
+    }
 
-    ~Interactable() {
+    private void OnDestroy()
+    {
+        if (interactTextInGame != null)
+        {
+            Destroy(interactTextInGame); // hopefully this will fix the press E to pick up bug?
+            interactTextInGame = null;
+        }
+    }
 
-        Destroy(gameObject);
+    ~Interactable()
+    {
+        if (interactTextInGame != null)
+        {
+            Destroy(interactTextInGame); // hopefully this will fix the press E to pick up bug?
+            interactTextInGame = null;
+        }
     }
 
     // Update is called once per frame
@@ -36,13 +99,15 @@ public class Interactable : MonoBehaviour
     void Update()
     {
 
-        if (interactTextInGame == null) {
+        if (interactTextInGame == null)
+        {
             return;
         }
 
 
 
-        if (!interactTextInGame.activeInHierarchy ) {
+        if (!interactTextInGame.activeInHierarchy)
+        {
             return;
         }
         interactTextInGame.transform.position = Vector3.SmoothDamp(interactTextInGame.transform.position,
@@ -52,10 +117,12 @@ public class Interactable : MonoBehaviour
 
 
     }
-    private void OnTriggerStay(Collider other) {
+    private void OnTriggerStay(Collider other)
+    {
         if (other.gameObject.tag == "Player")
         {
-            if(interactTextInGame == null) {
+            if (interactTextInGame == null)
+            {
                 return;
             }
 
@@ -107,17 +174,16 @@ public class Interactable : MonoBehaviour
     {
         touchingCollider = false;
         Destroy(interactTextInGame);
+        interactTextInGame = null;
 
-        if (interactTextInGame == null)
-        {
-            return;
-        }
-        if (other.gameObject.tag == "Player")
-        {
-            interactTextInGame.SetActive(false);
-        }
-
-
+        //if (interactTextInGame == null)
+        //{
+        //    return;
+        //}
+        ////if (other.gameObject.tag == "Player")
+        ////{
+        ////    interactTextInGame.SetActive(false);
+        ////}
     }
 
     public void DisableText()
@@ -125,12 +191,14 @@ public class Interactable : MonoBehaviour
         if (interactTextInGame != null)
         {
             interactTextInGame.SetActive(false);
-        } else
+        }
+        else
         {
             Debug.LogWarning("Error no interact text on this for some reason somehow. gameobject name: " + gameObject.name); // this gets called in the tutorial FIX
         }
     }
-    public void enableText() {
+    public void enableText()
+    {
         if (interactTextInGame != null)
         {
             interactTextInGame.SetActive(true);
@@ -141,17 +209,26 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public void setActivatedText() {
+    public void setActivatedText()
+    {
         if (interactTextInGame == null)
         {
             return;
         }
         beenInteracted = true;
         interactTextInGame.GetComponent<Text>().text = onActivateText;
+        StartCoroutine(ReplaceMaterialAfterTime());
     }
 
-
-
-
-
+    private IEnumerator ReplaceMaterialAfterTime()
+    {
+        yield return new WaitForSeconds(.5f); // the lights turn on after .5 seconds so we're going to delay the highlight turning off too
+        if (replaceMaterialOnInteract && associatedMeshs != null && associatedReplacementMaterials != null)
+        {
+            for (int i = 0; i < associatedMeshs.Length; i++)
+            {
+                associatedMeshs[i].material = associatedReplacementMaterials[i]; // replace the material
+            }
+        }
+    }
 }
