@@ -359,7 +359,7 @@ public class ShadowRealmManager : MonoBehaviour
         isInShadowRealm = !isInShadowRealm;
         GetComponent<simplePlayerMovement>().setCurrentWallCollider(targetWall);
 
-        Shader outlineShader = Shader.Find("Outlined/Silhouetted Diffuse");
+        Shader outlineShader = Shader.Find("Outlined/Pure Glow");
         for (int i = 0; i < copContainer.transform.childCount; i++)
         {
             copContainer.transform.GetChild(i).gameObject.GetComponent<GuardScript>().setShader(outlineShader);
