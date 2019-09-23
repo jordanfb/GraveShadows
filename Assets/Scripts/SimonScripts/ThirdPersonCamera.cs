@@ -60,7 +60,6 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void Start()
     {
-
         SRmanager = GetComponent<ShadowRealmManager>();
         if (mainCam == null) {
             //Debug.Log("Picked default main camera for third person camera controller");
@@ -77,8 +76,6 @@ public class ThirdPersonCamera : MonoBehaviour
         }catch(Exception e) {
             Debug.Log("ERROR: Options is null");
         }
-
-
     }
 
     // Update is called once per frame
@@ -86,7 +83,12 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         currentRotationX += Input.GetAxis("Mouse X") * scrollSpeedX;
         currentRotationY -= Input.GetAxis("Mouse Y") * scrollSpeedY;
+        if (currentRotationY > 180)
+        {
+            currentRotationY -= 360; // idk what's happening here but this is for when we warp to walls...
+        }
         //distance += Input.GetAxis("Mouse ScrollWheel");
+        Debug.Log(currentRotationY + " : " + min_y + " min < > max " + max_y);
         currentRotationY = Mathf.Clamp(currentRotationY, min_y, max_y);
     }
 
