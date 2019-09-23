@@ -262,10 +262,17 @@ public class simplePlayerMovement : MonoBehaviour
     {
         if(other.gameObject.tag == "Evidence" && Input.GetKeyDown(KeyCode.E))
         {
+            EvidenceMono emono = other.transform.parent.gameObject.GetComponentInChildren<EvidenceMono>();
+
             // start the monologue about collecting evidence! This is here so that any conversations started by the evidence will override this one
-            if (startMonologueOnEvidenceFound) {
-                // find a random one
-                if (evidenceFoundBarks.Length > 0)
+            if (startMonologueOnEvidenceFound)
+            {
+                // find a random one if we don't have one written for it
+                if (emono.EvidenceInfo.PickupText.Length > 0)
+                {
+                    monologueMember.InterruptConversation(emono.EvidenceInfo.PickupText, 0.05f, true, true);
+                }
+                else if (emono.EvidenceInfo.PickupText.Length == 0 && evidenceFoundBarks.Length > 0)
                 {
                     // pick a random 
                     string bark = "";
@@ -285,7 +292,6 @@ public class simplePlayerMovement : MonoBehaviour
             }
 
 
-            EvidenceMono emono = other.transform.parent.gameObject.GetComponentInChildren<EvidenceMono>();
             emono.CollectThisEvidence();
 
 
