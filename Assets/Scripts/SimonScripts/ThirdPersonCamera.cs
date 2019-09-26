@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using System;
 
 public class ThirdPersonCamera : MonoBehaviour
@@ -46,6 +47,8 @@ public class ThirdPersonCamera : MonoBehaviour
     public bool isWarping = false;
 
     public float warpingLerpSpeed = .25f;
+    public PostProcessProfile postProcessProfile; // this is used to warp the camera using fisheye
+    public float fishEyeIntensity = -.1f;
 
     public float mouseDeltaOnChange = 3f;
 
@@ -94,6 +97,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void LateUpdate()
     {
+        Debug.Log(postProcessProfile.settings[postProcessProfile.settings.Count-1]);
         Vector3 rotateAround;
         if (SRmanager.isChoosingWall)
         {
@@ -110,6 +114,12 @@ public class ThirdPersonCamera : MonoBehaviour
 
             if (isWarping)
             {
+                // warping the camera into the wall
+                //postProcessProfile.GetSetting < typeof(warpingEffect) > ();
+                if (postProcessProfile.HasSettings<LensDistortion>())
+                {
+                    postProcessProfile.GetSetting<LensDistortion>().intensity.Override(fishEyeIntensity);
+                }
                 rotateAround = Vector3.Lerp(oldCameraRotateAround, shadowPlaneChild.transform.position + shadowPlaneChild.transform.up, warpingLerpSpeed);
                 Vector3 dpos = rotateAround - oldCameraRotateAround;
                 if (dpos.sqrMagnitude > .1f)

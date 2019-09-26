@@ -35,6 +35,8 @@ public class ShadowRealmManager : MonoBehaviour
     private simplePlayerMovement spm;
     private ThirdPersonCamera tpc;
 
+    public float fishEyeRemoveSpeed = .1f; // ten frames
+
 
     //public GameObject choosingRedicle;
     GameObject lightContainer;
@@ -379,6 +381,16 @@ public class ShadowRealmManager : MonoBehaviour
             yield return new WaitForSeconds(1 / shadowAppearSpeed * cameraWarpTimeFraction * additionalFraction);
         }
         tpc.isWarping = false;
+        UnityEngine.Rendering.PostProcessing.LensDistortion dist = tpc.postProcessProfile.GetSetting<UnityEngine.Rendering.PostProcessing.LensDistortion>();
+        if (dist != null)
+        {
+            while (dist.intensity.value < 0) {
+                Debug.Log("Fish eye value: " + dist.intensity.value);
+                dist.intensity.Override(dist.intensity.value - tpc.fishEyeIntensity * fishEyeRemoveSpeed * Time.deltaTime);
+                yield return null; // wait a frame
+            }
+            dist.intensity.Override(0);
+        }
     }
 
     IEnumerator moveBodyToWall() {
