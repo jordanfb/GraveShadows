@@ -268,11 +268,11 @@ public class simplePlayerMovement : MonoBehaviour
             if (startMonologueOnEvidenceFound)
             {
                 // find a random one if we don't have one written for it
-                if (emono.EvidenceInfo.PickupText.Length > 0)
+                if (emono.EvidenceInfo != null && emono.EvidenceInfo.PickupText != null && emono.EvidenceInfo.PickupText.Length > 0)
                 {
                     monologueMember.InterruptConversation(emono.EvidenceInfo.PickupText, 0.05f, true, true);
                 }
-                else if (emono.EvidenceInfo.PickupText.Length == 0 && evidenceFoundBarks.Length > 0)
+                else if (evidenceFoundBarks != null && evidenceFoundBarks.Length > 0)
                 {
                     // pick a random 
                     string bark = "";
