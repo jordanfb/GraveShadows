@@ -106,6 +106,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
         RaycastHit wallHit = new RaycastHit();
         LayerMask mask = LayerMask.GetMask("WallLayer");
+        //if it is in the shadow realm then move it based on this logic
         if (SRmanager.isInShadowRealm)
         {
 
@@ -158,7 +159,7 @@ public class ThirdPersonCamera : MonoBehaviour
             currentDistance = REGULAR_CAMERA_DISTANCE;
         }
 
-
+        //
         Quaternion rot = Quaternion.Euler(currentRotationY, currentRotationX, 0.0f);
 
         oldCameraRotateAround = rotateAround;
@@ -180,7 +181,7 @@ public class ThirdPersonCamera : MonoBehaviour
         //mainCam.transform.position = Vector3.SmoothDamp(mainCam.transform.position, newCamPos, ref velocity, lerpTime);
         mainCam.transform.position = Vector3.SmoothDamp(mainCam.transform.position, newCamPos, ref velocity, 0.001f);
 
-
+        //
         if (SRmanager.isInShadowRealm)
         {
 
