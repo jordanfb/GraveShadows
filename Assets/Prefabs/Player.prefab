@@ -398,9 +398,9 @@ MonoBehaviour:
   materialedObjectsParent: {fileID: 0}
   headTransform: {fileID: 944607456}
   isWarping: 0
-  warpingLerpSpeed: 0.25
+  warpingLerpSpeed: 0.15
   postProcessProfile: {fileID: 11400000, guid: 1526c8b2733675240ac42521eb3b32fe, type: 2}
-  fishEyeIntensity: -40
+  fishEyeIntensity: -60
   mouseDeltaOnChange: 3
 --- !u!114 &1693832145
 MonoBehaviour:
@@ -544,10 +544,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2701277236420419687}
     m_Modifications:
-    - target: {fileID: 100000, guid: 6efc6d6c84360da4d8b650ae035a4757, type: 3}
-      propertyPath: m_Name
-      value: MC_9_27_RIT
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6efc6d6c84360da4d8b650ae035a4757, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -591,6 +587,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 6efc6d6c84360da4d8b650ae035a4757, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6efc6d6c84360da4d8b650ae035a4757, type: 3}
+      propertyPath: m_Name
+      value: MC_9_27_RIT
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 6efc6d6c84360da4d8b650ae035a4757, type: 3}
       propertyPath: m_Controller
