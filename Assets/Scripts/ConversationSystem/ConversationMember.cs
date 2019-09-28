@@ -111,7 +111,7 @@ public class ConversationMember : MonoBehaviour
                 FinishedTalkingHandling();
             }
 
-            if (skipOnClick && Input.GetMouseButtonDown(0))
+            if (skipOnClick && Input.GetMouseButtonDown(0) && Time.timeScale > 0)
             {
                 // left click skips it if the bool is true
                 overrideFinishedLine = true;
@@ -121,9 +121,9 @@ public class ConversationMember : MonoBehaviour
         }
         if (!IsFinished())
         {
-            if (skipOnClick && Input.GetMouseButtonDown(0))
+            if (skipOnClick && Input.GetMouseButtonDown(0) && Time.timeScale > 0)
             {
-                // left click skips it if the bool is true
+                // left click skips it if the bool is true and the game isn't paused
                 if (unformattedCharacterNumber >= line.unformattedText.Length)
                 {
                     // then skip to the next dialog, make it finished
