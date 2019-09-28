@@ -831,7 +831,7 @@ MonoBehaviour:
   onClickEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1880924433}
+      - m_Target: {fileID: 0}
         m_MethodName: ClickOnGun
         m_Mode: 1
         m_Arguments:
@@ -2252,7 +2252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   widthToDisplay: 2
-  hubManager: {fileID: 1880924433}
+  hubManager: {fileID: 0}
   offYarnboardItemsParent: {fileID: 1862434898}
   offYarnboardItemsHoverLocation: {fileID: 108013465}
   offYarnbardItemPrefab: {fileID: 1808650572571568162, guid: d12354a9c90ba7047867d59f3f88faa0,
@@ -3609,7 +3609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d978d0ac6a396644dbf835ac1cea26c7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d978d0ac6a396644dbf835ac1cea26c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5024,6 +5024,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hub 4_3 Alpha Fixes (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.259
+      objectReference: {fileID: 0}
+    - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0050000176
+      objectReference: {fileID: 0}
+    - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.3046682
+      objectReference: {fileID: 0}
+    - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.95245856
+      objectReference: {fileID: 0}
+    - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 35.476
+      objectReference: {fileID: 0}
     - target: {fileID: 400122, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -5067,30 +5091,6 @@ PrefabInstance:
     - target: {fileID: 400122, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.259
-      objectReference: {fileID: 0}
-    - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.0050000176
-      objectReference: {fileID: 0}
-    - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.3046682
-      objectReference: {fileID: 0}
-    - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.95245856
-      objectReference: {fileID: 0}
-    - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 35.476
       objectReference: {fileID: 0}
     - target: {fileID: 2300006, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6952,7 +6952,7 @@ MonoBehaviour:
   onClickEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1880924433}
+      - m_Target: {fileID: 0}
         m_MethodName: ExitDesk
         m_Mode: 1
         m_Arguments:
@@ -7609,7 +7609,7 @@ MonoBehaviour:
   onClickEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1880924433}
+      - m_Target: {fileID: 0}
         m_MethodName: ExitYarnBoard
         m_Mode: 1
         m_Arguments:
@@ -8199,7 +8199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1127781928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8212,7 +8212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c32d07de0637834f93b802038cb4a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hubManager: {fileID: 1880924433}
+  hubManager: {fileID: 0}
   movementInverted: 0
   scrollSpeed: 0.2
   keyboardScrollSpeed: 1
@@ -13283,7 +13283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1880924433
 MonoBehaviour:
   m_ObjectHideFlags: 0

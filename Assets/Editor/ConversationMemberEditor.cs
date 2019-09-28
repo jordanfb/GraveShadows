@@ -58,6 +58,7 @@ public class ConversationMemberEditor : Editor
         // things like "should face camera constantly" and perhaps more
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Text Box Settings:");
+        m.skipOnClick = GUILayout.Toggle(m.skipOnClick, "Skip on mouse click");
         if (m.text == null && GUILayout.Button("Find Text Asset"))
         {
             // then check for a text item in itself and then its children

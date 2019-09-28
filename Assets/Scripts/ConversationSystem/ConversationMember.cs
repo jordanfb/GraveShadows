@@ -14,6 +14,7 @@ public class ConversationMember : MonoBehaviour
 
     public GameObject enableDisableUponSpeaking;
 
+    public bool skipOnClick = false; // true for monologues
 
     public TextMeshProUGUI text; // we may want to make this the non-UGUI version but for now it works
     public bool alwaysFaceCamera = true;
@@ -24,6 +25,7 @@ public class ConversationMember : MonoBehaviour
     private ScriptLine line;
 
     private float doneTalkingTimer = 0; // if this is 0 then it disables everything
+    private bool overrideFinishedLine = false;
 
     private ScriptLine interuptedLine;
     private List<ConversationManager> runningManagersWhenInterupted = new List<ConversationManager>();
@@ -101,8 +103,43 @@ public class ConversationMember : MonoBehaviour
         {
             FaceCamera();
         }
+        if (IsFinished() && doneTalkingTimer > 0)
+        {
+            doneTalkingTimer -= Time.deltaTime;
+            if (doneTalkingTimer <= 0)
+            {
+                FinishedTalkingHandling();
+            }
+
+            if (skipOnClick && Input.GetMouseButtonDown(0))
+            {
+                // left click skips it if the bool is true
+                overrideFinishedLine = true;
+                characterNumber = line.formattedText.Length;
+                FinishedTalkingHandling();
+            }
+        }
         if (!IsFinished())
         {
+            if (skipOnClick && Input.GetMouseButtonDown(0))
+            {
+                // left click skips it if the bool is true
+                if (unformattedCharacterNumber >= line.unformattedText.Length)
+                {
+                    // then skip to the next dialog, make it finished
+                    // this will likely never happen (instead it gets used later down in this function)
+                    overrideFinishedLine = true;
+                    characterNumber = line.formattedText.Length;
+                    FinishedTalkingHandling();
+                    return;
+                }
+                else
+                {
+                    // otherwise display all the text
+                    unformattedCharacterNumber = line.unformattedText.Length;
+                }
+                Debug.Log(unformattedCharacterNumber + " <> " + line.unformattedText.Length);
+            }
             // then say stuff!
             timer += Time.deltaTime;
             while (unformattedCharacterNumber >= line.unformattedText.Length || timer >= line.characterTimes[unformattedCharacterNumber])
@@ -141,25 +178,22 @@ public class ConversationMember : MonoBehaviour
             }
             doneTalkingTimer = 3; // so that the ui stays around for an extra second
         }
-        if (IsFinished() && doneTalkingTimer > 0)
+    }
+
+    private void FinishedTalkingHandling()
+    {
+        doneTalkingTimer = 0;
+        if (enableDisableUponSpeaking != null && enableDisableUponSpeaking.activeSelf)
         {
-            doneTalkingTimer -= Time.deltaTime;
-            if (doneTalkingTimer <= 0)
-            {
-                doneTalkingTimer = 0;
-                if (enableDisableUponSpeaking != null && enableDisableUponSpeaking.activeSelf)
-                {
-                    // empty the text and set it not active
-                    text.text = "";
-                    enableDisableUponSpeaking.SetActive(false); // disable it
-                }
-                if (resumeAfterFinished)
-                {
-                    // then resume!
-                    ResumeConversation();
-                    resumeAfterFinished = false;
-                }
-            }
+            // empty the text and set it not active
+            text.text = "";
+            enableDisableUponSpeaking.SetActive(false); // disable it
+        }
+        if (resumeAfterFinished)
+        {
+            // then resume!
+            ResumeConversation();
+            resumeAfterFinished = false;
         }
     }
 
@@ -196,12 +230,13 @@ public class ConversationMember : MonoBehaviour
         timer = 0;
         characterNumber = 0;
         unformattedCharacterNumber = 0;
+        overrideFinishedLine = false;
         this.line = line;
     }
 
     public bool IsFinished()
     {
-        return line == null || characterNumber >= line.formattedText.Length;
+        return line == null || characterNumber >= line.formattedText.Length || overrideFinishedLine;
     }
 
     public void AddMaster(ConversationManager m)
