@@ -138,7 +138,6 @@ public class ConversationMember : MonoBehaviour
                     // otherwise display all the text
                     unformattedCharacterNumber = line.unformattedText.Length;
                 }
-                Debug.Log(unformattedCharacterNumber + " <> " + line.unformattedText.Length);
             }
             // then say stuff!
             timer += Time.deltaTime;

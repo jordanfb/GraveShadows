@@ -56,13 +56,13 @@ public class LevelOneEvidenceManager : MonoBehaviour
         FindObjects();
         if (keyFound && keyObject != null)
         {
-            Debug.Log("Destroyed key");
+            //Debug.Log("Destroyed key");
             Destroy(keyObject);
             keyObject = null;
         }
         if (receiptFound && receiptObject != null)
         {
-            Debug.Log("Destroyed receipt");
+            //Debug.Log("Destroyed receipt");
             Destroy(receiptObject);
             receiptObject = null;
         }

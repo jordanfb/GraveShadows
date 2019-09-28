@@ -97,7 +97,6 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        Debug.Log(postProcessProfile.settings[postProcessProfile.settings.Count-1]);
         Vector3 rotateAround;
         if (SRmanager.isChoosingWall)
         {

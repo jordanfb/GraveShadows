@@ -359,8 +359,8 @@ public class EvidenceManager : MonoBehaviour
             remainingEvidence.Remove(se);
         }
 
-        Debug.Log("Office: " + officeEv.Count);
-        Debug.Log("Factory: " + factoryEv.Count);
+        //Debug.Log("Office: " + officeEv.Count);
+        //Debug.Log("Factory: " + factoryEv.Count);
         //Debug.Log(culprit.CodeName);
         //Debug.Log("OFFICE EVIDENCE BELOW!");
         //string sus = "";
