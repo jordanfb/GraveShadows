@@ -12,6 +12,8 @@ public class YarnBoardCamera : MonoBehaviour
     public float keyboardScrollSpeed = 1;
     public float moveSpeed = 1;
     public float keyboardMoveSpeed = 1;
+    public float percentOfScreenForCameraPanning = .1f;
+    public float mousePanningSpeed = 1f;
 
     [Space]
     public Vector2 minCoords = -Vector2.one;
@@ -64,6 +66,29 @@ public class YarnBoardCamera : MonoBehaviour
             // we disabled the player moving in the hubmanager
             newPos.x += Input.GetAxis("Horizontal") * keyboardMoveSpeed;
             newPos.y += Input.GetAxis("Vertical") * keyboardMoveSpeed;
+
+            // check for mouse panning next to the edges of the screen if you aren't panning with the middle mouse button:
+            if (!Input.GetMouseButton(2))
+            {
+                Vector2 mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+                if (mousePos.x < percentOfScreenForCameraPanning)
+                {
+                    newPos.x -= mousePanningSpeed * Time.deltaTime;
+                }
+                else if (mousePos.x > 1 - percentOfScreenForCameraPanning)
+                {
+                    newPos.x += mousePanningSpeed * Time.deltaTime;
+                }
+                if (mousePos.y < percentOfScreenForCameraPanning)
+                {
+                    newPos.y -= mousePanningSpeed * Time.deltaTime;
+                }
+                else if (mousePos.y > 1 - percentOfScreenForCameraPanning)
+                {
+                    newPos.y += mousePanningSpeed * Time.deltaTime;
+                }
+            }
+
             newPos.x = Mathf.Clamp(newPos.x, minCoords.x, maxCoords.x);
             newPos.y = Mathf.Clamp(newPos.y, minCoords.y, maxCoords.y);
             startPos = transform.position; // set the zoom of the start pos probably?
