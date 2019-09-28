@@ -48,6 +48,17 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            // then free the mouse! This is mainly for exiting mid game so it doesn't get locked in.
+            // I don't know if this will work but we'll find out!
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
