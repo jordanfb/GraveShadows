@@ -385,7 +385,6 @@ public class ShadowRealmManager : MonoBehaviour
         if (dist != null)
         {
             while (dist.intensity.value < 0) {
-                Debug.Log("Fish eye value: " + dist.intensity.value);
                 dist.intensity.Override(dist.intensity.value - tpc.fishEyeIntensity * fishEyeRemoveSpeed * Time.deltaTime);
                 yield return null; // wait a frame
             }
