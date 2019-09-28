@@ -1012,6 +1012,12 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!4 &1379431613 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 487296377, guid: c16a4fdeecf104c7898d04976f09544e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1692261459}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1386115498
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,7 +1215,7 @@ GameObject:
   - component: {fileID: 1454815584}
   - component: {fileID: 1454815583}
   - component: {fileID: 1454815586}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1865,6 +1871,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: cameraWhileChoosingLerpMoveSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: cameraWhileChoosingLerpRotateSpeed
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: chooseWallSensitivity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: mouseDeltaOnChange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: REGULAR_CAMERA_DISTANCE
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
+      propertyPath: headTransform
+      value: 
+      objectReference: {fileID: 1379431613}
     - target: {fileID: 2701277236420419608, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: shadowPlane
@@ -1885,31 +1921,6 @@ PrefabInstance:
       propertyPath: copContainer
       value: 
       objectReference: {fileID: 149025275}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: cameraWhileChoosingLerpMoveSpeed
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: cameraWhileChoosingLerpRotateSpeed
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: chooseWallSensitivity
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: mouseDeltaOnChange
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701277236420419611, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
-      propertyPath: REGULAR_CAMERA_DISTANCE
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 2701277236420419687, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1923,7 +1934,7 @@ PrefabInstance:
     - target: {fileID: 2701277236420419687, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.42
+      value: 1.43
       objectReference: {fileID: 0}
     - target: {fileID: 2701277236420419687, guid: c16a4fdeecf104c7898d04976f09544e,
         type: 3}
@@ -1965,12 +1976,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1693832147, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
+    - target: {fileID: 3438070230744099239, guid: c16a4fdeecf104c7898d04976f09544e,
+        type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3438070230744099239, guid: c16a4fdeecf104c7898d04976f09544e,
-        type: 3}
+    - target: {fileID: 1693832147, guid: c16a4fdeecf104c7898d04976f09544e, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}

@@ -50,6 +50,8 @@ public class ShadowRealmManager : MonoBehaviour
     private GameObject choosingUI;
     private GameObject notChoosingUI;
 
+    float fishEyeDelta = 0f;
+
     private void Awake()
     {
 
@@ -88,31 +90,36 @@ public class ShadowRealmManager : MonoBehaviour
         //    checkForShadows();
         //}
 
-        if (isChoosingWall && checkForShadows().Count>1) {
-            choosingUI.SetActive(true);
-            notChoosingUI.SetActive(false);
-        }
-        else  if (isChoosingWall && checkForShadows().Count == 1)
-        {
-            choosingUI.SetActive(false);
-            notChoosingUI.SetActive(true);
-        }
-        else {
-            choosingUI.SetActive(false);
-            notChoosingUI.SetActive(false);
-        }
-
-        Debug.DrawRay(checkIfFreeCollider.transform.position, -transform.up + -transform.up*0.1f);
+        Dictionary<Collider, List<Vector3>> _shadowsThisFrame;
         if (Input.GetKey(KeyCode.Space))
         {
 
+            _shadowsThisFrame = checkForShadows();
+
+            if (isChoosingWall && _shadowsThisFrame.Count > 1)
+            {
+                choosingUI.SetActive(true);
+                notChoosingUI.SetActive(false);
+            }
+            else if (isChoosingWall && _shadowsThisFrame.Count == 1)
+            {
+                choosingUI.SetActive(false);
+                notChoosingUI.SetActive(true);
+            }
+            else
+            {
+                choosingUI.SetActive(false);
+                notChoosingUI.SetActive(false);
+            }
+            //if you do something that makes you stop choosing the wall
             if (abortIsChoosingWall) {
                 return;
             }
             if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.Escape))
             {
+                StartCoroutine("warpFisheyeBackOnExitCoroutine");
                 tpc.resetCurrentWallToChooseFrom();
-                foreach (KeyValuePair<Collider, List<Vector3>> entry in checkForShadows())
+                foreach (KeyValuePair<Collider, List<Vector3>> entry in _shadowsThisFrame)
                 {
                     if (entry.Key == null)
                     {
@@ -136,12 +143,16 @@ public class ShadowRealmManager : MonoBehaviour
 
                 return;
             }
+            //if there are no shadoes to choose from
             if (checkForShadows().Keys.Count == 0)
             {
                 return;
             }
+
+
             isChoosingWall = true;
-            foreach (KeyValuePair<Collider, List<Vector3>> entry in checkForShadows())
+            warpFisheyeOutWhileSelecting();
+            foreach (KeyValuePair<Collider, List<Vector3>> entry in _shadowsThisFrame)
             {
                 if(entry.Key == null) {
                     //Debug.Log("ENTRY IS NULL");
@@ -167,7 +178,7 @@ public class ShadowRealmManager : MonoBehaviour
 
             }
             if (wallToTeleportTo != null) {
-                if (checkForShadows().ContainsKey(wallToTeleportTo))
+                if (_shadowsThisFrame.ContainsKey(wallToTeleportTo))
                 {
                     if (wallToTeleportTo.gameObject.transform.Find("selectionQuad") != null) {
                         
@@ -185,6 +196,10 @@ public class ShadowRealmManager : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
+
+            choosingUI.SetActive(false);
+            notChoosingUI.SetActive(false);
+            _shadowsThisFrame = checkForShadows();
             tpc.resetCurrentWallToChooseFrom();
             if (abortIsChoosingWall) {
                 abortIsChoosingWall = false;
@@ -200,7 +215,7 @@ public class ShadowRealmManager : MonoBehaviour
             }
 
             else {
-                foreach (KeyValuePair<Collider, List<Vector3>> entry in checkForShadows())
+                foreach (KeyValuePair<Collider, List<Vector3>> entry in _shadowsThisFrame)
                 {
                     if (entry.Key == null)
                     {
@@ -210,6 +225,7 @@ public class ShadowRealmManager : MonoBehaviour
 
                     if (entry.Key.gameObject.transform.Find("selectionQuad") != null)
                     {
+
                         entry.Key.gameObject.transform.Find("selectionQuad").gameObject.SetActive(false);
                     }
                 }
@@ -220,7 +236,7 @@ public class ShadowRealmManager : MonoBehaviour
                 }
 
 
-                if (checkForShadows().ContainsKey(wallToTeleportTo))
+                if (_shadowsThisFrame.ContainsKey(wallToTeleportTo))
                 {
                     teleportToWall(wallToTeleportTo, checkForShadows()[wallToTeleportTo].Distinct().ToList());
                 }
@@ -262,7 +278,6 @@ public class ShadowRealmManager : MonoBehaviour
                 //if the raycast distance
                 if (Physics.Raycast(spm.playerHitPoints[j].position, direction, out hitWall, Vector3.Distance(spm.playerHitPoints[j].position, lightsInScene[i].transform.position), WallMask))
                 {
-
                     continue;
                 }
                 if (Physics.Raycast(spm.playerHitPoints[j].position, -direction, out hitWall, lightsInScene[i].GetComponent<Light>().range, WallMask))
@@ -301,9 +316,10 @@ public class ShadowRealmManager : MonoBehaviour
     }
 
 
+
     void teleportFromShadowRealm()
     {
-        StartCoroutine(MakeCameraWarp());
+        //StartCoroutine(MakeCameraWarp());
 
         checkIfFreeColliderScript checkFreeScript = checkIfFreeCollider.GetComponent<checkIfFreeColliderScript>();
         if (checkFreeScript.CheckExpandedCollisionsIsColliding())
@@ -346,6 +362,7 @@ public class ShadowRealmManager : MonoBehaviour
         //make constant for shadow plane height
         //teleport to average of all points
         float yPos = targetWall.transform.position.y - (targetWall.bounds.size.y / 2f) + SHADOWPLANE_HEIGHT;
+        //we need to check if the shadow goes off of the screen
         shadowPlane.transform.position = new Vector3(midPoint.x, yPos, midPoint.z);
         //adjust rotation to be thjat of the parent of the collider. i.e. the gameobject wall
 
@@ -357,7 +374,8 @@ public class ShadowRealmManager : MonoBehaviour
         StartCoroutine(spawnParticleSystem(gameObject.transform.position, midPoint, partDir));
 
         gameObject.transform.position = shadowRealmTransform.position;
-        StartCoroutine(MakeCameraWarp());
+
+        //StartCoroutine(MakeCameraWarp());
         StartCoroutine(moveBodyToWall());
         //gameObject.GetComponent<Rigidbody>().useGravity = false;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -372,6 +390,44 @@ public class ShadowRealmManager : MonoBehaviour
             copContainer.transform.GetChild(i).gameObject.GetComponent<GuardScript>().setShader(outlineShader);
         }
     }
+
+    float warpAnicipationSpeed = 100;
+    private void warpFisheyeOutWhileSelecting() {
+        Debug.Log("warping out" + fishEyeDelta);
+        if(fishEyeDelta > 70) {
+            return;
+        }
+        UnityEngine.Rendering.PostProcessing.LensDistortion dist = tpc.postProcessProfile.GetSetting<UnityEngine.Rendering.PostProcessing.LensDistortion>();
+        float currentValue = dist.intensity.value;
+        float deltaAmount = Time.deltaTime * warpAnicipationSpeed;
+        fishEyeDelta += deltaAmount;
+        float newValue = currentValue + deltaAmount;
+
+        dist.intensity.Override(newValue);
+
+    }
+
+
+
+    IEnumerator warpFisheyeBackOnExitCoroutine() {
+
+        while(fishEyeDelta > 0) {
+            Debug.Log("warping in" + fishEyeDelta);
+            UnityEngine.Rendering.PostProcessing.LensDistortion dist = tpc.postProcessProfile.GetSetting<UnityEngine.Rendering.PostProcessing.LensDistortion>();
+            float currentValue = dist.intensity.value;
+            float deltaAmount = -Time.deltaTime * warpAnicipationSpeed;
+            fishEyeDelta += deltaAmount;
+            float newValue = currentValue + deltaAmount;
+
+            dist.intensity.Override(newValue);
+            yield return new WaitForSeconds(Time.deltaTime);
+
+        }
+        yield return 0;
+
+    }
+
+
 
     IEnumerator MakeCameraWarp(float additionalFraction = 1)
     {

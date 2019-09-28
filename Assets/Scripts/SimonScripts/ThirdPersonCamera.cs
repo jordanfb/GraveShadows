@@ -306,9 +306,6 @@ public class ThirdPersonCamera : MonoBehaviour
 
         keyList = createColliderList(keyList);
 
-
-
-
         if (Input.GetKeyDown(KeyCode.A)) {
             currentWallToChooseFrom -= 1;
 
@@ -372,13 +369,13 @@ public class ThirdPersonCamera : MonoBehaviour
 
         Vector3 headToWallDir = targetPos - headTransform.position;
 
+        Debug.DrawRay(headTransform.position, headToWallDir, Color.yellow);
         Vector3 startPos = Quaternion.LookRotation(headToWallDir, Vector3.up) * (headTransform.transform.position + headTransform.transform.forward);
 
 
 
-
-        mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, headTransform.position + startPos*0.01f, cameraWhileChoosingLerpMoveSpeed * Time.deltaTime);
-
+        //mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, headTransform.position - headToWallDir.normalized, cameraWhileChoosingLerpMoveSpeed * Time.deltaTime);
+        mainCam.transform.position = Vector3.SmoothDamp(mainCam.transform.position, headTransform.position - headToWallDir.normalized, ref velocity, 1f);
 
         lastMouseDelta = Mathf.Lerp(lastMouseDelta, currentMouseDelta, Time.deltaTime* chooseWallSensitivity);
         lastMousePos = currentRotationX;
