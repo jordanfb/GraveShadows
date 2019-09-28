@@ -146,7 +146,7 @@ public class GuardScript : MonoBehaviour
         {
             // start the guard idle animation on a random frame
             AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
-            animator.Play(state.fullPathHash, -1, Random.Range(0f, 100f)); // should randomize the time
+            animator.Play(state.fullPathHash, -1, Random.Range(.75f, 1f)); // should randomize the time near the end so it can move to walking
         }
     }
 
@@ -173,7 +173,7 @@ public class GuardScript : MonoBehaviour
     {
         if (animator)
         {
-            animator.SetBool(animatorWalkingId, agent.velocity.sqrMagnitude > 0.1f); // if it's moving then animate!
+            animator.SetBool(animatorWalkingId, agent.velocity.sqrMagnitude > 0.025f); // if it's moving then animate!
             animator.SetBool(animatorSuspicousId, suspicion > investigateSuspicionLevel);
         }
         if (isInvestigating)
@@ -183,7 +183,7 @@ public class GuardScript : MonoBehaviour
             {
                 // look around you!
                 isWalkingOverToInvestigate = false; // once they've arrived they look around and are no longer walking over
-                Debug.LogWarning("STOPPED INVESTIGATING");
+                //Debug.LogWarning("STOPPED INVESTIGATING");
             } else
             {
                 // try to walk over towards the position!
