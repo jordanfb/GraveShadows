@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Rendering.PostProcessing;
 
 public class ShadowRealmManager : MonoBehaviour
 {
@@ -52,6 +53,10 @@ public class ShadowRealmManager : MonoBehaviour
 
     float fishEyeDelta = 0f;
 
+    public PostProcessProfile postProcessProfile; // this is used to warp the camera using fisheye
+
+    FishEyeStateMachine fesm;
+
     private void Awake()
     {
 
@@ -82,6 +87,9 @@ public class ShadowRealmManager : MonoBehaviour
         choosingUI.SetActive(false);
         notChoosingUI = Instantiate(notChoosingUIPrefab);
         notChoosingUI.SetActive(false);
+        fesm = Instantiate(new GameObject()).AddComponent<FishEyeStateMachine>();
+        fesm.setPPP(postProcessProfile);
+        fesm.setState(State.thirdPerson);
 
     }
     private void Update()
@@ -90,7 +98,22 @@ public class ShadowRealmManager : MonoBehaviour
         //    checkForShadows();
         //}
 
+        if (Input.GetKeyDown(KeyCode.I)) {
+            fesm.setState(State.wallSelection);
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            fesm.setState(State.thirdPerson);
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            fesm.setState(State.onWall);
+        }
+
         Dictionary<Collider, List<Vector3>> _shadowsThisFrame;
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            tpc.wallSortReferenceVector = gameObject.transform.forward;
+        }
         if (Input.GetKey(KeyCode.Space))
         {
 
@@ -117,7 +140,7 @@ public class ShadowRealmManager : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.Escape))
             {
-                StartCoroutine("warpFisheyeBackOnExitCoroutine");
+                fesm.setState(State.thirdPerson);
                 tpc.resetCurrentWallToChooseFrom();
                 foreach (KeyValuePair<Collider, List<Vector3>> entry in _shadowsThisFrame)
                 {
@@ -151,7 +174,7 @@ public class ShadowRealmManager : MonoBehaviour
 
 
             isChoosingWall = true;
-            warpFisheyeOutWhileSelecting();
+            fesm.setState(State.wallSelection);
             foreach (KeyValuePair<Collider, List<Vector3>> entry in _shadowsThisFrame)
             {
                 if(entry.Key == null) {
@@ -208,6 +231,7 @@ public class ShadowRealmManager : MonoBehaviour
 
 
             isChoosingWall = false;
+
             if (isInShadowRealm)
             {
                 teleportFromShadowRealm();
@@ -349,7 +373,7 @@ public class ShadowRealmManager : MonoBehaviour
     }
 
     void teleportToWall(Collider targetWall, List<Vector3> pointList) {
-
+        fesm.setState(State.onWall);
         foreach(GameObject ev in GameObject.FindGameObjectsWithTag("Evidence")) {
             if(ev.GetComponent<EvidenceMono>() == null) {
                 continue;
@@ -391,62 +415,11 @@ public class ShadowRealmManager : MonoBehaviour
         }
     }
 
-    float warpAnicipationSpeed = 100;
-    private void warpFisheyeOutWhileSelecting() {
-        Debug.Log("warping out" + fishEyeDelta);
-        if(fishEyeDelta > 70) {
-            return;
-        }
-        UnityEngine.Rendering.PostProcessing.LensDistortion dist = tpc.postProcessProfile.GetSetting<UnityEngine.Rendering.PostProcessing.LensDistortion>();
-        float currentValue = dist.intensity.value;
-        float deltaAmount = Time.deltaTime * warpAnicipationSpeed;
-        fishEyeDelta += deltaAmount;
-        float newValue = currentValue + deltaAmount;
-
-        dist.intensity.Override(newValue);
-
-    }
+    
 
 
 
-    IEnumerator warpFisheyeBackOnExitCoroutine() {
-
-        while(fishEyeDelta > 0) {
-            Debug.Log("warping in" + fishEyeDelta);
-            UnityEngine.Rendering.PostProcessing.LensDistortion dist = tpc.postProcessProfile.GetSetting<UnityEngine.Rendering.PostProcessing.LensDistortion>();
-            float currentValue = dist.intensity.value;
-            float deltaAmount = -Time.deltaTime * warpAnicipationSpeed;
-            fishEyeDelta += deltaAmount;
-            float newValue = currentValue + deltaAmount;
-
-            dist.intensity.Override(newValue);
-            yield return new WaitForSeconds(Time.deltaTime);
-
-        }
-        yield return 0;
-
-    }
-
-
-
-    IEnumerator MakeCameraWarp(float additionalFraction = 1)
-    {
-        tpc.isWarping = true;
-        if (shadowAppearSpeed > 0)
-        {
-            yield return new WaitForSeconds(1 / shadowAppearSpeed * cameraWarpTimeFraction * additionalFraction);
-        }
-        tpc.isWarping = false;
-        UnityEngine.Rendering.PostProcessing.LensDistortion dist = tpc.postProcessProfile.GetSetting<UnityEngine.Rendering.PostProcessing.LensDistortion>();
-        if (dist != null)
-        {
-            while (dist.intensity.value < 0) {
-                dist.intensity.Override(dist.intensity.value - tpc.fishEyeIntensity * fishEyeRemoveSpeed * Time.deltaTime);
-                yield return null; // wait a frame
-            }
-            dist.intensity.Override(0);
-        }
-    }
+    
 
     IEnumerator moveBodyToWall() {
         float alpha = 0.0f;
@@ -495,3 +468,160 @@ public class ShadowRealmManager : MonoBehaviour
 
 
 }
+
+public enum State
+{
+    thirdPerson,
+    wallSelection,
+    onWall
+}
+
+public class FishEyeStateMachine : MonoBehaviour {
+    public float currentFisheye = 0f;
+
+
+
+    private State s;
+    PostProcessProfile postProcessProfile;
+    LensDistortion dist;
+
+    private void Start()
+    {
+        s = State.thirdPerson;
+        NextState();
+    }
+
+    public void setPPP(PostProcessProfile newPPP) {
+        postProcessProfile = newPPP;
+        dist = postProcessProfile.GetSetting<LensDistortion>();
+    }
+    private void setDist(float newDist) {
+        if (postProcessProfile) {
+            dist.intensity.Override(newDist);
+        }
+    }
+
+    IEnumerator thirdPersonState()
+    {
+        Debug.Log("thirdpersonState enter");
+        while (s == State.thirdPerson)
+        {
+            if (currentFisheye > 0f) {
+                currentFisheye -= Time.deltaTime*20f;
+                setDist(currentFisheye);
+            }
+            
+            
+            yield return 0;
+        }
+        Debug.Log("thirdpersonState exit");
+        NextState();
+    }
+    IEnumerator wallSelectionState()
+    {
+        Debug.Log("wallSelectionState enter");
+        while (s == State.wallSelection)
+        {
+            if (currentFisheye < 80f)
+            {
+                currentFisheye += Time.deltaTime * 40f;
+                setDist(currentFisheye);
+            }
+            yield return 0;
+        }
+        Debug.Log("wallSelectionState exit");
+        NextState();
+    }
+    IEnumerator onWallState()
+    {
+        Debug.Log("onWallState enter");
+        while (s == State.onWall)
+        {
+            if (currentFisheye > 0f)
+            {
+                currentFisheye -= Time.deltaTime * 20f;
+                setDist(currentFisheye);
+            }
+            yield return 0;
+        }
+        Debug.Log("onWallState exit");
+        NextState();
+    }
+
+    public void setState(State newState) {
+        s = newState;
+    }
+
+    private void NextState()
+    {
+        string methodName = s.ToString() + "State";
+        System.Reflection.MethodInfo info =
+            GetType().GetMethod(methodName,
+                                System.Reflection.BindingFlags.NonPublic |
+                                System.Reflection.BindingFlags.Instance);
+        Debug.Log(methodName);
+        StartCoroutine((IEnumerator)info.Invoke(this, null));
+    }
+
+}
+
+
+
+//IEnumerator warpFisheyeBackOnExitCoroutine()
+//{
+
+//    while (fishEyeDelta > 0)
+//    {
+//        Debug.Log("warping in" + fishEyeDelta);
+//        UnityEngine.Rendering.PostProcessing.LensDistortion dist = tpc.postProcessProfile.GetSetting<UnityEngine.Rendering.PostProcessing.LensDistortion>();
+//        float currentValue = dist.intensity.value;
+//        float deltaAmount = -Time.deltaTime * warpAnicipationSpeed;
+//        fishEyeDelta += deltaAmount;
+//        float newValue = currentValue + deltaAmount;
+
+//        dist.intensity.Override(newValue);
+//        yield return new WaitForSeconds(Time.deltaTime);
+
+//    }
+//    yield return 0;
+
+//}
+
+//float warpAnicipationSpeed = 100;
+//private void warpFisheyeOutWhileSelecting()
+//{
+//    Debug.Log("warping out" + fishEyeDelta);
+//    if (fishEyeDelta > 70)
+//    {
+//        return;
+//    }
+//    UnityEngine.Rendering.PostProcessing.LensDistortion dist = tpc.postProcessProfile.GetSetting<UnityEngine.Rendering.PostProcessing.LensDistortion>();
+//    float currentValue = dist.intensity.value;
+//    float deltaAmount = Time.deltaTime * warpAnicipationSpeed;
+//    fishEyeDelta += deltaAmount;
+//    float newValue = currentValue + deltaAmount;
+
+//    dist.intensity.Override(newValue);
+
+//}
+
+
+//IEnumerator MakeCameraWarp(float additionalFraction = 1)
+//{
+//    tpc.isWarping = true;
+//    if (shadowAppearSpeed > 0)
+//    {
+//        yield return new WaitForSeconds(1 / shadowAppearSpeed * cameraWarpTimeFraction * additionalFraction);
+//    }
+//    tpc.isWarping = false;
+//    UnityEngine.Rendering.PostProcessing.LensDistortion dist = tpc.postProcessProfile.GetSetting<UnityEngine.Rendering.PostProcessing.LensDistortion>();
+//    if (dist != null)
+//    {
+//        while (dist.intensity.value < 0)
+//        {
+//            dist.intensity.Override(dist.intensity.value - tpc.fishEyeIntensity * fishEyeRemoveSpeed * Time.deltaTime);
+//            yield return null; // wait a frame
+//        }
+//        dist.intensity.Override(0);
+//    }
+//}

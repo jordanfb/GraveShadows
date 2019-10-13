@@ -47,19 +47,19 @@ public class ThirdPersonCamera : MonoBehaviour
     public bool isWarping = false;
 
     public float warpingLerpSpeed = .25f;
-    public PostProcessProfile postProcessProfile; // this is used to warp the camera using fisheye
-    public float fishEyeIntensity = -.1f;
 
     public float mouseDeltaOnChange = 3f;
 
 
     Vector3 newCamPos;
-    Vector3 lastLegalCamPos;
-    Vector3 shadowModVec = Vector3.zero;
+
     Vector3 wallRaycastVec;
     Vector3 velocity = Vector3.zero;
 
     private Vector3 oldCameraRotateAround = Vector3.zero;
+
+
+    public Vector3 wallSortReferenceVector;
 
     void Start()
     {
@@ -116,10 +116,7 @@ public class ThirdPersonCamera : MonoBehaviour
             {
                 // warping the camera into the wall
                 //postProcessProfile.GetSetting < typeof(warpingEffect) > ();
-                if (postProcessProfile.HasSettings<LensDistortion>())
-                {
-                    postProcessProfile.GetSetting<LensDistortion>().intensity.Override(fishEyeIntensity);
-                }
+                
                 rotateAround = Vector3.Lerp(oldCameraRotateAround, shadowPlaneChild.transform.position + shadowPlaneChild.transform.up, warpingLerpSpeed);
                 Vector3 dpos = rotateAround - oldCameraRotateAround;
                 if (dpos.sqrMagnitude > .1f)
@@ -231,8 +228,10 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private int compareCollidersBySignedAngle(Collider a, Collider b)
     {
-        float aSA = Vector3.SignedAngle(a.gameObject.transform.right, gameObject.transform.forward, gameObject.transform.up);
-        float bSA = Vector3.SignedAngle(b.gameObject.transform.right, gameObject.transform.forward, gameObject.transform.up);
+
+        //I would just use camera instead of gameobject here.
+        float aSA = Vector3.SignedAngle(a.gameObject.transform.right, wallSortReferenceVector, Vector3.up);
+        float bSA = Vector3.SignedAngle(b.gameObject.transform.right, wallSortReferenceVector, Vector3.up);
         if (aSA < 0f) {
             aSA += 360f;
         }
@@ -304,12 +303,11 @@ public class ThirdPersonCamera : MonoBehaviour
             return;
         }
 
+        //creates a sorted list of the wall colliders based on their signed angle
         keyList = createColliderList(keyList);
 
         if (Input.GetKeyDown(KeyCode.A)) {
             currentWallToChooseFrom -= 1;
-
-
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
