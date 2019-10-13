@@ -11,8 +11,10 @@ public class Pin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _defaultShader = _renderer.materials[0].shader;
-        _glowShader = Shader.Find("Custom/ItemGlow");
+        _defaultShader = Shader.Find("Custom/ItemGlow");
+        _glowShader = _renderer.materials[0].shader;
+
+        _renderer.materials[0].shader = _defaultShader;
     }
 
     // Update is called once per frame
@@ -21,7 +23,7 @@ public class Pin : MonoBehaviour
         
     }
 
-    private void OnMouseOver()
+    private void OnMouseEnter()
     {
         _renderer.materials[0].shader = _glowShader;
     }

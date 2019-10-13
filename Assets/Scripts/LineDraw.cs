@@ -94,27 +94,33 @@ public class LineDraw : MonoBehaviour
             if(Physics.Raycast(ray, out endHit))
             {
                 Collider endColl = endHit.collider;
-                if(endColl.gameObject.tag == "Pin" && 
-                    endColl.gameObject != _startPin &&
-                    !ConnectionExists(endColl.gameObject.transform.position))
+                GameObject endObject = endColl.gameObject;
+                if (endObject.tag == "Evidence")
+                {
+                    // then that's also valid, it's just let go on the evidence not the pin
+                    endObject = endColl.transform.parent.gameObject; // get the top level of the pin
+                }
+                if((endObject.tag == "Pin" || endObject.tag == "Evidence") && 
+                    endObject != _startPin &&
+                    !ConnectionExists(endObject.transform.position))
                 {
                     //Set the endpoint position of the line to the end pin
-                    _line.SetPosition(1, endColl.gameObject.transform.position);
+                    _line.SetPosition(1, endObject.transform.position);
                     AddCollider();
                     _lines.Add(_line);
                     YarnLine yarnLine = _line.gameObject.AddComponent<YarnLine>();
                     yarnLine.point1 = _startPin.transform;
-                    yarnLine.point2 = endColl.gameObject.transform;
+                    yarnLine.point2 = endObject.transform;
                     yarnLine.lockToPoints = true;
 
                     // find the final evidence and connect them
-                    SuspectMono sm = endColl.gameObject.GetComponentInChildren<SuspectMono>();
+                    SuspectMono sm = endObject.GetComponentInChildren<SuspectMono>();
                     YarnBoardEntity endEvidence = null;
                     if (sm != null)
                     {
                         endEvidence = sm.SuspectInfo;
                     }
-                    EvidenceMono em = endColl.gameObject.GetComponentInChildren<EvidenceMono>();
+                    EvidenceMono em = endObject.GetComponentInChildren<EvidenceMono>();
                     if (em != null)
                     {
                         endEvidence = em.EvidenceInfo;

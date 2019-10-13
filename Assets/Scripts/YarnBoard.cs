@@ -200,8 +200,26 @@ public class YarnBoard : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 GameObject evidence = hit.collider.gameObject;
-                if (evidence.tag == "Evidence")
+                if (evidence.tag == "Evidence" || evidence.tag == "Pin")
                 {
+                    if (evidence.tag == "Pin")
+                    {
+                        // then try to find the evidence in the child
+                        EvidenceMono e = evidence.GetComponentInChildren<EvidenceMono>();
+                        SuspectMono s = evidence.GetComponentInChildren<SuspectMono>();
+                        if (e != null)
+                        {
+                            evidence = e.gameObject;
+                        }
+                        else if (s != null)
+                        {
+                            evidence = s.gameObject;
+                        }
+                        else
+                        {
+                            return; // don't do it we haven't found the evidencemono so things will error unless we exit
+                        }
+                    }
                     _yarnBoardCamera.LookAtEvidence(evidence.transform);
                     EvidenceMono em = evidence.GetComponent<EvidenceMono>();
                     SuspectMono sm = evidence.GetComponent<SuspectMono>();

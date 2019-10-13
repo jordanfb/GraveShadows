@@ -1,2 +1,2 @@
-# GameDev2LevelPrototyper
-This is a unity project that we're using to prototype level design for our game dev 2 project
+# Grave Shadows
+This is Grave Shadows. If you don't know what that means then why are you here.
