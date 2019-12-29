@@ -196,13 +196,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43419565}
-  m_LocalRotation: {x: 0.010247901, y: -0.37591842, z: 0.004157593, w: 0.9265868}
-  m_LocalPosition: {x: 7.91, y: 1.64, z: -0.09}
+  m_LocalRotation: {x: -0, y: -0.6004485, z: -0, w: 0.7996635}
+  m_LocalPosition: {x: 8.11, y: 1.62, z: 0.163}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 1.2670001, y: -44.165, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -73.804, z: 0}
 --- !u!114 &43419569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5246,6 +5246,7 @@ MonoBehaviour:
   deskItemCameraOffset: {x: 0, y: 0, z: 0.7}
   deskCollider: {fileID: 1161317102}
   enterDeskCollider: {fileID: 127533484}
+  suspectHeadshotsForFinalDay: {fileID: 0}
   gunTransform: {fileID: 1477955333}
   finalGunPosition: {fileID: 981365714}
   GlowingGunMaterial: {fileID: 2100000, guid: 1808e7826878e8b4baf765f4c4ec4724, type: 2}
@@ -7474,7 +7475,7 @@ Light:
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.2
+  m_Intensity: 3.48
   m_Range: 30.13
   m_SpotAngle: 58
   m_CookieSize: 10
@@ -7508,13 +7509,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185780855}
-  m_LocalRotation: {x: 0.60198885, y: -0.05495546, z: 0.110414214, w: 0.78892213}
-  m_LocalPosition: {x: 7.45, y: 3.376, z: -0.131}
+  m_LocalRotation: {x: 0.29819477, y: 0.17489396, z: 0.5780848, w: 0.7391278}
+  m_LocalPosition: {x: 6.885, y: 2.034, z: -0.393}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 38
-  m_LocalEulerAnglesHint: {x: 74.15, y: 9.744, z: 23.305}
+  m_LocalEulerAnglesHint: {x: 13.804001, y: 38.407, z: 80.888}
 --- !u!1 &1186961188
 GameObject:
   m_ObjectHideFlags: 0
@@ -11017,6 +11018,8 @@ MonoBehaviour:
   keyboardScrollSpeed: 1
   moveSpeed: 0.2
   keyboardMoveSpeed: 1
+  percentOfScreenForCameraPanning: 0.1
+  mousePanningSpeed: 1
   minCoords: {x: -1, y: 0.1}
   maxCoords: {x: 1, y: 1}
   zoomBounds: {x: 0, y: 1}
@@ -12139,7 +12142,7 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1.43
   m_Range: 30.13
-  m_SpotAngle: 58
+  m_SpotAngle: 56
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -12854,10 +12857,10 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
-  m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
-  m_Intensity: 2.06
+  m_Color: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+  m_Intensity: 0.43
   m_Range: 30.13
-  m_SpotAngle: 58
+  m_SpotAngle: 86
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -12889,13 +12892,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105357255}
-  m_LocalRotation: {x: 0.40040812, y: -0.18954186, z: 0.13867702, w: 0.885729}
-  m_LocalPosition: {x: 8.432, y: 3.42, z: -1.78}
+  m_LocalRotation: {x: 0.25549132, y: -0.28668165, z: 0.096949495, w: 0.9182258}
+  m_LocalPosition: {x: 8.061, y: 2.251, z: -0.35300025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 25
-  m_LocalEulerAnglesHint: {x: 49.63, y: -20.299002, z: 8.333}
+  m_LocalEulerAnglesHint: {x: 31.654001, y: -34.076, z: 2.124}
 --- !u!122 &2105357258
 Halo:
   m_ObjectHideFlags: 0
