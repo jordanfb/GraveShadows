@@ -21,6 +21,7 @@ public class doorOpenScript : MonoBehaviour
     private void Start()
     {
         spm = GameObject.Find("Player").GetComponent<simplePlayerMovement>();
+        print("Found person");
     }
 
 
