@@ -68,7 +68,7 @@ public class simplePlayerMovement : MonoBehaviour
 
             if (rb.velocity.sqrMagnitude < .01f)
             {
-                Camera.main.GetComponent<LozowichEffect>().animateTexture = 0;
+                Camera.main.GetComponent<LozowichEffect>().animateTexture = 1;
             }
             else
             {
