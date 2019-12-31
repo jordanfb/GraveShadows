@@ -45,7 +45,7 @@ public class LozowichEffect : MonoBehaviour {
         material.SetFloat("_bwBlend", Mathf.Clamp(intensity,0f, 1f)); 
         material.SetFloat("_FPS", FPS); 
         material.SetFloat("_tile", Mathf.Clamp(tileAmount, 0f, 10f));
-        material.SetFloat("_mitigationAmount", Mathf.Clamp(mitigationAmount, 0f, 100f));
+        //material.SetFloat("_mitigationAmount", Mathf.Clamp(mitigationAmount, 0f, 100f));
         Graphics.Blit (source, destination, material);
     }
 
