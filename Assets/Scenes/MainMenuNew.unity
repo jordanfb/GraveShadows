@@ -1761,7 +1761,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: 3
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -1793,16 +1793,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319980969}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19295b8ed119d469c9137c4154a9b244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
-  tileAmount: 20
-  mitigationAmount: 1000
+  tileAmount: 10
+  mitigationAmount: 100
   animateTexture: 1
-  FPS: 24
+  FPS: 5
   TAM1: {fileID: 18700000, guid: 921da6c83892d48da8457e28c83c7f41, type: 2}
   TAM2: {fileID: 18700000, guid: 27f187d39d492409bb3fd8aaa48a4293, type: 2}
   TAM3: {fileID: 18700000, guid: fcea2e632ceaf4291aa81051017d3af9, type: 2}
@@ -4975,22 +4975,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hub 4_3 Alpha Fixes (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 400002, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.397
-      objectReference: {fileID: 0}
-    - target: {fileID: 400002, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 400114, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.006
-      objectReference: {fileID: 0}
-    - target: {fileID: 400114, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.944
-      objectReference: {fileID: 0}
     - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.259
@@ -5014,6 +4998,22 @@ PrefabInstance:
     - target: {fileID: 400118, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 35.476
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.397
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 400114, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.006
+      objectReference: {fileID: 0}
+    - target: {fileID: 400114, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.944
       objectReference: {fileID: 0}
     - target: {fileID: 400122, guid: 50c054abb9c63e140bdd3a68cd882c1a, type: 3}
       propertyPath: m_LocalPosition.x
