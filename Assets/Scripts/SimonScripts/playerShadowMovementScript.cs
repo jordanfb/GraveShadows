@@ -61,7 +61,6 @@ public class playerShadowMovementScript : MonoBehaviour
             mainCamera.gameObject.transform.SetParent(shadowPlane.transform);
             mainCamera.transform.localPosition = new Vector3(0.0f, 30.0f, -15.0f);
             mainCamera.transform.localRotation = Quaternion.Euler(65.0f, 0.0f, -180.0f);
-
         }
 
     }

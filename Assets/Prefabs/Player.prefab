@@ -305,7 +305,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2701277236420419685}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 99c328c484e1f8d45a7ad199b359739f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
@@ -343,6 +343,7 @@ MonoBehaviour:
   monologueMember: {fileID: 0}
   anim: {fileID: 0}
   isAllowedToWalk: 1
+  notWalkingBrakeMultiplier: 0.5
   currentWallCollider: {fileID: 0}
   isSprinting: 0
 --- !u!114 &2701277236420419608
@@ -359,6 +360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowPlane: {fileID: 0}
   lightsInScene: []
+  player: {fileID: 2701277236420419684}
   shadowRealmTransform: {fileID: 0}
   checkIfFreeCollider: {fileID: 0}
   WallMask:

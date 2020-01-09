@@ -98,12 +98,12 @@ public class LevelOneEvidenceManager : MonoBehaviour
         if (keySE.evidenceState != SerializedEvidence.EvidenceState.NotFound)
         {
             keyFound = true;
-            print("Key found" + keySE.evidenceState);
+            //print("Key found" + keySE.evidenceState);
         }
         if (receiptSE.evidenceState != SerializedEvidence.EvidenceState.NotFound)
         {
             receiptFound = true;
-            print("Recipt found" + receiptSE.evidenceState);
+            //print("Recipt found" + receiptSE.evidenceState);
         }
         if (!allEvidenceFoundLatch && AllEvidenceFound())
         {

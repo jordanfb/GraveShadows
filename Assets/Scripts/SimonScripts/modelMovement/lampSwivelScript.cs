@@ -29,6 +29,7 @@ public class lampSwivelScript : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             if (Input.GetKeyDown(KeyCode.E)) {
+                other.GetComponent<simplePlayerMovement>().getAnim().SetTrigger("reachOver");
                 assocLight.SetActive(true);
                 IEnumerator coroutine = rotateLightAndLamp(angleSpunEachTime);
                 StartCoroutine(coroutine);

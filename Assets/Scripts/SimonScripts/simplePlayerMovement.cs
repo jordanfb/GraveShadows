@@ -34,6 +34,8 @@ public class simplePlayerMovement : MonoBehaviour
 
     const float PLAYER_WIDTH = 0.5f;
 
+    public float notWalkingBrakeMultiplier = .5f;
+
 
     public Collider currentWallCollider = null;
     public bool isSprinting = false;
@@ -58,8 +60,6 @@ public class simplePlayerMovement : MonoBehaviour
         if (SRmanager.isChoosingWall) {
             anim.SetFloat("yVelocity", 0f);
             anim.SetFloat("xVelocity", 0f);
-
-            return;
         } else
         {
             // set the velocity here for the animation so that if it's not moving it won't animate
@@ -92,6 +92,10 @@ public class simplePlayerMovement : MonoBehaviour
                 }
                 wallMovement(moveDirX, moveDirY, currentWallCollider, camForwardOnEnteranceToShadowRealm);
             }
+        } else
+        {
+            // slow us down, we aren't allowed to walk!
+            rb.velocity = rb.velocity * notWalkingBrakeMultiplier;
         }
     }
 

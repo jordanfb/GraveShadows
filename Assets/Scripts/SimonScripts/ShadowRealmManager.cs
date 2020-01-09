@@ -20,8 +20,9 @@ public class ShadowRealmManager : MonoBehaviour
 
     //this will eventually be a list of objects on the player
 
+    public simplePlayerMovement player;
 
-    
+
     public Transform shadowRealmTransform;
 
     public Collider checkIfFreeCollider;
@@ -116,6 +117,11 @@ public class ShadowRealmManager : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Space))
         {
+
+            player.isAllowedToWalk = false;
+            // in the shadow mode so slow your velocity
+            
+
 
             _shadowsThisFrame = checkForShadows();
 
@@ -219,6 +225,7 @@ public class ShadowRealmManager : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            player.isAllowedToWalk = true;
 
             choosingUI.SetActive(false);
             notChoosingUI.SetActive(false);
