@@ -8948,7 +8948,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.949538, y: 3.9949658, z: 4.0836234}
+  m_Size: {x: 3.949538, y: 3.9949658, z: 3.01}
   m_Center: {x: 0.0000031049476, y: 1.9974829, z: -1.1410943}
 --- !u!23 &528220830
 MeshRenderer:
@@ -11728,6 +11728,50 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &765656001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 765656002}
+  - component: {fileID: 765656003}
+  m_Layer: 0
+  m_Name: ExtraCollider (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &765656002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765656001}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.19, y: 0.555, z: 0}
+  m_LocalScale: {x: 2.8959394, y: 1, z: 3.2465}
+  m_Children: []
+  m_Father: {fileID: 958217030}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &765656003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765656001}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &766712600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14182,6 +14226,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 898471967}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &899873586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 899873587}
+  - component: {fileID: 899873588}
+  m_Layer: 0
+  m_Name: ExtraCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &899873587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899873586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.555, z: 0}
+  m_LocalScale: {x: 5.6579, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 958217030}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &899873588
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899873586}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &912512691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14735,6 +14823,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6238087488748320765, guid: 991cf44a4aa784135bc05dbaa6d8b71b,
     type: 3}
   m_PrefabInstance: {fileID: 956231242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &958217030 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 28744813162457462, guid: 1d8fd3f5cca74ae47bd9860a58d210c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 28744812862385976}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &984612761
 PrefabInstance:
@@ -20923,6 +21017,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4996338, y: 0.59342957, z: 0.6840136}
   m_Center: {x: -0.000000923872, y: 0.29671478, z: -0.0000003427267}
+--- !u!1 &1454341111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 28744813162089198, guid: 1d8fd3f5cca74ae47bd9860a58d210c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 28744812862385976}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1454341112
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454341111}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9731607, y: 0.58960736, z: 2.3703308}
+  m_Center: {x: -0.515996, y: 0.29480368, z: 0.36931992}
 --- !u!1 &1471381063
 GameObject:
   m_ObjectHideFlags: 0
@@ -40470,6 +40583,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 28744813162089158, guid: 1d8fd3f5cca74ae47bd9860a58d210c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 28744813162089154, guid: 1d8fd3f5cca74ae47bd9860a58d210c7,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -40634,6 +40752,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 28744811900772146, guid: 1d8fd3f5cca74ae47bd9860a58d210c7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.947
+      objectReference: {fileID: 0}
+    - target: {fileID: 28744811900772146, guid: 1d8fd3f5cca74ae47bd9860a58d210c7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 32.357
+      objectReference: {fileID: 0}
+    - target: {fileID: 28744811900772146, guid: 1d8fd3f5cca74ae47bd9860a58d210c7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.091
+      objectReference: {fileID: 0}
+    - target: {fileID: 28744813691627402, guid: 1d8fd3f5cca74ae47bd9860a58d210c7,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 4.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 28744813691627402, guid: 1d8fd3f5cca74ae47bd9860a58d210c7,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 2.17
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 28744813162056759, guid: 1d8fd3f5cca74ae47bd9860a58d210c7, type: 3}
